@@ -11,7 +11,7 @@ One-page quick reference. Scan before filling a template. Full spec in `referenc
 5. Two weights only: 400 / 500. No bold (600+), no italic body
 6. Typography mechanics: titles tight (-0.02em+), eyebrows loose (+0.04em+), body 0; line-height 1.05–1.20 / 1.55–1.70
 7. Chapter dividers use `--accent-tint`, never full-saturation fills
-8. No shadows, no gradients, no blur. `border-radius` ≤ 3pt
+8. No shadows, no gradients, no blur. `border-radius` ≤ 3pt; strokes ≤ 2px
 9. No personal-brand chrome — no avatars, badges, signature boxes, italic quote cards
 10. Every callout has a label; unlabelled blockquotes drift into decoration
 
@@ -40,6 +40,14 @@ One-page quick reference. Scan before filling a template. Full spec in `referenc
 --accent:       #3a82c4;   /* sky blue — the only chromatic color */
 --accent-tint:  #b8d6f0;   /* chapter divider fill, tag bg */
 --accent-deep:  #2a6299;   /* body links, AA-passing accent text */
+
+--stroke-rule:   1px;      /* dividers, table rows, card border */
+--stroke-accent: 1.5px;    /* under table heads */
+--stroke-quote:  2px;      /* callout / pull-quote left bar */
+
+--r-none:        0;        /* default; cards, callouts, pages */
+--r-sm:          2pt;      /* tag pills */
+--r-md:          3pt;      /* small components, max allowed */
 
 --font-serif:   "Fraunces", "Tiempos Text", "Source Serif Pro", Georgia, serif;
 --font-sans:    "Inter Tight", "Inter", -apple-system, sans-serif;

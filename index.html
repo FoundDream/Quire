@@ -49,6 +49,16 @@
     --sp-xl:  28pt;
     --sp-2xl: 50pt;
     --sp-3xl: 90pt;
+
+    /* Strokes */
+    --stroke-rule:    1px;
+    --stroke-accent:  1.5px;
+    --stroke-quote:   2px;
+
+    /* Radii */
+    --r-none: 0;
+    --r-sm:   2pt;
+    --r-md:   3pt;
   }
 
   /* ============================================
@@ -141,18 +151,24 @@
     letter-spacing: 0.01em;
     padding: 13px 22px;
     border: 1px solid var(--accent);
-    color: var(--accent-deep);
+    color: var(--accent);
     text-decoration: none;
     background: transparent;
-    transition: background 0.15s ease;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
   }
-  .cta:hover { background: var(--accent-tint); }
+  .cta:hover {
+    background: var(--accent);
+    color: var(--canvas);
+  }
   .cta.primary {
     background: var(--accent);
-    color: #fff;
+    color: var(--canvas);
     border-color: var(--accent);
   }
-  .cta.primary:hover { background: var(--accent-deep); border-color: var(--accent-deep); }
+  .cta.primary:hover {
+    background: var(--accent-deep);
+    border-color: var(--accent-deep);
+  }
   .cta-arrow {
     margin-left: 4px;
     display: inline-block;
@@ -727,7 +743,7 @@
     color: var(--accent-deep);
     background: var(--accent-tint);
     padding: 3px 9px;
-    border-radius: 2px;
+    border-radius: var(--r-sm);
     margin-right: 6px;
   }
 
@@ -923,6 +939,239 @@
     margin-bottom: 6px;
     font-weight: 500;
   }
+
+  /* ============================================
+     Strokes — sample block
+     ============================================ */
+  .stroke-block {
+    height: 84px;
+    border: 1px solid var(--rule);
+    margin-bottom: 10px;
+    background: var(--canvas);
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+  }
+  .stroke-block .stroke-line { width: 100%; background: var(--ink); }
+  .stroke-block .stroke-line.accent { background: var(--accent); }
+
+  /* ============================================
+     Page chrome — demo pages
+     ============================================ */
+  .chrome-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin: 18px 0 60px;
+  }
+  .chrome-page {
+    aspect-ratio: 11 / 8.5;
+    background: var(--canvas);
+    border: 1px solid var(--rule);
+    position: relative;
+    font-family: var(--font-serif);
+  }
+  .chrome-page.bleed { background: var(--accent); border-color: var(--accent); }
+  .chrome-page.tint { background: var(--accent-tint); border-color: var(--accent-tint); }
+  .chrome-page .cp-header {
+    position: absolute;
+    top: 10px;
+    left: 18px;
+    right: 22px;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 8px;
+    color: var(--ink-faint);
+    letter-spacing: 0.06em;
+  }
+  .chrome-page .cp-page-no {
+    position: absolute;
+    bottom: 10px;
+    right: 22px;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--ink-faint);
+    font-variant-numeric: tabular-nums;
+  }
+  .chrome-page .cp-body {
+    position: absolute;
+    top: 32px;
+    bottom: 26px;
+    left: 18px;
+    right: 22px;
+  }
+  .chrome-page .cp-h2 {
+    height: 6px;
+    background: var(--ink);
+    width: 55%;
+    margin-bottom: 12px;
+  }
+  .chrome-page .cp-line {
+    height: 3px;
+    background: var(--ink-faint);
+    margin-bottom: 5px;
+  }
+  .chrome-page .cp-line.med { width: 75%; }
+  .chrome-page .cp-line.short { width: 45%; }
+  .chrome-page .cp-title-large {
+    position: absolute;
+    top: 50%;
+    left: 18px;
+    right: 22px;
+    transform: translateY(-50%);
+    height: 18px;
+    background: var(--ink);
+    opacity: 0.85;
+    width: 70%;
+  }
+  .chrome-page.bleed .cp-title-large { background: #fff; opacity: 0.95; }
+  .chrome-page.tint .cp-title-large { background: var(--ink); opacity: 0.7; }
+  .chrome-page .cp-stat {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--font-serif);
+    font-variation-settings: var(--serif-display);
+    font-size: 56px;
+    color: var(--accent);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .chrome-page .cp-label {
+    position: absolute;
+    bottom: -40px;
+    left: 0;
+    right: 0;
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: 0.02em;
+  }
+  .chrome-page .cp-label .small {
+    display: block;
+    font-weight: 400;
+    color: var(--ink-muted);
+    font-size: 11px;
+    margin-top: 3px;
+    font-family: var(--font-mono);
+    letter-spacing: 0.04em;
+  }
+
+  /* ============================================
+     Lists · ul / ol / dl
+     ============================================ */
+  .demo-eyebrow {
+    font-family: var(--font-sans);
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 22px 0 10px;
+  }
+  .demo-eyebrow:first-child { margin-top: 0; }
+  ul.list, ol.list-num {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--ink);
+    margin: 0 0 8px;
+    padding: 0;
+    list-style: none;
+    max-width: 64ch;
+  }
+  ul.list li, ol.list-num li {
+    position: relative;
+    padding-left: 1.8em;
+    margin-bottom: 4px;
+  }
+  ul.list li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  ul.list li strong { font-weight: 500; color: var(--ink); }
+  ol.list-num { counter-reset: ln; }
+  ol.list-num li { counter-increment: ln; }
+  ol.list-num li::before {
+    content: counter(ln, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 0.18em;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.82em;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+  dl.list-def {
+    font-family: var(--font-serif);
+    margin: 0;
+    display: grid;
+    grid-template-columns: 14ch 1fr;
+    gap: 8px 24px;
+    max-width: 64ch;
+  }
+  dl.list-def dt {
+    color: var(--accent);
+    font-weight: 500;
+    font-size: 14.5px;
+    letter-spacing: -0.005em;
+  }
+  dl.list-def dd {
+    margin: 0;
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  /* ============================================
+     Figure
+     ============================================ */
+  figure.fig { margin: 0 0 24px; }
+  figure.fig:last-child { margin-bottom: 0; }
+  figure.fig .fig-image {
+    background: var(--canvas);
+    border: 1px solid var(--rule);
+    aspect-ratio: 16 / 9;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ink-faint);
+    letter-spacing: 0.04em;
+    position: relative;
+    overflow: hidden;
+  }
+  figure.fig.fig-bleed .fig-image {
+    background: var(--accent);
+    border: 0;
+    color: rgba(255,255,255,0.6);
+  }
+  figure.fig figcaption {
+    font-family: var(--font-serif);
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: var(--ink-muted);
+    max-width: 64ch;
+  }
+  figure.fig .fig-num {
+    font-family: var(--font-sans);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-right: 8px;
+  }
 </style>
 </head>
 <body>
@@ -1076,7 +1325,7 @@
      1. COLOR
      ============================================= -->
 <section>
-  <p class="anchor">01 / 08</p>
+  <p class="anchor">01 / 11</p>
   <p class="section-eyebrow">Tokens</p>
   <h2 class="section-title">Color</h2>
   <p class="section-desc">
@@ -1168,33 +1417,6 @@
     </div>
   </div>
 
-  <p class="sub-title">Banned — common AI defaults to avoid</p>
-  <div class="swatch-grid">
-    <div class="swatch banned">
-      <div class="swatch-block" style="background: #ffffff"></div>
-      <div class="swatch-name">pure white</div>
-      <div class="swatch-hex">#ffffff</div>
-      <div class="swatch-use">default-doc tell</div>
-    </div>
-    <div class="swatch banned">
-      <div class="swatch-block" style="background: #faf9f5"></div>
-      <div class="swatch-name">warm cream</div>
-      <div class="swatch-hex">#faf9f5</div>
-      <div class="swatch-use">retired Quire heritage</div>
-    </div>
-    <div class="swatch banned">
-      <div class="swatch-block" style="background: #0a66c2"></div>
-      <div class="swatch-name">LinkedIn blue</div>
-      <div class="swatch-hex">#0a66c2</div>
-      <div class="swatch-use">too saturated, corporate</div>
-    </div>
-    <div class="swatch banned">
-      <div class="swatch-block" style="background: #6b6a64"></div>
-      <div class="swatch-name">warm gray</div>
-      <div class="swatch-hex">#6b6a64</div>
-      <div class="swatch-use">R > B — wrong temperature</div>
-    </div>
-  </div>
 </section>
 <hr class="section-divider">
 
@@ -1202,7 +1424,7 @@
      2. TYPOGRAPHY
      ============================================= -->
 <section>
-  <p class="anchor">02 / 08</p>
+  <p class="anchor">02 / 11</p>
   <p class="section-eyebrow">Tokens</p>
   <h2 class="section-title">Typography</h2>
   <p class="section-desc">
@@ -1275,7 +1497,7 @@
      3. SPACING
      ============================================= -->
 <section>
-  <p class="anchor">03 / 08</p>
+  <p class="anchor">03 / 11</p>
   <p class="section-eyebrow">Tokens</p>
   <h2 class="section-title">Spacing</h2>
   <p class="section-desc">
@@ -1343,10 +1565,87 @@
 <hr class="section-divider">
 
 <!-- =============================================
-     4. PAGE ARCHETYPES
+     4. STROKES & RADII
      ============================================= -->
 <section>
-  <p class="anchor">04 / 08</p>
+  <p class="anchor">04 / 11</p>
+  <p class="section-eyebrow">Tokens</p>
+  <h2 class="section-title">Strokes &amp; radii</h2>
+  <p class="section-desc">
+    Three line weights — rule, accent, quote — cover every divider, table head,
+    and pull-quote bar. Radii stay flat: 3pt is the maximum a Quire document
+    will ever round.
+  </p>
+
+  <p class="sub-title">Stroke weights</p>
+  <div class="swatch-grid">
+    <div class="swatch">
+      <div class="stroke-block">
+        <div class="stroke-line" style="height: 1px;"></div>
+      </div>
+      <div class="swatch-name">stroke-rule</div>
+      <div class="swatch-hex">1px</div>
+      <div class="swatch-use">table rows, section dividers, card border</div>
+    </div>
+    <div class="swatch">
+      <div class="stroke-block">
+        <div class="stroke-line accent" style="height: 1.5px;"></div>
+      </div>
+      <div class="swatch-name">stroke-accent</div>
+      <div class="swatch-hex">1.5px</div>
+      <div class="swatch-use">under table heads, emphasis rule</div>
+    </div>
+    <div class="swatch">
+      <div class="stroke-block">
+        <div class="stroke-line accent" style="height: 2px;"></div>
+      </div>
+      <div class="swatch-name">stroke-quote</div>
+      <div class="swatch-hex">2px</div>
+      <div class="swatch-use">callout left bar, pull-quote bar</div>
+    </div>
+    <div class="swatch banned">
+      <div class="swatch-block"></div>
+      <div class="swatch-name">— no heavier than 2px —</div>
+      <div class="swatch-hex">forbidden</div>
+      <div class="swatch-use">no thick borders, no boxed sections</div>
+    </div>
+  </div>
+
+  <p class="sub-title">Border radius — flat by default</p>
+  <div class="swatch-grid">
+    <div class="swatch">
+      <div class="swatch-block" style="background: var(--accent-tint); border-radius: var(--r-none);"></div>
+      <div class="swatch-name">r-none</div>
+      <div class="swatch-hex">0</div>
+      <div class="swatch-use">default; cards, callouts, pages</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-block" style="background: var(--accent-tint); border-radius: var(--r-sm);"></div>
+      <div class="swatch-name">r-sm</div>
+      <div class="swatch-hex">2pt</div>
+      <div class="swatch-use">tag pills, inline labels</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-block" style="background: var(--accent-tint); border-radius: var(--r-md);"></div>
+      <div class="swatch-name">r-md</div>
+      <div class="swatch-hex">3pt</div>
+      <div class="swatch-use">small contained components (max allowed)</div>
+    </div>
+    <div class="swatch banned">
+      <div class="swatch-block" style="background: var(--canvas); border-radius: 12pt;"></div>
+      <div class="swatch-name">— rounded chrome —</div>
+      <div class="swatch-hex">forbidden</div>
+      <div class="swatch-use">no pill buttons, no app-style cards</div>
+    </div>
+  </div>
+</section>
+<hr class="section-divider">
+
+<!-- =============================================
+     5. PAGE ARCHETYPES
+     ============================================= -->
+<section>
+  <p class="anchor">05 / 11</p>
   <p class="section-eyebrow">Structure</p>
   <h2 class="section-title">Page archetypes</h2>
   <p class="section-desc">
@@ -1473,10 +1772,102 @@
 <hr class="section-divider">
 
 <!-- =============================================
-     5. COMPONENTS
+     6. PAGE CHROME
      ============================================= -->
 <section>
-  <p class="anchor">05 / 08</p>
+  <p class="anchor">06 / 11</p>
+  <p class="section-eyebrow">Structure</p>
+  <h2 class="section-title">Page chrome</h2>
+  <p class="section-desc">
+    Running header and page number are the only marks that sit outside the
+    content area. Tiny, mono, ink-faint — present enough to orient, quiet
+    enough to disappear. Three archetypes carry chrome, three skip it.
+  </p>
+
+  <p class="sub-title">Where chrome lives — four archetypes side by side</p>
+  <div class="chrome-grid">
+    <div class="chrome-page">
+      <div class="cp-header">
+        <span>QUIRE · PLAYBOOK</span>
+        <span>CH 02 · CONSTRAINT</span>
+      </div>
+      <div class="cp-body">
+        <div class="cp-h2"></div>
+        <div class="cp-line"></div>
+        <div class="cp-line med"></div>
+        <div class="cp-line"></div>
+        <div class="cp-line short"></div>
+        <div class="cp-line"></div>
+        <div class="cp-line med"></div>
+      </div>
+      <div class="cp-page-no">04</div>
+      <div class="cp-label">Standard content<span class="small">running head · page #</span></div>
+    </div>
+    <div class="chrome-page bleed">
+      <div class="cp-title-large"></div>
+      <div class="cp-label">Cover<span class="small">no chrome at all</span></div>
+    </div>
+  </div>
+  <div class="chrome-grid">
+    <div class="chrome-page tint">
+      <div class="cp-title-large"></div>
+      <div class="cp-label">Chapter divider<span class="small">no chrome — pure pause</span></div>
+    </div>
+    <div class="chrome-page">
+      <div class="cp-stat">42%</div>
+      <div class="cp-page-no">07</div>
+      <div class="cp-label">Stat-anchor<span class="small">page # only · header dropped</span></div>
+    </div>
+  </div>
+
+  <p class="sub-title">Specs</p>
+  <table class="density-rules">
+    <thead>
+      <tr><th>Element</th><th>Spec</th><th>Position</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Running header</td>
+        <td class="num">mono 8pt · ink-faint · +0.04em</td>
+        <td class="why">12pt above top trim. Left: document name. Right: current chapter title.</td>
+      </tr>
+      <tr>
+        <td>Page number</td>
+        <td class="num">mono 9pt · ink-faint · tabular-nums</td>
+        <td class="why">12pt below bottom trim. Outside edge — right on recto, left on verso (portrait); right corner (landscape).</td>
+      </tr>
+      <tr>
+        <td>Margin rule (optional)</td>
+        <td class="num">1px · ink-faint</td>
+        <td class="why">A hairline between header and body, only on documents over 40 pages — gives long docs a stronger orienting line.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="sub-title">Chrome by archetype</p>
+  <table class="density-rules">
+    <thead>
+      <tr><th>Archetype</th><th>Header</th><th>Page #</th><th>Why</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Cover</td><td class="num">—</td><td class="num">—</td><td class="why">Title is the entire page; chrome would compete.</td></tr>
+      <tr><td>TOC</td><td class="num">●</td><td class="num">●</td><td class="why">First navigable page; full chrome.</td></tr>
+      <tr><td>Chapter divider</td><td class="num">—</td><td class="num">—</td><td class="why">Acts as a visual reset; chrome breaks the pause.</td></tr>
+      <tr><td>Standard content</td><td class="num">●</td><td class="num">●</td><td class="why">Default. Both marks present.</td></tr>
+      <tr><td>Stat-anchor</td><td class="num">—</td><td class="num">●</td><td class="why">Drop header so the figure dominates; keep page # for reference.</td></tr>
+      <tr><td>Comparison</td><td class="num">●</td><td class="num">●</td><td class="why">Standard chrome.</td></tr>
+      <tr><td>Pull-quote</td><td class="num">—</td><td class="num">●</td><td class="why">Quote needs air; header would crowd it.</td></tr>
+      <tr><td>Colophon</td><td class="num">●</td><td class="num">●</td><td class="why">Final page; full chrome reads as closing the document.</td></tr>
+    </tbody>
+  </table>
+</section>
+<hr class="section-divider">
+
+<!-- =============================================
+     7. COMPONENTS
+     ============================================= -->
+<section>
+  <p class="anchor">07 / 11</p>
   <p class="section-eyebrow">Building blocks</p>
   <h2 class="section-title">Components</h2>
   <p class="section-desc">
@@ -1554,14 +1945,60 @@
       <em>term-of-art</em> convention.
     </p>
   </div>
+
+  <p class="sub-title">Lists · unordered, ordered, definition</p>
+  <div class="demo">
+    <p class="demo-eyebrow">Unordered · em-dash bullet</p>
+    <ul class="list">
+      <li>A <strong>signal</strong> is an observation collected from interviews, tickets, or telemetry.</li>
+      <li>A <strong>hypothesis</strong> is a prediction with a fail condition — metric, magnitude, timeframe.</li>
+      <li>A <strong>test</strong> is the cheapest experiment that could falsify the hypothesis.</li>
+    </ul>
+
+    <p class="demo-eyebrow">Ordered · numbered, accent</p>
+    <ol class="list-num">
+      <li>State the signal in one sentence.</li>
+      <li>Rewrite it as a hypothesis containing a metric, a magnitude, and a timeframe.</li>
+      <li>Name the cheapest test that could prove the hypothesis wrong.</li>
+    </ol>
+
+    <p class="demo-eyebrow">Definition · term + body</p>
+    <dl class="list-def">
+      <dt>Signal</dt>
+      <dd>An observation from a customer or user — not yet a claim.</dd>
+      <dt>Hypothesis</dt>
+      <dd>A prediction with a fail condition. Names metric, magnitude, timeframe.</dd>
+      <dt>Validation</dt>
+      <dd>A test designed to falsify the hypothesis, not confirm it.</dd>
+    </dl>
+  </div>
+
+  <p class="sub-title">Figure · image with caption</p>
+  <div class="demo">
+    <figure class="fig">
+      <div class="fig-image">[ image · 16:9 · canvas + 1px rule ]</div>
+      <figcaption>
+        <span class="fig-num">Figure 02</span>
+        A 12-page cadence track. Cover at 01, chapter dividers at 03 / 06 / 09, stat-anchor at 05, pull-quote at 10. Every visual reset falls within the 5–7 page window.
+      </figcaption>
+    </figure>
+
+    <figure class="fig fig-bleed">
+      <div class="fig-image">[ full-bleed · accent · for covers, stat-anchors ]</div>
+      <figcaption>
+        <span class="fig-num">Figure 03</span>
+        Full-bleed variant. No border; image extends to the trim. Reserved for covers, chapter dividers, and stat-anchor backgrounds.
+      </figcaption>
+    </figure>
+  </div>
 </section>
 <hr class="section-divider">
 
 <!-- =============================================
-     6. CADENCE
+     8. CADENCE
      ============================================= -->
 <section>
-  <p class="anchor">06 / 08</p>
+  <p class="anchor">08 / 11</p>
   <p class="section-eyebrow">Rhythm</p>
   <h2 class="section-title">Cadence rule</h2>
   <p class="section-desc">
@@ -1594,10 +2031,10 @@
 <hr class="section-divider">
 
 <!-- =============================================
-     7. DENSITY RULES
+     9. DENSITY RULES
      ============================================= -->
 <section>
-  <p class="anchor">07 / 08</p>
+  <p class="anchor">09 / 11</p>
   <p class="section-eyebrow">Quantitative limits</p>
   <h2 class="section-title">Density limits</h2>
   <p class="section-desc">
@@ -1651,10 +2088,67 @@
 <hr class="section-divider">
 
 <!-- =============================================
-     8. 10 INVARIANTS
+     10. PRINT RULES
      ============================================= -->
 <section>
-  <p class="anchor">08 / 08</p>
+  <p class="anchor">10 / 11</p>
+  <p class="section-eyebrow">Output</p>
+  <h2 class="section-title">Print rules</h2>
+  <p class="section-desc">
+    Constraints that only bite when exporting to PDF for press or bind. Screen-
+    only documents may ignore them; anything destined for paper cannot.
+  </p>
+
+  <table class="density-rules">
+    <thead>
+      <tr><th>Constraint</th><th>Value</th><th>Why</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Bleed</td>
+        <td class="num">3 mm all sides</td>
+        <td class="why">Required on covers, chapter dividers, and any full-bleed figure. Extend the background past the trim line.</td>
+      </tr>
+      <tr>
+        <td>Safe area</td>
+        <td class="num">5 mm inside trim</td>
+        <td class="why">No text or critical mark closer than 5 mm to the trim — binding tolerance eats the rest.</td>
+      </tr>
+      <tr>
+        <td>Page-break inside</td>
+        <td class="num">avoid</td>
+        <td class="why">Callouts, stat-blocks, figures, and compare tables must not split across pages.</td>
+      </tr>
+      <tr>
+        <td>Widows &amp; orphans</td>
+        <td class="num">≥ 2 lines</td>
+        <td class="why">A single trailing or leading line of a paragraph reads as a typesetting error.</td>
+      </tr>
+      <tr>
+        <td>Hyphenation</td>
+        <td class="num">off in headings; on in body</td>
+        <td class="why">Headings break by sense, not syllable. Justified body reads better with hyphens on.</td>
+      </tr>
+      <tr>
+        <td>Image resolution</td>
+        <td class="num">≥ 300 dpi at print size</td>
+        <td class="why">Below 300 dpi, detailed images soften visibly once bound.</td>
+      </tr>
+      <tr>
+        <td>Color space</td>
+        <td class="num">sRGB authoring · CMYK soft-proof</td>
+        <td class="why">Sky-blue accent shifts on press; check the proof before committing to a print run.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+<hr class="section-divider">
+
+<!-- =============================================
+     11. 10 INVARIANTS
+     ============================================= -->
+<section>
+  <p class="anchor">11 / 11</p>
   <p class="section-eyebrow">Hard rules</p>
   <h2 class="section-title">The 10 invariants</h2>
   <p class="section-desc">

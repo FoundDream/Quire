@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Quire — 编辑型文档的设计系统</title>
-<meta name="description" content="单一天蓝辅色,不要第二色,衬线扛起层级。Quire 把 AI 生成的内容变成编辑感 PDF —— playbook、白皮书、简历、单页报告。">
+<meta name="description" content="只用一种天蓝作强调色，衬线撑起层级。Quire 把 AI 生成的内容排成有编辑感的 PDF——playbook、白皮书、简历与单页报告。">
 <meta property="og:title" content="Quire — 编辑型文档的设计系统">
-<meta property="og:description" content="单一天蓝辅色,不要第二色,衬线扛起层级。">
+<meta property="og:description" content="只用一种天蓝作强调色，衬线撑起层级。">
 <meta property="og:type" content="website">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -49,6 +49,16 @@
     --sp-xl:  28pt;
     --sp-2xl: 50pt;
     --sp-3xl: 90pt;
+
+    /* Strokes */
+    --stroke-rule:    1px;
+    --stroke-accent:  1.5px;
+    --stroke-quote:   2px;
+
+    /* Radii */
+    --r-none: 0;
+    --r-sm:   2pt;
+    --r-md:   3pt;
   }
 
   /* ============================================
@@ -141,18 +151,24 @@
     letter-spacing: 0.01em;
     padding: 13px 22px;
     border: 1px solid var(--accent);
-    color: var(--accent-deep);
+    color: var(--accent);
     text-decoration: none;
     background: transparent;
-    transition: background 0.15s ease;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
   }
-  .cta:hover { background: var(--accent-tint); }
+  .cta:hover {
+    background: var(--accent);
+    color: var(--canvas);
+  }
   .cta.primary {
     background: var(--accent);
-    color: #fff;
+    color: var(--canvas);
     border-color: var(--accent);
   }
-  .cta.primary:hover { background: var(--accent-deep); border-color: var(--accent-deep); }
+  .cta.primary:hover {
+    background: var(--accent-deep);
+    border-color: var(--accent-deep);
+  }
   .cta-arrow {
     margin-left: 4px;
     display: inline-block;
@@ -727,7 +743,7 @@
     color: var(--accent-deep);
     background: var(--accent-tint);
     padding: 3px 9px;
-    border-radius: 2px;
+    border-radius: var(--r-sm);
     margin-right: 6px;
   }
 
@@ -923,6 +939,239 @@
     margin-bottom: 6px;
     font-weight: 500;
   }
+
+  /* ============================================
+     Strokes — sample block
+     ============================================ */
+  .stroke-block {
+    height: 84px;
+    border: 1px solid var(--rule);
+    margin-bottom: 10px;
+    background: var(--canvas);
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+  }
+  .stroke-block .stroke-line { width: 100%; background: var(--ink); }
+  .stroke-block .stroke-line.accent { background: var(--accent); }
+
+  /* ============================================
+     Page chrome — demo pages
+     ============================================ */
+  .chrome-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin: 18px 0 60px;
+  }
+  .chrome-page {
+    aspect-ratio: 11 / 8.5;
+    background: var(--canvas);
+    border: 1px solid var(--rule);
+    position: relative;
+    font-family: var(--font-serif);
+  }
+  .chrome-page.bleed { background: var(--accent); border-color: var(--accent); }
+  .chrome-page.tint { background: var(--accent-tint); border-color: var(--accent-tint); }
+  .chrome-page .cp-header {
+    position: absolute;
+    top: 10px;
+    left: 18px;
+    right: 22px;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 8px;
+    color: var(--ink-faint);
+    letter-spacing: 0.06em;
+  }
+  .chrome-page .cp-page-no {
+    position: absolute;
+    bottom: 10px;
+    right: 22px;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--ink-faint);
+    font-variant-numeric: tabular-nums;
+  }
+  .chrome-page .cp-body {
+    position: absolute;
+    top: 32px;
+    bottom: 26px;
+    left: 18px;
+    right: 22px;
+  }
+  .chrome-page .cp-h2 {
+    height: 6px;
+    background: var(--ink);
+    width: 55%;
+    margin-bottom: 12px;
+  }
+  .chrome-page .cp-line {
+    height: 3px;
+    background: var(--ink-faint);
+    margin-bottom: 5px;
+  }
+  .chrome-page .cp-line.med { width: 75%; }
+  .chrome-page .cp-line.short { width: 45%; }
+  .chrome-page .cp-title-large {
+    position: absolute;
+    top: 50%;
+    left: 18px;
+    right: 22px;
+    transform: translateY(-50%);
+    height: 18px;
+    background: var(--ink);
+    opacity: 0.85;
+    width: 70%;
+  }
+  .chrome-page.bleed .cp-title-large { background: #fff; opacity: 0.95; }
+  .chrome-page.tint .cp-title-large { background: var(--ink); opacity: 0.7; }
+  .chrome-page .cp-stat {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--font-serif);
+    font-variation-settings: var(--serif-display);
+    font-size: 56px;
+    color: var(--accent);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .chrome-page .cp-label {
+    position: absolute;
+    bottom: -40px;
+    left: 0;
+    right: 0;
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: 0.02em;
+  }
+  .chrome-page .cp-label .small {
+    display: block;
+    font-weight: 400;
+    color: var(--ink-muted);
+    font-size: 11px;
+    margin-top: 3px;
+    font-family: var(--font-mono);
+    letter-spacing: 0.04em;
+  }
+
+  /* ============================================
+     Lists · ul / ol / dl
+     ============================================ */
+  .demo-eyebrow {
+    font-family: var(--font-sans);
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 22px 0 10px;
+  }
+  .demo-eyebrow:first-child { margin-top: 0; }
+  ul.list, ol.list-num {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--ink);
+    margin: 0 0 8px;
+    padding: 0;
+    list-style: none;
+    max-width: 64ch;
+  }
+  ul.list li, ol.list-num li {
+    position: relative;
+    padding-left: 1.8em;
+    margin-bottom: 4px;
+  }
+  ul.list li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  ul.list li strong { font-weight: 500; color: var(--ink); }
+  ol.list-num { counter-reset: ln; }
+  ol.list-num li { counter-increment: ln; }
+  ol.list-num li::before {
+    content: counter(ln, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 0.18em;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.82em;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+  dl.list-def {
+    font-family: var(--font-serif);
+    margin: 0;
+    display: grid;
+    grid-template-columns: 14ch 1fr;
+    gap: 8px 24px;
+    max-width: 64ch;
+  }
+  dl.list-def dt {
+    color: var(--accent);
+    font-weight: 500;
+    font-size: 14.5px;
+    letter-spacing: -0.005em;
+  }
+  dl.list-def dd {
+    margin: 0;
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  /* ============================================
+     Figure
+     ============================================ */
+  figure.fig { margin: 0 0 24px; }
+  figure.fig:last-child { margin-bottom: 0; }
+  figure.fig .fig-image {
+    background: var(--canvas);
+    border: 1px solid var(--rule);
+    aspect-ratio: 16 / 9;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ink-faint);
+    letter-spacing: 0.04em;
+    position: relative;
+    overflow: hidden;
+  }
+  figure.fig.fig-bleed .fig-image {
+    background: var(--accent);
+    border: 0;
+    color: rgba(255,255,255,0.6);
+  }
+  figure.fig figcaption {
+    font-family: var(--font-serif);
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: var(--ink-muted);
+    max-width: 64ch;
+  }
+  figure.fig .fig-num {
+    font-family: var(--font-sans);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-right: 8px;
+  }
 </style>
 </head>
 <body>
@@ -939,10 +1188,10 @@
     <a href="index-zh.html" class="active">中</a>
   </span>
   <h1 class="hero-title">Quire</h1>
-  <p class="hero-lede">编辑型文档的设计系统 —— <strong>playbook、白皮书、简历、单页报告</strong>。</p>
+  <p class="hero-lede">面向 <strong>playbook、白皮书、简历与单页报告</strong> 的编辑型排版系统。一种天蓝强调色，衬线负责层级，输出可直接装订的 PDF。</p>
   <div class="cta-row">
     <a href="https://github.com/FoundDream/Quire" class="cta primary" target="_blank" rel="noopener">在 GitHub 查看 <span class="cta-arrow">→</span></a>
-    <a href="assets/output/quire-playbook.pdf" class="cta" target="_blank" rel="noopener">看示例 PDF</a>
+    <a href="assets/output/quire-playbook.pdf" class="cta" target="_blank" rel="noopener">查看示例 PDF</a>
   </div>
 </section>
 
@@ -951,16 +1200,16 @@
      ============================================= -->
 <section id="formats">
   <p class="anchor">引言</p>
-  <p class="section-eyebrow">输出形态</p>
-  <h2 class="section-title">一套设计语言,四种形态画像。</h2>
+  <p class="section-eyebrow">文档形态</p>
+  <h2 class="section-title">一套设计语言，四种成品规格。</h2>
   <p class="section-desc">
-    同一套调色板、字体层级、组件库,渲染出不同形态的文档。当前已实现 Playbook 画像;其余三种共享系统,下一批落地。
+    同一套色板、字体层级与组件库，可排成不同开本与页数的文档。Playbook 已完整实现；白皮书、简历与单页报告共用同一系统，将陆续推出。
   </p>
 
   <table class="formats">
     <thead>
       <tr>
-        <th>画像</th>
+        <th>形态</th>
         <th>页数</th>
         <th>开本</th>
         <th>节奏</th>
@@ -972,29 +1221,29 @@
         <td class="fmt-name">Playbook</td>
         <td>10–80</td>
         <td>11×8.5in 横版</td>
-        <td>每 5–7 页一个视觉重置</td>
+        <td>每 5–7 页一次视觉重置</td>
         <td class="fmt-status status-live">● 已上线</td>
       </tr>
       <tr>
         <td class="fmt-name">白皮书</td>
         <td>8–30</td>
         <td>A4 竖版</td>
-        <td>每 5–7 页一个视觉重置</td>
-        <td class="fmt-status status-soon">○ 下一批</td>
+        <td>每 5–7 页一次视觉重置</td>
+        <td class="fmt-status status-soon">○ 即将推出</td>
       </tr>
       <tr>
         <td class="fmt-name">简历</td>
         <td>1–2</td>
         <td>A4 / Letter 竖版</td>
-        <td>单一节奏,无 cadence 规则</td>
-        <td class="fmt-status status-soon">○ 下一批</td>
+        <td>单页节奏，不适用 cadence 规则</td>
+        <td class="fmt-status status-soon">○ 即将推出</td>
       </tr>
       <tr>
         <td class="fmt-name">单页报告</td>
         <td>1</td>
         <td>A4 竖版</td>
-        <td>单一节奏,无 cadence 规则</td>
-        <td class="fmt-status status-soon">○ 下一批</td>
+        <td>单页节奏，不适用 cadence 规则</td>
+        <td class="fmt-status status-soon">○ 即将推出</td>
       </tr>
     </tbody>
   </table>
@@ -1006,10 +1255,10 @@
      ============================================= -->
 <section id="see">
   <p class="anchor">引言</p>
-  <p class="section-eyebrow">看一下</p>
-  <h2 class="section-title">用 Quire 介绍 Quire,12 页 playbook。</h2>
+  <p class="section-eyebrow">示例</p>
+  <h2 class="section-title">12 页 playbook，用 Quire 介绍 Quire。</h2>
   <p class="section-desc">
-    同一套设计系统排自己。4 种内文原型、3 个章节分隔页、1 个 stat-anchor、1 个 pull-quote、1 个 colophon。页数为偶数,节奏严格遵循 5–7 页一个重置。
+    同一套设计系统排版自身：4 种内文原型、3 个章节分隔页、1 个 stat-anchor、1 个 pull-quote、1 个 colophon。总页数为偶数；节奏严格遵循每 5–7 页一次视觉重置。
   </p>
 
   <div class="preview-grid">
@@ -1049,7 +1298,7 @@
   <p class="part-eyebrow">参考</p>
   <h2 class="part-title">设计系统</h2>
   <p class="part-desc">
-    所有 token、页面原型、组件、规则,下面全部可视化。修改本文件顶部 <code>:root</code> 里的 CSS 变量即可换主题 —— 下方每个区段都由这些变量组合而成。
+    下方可视化呈现全部 token、页面原型、组件与规则。修改本文件顶部 <code>:root</code> 中的 CSS 变量即可换肤——各区块均由这些变量组合而成。
   </p>
 </section>
 
@@ -1070,11 +1319,11 @@
      1. COLOR
      ============================================= -->
 <section>
-  <p class="anchor">01 / 08</p>
+  <p class="anchor">01 / 11</p>
   <p class="section-eyebrow">Tokens</p>
   <h2 class="section-title">颜色</h2>
   <p class="section-desc">
-    冷调,单色化。一个辅色、一个画布家族、一个冷灰阶。没有第二个发色。
+    冷色调、单色系：一种强调色、一组画布色、一套冷灰阶。不设第二种彩色。
   </p>
 
   <p class="sub-title">Surface · 画布</p>
@@ -1105,7 +1354,7 @@
     </div>
   </div>
 
-  <p class="sub-title">Text · 冷灰文字色,B ≥ G ≥ R</p>
+  <p class="sub-title">Text · 冷灰文字色（B ≥ G ≥ R）</p>
   <div class="swatch-grid">
     <div class="swatch">
       <div class="swatch-block" style="background: var(--ink)"></div>
@@ -1123,7 +1372,7 @@
       <div class="swatch-block" style="background: var(--ink-muted)"></div>
       <div class="swatch-name">ink-muted</div>
       <div class="swatch-hex">#6b6f78</div>
-      <div class="swatch-use">图注、metadata</div>
+      <div class="swatch-use">图注与元数据</div>
     </div>
     <div class="swatch">
       <div class="swatch-block" style="background: var(--ink-faint)"></div>
@@ -1133,61 +1382,34 @@
     </div>
   </div>
 
-  <p class="sub-title">Accent · 天蓝,全局唯一</p>
+  <p class="sub-title">Accent · 天蓝（全局唯一）</p>
   <div class="swatch-grid">
     <div class="swatch">
       <div class="swatch-block" style="background: var(--accent-tint)"></div>
       <div class="swatch-name">accent-tint</div>
       <div class="swatch-hex">#b8d6f0</div>
-      <div class="swatch-use">章封底色、tag 背景</div>
+      <div class="swatch-use">章节分隔底色、标签背景</div>
     </div>
     <div class="swatch">
       <div class="swatch-block" style="background: var(--accent)"></div>
       <div class="swatch-name">accent</div>
       <div class="swatch-hex">#3a82c4</div>
-      <div class="swatch-use">eyebrow、tag、表头规则</div>
+      <div class="swatch-use">眉题、标签、表头线</div>
     </div>
     <div class="swatch">
       <div class="swatch-block" style="background: var(--accent-deep)"></div>
       <div class="swatch-name">accent-deep</div>
       <div class="swatch-hex">#2a6299</div>
-      <div class="swatch-use">正文链接、AA 级辅色文字</div>
+      <div class="swatch-use">正文链接、AA 级强调色文字</div>
     </div>
     <div class="swatch banned">
       <div class="swatch-block" style="background: var(--canvas)"></div>
       <div class="swatch-name">—— 不要第二色 ——</div>
       <div class="swatch-hex">禁止</div>
-      <div class="swatch-use">禁橙、禁绿、禁红</div>
+      <div class="swatch-use">不用橙、绿、红</div>
     </div>
   </div>
 
-  <p class="sub-title">Banned · AI 常见的崩坏值</p>
-  <div class="swatch-grid">
-    <div class="swatch banned">
-      <div class="swatch-block" style="background: #ffffff"></div>
-      <div class="swatch-name">纯白</div>
-      <div class="swatch-hex">#ffffff</div>
-      <div class="swatch-use">默认文档的标志</div>
-    </div>
-    <div class="swatch banned">
-      <div class="swatch-block" style="background: #faf9f5"></div>
-      <div class="swatch-name">暖奶油色</div>
-      <div class="swatch-hex">#faf9f5</div>
-      <div class="swatch-use">已退役的 Quire 历史色</div>
-    </div>
-    <div class="swatch banned">
-      <div class="swatch-block" style="background: #0a66c2"></div>
-      <div class="swatch-name">LinkedIn 蓝</div>
-      <div class="swatch-hex">#0a66c2</div>
-      <div class="swatch-use">过饱和、企业感</div>
-    </div>
-    <div class="swatch banned">
-      <div class="swatch-block" style="background: #6b6a64"></div>
-      <div class="swatch-name">暖灰</div>
-      <div class="swatch-hex">#6b6a64</div>
-      <div class="swatch-use">R > B,色温反了</div>
-    </div>
-  </div>
 </section>
 <hr class="section-divider">
 
@@ -1195,11 +1417,11 @@
      2. TYPOGRAPHY
      ============================================= -->
 <section>
-  <p class="anchor">02 / 08</p>
+  <p class="anchor">02 / 11</p>
   <p class="section-eyebrow">Tokens</p>
   <h2 class="section-title">字体</h2>
   <p class="section-desc">
-    一套衬线(Fraunces 可变字体)扛起从封面标题到正文的所有层级。Sans(Inter Tight)只用于 UI 边角。两个字重 —— <code>400</code> 和 <code>500</code>。不加粗,正文不用斜体。中文段落由 Noto Serif/Sans SC 接管 CJK 字符。
+    Fraunces 可变衬线贯穿封面到正文；Inter Tight 无衬线仅用于页眉、页码等界面元素。字重只有 <code>400</code> 与 <code>500</code>：不加粗，正文不用斜体。中文由 Noto Serif SC / Noto Sans SC 回退。
   </p>
 
   <p class="sub-title">字号阶梯</p>
@@ -1216,47 +1438,47 @@
     <div class="type-sample serif" style="font-size: 22px; font-weight: 500; letter-spacing: -0.014em; line-height: 1.25;">把信号重写成假设</div>
   </div>
   <div class="type-row">
-    <div class="type-meta"><strong>H3 / Eyebrow</strong>13pt · 500 · +0.04em<br>无衬线,大写</div>
+    <div class="type-meta"><strong>H3 / Eyebrow</strong>13pt · 500 · +0.04em<br>无衬线、全大写</div>
     <div class="type-sample sans" style="font-size: 14px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent);">Chapter 03 · 验证回路</div>
   </div>
   <div class="type-row">
     <div class="type-meta"><strong>Lead</strong>11pt · 400 · lh 1.55<br>章节起首引导段</div>
-    <div class="type-sample serif" style="font-size: 17px; line-height: 1.55; color: var(--ink-soft);">每支团队都在收集客户信号 —— 访谈、支持工单、流失对话。大多数把这些当作"我们方向对了"的确认。</div>
+    <div class="type-sample serif" style="font-size: 17px; line-height: 1.55; color: var(--ink-soft);">每支团队都在收集客户信号——访谈、工单、流失对话。多数团队把它们当成「方向没错」的佐证。</div>
   </div>
   <div class="type-row">
     <div class="type-meta"><strong>Body</strong>10pt · 400 · lh 1.65<br>正文阅读字号</div>
-    <div class="type-sample serif" style="font-size: 15.5px; line-height: 1.65;">信号是观察;假设是带失败条件的预测。"用户想要更好的引导流程"是信号;"如果把引导从 9 步压到 3 步,第 7 日留存提升 ≥ 5 个百分点"才是假设。</div>
+    <div class="type-sample serif" style="font-size: 15.5px; line-height: 1.65;">信号是观察；假设是带失败条件的预测。「用户想要更好的引导」是信号；「把引导从 9 步压到 3 步，第 7 日留存提升 ≥ 5 个百分点」才是假设。</div>
   </div>
   <div class="type-row">
     <div class="type-meta"><strong>Caption</strong>9pt · 400 · lh 1.45<br>图注、注解</div>
-    <div class="type-sample serif" style="font-size: 12px; line-height: 1.45; color: var(--ink-muted);">来源:CB Insights,2024 年 110 家失败创业公司的复盘分析。</div>
+    <div class="type-sample serif" style="font-size: 12px; line-height: 1.45; color: var(--ink-muted);">来源：CB Insights，2024 年对 110 家失败创业公司的复盘分析。</div>
   </div>
   <div class="type-row">
-    <div class="type-meta"><strong>Label</strong>9pt · 500 · 大写<br>eyebrow、tag pill</div>
+    <div class="type-meta"><strong>Label</strong>9pt · 500 · 大写<br>眉题、标签</div>
     <div class="type-sample sans" style="font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent);">Exercise · Note · Think · Warning</div>
   </div>
 
   <p class="sub-title">Letter-spacing · AI 最常做错的一件事</p>
   <div class="ls-demo">
-    <div class="ls-label">标题:收紧,−0.022em 到 −0.028em</div>
+    <div class="ls-label">标题：收紧，−0.022em 至 −0.028em</div>
     <div class="ls-sample title">寻找产品与市场契合</div>
   </div>
   <div class="ls-demo">
-    <div class="ls-label">eyebrow:放开,+0.06em 到 +0.08em</div>
+    <div class="ls-label">眉题：放开，+0.06em 至 +0.08em</div>
     <div class="ls-sample eyebrow">A Founder's Playbook · 2026</div>
   </div>
   <div class="ls-demo">
-    <div class="ls-label">正文:0(或 Fraunces 下 −0.003em)</div>
-    <div class="ls-sample body">信号是观察;假设是带失败条件的预测。</div>
+    <div class="ls-label">正文：0（Fraunces 可用 −0.003em）</div>
+    <div class="ls-sample body">信号是观察；假设是带失败条件的预测。</div>
   </div>
 
   <p class="sub-title">Fraunces 可变轴 · opsz × SOFT</p>
   <div class="type-row">
-    <div class="type-meta"><strong>Display 设置</strong>opsz 144 · SOFT 30<br>锐利、有编辑感</div>
+    <div class="type-meta"><strong>Display 设置</strong>opsz 144 · SOFT 30<br>利落，偏编辑感</div>
     <div class="type-sample serif" style="font-size: 56px; font-weight: 500; letter-spacing: -0.026em; font-variation-settings: 'opsz' 144, 'SOFT' 30;">Quarterly</div>
   </div>
   <div class="type-row">
-    <div class="type-meta"><strong>Body 设置</strong>opsz 14 · SOFT 50<br>温和、更接近人手</div>
+    <div class="type-meta"><strong>Body 设置</strong>opsz 14 · SOFT 50<br>柔和，更接近手写感</div>
     <div class="type-sample serif" style="font-size: 56px; font-weight: 500; letter-spacing: -0.026em; font-variation-settings: 'opsz' 14, 'SOFT' 50;">Quarterly</div>
   </div>
 </section>
@@ -1266,11 +1488,11 @@
      3. SPACING
      ============================================= -->
 <section>
-  <p class="anchor">03 / 08</p>
+  <p class="anchor">03 / 11</p>
   <p class="section-eyebrow">Tokens</p>
   <h2 class="section-title">间距</h2>
   <p class="section-desc">
-    基础单位 <strong>4pt</strong>。7 个层级从相邻元素到封面 hero 留白都覆盖。页面边距非对称 —— 左紧右松 —— 留出右侧呼吸给页码和旁注。
+    基础单位 <strong>4pt</strong>，七级间距覆盖行内元素到封面大留白。页边距非对称（左紧右松），为页码与旁注留出右侧空间。
   </p>
 
   <p class="sub-title">Scale · 间距阶梯</p>
@@ -1317,7 +1539,7 @@
     <div class="sp-use">封面标题 → 副标题</div>
   </div>
 
-  <p class="sub-title">页面边距 · 非对称(左紧右松)</p>
+  <p class="sub-title">页面边距 · 非对称（左紧右松）</p>
   <table class="density-rules" style="max-width: 600px;">
     <thead>
       <tr><th>开本</th><th>T / R / B / L</th><th>说明</th></tr>
@@ -1325,21 +1547,96 @@
     <tbody>
       <tr><td>A4 竖版</td><td class="num">22 / 24 / 24 / 22 mm</td><td class="why">白皮书、简历</td></tr>
       <tr><td>Letter 竖版</td><td class="num">.85 / .95 / .95 / .85 in</td><td class="why">简历、单页报告</td></tr>
-      <tr><td>横版(playbook)</td><td class="num">18 / 22 / 22 / 18 mm</td><td class="why">默认 playbook 画像</td></tr>
+      <tr><td>横版（playbook）</td><td class="num">18 / 22 / 22 / 18 mm</td><td class="why">默认 playbook 规格</td></tr>
     </tbody>
   </table>
 </section>
 <hr class="section-divider">
 
 <!-- =============================================
-     4. PAGE ARCHETYPES
+     4. STROKES & RADII
      ============================================= -->
 <section>
-  <p class="anchor">04 / 08</p>
+  <p class="anchor">04 / 11</p>
+  <p class="section-eyebrow">Tokens</p>
+  <h2 class="section-title">描边与圆角</h2>
+  <p class="section-desc">
+    三种线宽——rule、accent、quote——覆盖所有分隔线、表头与引文边条。圆角保持克制：3pt 是 Quire 文档允许的最大圆角。
+  </p>
+
+  <p class="sub-title">线宽 · Stroke</p>
+  <div class="swatch-grid">
+    <div class="swatch">
+      <div class="stroke-block">
+        <div class="stroke-line" style="height: 1px;"></div>
+      </div>
+      <div class="swatch-name">stroke-rule</div>
+      <div class="swatch-hex">1px</div>
+      <div class="swatch-use">表格行线、章节分隔、卡片边框</div>
+    </div>
+    <div class="swatch">
+      <div class="stroke-block">
+        <div class="stroke-line accent" style="height: 1.5px;"></div>
+      </div>
+      <div class="swatch-name">stroke-accent</div>
+      <div class="swatch-hex">1.5px</div>
+      <div class="swatch-use">表头下方、强调用分隔</div>
+    </div>
+    <div class="swatch">
+      <div class="stroke-block">
+        <div class="stroke-line accent" style="height: 2px;"></div>
+      </div>
+      <div class="swatch-name">stroke-quote</div>
+      <div class="swatch-hex">2px</div>
+      <div class="swatch-use">Callout 左边条、引文边条</div>
+    </div>
+    <div class="swatch banned">
+      <div class="swatch-block"></div>
+      <div class="swatch-name">—— 不超过 2px ——</div>
+      <div class="swatch-hex">禁止</div>
+      <div class="swatch-use">不要粗边框，不要边框包整页</div>
+    </div>
+  </div>
+
+  <p class="sub-title">圆角 · Radius · 默认为零</p>
+  <div class="swatch-grid">
+    <div class="swatch">
+      <div class="swatch-block" style="background: var(--accent-tint); border-radius: var(--r-none);"></div>
+      <div class="swatch-name">r-none</div>
+      <div class="swatch-hex">0</div>
+      <div class="swatch-use">默认；卡片、callout、页面</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-block" style="background: var(--accent-tint); border-radius: var(--r-sm);"></div>
+      <div class="swatch-name">r-sm</div>
+      <div class="swatch-hex">2pt</div>
+      <div class="swatch-use">Tag 标签、行内 label</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-block" style="background: var(--accent-tint); border-radius: var(--r-md);"></div>
+      <div class="swatch-name">r-md</div>
+      <div class="swatch-hex">3pt</div>
+      <div class="swatch-use">小型组件容器（上限）</div>
+    </div>
+    <div class="swatch banned">
+      <div class="swatch-block" style="background: var(--canvas); border-radius: 12pt;"></div>
+      <div class="swatch-name">—— 圆角装饰 ——</div>
+      <div class="swatch-hex">禁止</div>
+      <div class="swatch-use">不要 pill 按钮，不要 app 风格卡片</div>
+    </div>
+  </div>
+</section>
+<hr class="section-divider">
+
+<!-- =============================================
+     5. PAGE ARCHETYPES
+     ============================================= -->
+<section>
+  <p class="anchor">05 / 11</p>
   <p class="section-eyebrow">结构</p>
   <h2 class="section-title">页面原型</h2>
   <p class="section-desc">
-    Quire 文档的每一页都属于以下 7 种原型之一。每种原型是固定结构 —— 改了结构就变成另一种原型,从不出现混合型。
+    Quire 文档的每一页必属以下七种原型之一。结构固定——一改版式即属另一类，不做混搭。
   </p>
 
   <div class="archetype-grid">
@@ -1349,7 +1646,7 @@
         <div class="t-title white"></div>
       </div>
       <div class="arch-name">Cover · 封面</div>
-      <div class="arch-desc">仅第 1 页。满辅色或满画布。超大标题,无页码。</div>
+      <div class="arch-desc">仅第 1 页。满铺强调色或画布色。超大标题，无页码。</div>
     </div>
 
     <div class="archetype">
@@ -1363,7 +1660,7 @@
         </div>
       </div>
       <div class="arch-name">TOC · 目录</div>
-      <div class="arch-desc">第 2 页。Eyebrow + 编号列表 + leader 引导线。</div>
+      <div class="arch-desc">第 2 页。眉题 + 编号列表 + 引导点线。</div>
     </div>
 
     <div class="archetype">
@@ -1372,7 +1669,7 @@
         <div class="t-title short"></div>
       </div>
       <div class="arch-name">Chapter divider · 章节分隔</div>
-      <div class="arch-desc">accent-tint 底色。章号 + 标题。无正文,无页码。</div>
+      <div class="arch-desc">accent-tint 铺底。章号 + 标题。无正文，无页码。</div>
     </div>
 
     <div class="archetype">
@@ -1389,7 +1686,7 @@
         </div>
       </div>
       <div class="arch-name">Standard · 标准内文</div>
-      <div class="arch-desc">大部分页。h1 + lead + h2/h3 + 段落 + callout。</div>
+      <div class="arch-desc">占大多数页面。h1 + 引导段 + h2/h3 + 正文 + callout。</div>
     </div>
 
     <div class="archetype">
@@ -1397,7 +1694,7 @@
         <div class="t-stat">42%</div>
       </div>
       <div class="arch-name">Stat-anchor · 数据锚点</div>
-      <div class="arch-desc">每份文档 1–2 次。整页 hero 位置只放一个超大数字。</div>
+      <div class="arch-desc">每份文档 1–2 次。整页只放一个超大数字。</div>
     </div>
 
     <div class="archetype">
@@ -1427,7 +1724,7 @@
         </div>
       </div>
       <div class="arch-name">Comparison · 对照</div>
-      <div class="arch-desc">引入 trade-off 时。3 栏对照表。</div>
+      <div class="arch-desc">用于呈现权衡时。三栏对照表。</div>
     </div>
 
     <div class="archetype">
@@ -1439,7 +1736,7 @@
         </div>
       </div>
       <div class="arch-name">Pull-quote · 引文</div>
-      <div class="arch-desc">每章 ≤ 1 次。半页编辑感引文,左侧辅色竖条。</div>
+      <div class="arch-desc">每章 ≤ 1 次。半页引文，左侧强调色竖线。</div>
     </div>
 
     <div class="archetype">
@@ -1453,40 +1750,130 @@
         </div>
       </div>
       <div class="arch-name">Colophon · 版本页</div>
-      <div class="arch-desc">最末页。资源、致谢、文件清单。</div>
+      <div class="arch-desc">末页。资源、致谢与文件清单。</div>
     </div>
   </div>
 </section>
 <hr class="section-divider">
 
 <!-- =============================================
-     5. COMPONENTS
+     6. PAGE CHROME
      ============================================= -->
 <section>
-  <p class="anchor">05 / 08</p>
+  <p class="anchor">06 / 11</p>
+  <p class="section-eyebrow">结构</p>
+  <h2 class="section-title">页眉与页码</h2>
+  <p class="section-desc">
+    页眉与页码是仅有的、出现在版心之外的标记。冷灰等宽，字号很小——足以让读者定位，却低调到几乎隐形。七种原型里，三种带 chrome，三种省略 chrome。
+  </p>
+
+  <p class="sub-title">四种原型对照</p>
+  <div class="chrome-grid">
+    <div class="chrome-page">
+      <div class="cp-header">
+        <span>QUIRE · PLAYBOOK</span>
+        <span>CH 02 · CONSTRAINT</span>
+      </div>
+      <div class="cp-body">
+        <div class="cp-h2"></div>
+        <div class="cp-line"></div>
+        <div class="cp-line med"></div>
+        <div class="cp-line"></div>
+        <div class="cp-line short"></div>
+        <div class="cp-line"></div>
+        <div class="cp-line med"></div>
+      </div>
+      <div class="cp-page-no">04</div>
+      <div class="cp-label">Standard · 标准内文<span class="small">页眉 + 页码</span></div>
+    </div>
+    <div class="chrome-page bleed">
+      <div class="cp-title-large"></div>
+      <div class="cp-label">Cover · 封面<span class="small">完全无 chrome</span></div>
+    </div>
+  </div>
+  <div class="chrome-grid">
+    <div class="chrome-page tint">
+      <div class="cp-title-large"></div>
+      <div class="cp-label">Chapter divider · 章节分隔<span class="small">无 chrome — 留出停顿</span></div>
+    </div>
+    <div class="chrome-page">
+      <div class="cp-stat">42%</div>
+      <div class="cp-page-no">07</div>
+      <div class="cp-label">Stat-anchor · 数据锚点<span class="small">仅页码 · 去掉页眉</span></div>
+    </div>
+  </div>
+
+  <p class="sub-title">规格</p>
+  <table class="density-rules">
+    <thead>
+      <tr><th>元素</th><th>规格</th><th>位置</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Running header · 页眉</td>
+        <td class="num">mono 8pt · ink-faint · +0.04em</td>
+        <td class="why">距上裁切线 12pt。左：文档名；右：当前章节标题。</td>
+      </tr>
+      <tr>
+        <td>Page number · 页码</td>
+        <td class="num">mono 9pt · ink-faint · tabular-nums</td>
+        <td class="why">距下裁切线 12pt。外侧——竖版正面右下、背面左下；横版统一右下。</td>
+      </tr>
+      <tr>
+        <td>Margin rule · 边距细线（可选）</td>
+        <td class="num">1px · ink-faint</td>
+        <td class="why">页眉与正文之间的发线；仅对超过 40 页的文档启用——长文需要更强的视觉锚点。</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="sub-title">各原型的 chrome 处理</p>
+  <table class="density-rules">
+    <thead>
+      <tr><th>原型</th><th>页眉</th><th>页码</th><th>原因</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Cover · 封面</td><td class="num">—</td><td class="num">—</td><td class="why">标题撑满整页；chrome 会与之争抢。</td></tr>
+      <tr><td>TOC · 目录</td><td class="num">●</td><td class="num">●</td><td class="why">第一个可导航的页面；完整 chrome。</td></tr>
+      <tr><td>Chapter divider · 章节分隔</td><td class="num">—</td><td class="num">—</td><td class="why">本身是一次视觉重置；chrome 会破坏停顿感。</td></tr>
+      <tr><td>Standard · 标准内文</td><td class="num">●</td><td class="num">●</td><td class="why">默认形态。两个标记都在。</td></tr>
+      <tr><td>Stat-anchor · 数据锚点</td><td class="num">—</td><td class="num">●</td><td class="why">去掉页眉以突出数字；保留页码便于检索。</td></tr>
+      <tr><td>Comparison · 对照</td><td class="num">●</td><td class="num">●</td><td class="why">标准 chrome。</td></tr>
+      <tr><td>Pull-quote · 引文</td><td class="num">—</td><td class="num">●</td><td class="why">引文需要呼吸；页眉会挤压它。</td></tr>
+      <tr><td>Colophon · 版本页</td><td class="num">●</td><td class="num">●</td><td class="why">末页；完整 chrome 像是「合上书页」。</td></tr>
+    </tbody>
+  </table>
+</section>
+<hr class="section-divider">
+
+<!-- =============================================
+     7. COMPONENTS
+     ============================================= -->
+<section>
+  <p class="anchor">07 / 11</p>
   <p class="section-eyebrow">基础组件</p>
   <h2 class="section-title">组件</h2>
   <p class="section-desc">
-    实时渲染示例。下面每个组件都是模板里真正会渲染出来的样子 —— 复制 CSS class 名到自己的代码即可。
+    以下为实时渲染。样式与模板一致——复制对应 CSS class 即可复用。
   </p>
 
   <p class="sub-title">Callout · 4 种 label 变体</p>
   <div class="demo">
     <div class="demo-callout">
       <span class="label">Exercise</span>
-      从上周访谈里挑出最响的那个信号。把它改写成一句包含指标、量级、时间窗的话。如果改不出来,这个信号还没锐利到能行动。
+      从上周访谈中挑出最强的一条信号，改写成含指标、量级与时间窗的一句话。若写不出，说明信号还不够具体，暂不宜行动。
     </div>
     <div class="demo-callout note">
       <span class="label">Note</span>
-      一轮发现过程如果没"杀掉"任何假设,那就不是在验证 —— 是在为既定 roadmap 找理由。
+      若一轮探索没有「证伪」任何假设，多半不是在验证，而是在为既定路线图找借口。
     </div>
     <div class="demo-callout">
       <span class="label">Think</span>
-      你愿意拿一个 sprint 赌这个假设为真吗?
+      你愿意用一个 sprint 赌这个假设成立吗？
     </div>
     <div class="demo-callout warning">
       <span class="label">Warning</span>
-      上线前不做安全审查,是发布前最常见的事故源头。
+      上线前跳过安全审查，是发布前最常见的事故来源。
     </div>
   </div>
 
@@ -1501,9 +1888,9 @@
         </tr>
       </thead>
       <tbody>
-        <tr><td>问题是否真实、频繁</td><td><strong>探索式访谈</strong></td><td>开放式提问;能浮现没被引导的语言和绕路方案</td></tr>
-        <tr><td>付费意愿或承诺</td><td><strong>预售 / LOI</strong></td><td>行为是唯一诚实的信号;口头意愿会夸大</td></tr>
-        <tr><td>特定方案是否可用</td><td><strong>原型测试</strong></td><td>具体物件;暴露假设崩塌的地方</td></tr>
+        <tr><td>问题是否真实、频繁</td><td><strong>探索式访谈</strong></td><td>开放式提问；能浮现未被引导的说法与绕行方案</td></tr>
+        <tr><td>付费意愿或承诺</td><td><strong>预售 / LOI</strong></td><td>行为是最诚实的信号；口头意愿往往夸大</td></tr>
+        <tr><td>特定方案是否可用</td><td><strong>原型测试</strong></td><td>具体可测的原型；暴露假设失效之处</td></tr>
       </tbody>
     </table>
   </div>
@@ -1521,32 +1908,75 @@
     <div class="stat-block">
       <div class="stat-figure">42%</div>
       <p class="stat-label">
-        的初创公司是因为做了没人要的东西而失败 —— 这还是在 agentic coding 让"造原型"变成一下午的工作之前。
+        的初创公司死于「做了没人要的东西」——这还是在 agentic coding 把「造原型」压缩到一下午之前的数据。
       </p>
     </div>
   </div>
 
-  <p class="sub-title">Inline highlight <code>.hl</code> 和术语标记 <code>&lt;em&gt;</code></p>
+  <p class="sub-title">行内强调 <code>.hl</code> 与术语 <code>&lt;em&gt;</code></p>
   <div class="demo">
     <p class="demo-prose">
-      AI 改变内部流程的方式,是把
-      <span class="hl">决策到行动</span>之间的缝合上。变化不是速度 —— 而是团队角色从单兵执行变成
-      <em>agents 的编排者</em>。<span class="hl">两种用法</span>都合规:前者用辅色 + 500 字重,后者是
-      <em>术语标记</em>的约定。
+      AI 改变内部流程，在于缩短<span class="hl">决策到行动</span>的间隔。关键不在更快，而是角色从单兵执行转向<span class="hl">编排 Agent</span>。<span class="hl">.hl</span> 与 <em>术语标记</em> 均可：前者用强调色 + 500 字重，后者用 <em> 标术语。
     </p>
+  </div>
+
+  <p class="sub-title">列表 · 无序、有序、定义</p>
+  <div class="demo">
+    <p class="demo-eyebrow">无序 · 破折号</p>
+    <ul class="list">
+      <li><strong>信号（signal）</strong>：来自访谈、工单、埋点的观察。</li>
+      <li><strong>假设（hypothesis）</strong>：带失败条件的预测——指标、量级、时间窗。</li>
+      <li><strong>测试（test）</strong>：能证伪假设的最便宜实验。</li>
+    </ul>
+
+    <p class="demo-eyebrow">有序 · 数字 + accent</p>
+    <ol class="list-num">
+      <li>把信号写成一句话。</li>
+      <li>改写为含指标、量级与时间窗的假设。</li>
+      <li>指出最便宜的、可能证伪它的测试。</li>
+    </ol>
+
+    <p class="demo-eyebrow">定义 · 名词 + 释义</p>
+    <dl class="list-def">
+      <dt>Signal</dt>
+      <dd>来自客户或用户的观察——尚未成为主张。</dd>
+      <dt>Hypothesis</dt>
+      <dd>带失败条件的预测：含指标、量级与时间窗。</dd>
+      <dt>Validation</dt>
+      <dd>为证伪假设而做的测试——不是为了证实。</dd>
+    </dl>
+  </div>
+
+  <p class="sub-title">Figure · 图片与题注</p>
+  <div class="demo">
+    <figure class="fig">
+      <div class="fig-image">[ 图片 · 16:9 · canvas + 1px 边框 ]</div>
+      <figcaption>
+        <span class="fig-num">Figure 02</span>
+        一份 12 页 playbook 的节奏图。封面在 01；章节分隔在 03 / 06 / 09；stat-anchor 在 05；pull-quote 在 10。每次视觉重置都落在 5–7 页窗口内。
+      </figcaption>
+    </figure>
+
+    <figure class="fig fig-bleed">
+      <div class="fig-image">[ 满铺 · accent · 用于封面、stat-anchor ]</div>
+      <figcaption>
+        <span class="fig-num">Figure 03</span>
+        满铺变体：无边框，画面延伸至裁切线。仅用于封面、章节分隔与 stat-anchor 背景。
+      </figcaption>
+    </figure>
   </div>
 </section>
 <hr class="section-divider">
 
 <!-- =============================================
-     6. CADENCE
+     8. CADENCE
      ============================================= -->
 <section>
-  <p class="anchor">06 / 08</p>
+  <p class="anchor">08 / 11</p>
   <p class="section-eyebrow">节奏</p>
-  <h2 class="section-title">Cadence 规则</h2>
+  <h2 class="section-title">页面节奏（Cadence）</h2>
   <p class="section-desc">
-    每 5–7 页内文,眼睛需要一个视觉重置 —— 章节分隔、stat-anchor 或 pull-quote 都行。没有重置,读者会迷路。Cadence 是"成书"和"打字稿"之间的分水岭。
+    每 5–7 页正文需一次视觉重置——章节分隔、stat-anchor 或 pull-quote 均可。缺少重置，读者容易迷失。节奏是把「成书」与「打字稿」分开的那条线。
   </p>
 
   <p class="sub-title">可视化 · 一份 12 页 playbook</p>
@@ -1567,20 +1997,20 @@
   <div class="cadence-legend">
     <span><span class="swatch-mini" style="background: var(--accent);"></span>封面</span>
     <span><span class="swatch-mini" style="background: var(--accent-tint);"></span>章节分隔</span>
-    <span><span class="swatch-mini" style="background: var(--canvas);"></span>内文(含 stat-anchor、pull-quote)</span>
+    <span><span class="swatch-mini" style="background: var(--canvas);"></span>正文（含 stat-anchor、pull-quote）</span>
   </div>
 </section>
 <hr class="section-divider">
 
 <!-- =============================================
-     7. DENSITY RULES
+     9. DENSITY RULES
      ============================================= -->
 <section>
-  <p class="anchor">07 / 08</p>
-  <p class="section-eyebrow">量化限制</p>
+  <p class="anchor">09 / 11</p>
+  <p class="section-eyebrow">用量上限</p>
   <h2 class="section-title">密度限值</h2>
   <p class="section-desc">
-    任何一条超标,这份文档就违反了 Quire。这些限值防的是 AI 最常见的失败:把每一页都当成最重要的那一页。
+    任一超限即偏离 Quire。这些上限针对 AI 最常犯的错：把每一页都排成「最重要的一页」。
   </p>
 
   <table class="density-rules">
@@ -1593,34 +2023,34 @@
     </thead>
     <tbody>
       <tr>
-        <td>Callout(Exercise / Note / Think)</td>
+        <td>Callout（Exercise / Note / Think）</td>
         <td class="num">每对开页 ≤ 2 个</td>
-        <td class="why">3 个以上,页面看起来像一节带批注的课,不像书的一章。</td>
+        <td class="why">超过 2 个会像带批注的讲义，不像书中一章。</td>
       </tr>
       <tr>
         <td>Pull-quote 页</td>
         <td class="num">每章 ≤ 1 个</td>
-        <td class="why">Pull-quote 是标点。一章里两个就变装饰。</td>
+        <td class="why">引文页是标点；一章两个以上就成装饰。</td>
       </tr>
       <tr>
         <td>Stat-anchor 页</td>
         <td class="num">每份文档 ≤ 2 个</td>
-        <td class="why">数字是锚。过多会让文档退化成信息图。</td>
+        <td class="why">数字页是锚点；过多会退化成信息图。</td>
       </tr>
       <tr>
         <td>每页辅色面积</td>
-        <td class="num">凭判断</td>
-        <td class="why">5% 上限已退役。原则仍在:单一辅色要让人感到稀缺。</td>
+        <td class="num">视版面而定</td>
+        <td class="why">5% 硬上限已取消；原则不变：强调色须稀缺。</td>
       </tr>
       <tr>
         <td>Inline <code>.hl</code> 高亮</td>
         <td class="num">每页 ≤ 2 处</td>
-        <td class="why">什么都高亮 = 什么都没高亮。</td>
+        <td class="why">处处强调等于没有强调。</td>
       </tr>
       <tr>
         <td>视觉重置(cadence)</td>
         <td class="num">每 5–7 页内文</td>
-        <td class="why">超过 7 页,读者在长文档里就会失去方位。</td>
+        <td class="why">超过 7 页无重置，读者在长文中易迷失。</td>
       </tr>
     </tbody>
   </table>
@@ -1628,10 +2058,66 @@
 <hr class="section-divider">
 
 <!-- =============================================
-     8. 10 INVARIANTS
+     10. PRINT RULES
      ============================================= -->
 <section>
-  <p class="anchor">08 / 08</p>
+  <p class="anchor">10 / 11</p>
+  <p class="section-eyebrow">输出</p>
+  <h2 class="section-title">印刷规则</h2>
+  <p class="section-desc">
+    只有导出 PDF 用于印刷或装订时才生效的约束。仅供屏幕阅读的文档可以忽略；要落到纸上的文档不行。
+  </p>
+
+  <table class="density-rules">
+    <thead>
+      <tr><th>约束</th><th>取值</th><th>原因</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Bleed · 出血</td>
+        <td class="num">四边各 3 mm</td>
+        <td class="why">封面、章节分隔与所有满铺图必用——将背景延伸过裁切线。</td>
+      </tr>
+      <tr>
+        <td>Safe area · 安全区</td>
+        <td class="num">距裁切线内 5 mm</td>
+        <td class="why">文字与关键元素均不可靠近裁切线 5 mm 以内——装订误差会吃掉这段空间。</td>
+      </tr>
+      <tr>
+        <td>Page-break inside · 元素内分页</td>
+        <td class="num">避免</td>
+        <td class="why">Callout、stat-block、figure、对照表不能被分页打断。</td>
+      </tr>
+      <tr>
+        <td>Widows &amp; orphans · 孤行寡行</td>
+        <td class="num">≥ 2 行</td>
+        <td class="why">段首或段尾只剩 1 行，会被读成排版错误。</td>
+      </tr>
+      <tr>
+        <td>Hyphenation · 连字符</td>
+        <td class="num">标题关闭；正文开启</td>
+        <td class="why">标题按语义断行，不按音节；正文两端对齐时开启连字符更易读。</td>
+      </tr>
+      <tr>
+        <td>Image resolution · 图片分辨率</td>
+        <td class="num">实印尺寸下 ≥ 300 dpi</td>
+        <td class="why">低于 300 dpi 的图，装订后细节会明显发软。</td>
+      </tr>
+      <tr>
+        <td>Color space · 色彩空间</td>
+        <td class="num">编辑 sRGB；印前 CMYK 软打样</td>
+        <td class="why">天蓝在印刷上会有色偏；下印前先做一次色彩校样。</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+<hr class="section-divider">
+
+<!-- =============================================
+     11. 10 INVARIANTS
+     ============================================= -->
+<section>
+  <p class="anchor">11 / 11</p>
   <p class="section-eyebrow">硬规则</p>
   <h2 class="section-title">10 条不变式</h2>
   <p class="section-desc">
@@ -1639,16 +2125,16 @@
   </p>
 
   <ol class="invariants">
-    <li>冷调画布 <code>#f6f8fb</code>,绝不纯白,绝不暖奶油色。</li>
-    <li>天蓝 <code>#3a82c4</code> 是唯一发色 —— 没有第二色。</li>
-    <li>全部灰为冷调(<code>B ≥ G ≥ R</code>)。禁止暖黄褐灰。</li>
-    <li>一个衬线字体扛全部层级。Sans 只用在 UI 边角。</li>
-    <li>只有两个字重:400 / 500。不加粗,正文不用斜体。</li>
-    <li>字号机制:标题收紧,eyebrow 放开,正文为零。</li>
-    <li>章节分隔用 <code>--accent-tint</code>,绝不用满辅色。</li>
-    <li>无阴影、无渐变、无模糊。<code>border-radius</code> ≤ 3pt。</li>
-    <li>无个人品牌饰件 —— 无头像、无徽章、无签名框。</li>
-    <li>每个 callout 必须有 label;没有 label 的 blockquote 会沦为装饰。</li>
+    <li>冷调画布 <code>#f6f8fb</code>：不用纯白，不用暖奶油色。</li>
+    <li>天蓝 <code>#3a82c4</code> 是唯一强调色——不设第二彩色。</li>
+    <li>灰色一律冷调（<code>B ≥ G ≥ R</code>），不用暖黄褐灰。</li>
+    <li>衬线承担全部层级；无衬线仅用于界面元素。</li>
+    <li>字重仅 400 / 500：不加粗，正文不用斜体。</li>
+    <li>字距：标题收紧，眉题放开，正文为零。</li>
+    <li>章节分隔用 <code>--accent-tint</code>，不用满铺强调色。</li>
+    <li>无阴影、无渐变、无模糊；<code>border-radius</code> ≤ 3pt。</li>
+    <li>无个人品牌装饰——头像、徽章、签名框均不用。</li>
+    <li>每个 callout 须有 label；无 label 的 blockquote 易沦为装饰。</li>
   </ol>
 </section>
 <footer style="margin-top: 80px; padding-top: 36px; border-top: 1px solid var(--rule); font-family: var(--font-sans); font-size: 12px; color: var(--ink-muted); line-height: 1.7;">
@@ -1661,7 +2147,7 @@
     &nbsp;·&nbsp;
     <a href="https://github.com/FoundDream/Quire/blob/main/LICENSE" style="color: var(--accent-deep); text-decoration: none; border-bottom: 1px solid var(--accent-tint);" target="_blank" rel="noopener">MIT 协议</a>
   </p>
-  <p style="margin: 0;">编辑本文件顶部 <code>:root</code> 里的 CSS 变量即可换主题;上方所有区段都由这些变量组合而成。</p>
+  <p style="margin: 0;">编辑本文件顶部 <code>:root</code> 中的 CSS 变量即可换肤；上方各区块均由这些变量组合。</p>
 </footer>
 
 </main>

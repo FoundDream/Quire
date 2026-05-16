@@ -105,6 +105,6 @@ These are the rules Quire will not break. Each has a real cost — think before 
 5. **Two weights only**: 400 regular, 500 medium. No 600+, no synthetic bold, no italic body.
 6. **Typography mechanics**: titles tight (-0.02em to -0.03em), eyebrows loose (+0.04em to +0.08em), body 0; line-heights 1.05–1.20 for titles, 1.55–1.70 for body.
 7. **Chapter dividers use the `--accent-tint`**, never the full-saturation accent.
-8. **No drop shadows, no gradients, no blur.** `border-radius` ≤ 3pt. Depth comes from rule lines and tints.
+8. **No drop shadows, no gradients, no blur.** `border-radius` ≤ 3pt; strokes ≤ 2px. Depth comes from rule lines and tints, not weight.
 9. **No personal-brand chrome** — no avatar circles, no signature boxes, no badges, no italic quote cards. Quire is editorial, not a profile page.
 10. **Every callout has a label** (Exercise / Note / Think / Warning). Unlabelled blockquotes drift into decoration.

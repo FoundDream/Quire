@@ -153,7 +153,33 @@ Asymmetric horizontal margins (left tighter than right) leave breathing room on 
 
 ---
 
-## 4. Page archetypes (visual signals)
+## 4. Strokes & radii
+
+Three line weights cover every divider, table head, and quote bar. Radii stay flat.
+
+### Stroke weights
+
+```css
+--stroke-rule:    1px;   /* table rows, section dividers, card border */
+--stroke-accent:  1.5px; /* under table heads, emphasis rule */
+--stroke-quote:   2px;   /* callout left bar, pull-quote bar */
+```
+
+**Forbidden**: weights heavier than 2px. Thick borders read as boxed brochure UI, not editorial. Use whitespace and rule lines for separation, not heavier strokes.
+
+### Border radius
+
+```css
+--r-none: 0;     /* default: cards, callouts, pages */
+--r-sm:   2pt;   /* tag pills, inline labels */
+--r-md:   3pt;   /* small contained components — the maximum allowed */
+```
+
+**Forbidden**: any radius greater than 3pt. Pill-shaped buttons and rounded cards read as profile-page UI; Quire is editorial print, not app chrome.
+
+---
+
+## 5. Page archetypes (visual signals)
 
 ### Cover
 
@@ -201,7 +227,45 @@ Asymmetric horizontal margins (left tighter than right) leave breathing room on 
 
 ---
 
-## 5. Components
+## 6. Page chrome
+
+Running header and page number are the only marks outside the content area. Tiny, cool-toned, mono — present enough to orient, quiet enough to disappear.
+
+### Running header
+
+- Position: 12pt above the top trim line.
+- Style: `mono 8pt`, `--ink-faint`, `+0.04em` tracking.
+- Content: document name (left) · current chapter title (right).
+- Landscape may compress to chapter title only when the document name is long.
+
+### Page number
+
+- Position: 12pt below the bottom trim line, outside edge.
+  - Portrait: right corner on recto pages, left corner on verso.
+  - Landscape: right corner on every page.
+- Style: `mono 9pt`, `--ink-faint`, `tabular-nums`.
+- Suppressed on cover and chapter dividers.
+
+### Margin rule (optional)
+
+A 1px `--ink-faint` hairline between header and body. Use only on documents over 40 pages — long-form work benefits from a stronger visual anchor; shorter docs do not.
+
+### Chrome by archetype
+
+| Archetype        | Header | Page # | Notes                                     |
+| ---------------- | :----: | :----: | ----------------------------------------- |
+| Cover            |   —    |   —    | Title is the whole page; nothing competes |
+| TOC              |   ●    |   ●    | First navigable page; full chrome         |
+| Chapter divider  |   —    |   —    | Visual reset; chrome breaks the pause     |
+| Standard content |   ●    |   ●    | Default; both marks present               |
+| Stat-anchor      |   —    |   ●    | Drop header so figure dominates           |
+| Comparison       |   ●    |   ●    | Standard chrome                           |
+| Pull-quote       |   —    |   ●    | Quote needs air                           |
+| Colophon         |   ●    |   ●    | Final page; full chrome closes the doc    |
+
+---
+
+## 7. Components
 
 ### Callout
 
@@ -273,9 +337,73 @@ Asymmetric horizontal margins (left tighter than right) leave breathing room on 
 
 `<em>` renders **upright** (no italic), accent color. Use for terms of art, not emphasis.
 
+### List
+
+Three list variants, all serif-bodied. Use lists in body paragraphs; lists inside callouts double-structure.
+
+**Unordered** — em-dash bullet in accent color:
+
+```html
+<ul class="list">
+  <li><strong>Signal</strong> — observation from interviews, tickets, or telemetry.</li>
+  <li><strong>Hypothesis</strong> — a prediction with metric, magnitude, timeframe.</li>
+</ul>
+```
+
+**Ordered** — `01` `02` `03` numerals in mono accent:
+
+```html
+<ol class="list-num">
+  <li>State the signal in one sentence.</li>
+  <li>Rewrite it as a hypothesis.</li>
+</ol>
+```
+
+**Definition** — term in accent, body in serif:
+
+```html
+<dl class="list-def">
+  <dt>Signal</dt>
+  <dd>An observation; not yet a claim.</dd>
+</dl>
+```
+
+### Figure
+
+```html
+<figure class="fig">
+  <div class="fig-image"><!-- img / svg --></div>
+  <figcaption>
+    <span class="fig-num">Figure 02</span>
+    Caption explains why the image matters, not what it shows.
+  </figcaption>
+</figure>
+```
+
+- Default: 16:9 aspect, 1px `--rule` border, canvas background.
+- `<figure class="fig fig-bleed">`: full-bleed accent, no border — covers, chapter dividers, stat-anchor backgrounds only.
+- Caption is `--ink-muted` serif at 12.5pt; figure number is sans accent eyebrow.
+- Caption discipline (from `writing.md`): caption is the takeaway, not the title restated.
+
 ### Diagrams
 
 Inline `<svg>` only — never embedded PNG / screenshots. Use accent + cool grays only; no second chromatic hue in chart series (secondary series use gray-scale, not a second color). (Not yet implemented in the current template.)
+
+---
+
+## 8. Print rules
+
+Design-level constraints that only bite on PDF exports for press or bind. Screen-only documents may ignore them. For the mechanics (CSS / WeasyPrint / headless Chrome), see `production.md`.
+
+| Constraint        | Value                            | Notes                                                 |
+| ----------------- | -------------------------------- | ----------------------------------------------------- |
+| Bleed             | 3 mm all sides                   | Required on covers, dividers, full-bleed figures      |
+| Safe area         | 5 mm inside trim                 | No text or critical mark closer to the trim           |
+| Page-break inside | avoid                            | Callouts, stat-blocks, figures, tables must not split |
+| Widows / orphans  | ≥ 2 lines                        | Single trailing or leading line reads as error        |
+| Hyphenation       | off in headings, on in body      | Headings break by sense; justified body needs hyphens |
+| Image resolution  | ≥ 300 dpi at print size          | Below this, detail softens once bound                 |
+| Color space       | sRGB authoring · CMYK soft-proof | Sky blue shifts on press; check before committing     |
 
 ---
 
