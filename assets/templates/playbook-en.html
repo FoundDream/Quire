@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>Playbook Template — Founder's Playbook style</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..700,30..100&family=Inter+Tight:wght@400..600&display=swap" rel="stylesheet">
+<style>
+  /* Design tokens — change here to retheme */
+  :root {
+    --cream:        #faf9f5;   /* 内文奶油底 */
+    --ink:          #1a1a1a;   /* 正文字色 */
+    --ink-soft:     #4a4a4a;   /* 次级字色 */
+    --rule:         #d6d3c8;   /* 分隔线 */
+
+    /* 章节封面色板（直接从原 PDF 取色） */
+    --c-orange:     #d97757;
+    --c-green:      #629987;
+    --c-purple:     #827dbd;
+    --c-mint:       #bcd1ca;
+    --c-mauve:      #cbcadb;
+    --c-peach:      #f0d5c7;
+
+    /* 字体 —— 用 Fraunces (Tiempos 替代) + Inter Tight (Styrene 替代) */
+    --font-serif:   "Fraunces", "Tiempos Text", "Source Serif Pro", Georgia, serif;
+    --font-sans:    "Inter Tight", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+    /* Fraunces 可变轴：让 display 用更紧的光学尺寸、低 SOFT 值（更硬朗）*/
+    --serif-display-settings: "opsz" 144, "SOFT" 30;
+    --serif-text-settings:    "opsz" 14,  "SOFT" 50;
+
+    /* 页面尺寸（横版，接近原 PDF 11×8.5） */
+    --page-w: 1100px;
+    --page-h: 850px;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: #e6e4dc;
+    font-family: var(--font-serif);
+    font-variation-settings: var(--serif-text-settings);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Page container — screen preview */
+  .page {
+    width: var(--page-w);
+    height: var(--page-h);
+    margin: 24px auto;
+    background: var(--cream);
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+  }
+  @media screen {
+    /* Subtle screen-only depth via outline (not box-shadow, lint-safe) */
+    .page { outline: 1px solid var(--rule); }
+  }
+
+  /* Cover / chapter divider */
+  .cover {
+    color: #fff;
+    padding: 90px 110px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* 文字偏下 */
+  }
+  .cover.bg-orange  { background: var(--c-orange); color: #fff; }
+  .cover.bg-green   { background: var(--c-green);  color: #fff; }
+  .cover.bg-purple  { background: var(--c-purple); color: #fff; }
+  .cover.bg-mint    { background: var(--c-mint);   color: var(--ink); }
+  .cover.bg-mauve   { background: var(--c-mauve);  color: var(--ink); }
+  .cover.bg-peach   { background: var(--c-peach);  color: var(--ink); }
+
+  .cover .chapter-num {
+    font-family: var(--font-sans);
+    font-size: 18px;
+    letter-spacing: .04em;
+    margin: 0 0 28px;
+    opacity: .92;
+    font-weight: 400;
+  }
+  .cover h1 {
+    font-family: var(--font-serif);
+    font-variation-settings: var(--serif-display-settings);
+    font-size: 78px;
+    line-height: 1.04;
+    font-weight: 360;
+    letter-spacing: -0.022em;
+    margin: 0 0 12px;
+    max-width: 14ch;
+  }
+  .cover .page-num {
+    position: absolute;
+    right: 60px;
+    bottom: 50px;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    opacity: .85;
+  }
+
+  /* 主封面（区别于章节封面）—— 标题更大、副标题在下 */
+  .cover-main h1 { font-size: 96px; max-width: 12ch; letter-spacing: -0.028em; font-weight: 340; }
+  .cover-main .subtitle {
+    font-family: var(--font-sans);
+    font-size: 22px;
+    margin-top: 24px;
+    opacity: .9;
+    max-width: 30ch;
+  }
+
+  /* Content page */
+  .content {
+    padding: 70px 130px 70px 90px; /* 左右非对称留白 */
+    color: var(--ink);
+  }
+  .content .chapter-tag {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: var(--ink-soft);
+    letter-spacing: .03em;
+    margin: 0 0 8px;
+  }
+  .content h2 {
+    font-family: var(--font-serif);
+    font-variation-settings: "opsz" 60, "SOFT" 40;
+    font-size: 38px;
+    line-height: 1.12;
+    font-weight: 380;
+    letter-spacing: -0.02em;
+    margin: 0 0 36px;
+  }
+  .content h3 {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-weight: 600;
+    margin: 28px 0 10px;
+    letter-spacing: -0.01em;
+  }
+  .content p {
+    font-family: var(--font-serif);
+    font-variation-settings: var(--serif-text-settings);
+    font-size: 15.5px;
+    line-height: 1.7;
+    letter-spacing: -0.003em;
+    margin: 0 0 14px;
+  }
+  .content ul, .content ol {
+    font-family: var(--font-serif);
+    font-size: 15.5px;
+    line-height: 1.65;
+    padding-left: 22px;
+    margin: 8px 0 16px;
+  }
+  .content li { margin-bottom: 6px; }
+  .content li::marker { color: var(--ink-soft); }
+
+  /* 强调段：粗体起头 */
+  .lede strong { font-weight: 600; }
+
+  /* Callout：Exercise / Note / Think */
+  .callout {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    line-height: 1.6;
+    padding: 4px 0 4px 16px;
+    border-left: 2px solid var(--ink);
+    margin: 14px 0 18px;
+  }
+  .callout .label {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    margin-right: 6px;
+  }
+  .callout.note {
+    border-color: var(--ink-soft);
+    color: var(--ink-soft);
+    font-size: 13.5px;
+  }
+
+  /* 对照表 */
+  table.compare {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-sans);
+    font-size: 13.5px;
+    margin: 20px 0;
+  }
+  table.compare th,
+  table.compare td {
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  table.compare th {
+    font-weight: 600;
+    border-bottom: 1.5px solid var(--ink);
+  }
+
+  /* 页脚：页码 */
+  .content .footer {
+    position: absolute;
+    bottom: 36px;
+    right: 130px;
+    font-family: var(--font-sans);
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+
+  /* Print / PDF export */
+  @page {
+    size: 11in 8.5in;   /* 横版 letter，匹配原 PDF */
+    margin: 0;
+  }
+  @media print {
+    body { background: var(--cream); }
+    .page {
+      margin: 0;
+      outline: none;
+      width: 11in;
+      height: 8.5in;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- 1. Main cover -->
+<section class="page cover cover-main bg-orange">
+  <p class="chapter-num">A Founder's Playbook · 2026</p>
+  <h1>Building an AI-Native Startup</h1>
+  <p class="subtitle">The startup lifecycle, rebooted for the agentic era.</p>
+  <span class="page-num">01</span>
+</section>
+
+<!-- 2. Chapter divider — dark bg, reverse text -->
+<section class="page cover bg-green">
+  <p class="chapter-num">Chapter 02</p>
+  <h1>What it means to be a founder is changing</h1>
+  <span class="page-num">05</span>
+</section>
+
+<!-- 3. Chapter divider — light bg, dark text -->
+<section class="page cover bg-mint">
+  <p class="chapter-num">Chapter 03</p>
+  <h1>Idea Stage</h1>
+  <span class="page-num">08</span>
+</section>
+
+<!-- 4. Content — heading + lede + Exercise callout -->
+<section class="page content">
+  <p class="chapter-tag">Chapter 03 · Idea Stage</p>
+  <h2>Defining and pressure-testing the problem hypothesis</h2>
+
+  <p class="lede">
+    Your own domain expertise and up-front research have already generated a hypothesis.
+    The first job is to sharpen it until it's actually testable. <strong>Claude is
+    particularly useful here for forcing specificity</strong>: who exactly has this problem,
+    how often, how severely, and what do they currently do about it?
+  </p>
+
+  <h3>Sharpen the statement</h3>
+  <p>
+    A problem statement that can't answer those questions precisely isn't ready to validate.
+    The goal is to arrive at customer discovery with assumptions already stress-tested.
+  </p>
+
+  <div class="callout">
+    <span class="label">Exercise</span>
+    Work with Claude to sharpen your problem statement until it's a testable hypothesis.
+    "Contract review takes too long" is not testable. "In-house legal teams at mid-market
+    companies spend 3+ days per cycle because redlines live across email threads" is.
+  </div>
+
+  <h3>Find disconfirming evidence</h3>
+  <ul>
+    <li>Ask Claude to argue against your idea, not for it.</li>
+    <li>Surface negative market signals and failed competitors in the same space.</li>
+    <li>Map structural obstacles a supportive synthesis would have buried.</li>
+  </ul>
+
+  <div class="callout note">
+    <span class="label">Note</span>
+    Using Claude as a structured devil's advocate is a core use case at every stage of the
+    AI startup life cycle, not just here.
+  </div>
+
+  <span class="footer">11</span>
+</section>
+
+<!-- 5. Content — with comparison table -->
+<section class="page content">
+  <p class="chapter-tag">Chapter 03 · Idea Stage</p>
+  <h2>Choosing the right Claude surface</h2>
+
+  <p class="lede">
+    AI makes it easier to ship faster, automate workflows, and operate at scale &mdash; but
+    the surface you use matters. Here's when to reach for which.
+  </p>
+
+  <table class="compare">
+    <thead>
+      <tr>
+        <th style="width: 28%">If the task is…</th>
+        <th style="width: 24%">Reach for</th>
+        <th>Why</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>A question, a rewrite, a quick brainstorm</td>
+        <td><strong>Chat</strong></td>
+        <td>Fast, conversational, no setup</td>
+      </tr>
+      <tr>
+        <td>Research, analysis, or a finished document built from your files</td>
+        <td><strong>Cowork</strong></td>
+        <td>Folder access, connectors, scheduled runs</td>
+      </tr>
+      <tr>
+        <td>Writing, testing, or shipping software</td>
+        <td><strong>Code</strong></td>
+        <td>Codebase access, diffs, git, dev environments</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p style="color: var(--ink-soft); font-size: 14px; margin-top: 20px;">
+    The three share the same Claude underneath; what changes is the workspace around it.
+  </p>
+
+  <span class="footer">12</span>
+</section>
+
+</body>
+</html>
