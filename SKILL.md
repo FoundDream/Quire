@@ -54,6 +54,8 @@ A standard Quire document follows this rhythm:
 
 **Rule of cadence**: every 5–7 content pages need one visual reset — a chapter divider, a full-page pull-quote, or a stat-block page.
 
+**Clickable TOC**: each TOC row must be an `<a href="#sec-NN">` (not a `<span>`), and the section it points to must carry the matching `id`. Headless Chrome preserves these as internal GoTo links in the PDF. Inherit color and remove the underline so the row looks identical to a span. Reference patterns: `assets/output/quire-playbook.html` (`#ch-01` style) and `assets/output/quire-white-paper.html` (`#sec-01` style).
+
 ---
 
 ## Step 3 · Fill the template

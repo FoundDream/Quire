@@ -135,6 +135,7 @@
     margin: 0 0 42px;
   }
   .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { padding: 0; margin: 0; }
   .toc-item {
     display: flex;
     align-items: baseline;
@@ -142,6 +143,8 @@
     border-bottom: var(--stroke-rule) solid var(--rule);
     font-family: var(--font-serif);
     font-size: 16px;
+    color: inherit;
+    text-decoration: none;
   }
   .toc-num {
     font-family: var(--font-sans);
@@ -439,23 +442,23 @@
   <p class="eyebrow">Contents</p>
   <h2>The Validation Discipline</h2>
   <ul class="toc-list">
-    <li class="toc-item"><span class="toc-num">01</span><span class="toc-title">Why discovery breaks down</span><span class="toc-page">03</span></li>
-    <li class="toc-item"><span class="toc-num">02</span><span class="toc-title">Turning weak signals into testable hypotheses</span><span class="toc-page">04</span></li>
-    <li class="toc-item"><span class="toc-num">03</span><span class="toc-title">The cost of unkilled hypotheses</span><span class="toc-page">05</span></li>
-    <li class="toc-item"><span class="toc-num">04</span><span class="toc-title">Picking the right validation method</span><span class="toc-page">07</span></li>
-    <li class="toc-item"><span class="toc-num">05</span><span class="toc-title">Method selection &amp; decision rules</span><span class="toc-page">08</span></li>
-    <li class="toc-item"><span class="toc-num">06</span><span class="toc-title">Colophon &amp; references</span><span class="toc-page">10</span></li>
+    <li><a class="toc-item" href="#sec-01"><span class="toc-num">01</span><span class="toc-title">Why discovery breaks down</span><span class="toc-page">03</span></a></li>
+    <li><a class="toc-item" href="#sec-02"><span class="toc-num">02</span><span class="toc-title">Turning weak signals into testable hypotheses</span><span class="toc-page">04</span></a></li>
+    <li><a class="toc-item" href="#sec-03"><span class="toc-num">03</span><span class="toc-title">The cost of unkilled hypotheses</span><span class="toc-page">05</span></a></li>
+    <li><a class="toc-item" href="#sec-04"><span class="toc-num">04</span><span class="toc-title">Picking the right validation method</span><span class="toc-page">07</span></a></li>
+    <li><a class="toc-item" href="#sec-05"><span class="toc-num">05</span><span class="toc-title">Method selection &amp; decision rules</span><span class="toc-page">08</span></a></li>
+    <li><a class="toc-item" href="#sec-06"><span class="toc-num">06</span><span class="toc-title">Colophon &amp; references</span><span class="toc-page">10</span></a></li>
   </ul>
 </section>
 
 <!-- 03 · Chapter 01 divider -->
-<section class="page cover bg-accent-tint">
+<section id="sec-01" class="page cover bg-accent-tint">
   <p class="eyebrow">Chapter 01</p>
   <h1>Where Discovery Breaks Down</h1>
 </section>
 
 <!-- 04 · Standard content -->
-<section class="page content">
+<section id="sec-02" class="page content">
   <div class="running-head"><span>Quire · The Validation Discipline</span><span>Ch 02 · Signals → Hypotheses</span></div>
 
   <p class="chapter-tag">Chapter 02 · Signals → Hypotheses</p>
@@ -500,7 +503,7 @@
 </section>
 
 <!-- 05 · Stat-anchor -->
-<section class="page stat-page">
+<section id="sec-03" class="page stat-page">
   <p class="chapter-tag">Chapter 02 · Why this matters</p>
   <div class="stat-figure">42%</div>
   <p class="stat-label">of startups failed because they built something nobody wanted — before agentic coding made shipping a prototype an afternoon's work.</p>
@@ -515,7 +518,7 @@
 </section>
 
 <!-- 07 · Standard content -->
-<section class="page content">
+<section id="sec-04" class="page content">
   <div class="running-head"><span>Quire · The Validation Discipline</span><span>Ch 03 · Choosing the Test</span></div>
 
   <p class="chapter-tag">Chapter 03 · Choosing the Test</p>
@@ -551,7 +554,7 @@
 </section>
 
 <!-- 08 · Comparison content -->
-<section class="page content">
+<section id="sec-05" class="page content">
   <div class="running-head"><span>Quire · The Validation Discipline</span><span>Ch 03 · Choosing the Test</span></div>
 
   <p class="chapter-tag">Chapter 03 · Choosing the Test</p>
@@ -615,7 +618,7 @@
 </section>
 
 <!-- 10 · Colophon -->
-<section class="page colophon">
+<section id="sec-06" class="page colophon">
   <p class="eyebrow">Colophon</p>
   <h2>About this paper</h2>
 

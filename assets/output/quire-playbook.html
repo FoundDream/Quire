@@ -157,6 +157,10 @@
         padding: 0;
         margin: 0;
       }
+      .toc-list li {
+        padding: 0;
+        margin: 0;
+      }
       .toc-item {
         display: flex;
         align-items: baseline;
@@ -164,6 +168,8 @@
         border-bottom: 1px solid var(--rule);
         font-family: var(--font-serif);
         font-size: 18px;
+        color: inherit;
+        text-decoration: none;
       }
       .toc-num {
         font-family: var(--font-sans);
@@ -511,29 +517,35 @@
       <p class="eyebrow">Contents</p>
       <h2>What's inside this playbook</h2>
       <ul class="toc-list">
-        <li class="toc-item">
-          <span class="toc-num">01</span>
-          <span class="toc-title">The problem with default PDFs</span>
-          <span class="toc-page">03</span>
+        <li>
+          <a class="toc-item" href="#ch-01">
+            <span class="toc-num">01</span>
+            <span class="toc-title">The problem with default PDFs</span>
+            <span class="toc-page">03</span>
+          </a>
         </li>
-        <li class="toc-item">
-          <span class="toc-num">02</span>
-          <span class="toc-title">The constraint language — four pillars</span>
-          <span class="toc-page">06</span>
+        <li>
+          <a class="toc-item" href="#ch-02">
+            <span class="toc-num">02</span>
+            <span class="toc-title">The constraint language — four pillars</span>
+            <span class="toc-page">06</span>
+          </a>
         </li>
-        <li class="toc-item">
-          <span class="toc-num">03</span>
-          <span class="toc-title"
-            >The page archetypes — how Quire composes a document</span
-          >
-          <span class="toc-page">09</span>
+        <li>
+          <a class="toc-item" href="#ch-03">
+            <span class="toc-num">03</span>
+            <span class="toc-title"
+              >The page archetypes — how Quire composes a document</span
+            >
+            <span class="toc-page">09</span>
+          </a>
         </li>
       </ul>
       <span class="footer">02</span>
     </section>
 
     <!-- 3. Chapter 01 divider — tint background -->
-    <section class="page cover tint">
+    <section id="ch-01" class="page cover tint">
       <p class="eyebrow">Chapter 01</p>
       <h1>The Problem</h1>
       <span class="page-num">03</span>
@@ -593,7 +605,7 @@
     </section>
 
     <!-- 6. Chapter 02 divider -->
-    <section class="page cover tint">
+    <section id="ch-02" class="page cover tint">
       <p class="eyebrow">Chapter 02</p>
       <h1>The Constraint Language</h1>
       <span class="page-num">06</span>
@@ -736,7 +748,7 @@
     </section>
 
     <!-- 9. Chapter 03 divider -->
-    <section class="page cover tint">
+    <section id="ch-03" class="page cover tint">
       <p class="eyebrow">Chapter 03</p>
       <h1>The Page Archetypes</h1>
       <span class="page-num">09</span>
