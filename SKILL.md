@@ -89,7 +89,7 @@ For full export instructions, see `references/production.md`.
 | ----------------------------- | ------------------------------------------------------------ |
 | `references/design.md`        | Full design system (color, type, spacing, the 10 invariants) |
 | `references/components.md`    | Page archetypes and HTML snippets for each                   |
-| `references/writing.md`       | Voice and content rules for playbook-style prose             |
+| `references/writing.md`       | Content brain — how to write prose readers finish, trust, remember |
 | `references/anti-patterns.md` | Common ways AI-generated playbooks go wrong                  |
 | `references/production.md`    | HTML → PDF export, font embedding, print pitfalls            |
 

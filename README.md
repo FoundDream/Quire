@@ -37,6 +37,10 @@ In any chat, Quire activates on:
 - "turn this content into an editorial PDF / chapter dividers"
 - Mentions of multi-page editorial output ≥ 10 pages
 
+## Inspired by
+
+Structure and some design principles learned from [tw93/kami](https://github.com/tw93/kami).
+
 ## License
 
 MIT.

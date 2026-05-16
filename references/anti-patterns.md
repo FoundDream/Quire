@@ -2,7 +2,7 @@
 
 Common ways AI-generated playbooks go wrong. Each entry has a bad example, the diagnosis, and the fix.
 
-Use alongside `writing.md` (content) and `design.md` (visual).
+Use alongside `writing.md` (credibility) and `design.md` (visual).
 
 ---
 

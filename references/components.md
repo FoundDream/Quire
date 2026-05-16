@@ -2,7 +2,7 @@
 
 Page-level archetypes and reusable HTML snippets. Copy directly into a template; do not redesign.
 
-For visual rules, see `design.md`. For writing voice, see `writing.md`.
+For visual rules, see `design.md`. For prose credibility, see `writing.md`.
 
 ---
 
