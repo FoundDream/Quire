@@ -28,17 +28,7 @@ Use alongside `writing.md` (content) and `design.md` (visual).
 
 ---
 
-### 3. Full-saturation chapter dividers
-
-**Symptom**: chapter divider page is `#d97757` (pure clay), title in pure white — looks like a marketing splash, not a book.
-
-**Why it happens**: AI saw the Anthropic Founder's Playbook covers and copied them literally.
-
-**Fix**: use the **lightened tint** (`#f0d5c7` for clay, mix 65 % cream + 35 % accent). Title in `--ink`, not white. Quire is editorial — saturated splashes are Stripe Press covers, not chapter dividers.
-
----
-
-### 4. Decorative blockquotes
+### 3. Decorative blockquotes
 
 **Symptom**: every other page has a `<blockquote>` with no label, no left rule, no author — just italicized loose text.
 
@@ -48,17 +38,7 @@ Use alongside `writing.md` (content) and `design.md` (visual).
 
 ---
 
-### 5. Italic body paragraphs
-
-**Symptom**: whole paragraphs in italic, "for emphasis".
-
-**Why it happens**: AI copied Medium / Substack conventions.
-
-**Fix**: Quire forbids italic body. Use `<strong>` (renders 500 weight, no italic) or `.hl` (accent color + 500 weight). `<em>` may be styled as accent-color upright. Italic in body = visual stress without semantic meaning.
-
----
-
-### 6. Emoji and dingbats
+### 4. Emoji and dingbats
 
 **Symptom**: 🚀 in cover title, ✅ in callouts, 💡 next to "Think:" labels.
 
@@ -68,27 +48,7 @@ Use alongside `writing.md` (content) and `design.md` (visual).
 
 ---
 
-### 7. Dropshadows and gradients
-
-**Symptom**: callout boxes with `box-shadow: 0 4px 12px rgba(0,0,0,.1)`, cover with `linear-gradient(135deg, …)`.
-
-**Why it happens**: AI defaulted to "modern web design" patterns.
-
-**Fix**: depth via rule lines and tints only. Allowed: 0.5pt `--rule` borders. Forbidden: any `box-shadow`, `text-shadow`, `filter: blur`, `linear-gradient`.
-
----
-
-### 8. Cool-gray neutrals
-
-**Symptom**: body text in `#666`, captions in `#999`, table borders in `#e5e7eb` (Tailwind gray-200).
-
-**Why it happens**: AI defaulted to Tailwind / Material gray scales.
-
-**Fix**: every gray must be warm-toned. Body `#1a1a1a`, secondary `#3d3d3a`, muted `#6b6a64`. The `R ≥ G > B` rule is non-negotiable.
-
----
-
-### 9. RGBA tag backgrounds
+### 5. RGBA tag backgrounds
 
 **Symptom**: tag pills with `background: rgba(217, 119, 87, 0.15)` look fine on screen but render as **double rectangles** in PDF.
 
@@ -98,7 +58,7 @@ Use alongside `writing.md` (content) and `design.md` (visual).
 
 ---
 
-### 10. Page numbers on dividers and covers
+### 6. Page numbers on dividers and covers
 
 **Symptom**: cover page shows "01" in the bottom corner.
 
@@ -110,7 +70,7 @@ Use alongside `writing.md` (content) and `design.md` (visual).
 
 ## Content anti-patterns
 
-### 11. Empty thought-leader opener
+### 7. Empty thought-leader opener
 
 **Symptom**:
 > "In today's rapidly evolving AI landscape, founders face unprecedented challenges. This playbook will help you navigate them."
@@ -121,7 +81,7 @@ Use alongside `writing.md` (content) and `design.md` (visual).
 
 ---
 
-### 12. The adjective stack
+### 8. The adjective stack
 
 **Symptom**:
 > "Our innovative, scalable, AI-native, founder-friendly approach unlocks unprecedented value."
@@ -130,7 +90,7 @@ Use alongside `writing.md` (content) and `design.md` (visual).
 
 ---
 
-### 13. Hedge soup
+### 9. Hedge soup
 
 **Symptom**: "Some experts believe that, in many cases, AI may potentially help certain founders to perhaps accelerate…"
 
@@ -138,7 +98,7 @@ Use alongside `writing.md` (content) and `design.md` (visual).
 
 ---
 
-### 14. Rhetorical question carpets
+### 10. Rhetorical question carpets
 
 **Symptom**: every section begins with "But what does this really mean?" / "So how do you actually do this?" / "Where does this leave us?"
 
@@ -146,7 +106,7 @@ Use alongside `writing.md` (content) and `design.md` (visual).
 
 ---
 
-### 15. The "best practices" without practices
+### 11. The "best practices" without practices
 
 **Symptom**: "Following best practices for AI-native development is essential."
 
@@ -154,7 +114,7 @@ Use alongside `writing.md` (content) and `design.md` (visual).
 
 ---
 
-### 16. Tables that should be paragraphs
+### 12. Tables that should be paragraphs
 
 **Symptom**: a 2-column "Pros / Cons" table with one bullet per side, taking half a page.
 
@@ -162,7 +122,7 @@ Use alongside `writing.md` (content) and `design.md` (visual).
 
 ---
 
-### 17. Numbers without sources
+### 13. Numbers without sources
 
 **Symptom**: "73% of founders report higher productivity with AI tools."
 
@@ -170,7 +130,7 @@ Use alongside `writing.md` (content) and `design.md` (visual).
 
 ---
 
-### 18. Procedural list cosplay
+### 14. Procedural list cosplay
 
 **Symptom**: "Step 1. Open Claude. Step 2. Type your question. Step 3. Read the answer."
 
@@ -180,7 +140,7 @@ Use alongside `writing.md` (content) and `design.md` (visual).
 
 ## Production anti-patterns
 
-### 19. Forgetting font embedding
+### 15. Forgetting font embedding
 
 **Symptom**: PDF looks fine on the author's Mac, looks broken on a colleague's Windows machine — Fraunces fell back to Times.
 
@@ -188,7 +148,7 @@ Use alongside `writing.md` (content) and `design.md` (visual).
 
 ---
 
-### 20. Page count parity ignored
+### 16. Page count parity ignored
 
 **Symptom**: a 35-page playbook ends with chapter content on a left page, blank back, then a colophon.
 
@@ -196,7 +156,7 @@ Use alongside `writing.md` (content) and `design.md` (visual).
 
 ---
 
-### 21. Mixing print pt and screen px
+### 17. Mixing print pt and screen px
 
 **Symptom**: H1 declared as `font-size: 22px` but margins as `2cm` — at print scale the H1 looks tiny relative to the page.
 
@@ -204,7 +164,7 @@ Use alongside `writing.md` (content) and `design.md` (visual).
 
 ---
 
-### 22. Asymmetric margins on the wrong side
+### 18. Asymmetric margins on the wrong side
 
 **Symptom**: left margin tighter than right — fine on screen, but in print this looks unbalanced when the binding is on the left.
 

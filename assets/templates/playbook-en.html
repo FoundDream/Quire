@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<title>Playbook Template — Founder's Playbook style</title>
+<title>Playbook Template — Product Discovery sample</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..700,30..100&family=Inter+Tight:wght@400..600&display=swap" rel="stylesheet">
@@ -236,62 +236,63 @@
 
 <!-- 1. Main cover -->
 <section class="page cover cover-main bg-orange">
-  <p class="chapter-num">A Founder's Playbook · 2026</p>
-  <h1>Building an AI-Native Startup</h1>
-  <p class="subtitle">The startup lifecycle, rebooted for the agentic era.</p>
+  <p class="chapter-num">A Product Discovery Playbook · 2026</p>
+  <h1>Finding Product-Market Fit</h1>
+  <p class="subtitle">A 90-day discipline for early-stage product teams.</p>
   <span class="page-num">01</span>
 </section>
 
 <!-- 2. Chapter divider — dark bg, reverse text -->
 <section class="page cover bg-green">
   <p class="chapter-num">Chapter 02</p>
-  <h1>What it means to be a founder is changing</h1>
+  <h1>Why most discovery work doesn't stick</h1>
   <span class="page-num">05</span>
 </section>
 
 <!-- 3. Chapter divider — light bg, dark text -->
 <section class="page cover bg-mint">
   <p class="chapter-num">Chapter 03</p>
-  <h1>Idea Stage</h1>
+  <h1>The Validation Loop</h1>
   <span class="page-num">08</span>
 </section>
 
 <!-- 4. Content — heading + lede + Exercise callout -->
 <section class="page content">
-  <p class="chapter-tag">Chapter 03 · Idea Stage</p>
-  <h2>Defining and pressure-testing the problem hypothesis</h2>
+  <p class="chapter-tag">Chapter 03 · The Validation Loop</p>
+  <h2>Turning weak signals into testable hypotheses</h2>
 
   <p class="lede">
-    Your own domain expertise and up-front research have already generated a hypothesis.
-    The first job is to sharpen it until it's actually testable. <strong>Claude is
-    particularly useful here for forcing specificity</strong>: who exactly has this problem,
-    how often, how severely, and what do they currently do about it?
+    Every team collects customer signals &mdash; interviews, support tickets, churn calls.
+    Most treat them as confirmation. <strong>The discipline that produces PMF is the
+    opposite</strong>: take the noisiest signal, restate it as a falsifiable hypothesis,
+    and design the cheapest test that could kill it.
   </p>
 
-  <h3>Sharpen the statement</h3>
+  <h3>Restate the signal as a hypothesis</h3>
   <p>
-    A problem statement that can't answer those questions precisely isn't ready to validate.
-    The goal is to arrive at customer discovery with assumptions already stress-tested.
+    A signal is observation; a hypothesis is a prediction with a fail condition.
+    "Users want better onboarding" is a signal. "If we shorten onboarding from
+    nine steps to three, day-7 retention will rise by ≥ 5 points" is a hypothesis.
   </p>
 
   <div class="callout">
     <span class="label">Exercise</span>
-    Work with Claude to sharpen your problem statement until it's a testable hypothesis.
-    "Contract review takes too long" is not testable. "In-house legal teams at mid-market
-    companies spend 3+ days per cycle because redlines live across email threads" is.
+    Pick the loudest signal from last week's interviews. Rewrite it as one sentence
+    containing a metric, a magnitude, and a timeframe. If you can't, the signal
+    isn't sharp enough to act on yet.
   </div>
 
-  <h3>Find disconfirming evidence</h3>
+  <h3>Design tests you can finish in a week</h3>
   <ul>
-    <li>Ask Claude to argue against your idea, not for it.</li>
-    <li>Surface negative market signals and failed competitors in the same space.</li>
-    <li>Map structural obstacles a supportive synthesis would have buried.</li>
+    <li>One hypothesis, one metric, one decision rule &mdash; written before the test starts.</li>
+    <li>If the test takes more than a sprint, you're building, not validating.</li>
+    <li>Negative results count. Track them &mdash; they're cheaper to act on than positive ones.</li>
   </ul>
 
   <div class="callout note">
     <span class="label">Note</span>
-    Using Claude as a structured devil's advocate is a core use case at every stage of the
-    AI startup life cycle, not just here.
+    A discovery cycle that produces no killed hypotheses isn't validating &mdash; it's
+    rationalizing the roadmap you already have.
   </div>
 
   <span class="footer">11</span>
@@ -299,43 +300,45 @@
 
 <!-- 5. Content — with comparison table -->
 <section class="page content">
-  <p class="chapter-tag">Chapter 03 · Idea Stage</p>
-  <h2>Choosing the right Claude surface</h2>
+  <p class="chapter-tag">Chapter 03 · The Validation Loop</p>
+  <h2>Picking the right validation method</h2>
 
   <p class="lede">
-    AI makes it easier to ship faster, automate workflows, and operate at scale &mdash; but
-    the surface you use matters. Here's when to reach for which.
+    Discovery tools are not interchangeable. A method that's right for measuring
+    desire is wrong for measuring willingness to pay. Match the question to the
+    cheapest method that can answer it.
   </p>
 
   <table class="compare">
     <thead>
       <tr>
-        <th style="width: 28%">If the task is…</th>
-        <th style="width: 24%">Reach for</th>
+        <th style="width: 28%">If you're testing…</th>
+        <th style="width: 24%">Use</th>
         <th>Why</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td>A question, a rewrite, a quick brainstorm</td>
-        <td><strong>Chat</strong></td>
-        <td>Fast, conversational, no setup</td>
+        <td>Whether the problem is real and frequent</td>
+        <td><strong>Discovery interview</strong></td>
+        <td>Open-ended; surfaces unprompted language and workarounds</td>
       </tr>
       <tr>
-        <td>Research, analysis, or a finished document built from your files</td>
-        <td><strong>Cowork</strong></td>
-        <td>Folder access, connectors, scheduled runs</td>
+        <td>Willingness to pay or commit</td>
+        <td><strong>Pre-sale / LOI</strong></td>
+        <td>Behavior is the only honest signal; opinions inflate</td>
       </tr>
       <tr>
-        <td>Writing, testing, or shipping software</td>
-        <td><strong>Code</strong></td>
-        <td>Codebase access, diffs, git, dev environments</td>
+        <td>Whether a specific solution is usable</td>
+        <td><strong>Prototype test</strong></td>
+        <td>Concrete artifact; reveals where assumptions break</td>
       </tr>
     </tbody>
   </table>
 
   <p style="color: var(--ink-soft); font-size: 14px; margin-top: 20px;">
-    The three share the same Claude underneath; what changes is the workspace around it.
+    The cheapest test that can kill the hypothesis is always the right one.
+    Don't skip a five-call discovery round to jump straight to a prototype.
   </p>
 
   <span class="footer">12</span>

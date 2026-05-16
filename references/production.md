@@ -118,7 +118,7 @@ If you've changed accent colors or tints, run them through a WCAG contrast check
 
 **Symptom**: tag pills with `background: rgba(...)` render as two stacked rectangles in PDF, fine on screen.
 
-**Fix**: convert all rgba backgrounds to solid hex. See `tokens.json` for the pre-computed solid equivalents.
+**Fix**: convert all rgba backgrounds to solid hex. The `-tint` accent variants in `design.md` are pre-computed for this purpose (e.g. `--accent-clay-tint: #f0d5c7` equals `rgba(217,119,87,0.15)` over cream).
 
 ### Pitfall 2 · Headless Chrome print margin defaults
 

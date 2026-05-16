@@ -27,13 +27,13 @@ Quire uses **one accent color per document**, applied to ≤ 5 % of total surfac
 
 Pre-tuned palette (all desaturated, paired with the cream canvas `#faf9f5`):
 
-| Token           | Hex       | Mood                             |
-| --------------- | --------- | -------------------------------- |
-| `--accent-clay` | `#d97757` | Warm, narrative (default)        |
-| `--accent-sage` | `#629987` | Calm, operations-focused         |
-| `--accent-iris` | `#827dbd` | Strategic, future-facing         |
-| `--accent-ink`  | `#1B365D` | Formal, financial                |
-| `--accent-rust` | `#a04b3a` | Editorial, opinionated           |
+| Token           | Hex       | Mood                      |
+| --------------- | --------- | ------------------------- |
+| `--accent-clay` | `#d97757` | Warm, narrative (default) |
+| `--accent-sage` | `#629987` | Calm, operations-focused  |
+| `--accent-iris` | `#827dbd` | Strategic, future-facing  |
+| `--accent-ink`  | `#1B365D` | Formal, financial         |
+| `--accent-rust` | `#a04b3a` | Editorial, opinionated    |
 
 If the user mentions a brand color, use it directly — but verify the hex value passes WCAG AA on cream (`#faf9f5`). If contrast fails, darken to the closest accessible variant before applying.
 
@@ -55,13 +55,13 @@ A standard Quire document follows this rhythm:
 [end] Resources / colophon   ← cream, references and credits
 ```
 
-**Rule of cadence**: every 5–7 content pages need one visual reset — a chapter divider, a full-page pull-quote, or a stat-block page. Founders skim; cadence keeps them in.
+**Rule of cadence**: every 5–7 content pages need one visual reset — a chapter divider, a full-page pull-quote, or a stat-block page.
 
 ---
 
 ## Step 3 · Fill the template
 
-1. Open `assets/templates/playbook-en.html` (English) or `playbook-zh.html` (Chinese) as the starting frame.
+1. Open `assets/templates/playbook-en.html` (English) as the starting frame.
 2. Replace the `{{PLACEHOLDER}}` tokens with real content. Do not add new sections that don't exist in the frame — Quire's rhythm is intentional.
 3. For each chapter, use one of the four content-page archetypes from `references/components.md`:
    - **Standard** — h1 + lead + h2/h3 + paragraphs
@@ -75,11 +75,9 @@ A standard Quire document follows this rhythm:
 
 Run the production check before handing off the PDF:
 
-1. **Page count is even** — covers and dividers always sit on right-hand pages in print. Add a colophon or "intentionally blank" filler if needed.
-2. **Accent color audit** — measure: highlight all elements using `--accent` on every page; if any single page has accent on > 15 % of its surface, that page is overusing it.
-3. **No widows / orphans** — last paragraph of every page must have ≥ 2 lines.
-4. **Callout density** — no more than two callouts (Exercise / Note / Think) per spread. Three or more breaks rhythm.
-5. **Print at A4 or US-Letter** — confirm the user's region; default A4 outside the US.
+1. **Accent color audit** — measure: highlight all elements using `--accent` on every page; if any single page has accent on > 15 % of its surface, that page is overusing it.
+2. **No widows / orphans** — last paragraph of every page must have ≥ 2 lines.
+3. **Callout density** — no more than two callouts (Exercise / Note / Think) per spread. Three or more breaks rhythm.
 
 For full export instructions, see `references/production.md`.
 
@@ -94,7 +92,6 @@ For full export instructions, see `references/production.md`.
 | `references/writing.md`       | Voice and content rules for playbook-style prose             |
 | `references/anti-patterns.md` | Common ways AI-generated playbooks go wrong                  |
 | `references/production.md`    | HTML → PDF export, font embedding, print pitfalls            |
-| `references/tokens.json`      | Single source of truth for all CSS variables                 |
 
 Load only the file you need for the current task. Do not pre-load everything.
 

@@ -260,19 +260,4 @@ Asymmetric horizontal margins (left tighter than right) leave breathing room on 
 - Label: 10pt body, `--ink-soft`, max 24 em width.
 - Top + bottom rule in `--rule`, vertical padding 14pt.
 
----
-
-## 6. The 10 invariants
-
-1. Cream canvas `#faf9f5`, never pure white.
-2. One accent color per document, ≤ 5 % surface area.
-3. All grays warm-toned (yellow-brown undertone), no cool blue-grays.
-4. One serif family carries hierarchy; sans only for UI chrome.
-5. Two weights only: 400 / 500. No bold (600+), no italic body.
-6. Line-height: titles 1.05–1.20, body 1.55–1.70.
-7. Letter-spacing: titles tight (-0.02em+), eyebrows loose (+0.04em+), body 0.
-8. Chapter dividers use lightened tints, not full-saturation fills.
-9. No drop shadows, no gradients, no blur — depth via rule lines and tints.
-10. Every callout has a label; unlabelled blockquotes drift into decoration.
-
-Violating any of these has a real cost. If a document needs to break a rule, document why in a `# Style note` comment at the top of the HTML.
+The 10 invariants live in `SKILL.md`; this file contains the underlying spec.
