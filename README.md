@@ -1,12 +1,12 @@
 <div align="center">
   <h1>Quire</h1>
-  <p><b>One sky-blue, four formats, no second color.</b></p>
+  <p><b>One sky-blue, five formats, no second color.</b></p>
   <p>A cold-toned, chromatically monochrome design system for editorial documents.</p>
 </div>
 
 ## What it is
 
-Quire is a constraint system for editorial documents — playbooks, white papers, resumes, single-page reports — that share one design language and produce print-ready PDFs. Cool canvas, single sky-blue accent, serif carries hierarchy, no second color anywhere.
+Quire is a constraint system for editorial documents — playbooks, white papers, single-page reports — that share one design language and produce print-ready PDFs. Cool canvas, single sky-blue accent, serif carries hierarchy, no second color anywhere.
 
 ## Format profiles
 
@@ -16,9 +16,7 @@ Quire is a constraint system for editorial documents — playbooks, white papers
 | White paper  | 8–30        | A4 portrait             | Reset every 5–7 pages |
 | Single-page  | 1           | A4 portrait, fixed      | No cadence rule      |
 | Landing page | continuous  | A4 width, flows + paginates | No cadence rule  |
-| Resume       | 1–2         | A4 / Letter             | No cadence rule      |
-
-Playbook, white-paper, single-page, and landing-page profiles are implemented; resume shares the same system and ships next.
+| Slides       | 5–60        | 16:9 HTML deck, 1280×720 | One idea per slide  |
 
 ## Palette
 
@@ -43,8 +41,8 @@ The accent is locked. There is no palette to pick from, and no second chromatic 
 
 ## Triggers
 
-- "做一份 playbook / 白皮书 / 简历 / 报告"
-- "build me a playbook / typeset a white paper / make a resume / single-page report"
+- "做一份 playbook / 白皮书 / 报告"
+- "build me a playbook / typeset a white paper / single-page report"
 - "turn this content into an editorial PDF"
 
 ## What it deliberately is not

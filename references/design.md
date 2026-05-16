@@ -2,7 +2,7 @@
 
 Quire's aesthetic compresses into one sentence: **cool canvas, sky-blue accent, serif carries hierarchy, the document feels composed.**
 
-This is not a slide template or a UI framework. It is a constraint system for **editorial documents in print or screen-PDF form** — playbooks, white papers, resumes, single-page reports — the spiritual descendant of editorial print, adapted for AI-generated output.
+This is not a slide template or a UI framework. It is a constraint system for **editorial documents in print or screen-PDF form** — playbooks, white papers, single-page reports — the spiritual descendant of editorial print, adapted for AI-generated output.
 
 ---
 
@@ -198,7 +198,7 @@ Three line weights cover every divider, table head, and quote bar. Radii stay fl
 
 ### Standard content
 
-- Cream canvas. Eyebrow at top showing chapter context (e.g. "Chapter 03 · Idea Stage").
+- Canvas. Eyebrow at top showing chapter context (e.g. "Chapter 03 · Idea Stage").
 - H1 with optional left-rule in accent color.
 - Lead paragraph at 11pt, slightly muted (`--ink-soft`).
 - Body paragraphs, lists, callouts, tables.
@@ -206,7 +206,7 @@ Three line weights cover every divider, table head, and quote bar. Radii stay fl
 
 ### Stat-anchor
 
-- Cream canvas. One oversized figure (50–80pt) as the page's visual anchor.
+- Canvas. One oversized figure (50–80pt) as the page's visual anchor.
 - Figure in accent color, weight 500, tabular-nums.
 - Supporting label/sentence to the right or below in serif body size.
 - Used max 2x per document — overuse turns it into an infographic.
@@ -220,7 +220,7 @@ Three line weights cover every divider, table head, and quote bar. Radii stay fl
 
 ### Pull-quote
 
-- Cream canvas, half page or more allocated to a single quotation.
+- Canvas, half page or more allocated to a single quotation.
 - Serif at 18–22pt, weight 500, tight line-height (1.25).
 - Left rule in accent color, 2pt thickness.
 - Citation in sans-serif caption size below.

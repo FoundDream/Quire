@@ -63,8 +63,9 @@ Quire is one design language, multiple output forms. Each profile inherits the p
 | -------------- | ------- | -------------------------- | ------------------------- |
 | Playbook       | 10–80   | 11×8.5in landscape         | Reset every 5–7 pages     |
 | White paper    | 8–30    | A4 portrait                | Reset every 5–7 pages     |
-| Resume         | 1–2     | A4 / Letter portrait       | No cadence; one rhythm    |
 | Single-page    | 1       | A4 portrait                | No cadence                |
+| Landing page   | cont.   | A4 width, flows + paginates | No cadence               |
+| Slides         | 5–60    | 16:9 HTML deck, 1280×720   | One idea per slide        |
 
 ## Anti-LinkedIn guard
 

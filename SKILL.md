@@ -1,17 +1,17 @@
 ---
 name: quire
-description: 'Typeset editorial documents on a cool canvas with a single sky-blue accent and serif hierarchy. First format is multi-page playbooks; the same system also handles white papers, single-page A4 reports, long-form landing pages, HTML slide decks, and resumes. Triggers on "做 playbook / 白皮书 / 报告 / landing page / 幻灯片 / 简历 / editorial PDF" or "make a playbook / white paper / single-page report / landing page / slides / resume".'
+description: 'Typeset editorial documents on a cool canvas with a single sky-blue accent and serif hierarchy. First format is multi-page playbooks; the same system also handles white papers, single-page A4 reports, long-form landing pages, and HTML slide decks. Triggers on "做 playbook / 白皮书 / 报告 / landing page / 幻灯片 / editorial PDF" or "make a playbook / white paper / single-page report / landing page / slides".'
 ---
 
 # Quire
 
-A cold-toned, chromatically monochrome design system for editorial documents. Single accent (sky blue `#3a82c4`), single serif carries hierarchy, no second color anywhere. Output formats: playbook (default), white paper, single-page report, landing page, slide deck, resume — each a "format profile" of the same underlying system.
+A cold-toned, chromatically monochrome design system for editorial documents. Single accent (sky blue `#3a82c4`), single serif carries hierarchy, no second color anywhere. Output formats: playbook (default), white paper, single-page report, landing page, slide deck — each a "format profile" of the same underlying system.
 
 ---
 
 ## Step 0 · Decide the document archetype
 
-Quire targets long-form (10–80 page) documents structured as **cover → chapter dividers → content pages**, plus a few shorter format profiles (single-page, landing-page, slides, resume) that share the same design system. Use a different skill for:
+Quire targets long-form (10–80 page) documents structured as **cover → chapter dividers → content pages**, plus a few shorter format profiles (single-page, landing-page, slides) that share the same design system. Use a different skill for:
 
 - Short letters or single articles → markdown is fine
 - Decks heavier than 60 slides, or anything requiring animations / builds → use a dedicated slides tool
