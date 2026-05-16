@@ -58,13 +58,20 @@ A standard Quire document follows this rhythm:
 
 ---
 
-## Step 3 · Fill the template
+## Step 3 · Pick your starting point
+
+Quire supports two working modes. Decide first, then proceed.
+
+### Mode A · Template-constrained (default)
+
+Use when your document fits one of the existing format profiles. Lowest variance, fastest path.
 
 1. Open one of the templates as a starting point:
    - **Playbook** (landscape, 10–80 pages): `assets/templates/playbook.html` — frame; `assets/output/quire-playbook.html` is a 12-page reference.
    - **White paper** (A4 portrait, 8–30 pages): `assets/templates/white-paper.html` — frame; `assets/output/quire-white-paper.html` is a 10-page reference.
    - **Single-page** (A4 portrait, strictly 1 page): `assets/templates/single-page.html` — content is capped at one A4 sheet; use for briefs, posters, executive summaries.
    - **Landing page** (A4 width, continuous, paginates on print): `assets/templates/landing-page.html` — long-form scroll for web reading; prints to 1–N A4 sheets. No chapter dividers, no cadence.
+   - **Slides** (16:9, 1280×720, on-screen deck): `assets/templates/slides.html` — keyboard-navigable HTML deck; one idea per slide, no body paragraphs. Use for talks and walk-throughs, not for documents meant to be read.
 2. Replace the content with real material. Do not add new sections that don't exist in the frame — Quire's rhythm is intentional.
 3. For multi-page profiles (playbook, white-paper), pick one of the content-page archetypes per chapter (spec in `references/design.md` §5):
    - **Standard** — h1 + lead + h2/h3 + paragraphs
@@ -73,6 +80,16 @@ A standard Quire document follows this rhythm:
    - **Pull-quote** — half-page editorial quote from a source
 
    Single-page and landing-page profiles skip archetypes — they're one continuous composition.
+
+### Mode B · System-constrained (free-form)
+
+Use when no template fits — manifestos, posters, scrolly case studies, invitations, custom page sizes, anything off the shelf. Higher variance, but still Quire as long as the 10 invariants below hold.
+
+1. Start from a blank HTML. Load `references/design.md` in full — it is the system's source of truth (tokens, typography, spacing, strokes, components, print rules).
+2. Inherit the `:root` token block verbatim (cool canvas, single accent, Fraunces + Inter Tight, two weights). Do not re-derive colors or pick new fonts — that produces a different system, not a Quire variant.
+3. Decide page size, rhythm, and chrome from scratch, but stay inside the invariants. If a requirement forces you to break one, surface it to the user before proceeding — don't quietly bend the system.
+
+Templates are one productization of Quire. Mode B is Quire without the productization.
 
 ---
 
@@ -103,7 +120,7 @@ Load only the file you need for the current task. Do not pre-load everything.
 
 ## The 10 invariants
 
-These are the rules Quire will not break. Each has a real cost — think before overriding.
+These are the rules Quire will not break. In Mode A the templates already encode them; in Mode B they are the floor that defines "still Quire" — satisfy them and the result belongs to the system, regardless of format. Each has a real cost — think before overriding.
 
 1. **Cool canvas `#f6f8fb`**, never pure white. Never a warm cream.
 2. **Sky blue `#3a82c4` is the only chromatic color** in the document. No second hue — no orange engagement, no green success, no red warning.
