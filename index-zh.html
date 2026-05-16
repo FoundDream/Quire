@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Quire — 编辑型文档的设计系统</title>
-<meta name="description" content="只用一种天蓝作强调色，衬线撑起层级。Quire 把 AI 生成的内容排成有编辑感的 PDF——playbook、白皮书、简历、单页报告与 HTML 幻灯片。">
+<meta name="description" content="只用一种天蓝作强调色，衬线撑起层级。Quire 把 AI 生成的内容排成有编辑感的 PDF——playbook、白皮书、单页报告、landing page 与 HTML 幻灯片。">
 <meta property="og:title" content="Quire — 编辑型文档的设计系统">
 <meta property="og:description" content="只用一种天蓝作强调色，衬线撑起层级。">
 <meta property="og:type" content="website">
@@ -1051,6 +1051,39 @@
     color: var(--accent);
     margin-right: 8px;
   }
+
+  /* ============================================
+     Inline-SVG diagrams
+     ============================================ */
+  .gallery {
+    display: grid;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .gallery--4 { grid-template-columns: repeat(4, 1fr); }
+  .gallery--3 { grid-template-columns: repeat(3, 1fr); }
+  .gallery-card {
+    background: var(--canvas);
+    border: 1px solid var(--rule);
+    padding: 14px 14px 12px;
+  }
+  .gallery-card-label {
+    font-family: var(--font-sans);
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .gallery-card svg { width: 100%; height: auto; display: block; }
+  .gallery-card-meta {
+    font-family: var(--font-serif);
+    font-size: 12px;
+    line-height: 1.45;
+    color: var(--ink-muted);
+    margin-top: 8px;
+  }
 </style>
 </head>
 <body>
@@ -1067,7 +1100,7 @@
     <a href="index-zh.html" class="active">中</a>
   </span>
   <h1 class="hero-title">Quire</h1>
-  <p class="hero-lede">面向 <strong>playbook、白皮书、单页报告、landing page、幻灯片与简历</strong> 的编辑型排版系统。一种天蓝强调色，衬线负责层级，输出可直接装订的 PDF。</p>
+  <p class="hero-lede">面向 <strong>playbook、白皮书、单页报告、landing page 与幻灯片</strong> 的编辑型排版系统。一种天蓝强调色，衬线负责层级，输出可直接装订的 PDF。</p>
   <div class="cta-row">
     <a href="https://github.com/FoundDream/Quire" class="cta primary" target="_blank" rel="noopener">在 GitHub 查看 <span class="cta-arrow">→</span></a>
     <a href="assets/output/quire-playbook.pdf" class="cta" target="_blank" rel="noopener">查看示例 PDF</a>
@@ -1080,9 +1113,9 @@
 <section id="formats">
   <p class="anchor">引言</p>
   <p class="section-eyebrow">文档形态</p>
-  <h2 class="section-title">一套设计语言，六种成品规格。</h2>
+  <h2 class="section-title">一套设计语言，五种成品规格。</h2>
   <p class="section-desc">
-    同一套色板、字体层级与组件库，可排成不同开本与页数的文档。Playbook、白皮书、单页报告、landing page 与幻灯片已完整实现；简历共用同一系统，即将推出。
+    同一套色板、字体层级与组件库，可排成不同开本与页数的文档。Playbook、白皮书、单页报告、landing page 与幻灯片均已完整实现。
   </p>
 
   <table class="formats">
@@ -1130,13 +1163,6 @@
         <td>16:9 HTML 演示，方向键切换</td>
         <td>一张一个观点，不适用 cadence 规则</td>
         <td class="fmt-status status-live">● 已上线</td>
-      </tr>
-      <tr>
-        <td class="fmt-name">简历</td>
-        <td>1–2</td>
-        <td>A4 / Letter 竖版</td>
-        <td>单页节奏，不适用 cadence 规则</td>
-        <td class="fmt-status status-soon">○ 即将推出</td>
       </tr>
     </tbody>
   </table>
@@ -1220,7 +1246,7 @@
      1. COLOR
      ============================================= -->
 <section>
-  <p class="anchor">01 / 11</p>
+  <p class="anchor">01 / 12</p>
   <p class="section-eyebrow">Tokens</p>
   <h2 class="section-title">颜色</h2>
   <p class="section-desc">
@@ -1318,7 +1344,7 @@
      2. TYPOGRAPHY
      ============================================= -->
 <section>
-  <p class="anchor">02 / 11</p>
+  <p class="anchor">02 / 12</p>
   <p class="section-eyebrow">Tokens</p>
   <h2 class="section-title">字体</h2>
   <p class="section-desc">
@@ -1389,7 +1415,7 @@
      3. SPACING
      ============================================= -->
 <section>
-  <p class="anchor">03 / 11</p>
+  <p class="anchor">03 / 12</p>
   <p class="section-eyebrow">Tokens</p>
   <h2 class="section-title">间距</h2>
   <p class="section-desc">
@@ -1446,8 +1472,7 @@
       <tr><th>开本</th><th>T / R / B / L</th><th>说明</th></tr>
     </thead>
     <tbody>
-      <tr><td>A4 竖版</td><td class="num">22 / 24 / 24 / 22 mm</td><td class="why">白皮书、简历</td></tr>
-      <tr><td>Letter 竖版</td><td class="num">.85 / .95 / .95 / .85 in</td><td class="why">简历、单页报告</td></tr>
+      <tr><td>A4 竖版</td><td class="num">22 / 24 / 24 / 22 mm</td><td class="why">白皮书、单页报告、landing page</td></tr>
       <tr><td>横版（playbook）</td><td class="num">18 / 22 / 22 / 18 mm</td><td class="why">默认 playbook 规格</td></tr>
     </tbody>
   </table>
@@ -1458,26 +1483,66 @@
      4. STROKES & RADII
      ============================================= -->
 <section>
-  <p class="anchor">04 / 11</p>
+  <p class="anchor">04 / 12</p>
   <p class="section-eyebrow">Tokens</p>
-  <h2 class="section-title">描边与圆角</h2>
+  <h2 class="section-title">描边 &amp; 圆角</h2>
   <p class="section-desc">
-    三种线宽覆盖所有分隔线、表头与引文边条。圆角保持克制：3pt 是 Quire 文档允许的最大圆角。比这更粗、更圆的样式，属于另一个系统。
+    三种描边粗细足以覆盖所有分隔线、表头与 pull-quote 边栏。圆角维持极简：3pt 是 Quire 文档允许的最大圆角，更粗或更圆都属于另一套系统。
   </p>
 
-  <table class="density-rules">
-    <thead>
-      <tr><th>Token</th><th>取值</th><th>用途</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>stroke-rule</td><td class="num">1px</td><td class="why">表格行线、章节分隔、卡片边框</td></tr>
-      <tr><td>stroke-accent</td><td class="num">1.5px</td><td class="why">表头下方、强调用分隔</td></tr>
-      <tr><td>stroke-quote</td><td class="num">2px</td><td class="why">Callout 左边条、引文边条</td></tr>
-      <tr><td>r-none</td><td class="num">0</td><td class="why">默认——卡片、callout、页面</td></tr>
-      <tr><td>r-sm</td><td class="num">2pt</td><td class="why">Tag 标签、行内 label</td></tr>
-      <tr><td>r-md</td><td class="num">3pt</td><td class="why">小型组件容器——允许的最大圆角</td></tr>
-    </tbody>
-  </table>
+  <p class="sub-title">描边粗细 · 三个数值，1× 实际尺寸</p>
+  <div class="demo">
+    <div class="gallery gallery--3">
+        <div class="gallery-card">
+          <div class="gallery-card-label">stroke-rule · 1px</div>
+          <svg viewBox="0 0 180 60" role="img">
+            <line x1="20" y1="30" x2="160" y2="30" stroke="var(--ink-faint)" stroke-width="1"/>
+          </svg>
+          <div class="gallery-card-meta">表格行、分节线、卡片描边</div>
+        </div>
+        <div class="gallery-card">
+          <div class="gallery-card-label">stroke-accent · 1.5px</div>
+          <svg viewBox="0 0 180 60" role="img">
+            <line x1="20" y1="30" x2="160" y2="30" stroke="var(--accent)" stroke-width="1.5"/>
+          </svg>
+          <div class="gallery-card-meta">表头下沿、强调线</div>
+        </div>
+        <div class="gallery-card">
+          <div class="gallery-card-label">stroke-quote · 2px</div>
+          <svg viewBox="0 0 180 60" role="img">
+            <line x1="20" y1="30" x2="160" y2="30" stroke="var(--accent)" stroke-width="2"/>
+          </svg>
+          <div class="gallery-card-meta">callout 左边栏、pull-quote 边栏</div>
+        </div>
+    </div>
+  </div>
+
+  <p class="sub-title">边角半径 · 默认平直，3pt 为上限</p>
+  <div class="demo">
+    <div class="gallery gallery--3">
+        <div class="gallery-card">
+          <div class="gallery-card-label">r-none · 0</div>
+          <svg viewBox="0 0 180 60" role="img">
+            <rect x="40" y="14" width="100" height="32" rx="0" fill="none" stroke="var(--ink-soft)" stroke-width="1"/>
+          </svg>
+          <div class="gallery-card-meta">默认值——卡片、callout、页面</div>
+        </div>
+        <div class="gallery-card">
+          <div class="gallery-card-label">r-sm · 2pt</div>
+          <svg viewBox="0 0 180 60" role="img">
+            <rect x="40" y="14" width="100" height="32" rx="2.67" fill="none" stroke="var(--ink-soft)" stroke-width="1"/>
+          </svg>
+          <div class="gallery-card-meta">标签、行内 label</div>
+        </div>
+        <div class="gallery-card">
+          <div class="gallery-card-label">r-md · 3pt</div>
+          <svg viewBox="0 0 180 60" role="img">
+            <rect x="40" y="14" width="100" height="32" rx="4" fill="none" stroke="var(--ink-soft)" stroke-width="1"/>
+          </svg>
+          <div class="gallery-card-meta">小型组件容器——允许的最大圆角</div>
+        </div>
+    </div>
+  </div>
 </section>
 <hr class="section-divider">
 
@@ -1485,7 +1550,7 @@
      5. PAGE ARCHETYPES
      ============================================= -->
 <section>
-  <p class="anchor">05 / 11</p>
+  <p class="anchor">05 / 12</p>
   <p class="section-eyebrow">结构</p>
   <h2 class="section-title">页面原型</h2>
   <p class="section-desc">
@@ -1613,7 +1678,7 @@
      6. PAGE CHROME
      ============================================= -->
 <section>
-  <p class="anchor">06 / 11</p>
+  <p class="anchor">06 / 12</p>
   <p class="section-eyebrow">结构</p>
   <h2 class="section-title">页眉与页码</h2>
   <p class="section-desc">
@@ -1649,7 +1714,7 @@
      7. COMPONENTS
      ============================================= -->
 <section>
-  <p class="anchor">07 / 11</p>
+  <p class="anchor">07 / 12</p>
   <p class="section-eyebrow">基础组件</p>
   <h2 class="section-title">组件</h2>
   <p class="section-desc">
@@ -1768,10 +1833,163 @@
 <hr class="section-divider">
 
 <!-- =============================================
-     8. CADENCE
+     8. DIAGRAMS
      ============================================= -->
 <section>
-  <p class="anchor">08 / 11</p>
+  <p class="anchor">08 / 12</p>
+  <p class="section-eyebrow">基础组件</p>
+  <h2 class="section-title">图表与图示</h2>
+  <p class="section-desc">
+    「单 accent」的约束逼出一种编辑式可视化——不靠颜色编码、不要花哨修饰、用直接标注代替图例。下方八个 inline-SVG 图式覆盖大多数编辑场景；完整模板与多变量数据所需的 small-multiples 规则详见 <code>references/diagrams.md</code>。
+  </p>
+
+  <div class="demo">
+    <figure class="fig">
+      <div class="gallery gallery--4">
+        <div class="gallery-card">
+          <div class="gallery-card-label">Horizontal bar · 条形图</div>
+          <svg viewBox="0 0 180 110" role="img" aria-label="Horizontal bar">
+            <g fill="var(--accent)">
+              <rect x="0" y="14" width="160" height="12"/>
+              <rect x="0" y="38" width="120" height="12"/>
+              <rect x="0" y="62" width="80"  height="12"/>
+              <rect x="0" y="86" width="48"  height="12"/>
+            </g>
+          </svg>
+        </div>
+        <div class="gallery-card">
+          <div class="gallery-card-label">Annotated line · 标注折线</div>
+          <svg viewBox="0 0 180 110" role="img" aria-label="Annotated line">
+            <line x1="0" y1="98" x2="180" y2="98" stroke="var(--rule)" stroke-width="1"/>
+            <polyline fill="none" stroke="var(--accent)" stroke-width="1.5"
+              points="4,80 30,72 60,76 92,52 122,38 152,28 178,18"/>
+            <circle cx="92" cy="52" r="3" fill="var(--accent)"/>
+            <line x1="92" y1="48" x2="92" y2="22" stroke="var(--ink-faint)"
+                  stroke-width="1" stroke-dasharray="2 3"/>
+          </svg>
+        </div>
+        <div class="gallery-card">
+          <div class="gallery-card-label">System · 架构图</div>
+          <svg viewBox="0 0 180 110" role="img" aria-label="System diagram">
+            <defs>
+              <marker id="dia-arr-sys" viewBox="0 0 8 8" refX="6" refY="4"
+                      markerWidth="5" markerHeight="5" orient="auto">
+                <path d="M0 1 L6 4 L0 7" fill="none" stroke="var(--ink-faint)" stroke-width="1"/>
+              </marker>
+            </defs>
+            <g fill="none">
+              <rect x="6"   y="42" width="44" height="26" stroke="var(--ink-faint)" stroke-width="1"/>
+              <rect x="68"  y="42" width="44" height="26" stroke="var(--accent)" stroke-width="1.5"/>
+              <rect x="130" y="42" width="44" height="26" stroke="var(--ink-faint)" stroke-width="1"/>
+            </g>
+            <g stroke="var(--ink-faint)" stroke-width="1" fill="none">
+              <path d="M50 55 L66 55"  marker-end="url(#dia-arr-sys)"/>
+              <path d="M112 55 L128 55" marker-end="url(#dia-arr-sys)"/>
+            </g>
+          </svg>
+        </div>
+        <div class="gallery-card">
+          <div class="gallery-card-label">Sparkline · 火花图</div>
+          <svg viewBox="0 0 180 110" role="img" aria-label="Sparkline">
+            <polyline fill="none" stroke="var(--accent)" stroke-width="1.5"
+              points="18,72 50,60 80,66 110,46 140,52 168,30"/>
+            <circle cx="168" cy="30" r="2.5" fill="var(--accent)"/>
+          </svg>
+        </div>
+        <div class="gallery-card">
+          <div class="gallery-card-label">Process flow · 流程图</div>
+          <svg viewBox="0 0 180 110" role="img" aria-label="Process flow">
+            <defs>
+              <marker id="dia-arr-proc" viewBox="0 0 8 8" refX="6" refY="4"
+                      markerWidth="5" markerHeight="5" orient="auto">
+                <path d="M0 1 L6 4 L0 7" fill="none" stroke="var(--ink-faint)" stroke-width="1"/>
+              </marker>
+            </defs>
+            <g fill="none" stroke="var(--ink-faint)" stroke-width="1">
+              <rect x="4"   y="40" width="34" height="30"/>
+              <rect x="50"  y="40" width="34" height="30"/>
+              <rect x="96"  y="40" width="34" height="30"/>
+              <rect x="142" y="40" width="34" height="30"/>
+            </g>
+            <g font-family="var(--font-sans)" font-size="7" fill="var(--accent)"
+               letter-spacing="0.04em" text-anchor="middle">
+              <text x="21"  y="59">01</text>
+              <text x="67"  y="59">02</text>
+              <text x="113" y="59">03</text>
+              <text x="159" y="59">04</text>
+            </g>
+            <g stroke="var(--ink-faint)" stroke-width="1" fill="none">
+              <path d="M38 55 L48 55"  marker-end="url(#dia-arr-proc)"/>
+              <path d="M84 55 L94 55"  marker-end="url(#dia-arr-proc)"/>
+              <path d="M130 55 L140 55" marker-end="url(#dia-arr-proc)"/>
+            </g>
+          </svg>
+        </div>
+        <div class="gallery-card">
+          <div class="gallery-card-label">Dot / range · 点·区间</div>
+          <svg viewBox="0 0 180 110" role="img" aria-label="Dot range">
+            <g stroke="var(--ink-faint)" stroke-width="2" stroke-linecap="round">
+              <line x1="30" y1="20" x2="120" y2="20"/>
+              <line x1="45" y1="45" x2="140" y2="45"/>
+              <line x1="55" y1="70" x2="160" y2="70"/>
+              <line x1="70" y1="95" x2="170" y2="95"/>
+            </g>
+            <g fill="var(--accent)">
+              <circle cx="80"  cy="20" r="3"/>
+              <circle cx="100" cy="45" r="3"/>
+              <circle cx="125" cy="70" r="3"/>
+              <circle cx="135" cy="95" r="3"/>
+            </g>
+          </svg>
+        </div>
+        <div class="gallery-card">
+          <div class="gallery-card-label">2×2 quadrant · 四象限</div>
+          <svg viewBox="0 0 180 110" role="img" aria-label="2 by 2 quadrant">
+            <rect x="20" y="14" width="70" height="40" fill="var(--accent-tint)"/>
+            <rect x="20" y="14" width="140" height="80" fill="none" stroke="var(--rule)" stroke-width="1"/>
+            <g stroke="var(--ink-faint)" stroke-width="0.5">
+              <line x1="90" y1="14" x2="90" y2="94"/>
+              <line x1="20" y1="54" x2="160" y2="54"/>
+            </g>
+          </svg>
+        </div>
+        <div class="gallery-card">
+          <div class="gallery-card-label">Timeline · 时间轴</div>
+          <svg viewBox="0 0 180 110" role="img" aria-label="Timeline">
+            <line x1="10" y1="55" x2="170" y2="55" stroke="var(--rule)" stroke-width="1"/>
+            <g stroke="var(--ink-faint)" stroke-width="1">
+              <line x1="35"  y1="51" x2="35"  y2="59"/>
+              <line x1="80"  y1="51" x2="80"  y2="59"/>
+              <line x1="125" y1="51" x2="125" y2="59"/>
+              <line x1="165" y1="51" x2="165" y2="59"/>
+            </g>
+            <g fill="var(--accent)">
+              <circle cx="50"  cy="55" r="3.5"/>
+              <circle cx="95"  cy="55" r="3.5"/>
+              <circle cx="140" cy="55" r="3.5"/>
+            </g>
+            <g stroke="var(--ink-faint)" stroke-width="1" stroke-dasharray="2 3">
+              <line x1="50"  y1="51" x2="50"  y2="28"/>
+              <line x1="95"  y1="59" x2="95"  y2="82"/>
+              <line x1="140" y1="51" x2="140" y2="28"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+      <figcaption>
+        <span class="fig-num">Figure 04</span>
+        八种图式——从左上到右下按使用频率排列。Accent 标出焦点元素，其余维持冷灰。
+      </figcaption>
+    </figure>
+  </div>
+</section>
+<hr class="section-divider">
+
+<!-- =============================================
+     9. CADENCE
+     ============================================= -->
+<section>
+  <p class="anchor">09 / 12</p>
   <p class="section-eyebrow">节奏</p>
   <h2 class="section-title">页面节奏（Cadence）</h2>
   <p class="section-desc">
@@ -1802,10 +2020,10 @@
 <hr class="section-divider">
 
 <!-- =============================================
-     9. DENSITY RULES
+     10. DENSITY RULES
      ============================================= -->
 <section>
-  <p class="anchor">09 / 11</p>
+  <p class="anchor">10 / 12</p>
   <p class="section-eyebrow">用量上限</p>
   <h2 class="section-title">密度限值</h2>
   <p class="section-desc">
@@ -1857,10 +2075,10 @@
 <hr class="section-divider">
 
 <!-- =============================================
-     10. PRINT RULES
+     11. PRINT RULES
      ============================================= -->
 <section>
-  <p class="anchor">10 / 11</p>
+  <p class="anchor">11 / 12</p>
   <p class="section-eyebrow">输出</p>
   <h2 class="section-title">印刷规则</h2>
   <p class="section-desc">
@@ -1913,10 +2131,10 @@
 <hr class="section-divider">
 
 <!-- =============================================
-     11. 10 INVARIANTS
+     12. 10 INVARIANTS
      ============================================= -->
 <section>
-  <p class="anchor">11 / 11</p>
+  <p class="anchor">12 / 12</p>
   <p class="section-eyebrow">硬规则</p>
   <h2 class="section-title">10 条不变式</h2>
   <p class="section-desc">
