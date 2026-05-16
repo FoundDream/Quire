@@ -56,6 +56,8 @@ A standard Quire document follows this rhythm:
 
 **Clickable TOC**: each TOC row must be an `<a href="#sec-NN">` (not a `<span>`), and the section it points to must carry the matching `id`. Headless Chrome preserves these as internal GoTo links in the PDF. Inherit color and remove the underline so the row looks identical to a span. Reference patterns: `assets/output/quire-playbook.html` (`#ch-01` style) and `assets/output/quire-white-paper.html` (`#sec-01` style).
 
+**Diagrams**: when data or process warrants visual support, use the eight inline-SVG archetypes in `references/diagrams.md`. Default bias is to *not* draw — see §0.
+
 ---
 
 ## Step 3 · Pick your starting point
@@ -66,14 +68,20 @@ Quire supports two working modes. Decide first, then proceed.
 
 Use when your document fits one of the existing format profiles. Lowest variance, fastest path.
 
-1. Open one of the templates as a starting point:
-   - **Playbook** (landscape, 10–80 pages): `assets/templates/playbook.html` — frame; `assets/output/quire-playbook.html` is a 12-page reference.
-   - **White paper** (A4 portrait, 8–30 pages): `assets/templates/white-paper.html` — frame; `assets/output/quire-white-paper.html` is a 10-page reference.
-   - **Single-page** (A4 portrait, strictly 1 page): `assets/templates/single-page.html` — content is capped at one A4 sheet; use for briefs, posters, executive summaries.
-   - **Landing page** (A4 width, continuous, paginates on print): `assets/templates/landing-page.html` — long-form scroll for web reading; prints to 1–N A4 sheets. No chapter dividers, no cadence.
-   - **Slides** (16:9, 1280×720, on-screen deck): `assets/templates/slides.html` — keyboard-navigable HTML deck; one idea per slide, no body paragraphs. Use for talks and walk-throughs, not for documents meant to be read.
-2. Replace the content with real material. Do not add new sections that don't exist in the frame — Quire's rhythm is intentional.
-3. For multi-page profiles (playbook, white-paper), pick one of the content-page archetypes per chapter (spec in `references/design.md` §5):
+Pick a template:
+
+| Profile      | Format                          | Template                             | Use for                                                                                  |
+| ------------ | ------------------------------- | ------------------------------------ | ---------------------------------------------------------------------------------------- |
+| Playbook     | 10–80 pp, 11×8.5in landscape    | `assets/templates/playbook.html`     | Long-form editorial. `assets/output/quire-playbook.html` is a 12-page reference.         |
+| White paper  | 8–30 pp, A4 portrait            | `assets/templates/white-paper.html`  | Research-style documents. `assets/output/quire-white-paper.html` is a 10-page reference. |
+| Single-page  | 1 pp, A4 portrait               | `assets/templates/single-page.html`  | Briefs, posters, executive summaries. Capped at one A4 sheet.                            |
+| Landing page | Continuous, A4 width, paginates | `assets/templates/landing-page.html` | Long-form scroll for web reading; no chapter dividers, no cadence.                       |
+| Slides       | 16:9, 1280×720, on-screen deck  | `assets/templates/slides.html`       | Talks and walk-throughs; one idea per slide, no body paragraphs.                         |
+
+Then:
+
+1. Replace the content with real material. Do not add new sections that don't exist in the frame — Quire's rhythm is intentional.
+2. For multi-page profiles (playbook, white-paper), pick one of the content-page archetypes per chapter (spec in `references/design.md` §5):
    - **Standard** — h1 + lead + h2/h3 + paragraphs
    - **Stat-anchor** — oversized figure block as the page hero
    - **Comparison** — three-column compare table + commentary
@@ -100,6 +108,7 @@ Run the production check before handing off the PDF:
 1. **Accent color audit** — measure: highlight all elements using `--accent` on every page; if any single page has accent on > 15 % of its surface, that page is overusing it.
 2. **No widows / orphans** — last paragraph of every page must have ≥ 2 lines.
 3. **Callout density** — no more than two callouts (Exercise / Note / Think) per spread. Three or more breaks rhythm.
+4. **Diagram audit** — every chart uses `--accent` + cool grays only, no second hue. Direct labeling, no legend. Captions are takeaways, not descriptions.
 
 For full export instructions, see `references/production.md`.
 
@@ -111,6 +120,7 @@ For full export instructions, see `references/production.md`.
 | ----------------------------- | ------------------------------------------------------------------ |
 | `references/design.md`        | Full design system (color, type, spacing, archetypes, components)  |
 | `references/writing.md`       | Content brain — how to write prose readers finish, trust, remember |
+| `references/diagrams.md`      | Inline-SVG chart and diagram archetypes (8) + small-multiples rule |
 | `references/anti-patterns.md` | Common ways AI-generated playbooks go wrong                        |
 | `references/production.md`    | HTML → PDF export, font embedding, print pitfalls                  |
 
@@ -122,13 +132,15 @@ Load only the file you need for the current task. Do not pre-load everything.
 
 These are the rules Quire will not break. In Mode A the templates already encode them; in Mode B they are the floor that defines "still Quire" — satisfy them and the result belongs to the system, regardless of format. Each has a real cost — think before overriding.
 
-1. **Cool canvas `#f6f8fb`**, never pure white. Never a warm cream.
-2. **Sky blue `#3a82c4` is the only chromatic color** in the document. No second hue — no orange engagement, no green success, no red warning.
-3. **All grays cool-toned** (`B ≥ G ≥ R`). No warm yellow-brown grays. No pure-neutral `R = G = B` either.
-4. **One serif family** carries hierarchy. Sans only for UI chrome (eyebrows, page numbers, table headers, tags).
-5. **Two weights only**: 400 regular, 500 medium. No 600+, no synthetic bold, no italic body.
-6. **Typography mechanics**: titles tight (-0.02em to -0.03em), eyebrows loose (+0.04em to +0.08em), body 0; line-heights 1.05–1.20 for titles, 1.55–1.70 for body.
-7. **Chapter dividers use the `--accent-tint`**, never the full-saturation accent.
-8. **No drop shadows, no gradients, no blur.** `border-radius` ≤ 3pt; strokes ≤ 2px. Depth comes from rule lines and tints, not weight.
-9. **No personal-brand chrome** — no avatar circles, no signature boxes, no badges, no italic quote cards. Quire is editorial, not a profile page.
-10. **Every callout has a label** (Exercise / Note / Think / Warning). Unlabelled blockquotes drift into decoration.
+| Category | Rule                                                       | Specifics                                                                        |
+| -------- | ---------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| Color    | Cool canvas `#f6f8fb`                                      | Never pure white. Never a warm cream.                                            |
+| Color    | Sky blue `#3a82c4` is the only chromatic color             | No second hue — no orange engagement, no green success, no red warning.          |
+| Color    | All grays cool-toned (`B ≥ G ≥ R`)                         | No warm yellow-brown grays. No pure-neutral `R = G = B`.                         |
+| Color    | Chapter dividers use `--accent-tint`                       | Never the full-saturation accent as page-fill.                                   |
+| Type     | One serif family carries hierarchy                         | Sans only for UI chrome (eyebrows, page numbers, table headers, tags).           |
+| Type     | Two weights only: 400 regular, 500 medium                  | No 600+, no synthetic bold, no italic body.                                      |
+| Type     | Titles −0.02 to −0.03em, eyebrows +0.04 to +0.08em, body 0 | Line-heights 1.05–1.20 titles, 1.55–1.70 body.                                   |
+| Form     | No drop shadows, gradients, or blur                        | `border-radius` ≤ 3pt; strokes ≤ 2px. Depth comes from rule lines and tints.     |
+| Form     | No personal-brand chrome                                   | No avatar circles, signature boxes, badges, italic quote cards.                  |
+| Form     | Every callout has a label                                  | Exercise / Note / Think / Warning. Unlabelled blockquotes drift into decoration. |

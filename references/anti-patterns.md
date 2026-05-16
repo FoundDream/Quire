@@ -34,6 +34,36 @@ For prose-level moves see `writing.md`. For build/export failures see `productio
 
 ---
 
+## Diagrams
+
+The diagram catalog and shared rules live in `diagrams.md`. The entries below are the symptoms that show up when those rules are skipped.
+
+### 13. Second hue to encode a second series
+
+**Symptom** — a line chart with a blue line for Product A and an orange line for Product B; or a bar chart where each category gets its own color.
+
+**Fix** — small multiples (one panel per series, identical axes; see `diagrams.md` §1). If small multiples won't fit, use line style (solid vs dashed) with `--accent` for the focal series and a gray for the rest. Never introduce a second chromatic hue — that breaks SKILL.md invariant #2.
+
+### 14. Donut / pie chart
+
+**Symptom** — a 4–6 segment donut filling a third of the page, each segment in a different tinted color.
+
+**Fix** — replace with a horizontal bar chart (see `diagrams.md` §4.1). Bars are more accurate (angle / area judgments are unreliable), they encode rank directly, and they survive the one-accent constraint without inventing extra hues.
+
+### 15. Free-floating legend
+
+**Symptom** — a small framed box in the corner: `■ Series 1   ■ Series 2   ■ Series 3`. Reader's eye ping-pongs between legend and data to decode.
+
+**Fix** — label the data directly. End-of-line labels in the same color as the line; bar value labels at the end of each bar. See the annotated-line example in `diagrams.md` §4.2.
+
+### 16. Chart-library default styling leak
+
+**Symptom** — drop shadows behind bars, 8pt rounded corners on nodes, Helvetica in axis labels, rgba grays, a watermark in the bottom-right. The chart looks Mermaid- or Chart.js- shaped.
+
+**Fix** — hand-write inline SVG using the archetypes in `diagrams.md` §4. Never paste exported PNG or library-default SVG into a Quire document. The styling defaults of those libraries violate strokes, radii, color, and typography rules simultaneously.
+
+---
+
 ## Content
 
 The cut list lives in `writing.md`. The entries below add the visible symptom and a concrete example for the patterns it names.

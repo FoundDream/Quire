@@ -4,16 +4,18 @@ One-page quick reference. Scan before filling a template. Full spec in `referenc
 
 ## The 10 invariants
 
-1. Cool canvas `#f6f8fb`, never pure white, never a warm cream
-2. Sky blue `#3a82c4` is the only chromatic color — no second hue
-3. All grays cool-toned (`B ≥ G ≥ R`), no warm yellow-brown grays
-4. One serif family carries hierarchy; sans-serif only for UI chrome
-5. Two weights only: 400 / 500. No bold (600+), no italic body
-6. Typography mechanics: titles tight (-0.02em+), eyebrows loose (+0.04em+), body 0; line-height 1.05–1.20 / 1.55–1.70
-7. Chapter dividers use `--accent-tint`, never full-saturation fills
-8. No shadows, no gradients, no blur. `border-radius` ≤ 3pt; strokes ≤ 2px
-9. No personal-brand chrome — no avatars, badges, signature boxes, italic quote cards
-10. Every callout has a label; unlabelled blockquotes drift into decoration
+| Category | Rule                                               | Detail                                                  |
+| -------- | -------------------------------------------------- | ------------------------------------------------------- |
+| Color    | Cool canvas `#f6f8fb`                              | Never pure white, never a warm cream                    |
+| Color    | Sky blue `#3a82c4` is the only chromatic color     | No second hue                                           |
+| Color    | All grays cool-toned (`B ≥ G ≥ R`)                 | No warm yellow-brown grays                              |
+| Color    | Chapter dividers use `--accent-tint`               | Never full-saturation fills                             |
+| Type     | One serif family carries hierarchy                 | Sans-serif only for UI chrome                           |
+| Type     | Two weights only: 400 / 500                        | No bold (600+), no italic body                          |
+| Type     | Titles tight (-0.02em+), eyebrows loose (+0.04em+) | Line-height 1.05–1.20 / 1.55–1.70                       |
+| Form     | No shadows, gradients, or blur                     | `border-radius` ≤ 3pt; strokes ≤ 2px                    |
+| Form     | No personal-brand chrome                           | No avatars, badges, signature boxes, italic quote cards |
+| Form     | Every callout has a label                          | Unlabelled blockquotes drift into decoration            |
 
 ## Page archetypes
 

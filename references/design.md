@@ -387,7 +387,7 @@ Three list variants, all serif-bodied. Use lists in body paragraphs; lists insid
 
 ### Diagrams
 
-Inline `<svg>` only — never embedded PNG / screenshots. Use accent + cool grays only; no second chromatic hue in chart series (secondary series use gray-scale, not a second color). (Not yet implemented in the current template.)
+Inline `<svg>` only — never embedded PNG / screenshots. Use accent + cool grays only; no second chromatic hue in chart series (secondary series use gray-scale, not a second color). For the eight chart and diagram archetypes (horizontal bar, annotated line, system diagram, sparkline, process flow, dot/range, 2×2 quadrant, timeline) plus the small-multiples rule for multivariate data, see `diagrams.md`.
 
 ---
 
