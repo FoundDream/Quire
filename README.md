@@ -17,7 +17,7 @@ Quire is a constraint system for editorial documents — playbooks, white papers
 | Resume       | 1–2   | A4 / Letter        | No cadence rule      |
 | Single-page  | 1     | A4 portrait        | No cadence rule      |
 
-Today, only the playbook profile is implemented; others share the same palette and typography.
+Today, playbook and white-paper profiles are implemented; resume and single-page report share the same system and ship next.
 
 ## Palette
 

@@ -59,9 +59,11 @@ A standard Quire document follows this rhythm:
 
 ## Step 3 · Fill the template
 
-1. Open `assets/templates/playbook.html` (working frame) or `assets/output/quire-playbook.html` (12-page reference with all archetypes) as the starting point.
+1. Open one of the templates as a starting point:
+   - **Playbook** (landscape, 10–80 pages): `assets/templates/playbook.html` — frame; `assets/output/quire-playbook.html` is a 12-page reference.
+   - **White paper** (A4 portrait, 8–30 pages): `assets/templates/white-paper.html` — frame; `assets/output/quire-white-paper.html` is a 10-page reference.
 2. Replace the content with real material. Do not add new sections that don't exist in the frame — Quire's rhythm is intentional.
-3. For each chapter, pick one of the four content-page archetypes (spec in `references/design.md` §4):
+3. For each chapter, pick one of the content-page archetypes (spec in `references/design.md` §5):
    - **Standard** — h1 + lead + h2/h3 + paragraphs
    - **Stat-anchor** — oversized figure block as the page hero
    - **Comparison** — three-column compare table + commentary
