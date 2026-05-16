@@ -10,14 +10,15 @@ Quire is a constraint system for editorial documents — playbooks, white papers
 
 ## Format profiles
 
-| Profile      | Pages | Format             | Cadence              |
-| ------------ | ----- | ------------------ | -------------------- |
-| Playbook     | 10–80 | 11×8.5in landscape | Reset every 5–7 pages |
-| White paper  | 8–30  | A4 portrait        | Reset every 5–7 pages |
-| Resume       | 1–2   | A4 / Letter        | No cadence rule      |
-| Single-page  | 1     | A4 portrait        | No cadence rule      |
+| Profile      | Pages       | Format                  | Cadence              |
+| ------------ | ----------- | ----------------------- | -------------------- |
+| Playbook     | 10–80       | 11×8.5in landscape      | Reset every 5–7 pages |
+| White paper  | 8–30        | A4 portrait             | Reset every 5–7 pages |
+| Single-page  | 1           | A4 portrait, fixed      | No cadence rule      |
+| Landing page | continuous  | A4 width, flows + paginates | No cadence rule  |
+| Resume       | 1–2         | A4 / Letter             | No cadence rule      |
 
-Today, playbook and white-paper profiles are implemented; resume and single-page report share the same system and ship next.
+Playbook, white-paper, single-page, and landing-page profiles are implemented; resume shares the same system and ships next.
 
 ## Palette
 

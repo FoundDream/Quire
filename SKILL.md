@@ -1,21 +1,20 @@
 ---
 name: quire
-description: 'Typeset editorial documents on a cool canvas with a single sky-blue accent and serif hierarchy. First format is multi-page playbooks; the same system also handles resumes, white papers, and single-page A4 reports. Triggers on "做 playbook / 白皮书 / 简历 / 报告 / editorial PDF" or "make a playbook / white paper / resume / single-page report".'
+description: 'Typeset editorial documents on a cool canvas with a single sky-blue accent and serif hierarchy. First format is multi-page playbooks; the same system also handles white papers, single-page A4 reports, long-form landing pages, HTML slide decks, and resumes. Triggers on "做 playbook / 白皮书 / 报告 / landing page / 幻灯片 / 简历 / editorial PDF" or "make a playbook / white paper / single-page report / landing page / slides / resume".'
 ---
 
 # Quire
 
-A cold-toned, chromatically monochrome design system for editorial documents. Single accent (sky blue `#3a82c4`), single serif carries hierarchy, no second color anywhere. Output formats: playbook (default), resume, white paper, single-page report — each a "format profile" of the same underlying system.
+A cold-toned, chromatically monochrome design system for editorial documents. Single accent (sky blue `#3a82c4`), single serif carries hierarchy, no second color anywhere. Output formats: playbook (default), white paper, single-page report, landing page, slide deck, resume — each a "format profile" of the same underlying system.
 
 ---
 
 ## Step 0 · Decide the document archetype
 
-Quire targets long-form (10–80 page) documents structured as **cover → chapter dividers → content pages**. Use a different skill for:
+Quire targets long-form (10–80 page) documents structured as **cover → chapter dividers → content pages**, plus a few shorter format profiles (single-page, landing-page, slides, resume) that share the same design system. Use a different skill for:
 
-- One-page resumes, single-page landing pages → use a one-pager skill
-- Pure slides / keynotes → use a slides skill
 - Short letters or single articles → markdown is fine
+- Decks heavier than 60 slides, or anything requiring animations / builds → use a dedicated slides tool
 
 Confirm with the user when ambiguous. A 4-page document is a brochure, not a quire.
 
@@ -62,12 +61,16 @@ A standard Quire document follows this rhythm:
 1. Open one of the templates as a starting point:
    - **Playbook** (landscape, 10–80 pages): `assets/templates/playbook.html` — frame; `assets/output/quire-playbook.html` is a 12-page reference.
    - **White paper** (A4 portrait, 8–30 pages): `assets/templates/white-paper.html` — frame; `assets/output/quire-white-paper.html` is a 10-page reference.
+   - **Single-page** (A4 portrait, strictly 1 page): `assets/templates/single-page.html` — content is capped at one A4 sheet; use for briefs, posters, executive summaries.
+   - **Landing page** (A4 width, continuous, paginates on print): `assets/templates/landing-page.html` — long-form scroll for web reading; prints to 1–N A4 sheets. No chapter dividers, no cadence.
 2. Replace the content with real material. Do not add new sections that don't exist in the frame — Quire's rhythm is intentional.
-3. For each chapter, pick one of the content-page archetypes (spec in `references/design.md` §5):
+3. For multi-page profiles (playbook, white-paper), pick one of the content-page archetypes per chapter (spec in `references/design.md` §5):
    - **Standard** — h1 + lead + h2/h3 + paragraphs
    - **Stat-anchor** — oversized figure block as the page hero
    - **Comparison** — three-column compare table + commentary
    - **Pull-quote** — half-page editorial quote from a source
+
+   Single-page and landing-page profiles skip archetypes — they're one continuous composition.
 
 ---
 

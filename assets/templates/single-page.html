@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Quire Single-page — One-page report sample</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..700,30..100&family=Inter+Tight:wght@400..600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* Design tokens — sky blue, single accent, cold-toned */
+  :root {
+    --canvas:       #f6f8fb;
+    --canvas-soft:  #eef1f6;
+    --rule:         #dce0e6;
+    --rule-soft:    #e8ebf0;
+
+    --ink:          #16181d;
+    --ink-soft:     #3d4148;
+    --ink-muted:    #6b6f78;
+    --ink-faint:    #8c919b;
+
+    --accent:       #3a82c4;
+    --accent-tint:  #b8d6f0;
+    --accent-deep:  #2a6299;
+
+    --font-serif:   "Fraunces", "Tiempos Text", "Source Serif Pro", Georgia, serif;
+    --font-sans:    "Inter Tight", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --font-mono:    "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+
+    --serif-display: "opsz" 144, "SOFT" 30;
+    --serif-text:    "opsz" 14,  "SOFT" 50;
+
+    --stroke-rule:   1px;
+    --stroke-accent: 1.5px;
+    --stroke-quote:  2px;
+
+    --r-none: 0;
+    --r-sm:   2pt;
+    --r-md:   3pt;
+
+    /* A4 portrait at 96dpi: 210mm × 297mm */
+    --page-w: 794px;
+    --page-h: 1123px;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: #e5e8ec;
+    font-family: var(--font-serif);
+    font-variation-settings: var(--serif-text);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Page container */
+  .page {
+    width: var(--page-w);
+    height: var(--page-h);
+    margin: 24px auto;
+    background: var(--canvas);
+    position: relative;
+    overflow: hidden;
+    padding: 72px 80px 60px;
+    display: flex;
+    flex-direction: column;
+  }
+  @media screen {
+    .page { outline: 1px solid var(--rule); }
+  }
+
+  /* Masthead — top eyebrow row */
+  .masthead {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--ink-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding-bottom: 14px;
+    border-bottom: var(--stroke-accent) solid var(--accent);
+    margin-bottom: 36px;
+  }
+  .masthead .brand { color: var(--accent); font-weight: 500; }
+
+  /* Hero */
+  .hero { margin-bottom: 44px; }
+  .hero .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 18px;
+  }
+  .hero h1 {
+    font-family: var(--font-serif);
+    font-variation-settings: "opsz" 144, "SOFT" 35;
+    font-size: 54px;
+    line-height: 1.05;
+    font-weight: 500;
+    letter-spacing: -0.024em;
+    margin: 0 0 22px;
+    max-width: 18ch;
+  }
+  .hero .lede {
+    font-family: var(--font-serif);
+    font-variation-settings: "opsz" 18, "SOFT" 45;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin: 0;
+    max-width: 56ch;
+  }
+  .hero .lede strong { font-weight: 500; color: var(--ink); }
+
+  /* Stat band — 3 columns of figures */
+  .stat-band {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    padding: 28px 0;
+    border-top: var(--stroke-rule) solid var(--rule);
+    border-bottom: var(--stroke-rule) solid var(--rule);
+    margin-bottom: 40px;
+  }
+  .stat .figure {
+    font-family: var(--font-serif);
+    font-variation-settings: var(--serif-display);
+    font-size: 56px;
+    line-height: 1;
+    color: var(--accent);
+    font-weight: 500;
+    letter-spacing: -0.028em;
+    margin: 0 0 8px;
+  }
+  .stat .label {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin: 0 0 4px;
+  }
+  .stat .detail {
+    font-family: var(--font-serif);
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    margin: 0;
+    max-width: 22ch;
+  }
+
+  /* Body — 2-column section grid */
+  .sections {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px 40px;
+    margin-bottom: 32px;
+  }
+  .sections h3 {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 10px;
+  }
+  .sections p {
+    font-family: var(--font-serif);
+    font-variation-settings: var(--serif-text);
+    font-size: 12.5px;
+    line-height: 1.6;
+    color: var(--ink);
+    margin: 0;
+    max-width: 42ch;
+  }
+
+  /* Callout — one editorial pause */
+  .callout {
+    font-family: var(--font-serif);
+    font-variation-settings: "opsz" 60, "SOFT" 40;
+    font-size: 18px;
+    line-height: 1.4;
+    padding: 18px 0 18px 18px;
+    border-left: var(--stroke-quote) solid var(--accent);
+    color: var(--ink);
+    margin-bottom: 36px;
+    max-width: 56ch;
+  }
+  .callout .label {
+    display: block;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  /* Colophon — bottom strip */
+  .colophon {
+    margin-top: auto;
+    padding-top: 18px;
+    border-top: var(--stroke-rule) solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    color: var(--ink-faint);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .colophon .credit { color: var(--ink-muted); }
+
+  /* Print / PDF export */
+  @page {
+    size: A4;
+    margin: 0;
+  }
+  @media print {
+    body { background: var(--canvas); }
+    .page {
+      margin: 0;
+      outline: none;
+      width: 210mm;
+      height: 297mm;
+    }
+  }
+</style>
+</head>
+<body>
+
+<section class="page">
+
+  <!-- Masthead -->
+  <div class="masthead">
+    <span class="brand">Quire · One-pager</span>
+    <span>2026 · 05 · 16</span>
+  </div>
+
+  <!-- Hero -->
+  <div class="hero">
+    <p class="eyebrow">A design-system brief</p>
+    <h1>One sky blue, four formats, no second color.</h1>
+    <p class="lede">
+      Quire is a cold-toned, chromatically monochrome design system for editorial
+      documents. <strong>One serif carries hierarchy, one accent carries emphasis,
+      everything else is rule lines and tints.</strong> The same system produces
+      playbooks, white papers, resumes, and one-page reports — this page among them.
+    </p>
+  </div>
+
+  <!-- Stat band -->
+  <div class="stat-band">
+    <div class="stat">
+      <p class="figure">1</p>
+      <p class="label">Chromatic color</p>
+      <p class="detail">Sky blue <span style="font-family:var(--font-mono); font-size: 11.5px;">#3a82c4</span>. No second hue allowed, anywhere.</p>
+    </div>
+    <div class="stat">
+      <p class="figure">4</p>
+      <p class="label">Format profiles</p>
+      <p class="detail">Playbook, white paper, resume, and one-pager — same tokens, four shapes.</p>
+    </div>
+    <div class="stat">
+      <p class="figure">10</p>
+      <p class="label">Invariants</p>
+      <p class="detail">Hard rules the system will not break: cool canvas, two weights, labelled callouts, no shadows.</p>
+    </div>
+  </div>
+
+  <!-- Sections -->
+  <div class="sections">
+    <div>
+      <h3>The palette is locked</h3>
+      <p>
+        There is no palette to pick from. Cool canvas <span style="font-family:var(--font-mono); font-size:11.5px;">#f6f8fb</span>,
+        a single sky-blue accent, and four cool-toned inks. Swap any of them and you
+        produce a different system — not a variant of Quire.
+      </p>
+    </div>
+    <div>
+      <h3>One serif carries hierarchy</h3>
+      <p>
+        Fraunces sits at 54&nbsp;px on covers and 12.5&nbsp;px in body, with two weights
+        only — 400 and 500. Sans appears only on UI chrome: eyebrows, page numbers,
+        table heads, tags. Italic body is forbidden.
+      </p>
+    </div>
+    <div>
+      <h3>Page archetypes, not layouts</h3>
+      <p>
+        Every page belongs to one of seven archetypes: cover, TOC, chapter divider,
+        standard content, stat-anchor, comparison, pull-quote. Changing the structure
+        produces a different archetype, never a hybrid.
+      </p>
+    </div>
+    <div>
+      <h3>Depth from rule lines, not weight</h3>
+      <p>
+        No drop shadows, no gradients, no blur. Strokes stay ≤&nbsp;2&nbsp;px;
+        border-radius stays ≤&nbsp;3&nbsp;pt. Hierarchy comes from rule lines,
+        tints, and disciplined whitespace — the same vocabulary print has used
+        for two centuries.
+      </p>
+    </div>
+  </div>
+
+  <!-- Callout -->
+  <div class="callout">
+    <span class="label">The bet</span>
+    The reader notices typography only when it is bad. Build a system that
+    disappears, and your content is what they remember.
+  </div>
+
+  <!-- Colophon -->
+  <div class="colophon">
+    <span class="credit">Designed in Quire · A4 · single-page profile</span>
+    <span>quire.dev · 01 / 01</span>
+  </div>
+
+</section>
+
+</body>
+</html>
