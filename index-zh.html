@@ -941,127 +941,6 @@
   }
 
   /* ============================================
-     Strokes — sample block
-     ============================================ */
-  .stroke-block {
-    height: 84px;
-    border: 1px solid var(--rule);
-    margin-bottom: 10px;
-    background: var(--canvas);
-    display: flex;
-    align-items: center;
-    padding: 0 14px;
-  }
-  .stroke-block .stroke-line { width: 100%; background: var(--ink); }
-  .stroke-block .stroke-line.accent { background: var(--accent); }
-
-  /* ============================================
-     Page chrome — demo pages
-     ============================================ */
-  .chrome-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 32px;
-    margin: 18px 0 60px;
-  }
-  .chrome-page {
-    aspect-ratio: 11 / 8.5;
-    background: var(--canvas);
-    border: 1px solid var(--rule);
-    position: relative;
-    font-family: var(--font-serif);
-  }
-  .chrome-page.bleed { background: var(--accent); border-color: var(--accent); }
-  .chrome-page.tint { background: var(--accent-tint); border-color: var(--accent-tint); }
-  .chrome-page .cp-header {
-    position: absolute;
-    top: 10px;
-    left: 18px;
-    right: 22px;
-    display: flex;
-    justify-content: space-between;
-    font-family: var(--font-mono);
-    font-size: 8px;
-    color: var(--ink-faint);
-    letter-spacing: 0.06em;
-  }
-  .chrome-page .cp-page-no {
-    position: absolute;
-    bottom: 10px;
-    right: 22px;
-    font-family: var(--font-mono);
-    font-size: 9px;
-    color: var(--ink-faint);
-    font-variant-numeric: tabular-nums;
-  }
-  .chrome-page .cp-body {
-    position: absolute;
-    top: 32px;
-    bottom: 26px;
-    left: 18px;
-    right: 22px;
-  }
-  .chrome-page .cp-h2 {
-    height: 6px;
-    background: var(--ink);
-    width: 55%;
-    margin-bottom: 12px;
-  }
-  .chrome-page .cp-line {
-    height: 3px;
-    background: var(--ink-faint);
-    margin-bottom: 5px;
-  }
-  .chrome-page .cp-line.med { width: 75%; }
-  .chrome-page .cp-line.short { width: 45%; }
-  .chrome-page .cp-title-large {
-    position: absolute;
-    top: 50%;
-    left: 18px;
-    right: 22px;
-    transform: translateY(-50%);
-    height: 18px;
-    background: var(--ink);
-    opacity: 0.85;
-    width: 70%;
-  }
-  .chrome-page.bleed .cp-title-large { background: #fff; opacity: 0.95; }
-  .chrome-page.tint .cp-title-large { background: var(--ink); opacity: 0.7; }
-  .chrome-page .cp-stat {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-family: var(--font-serif);
-    font-variation-settings: var(--serif-display);
-    font-size: 56px;
-    color: var(--accent);
-    font-weight: 500;
-    line-height: 1;
-    letter-spacing: -0.02em;
-  }
-  .chrome-page .cp-label {
-    position: absolute;
-    bottom: -40px;
-    left: 0;
-    right: 0;
-    font-family: var(--font-sans);
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--ink);
-    letter-spacing: 0.02em;
-  }
-  .chrome-page .cp-label .small {
-    display: block;
-    font-weight: 400;
-    color: var(--ink-muted);
-    font-size: 11px;
-    margin-top: 3px;
-    font-family: var(--font-mono);
-    letter-spacing: 0.04em;
-  }
-
-  /* ============================================
      Lists · ul / ol / dl
      ============================================ */
   .demo-eyebrow {
@@ -1566,70 +1445,22 @@
   <p class="section-eyebrow">Tokens</p>
   <h2 class="section-title">描边与圆角</h2>
   <p class="section-desc">
-    三种线宽——rule、accent、quote——覆盖所有分隔线、表头与引文边条。圆角保持克制：3pt 是 Quire 文档允许的最大圆角。
+    三种线宽覆盖所有分隔线、表头与引文边条。圆角保持克制：3pt 是 Quire 文档允许的最大圆角。比这更粗、更圆的样式，属于另一个系统。
   </p>
 
-  <p class="sub-title">线宽 · Stroke</p>
-  <div class="swatch-grid">
-    <div class="swatch">
-      <div class="stroke-block">
-        <div class="stroke-line" style="height: 1px;"></div>
-      </div>
-      <div class="swatch-name">stroke-rule</div>
-      <div class="swatch-hex">1px</div>
-      <div class="swatch-use">表格行线、章节分隔、卡片边框</div>
-    </div>
-    <div class="swatch">
-      <div class="stroke-block">
-        <div class="stroke-line accent" style="height: 1.5px;"></div>
-      </div>
-      <div class="swatch-name">stroke-accent</div>
-      <div class="swatch-hex">1.5px</div>
-      <div class="swatch-use">表头下方、强调用分隔</div>
-    </div>
-    <div class="swatch">
-      <div class="stroke-block">
-        <div class="stroke-line accent" style="height: 2px;"></div>
-      </div>
-      <div class="swatch-name">stroke-quote</div>
-      <div class="swatch-hex">2px</div>
-      <div class="swatch-use">Callout 左边条、引文边条</div>
-    </div>
-    <div class="swatch banned">
-      <div class="swatch-block"></div>
-      <div class="swatch-name">—— 不超过 2px ——</div>
-      <div class="swatch-hex">禁止</div>
-      <div class="swatch-use">不要粗边框，不要边框包整页</div>
-    </div>
-  </div>
-
-  <p class="sub-title">圆角 · Radius · 默认为零</p>
-  <div class="swatch-grid">
-    <div class="swatch">
-      <div class="swatch-block" style="background: var(--accent-tint); border-radius: var(--r-none);"></div>
-      <div class="swatch-name">r-none</div>
-      <div class="swatch-hex">0</div>
-      <div class="swatch-use">默认；卡片、callout、页面</div>
-    </div>
-    <div class="swatch">
-      <div class="swatch-block" style="background: var(--accent-tint); border-radius: var(--r-sm);"></div>
-      <div class="swatch-name">r-sm</div>
-      <div class="swatch-hex">2pt</div>
-      <div class="swatch-use">Tag 标签、行内 label</div>
-    </div>
-    <div class="swatch">
-      <div class="swatch-block" style="background: var(--accent-tint); border-radius: var(--r-md);"></div>
-      <div class="swatch-name">r-md</div>
-      <div class="swatch-hex">3pt</div>
-      <div class="swatch-use">小型组件容器（上限）</div>
-    </div>
-    <div class="swatch banned">
-      <div class="swatch-block" style="background: var(--canvas); border-radius: 12pt;"></div>
-      <div class="swatch-name">—— 圆角装饰 ——</div>
-      <div class="swatch-hex">禁止</div>
-      <div class="swatch-use">不要 pill 按钮，不要 app 风格卡片</div>
-    </div>
-  </div>
+  <table class="density-rules">
+    <thead>
+      <tr><th>Token</th><th>取值</th><th>用途</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>stroke-rule</td><td class="num">1px</td><td class="why">表格行线、章节分隔、卡片边框</td></tr>
+      <tr><td>stroke-accent</td><td class="num">1.5px</td><td class="why">表头下方、强调用分隔</td></tr>
+      <tr><td>stroke-quote</td><td class="num">2px</td><td class="why">Callout 左边条、引文边条</td></tr>
+      <tr><td>r-none</td><td class="num">0</td><td class="why">默认——卡片、callout、页面</td></tr>
+      <tr><td>r-sm</td><td class="num">2pt</td><td class="why">Tag 标签、行内 label</td></tr>
+      <tr><td>r-md</td><td class="num">3pt</td><td class="why">小型组件容器——允许的最大圆角</td></tr>
+    </tbody>
+  </table>
 </section>
 <hr class="section-divider">
 
@@ -1769,46 +1600,9 @@
   <p class="section-eyebrow">结构</p>
   <h2 class="section-title">页眉与页码</h2>
   <p class="section-desc">
-    页眉与页码是仅有的、出现在版心之外的标记。冷灰等宽，字号很小——足以让读者定位，却低调到几乎隐形。七种原型里，三种带 chrome，三种省略 chrome。
+    页眉与页码是仅有的、出现在版心之外的标记。冷灰等宽，字号很小——足以让读者定位，却低调到几乎隐形。标准内文、TOC、对照、版本页都带；封面与章节分隔都去掉；数据锚点和引文只保留页码。
   </p>
 
-  <p class="sub-title">四种原型对照</p>
-  <div class="chrome-grid">
-    <div class="chrome-page">
-      <div class="cp-header">
-        <span>QUIRE · PLAYBOOK</span>
-        <span>CH 02 · CONSTRAINT</span>
-      </div>
-      <div class="cp-body">
-        <div class="cp-h2"></div>
-        <div class="cp-line"></div>
-        <div class="cp-line med"></div>
-        <div class="cp-line"></div>
-        <div class="cp-line short"></div>
-        <div class="cp-line"></div>
-        <div class="cp-line med"></div>
-      </div>
-      <div class="cp-page-no">04</div>
-      <div class="cp-label">Standard · 标准内文<span class="small">页眉 + 页码</span></div>
-    </div>
-    <div class="chrome-page bleed">
-      <div class="cp-title-large"></div>
-      <div class="cp-label">Cover · 封面<span class="small">完全无 chrome</span></div>
-    </div>
-  </div>
-  <div class="chrome-grid">
-    <div class="chrome-page tint">
-      <div class="cp-title-large"></div>
-      <div class="cp-label">Chapter divider · 章节分隔<span class="small">无 chrome — 留出停顿</span></div>
-    </div>
-    <div class="chrome-page">
-      <div class="cp-stat">42%</div>
-      <div class="cp-page-no">07</div>
-      <div class="cp-label">Stat-anchor · 数据锚点<span class="small">仅页码 · 去掉页眉</span></div>
-    </div>
-  </div>
-
-  <p class="sub-title">规格</p>
   <table class="density-rules">
     <thead>
       <tr><th>元素</th><th>规格</th><th>位置</th></tr>
@@ -1829,23 +1623,6 @@
         <td class="num">1px · ink-faint</td>
         <td class="why">页眉与正文之间的发线；仅对超过 40 页的文档启用——长文需要更强的视觉锚点。</td>
       </tr>
-    </tbody>
-  </table>
-
-  <p class="sub-title">各原型的 chrome 处理</p>
-  <table class="density-rules">
-    <thead>
-      <tr><th>原型</th><th>页眉</th><th>页码</th><th>原因</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>Cover · 封面</td><td class="num">—</td><td class="num">—</td><td class="why">标题撑满整页；chrome 会与之争抢。</td></tr>
-      <tr><td>TOC · 目录</td><td class="num">●</td><td class="num">●</td><td class="why">第一个可导航的页面；完整 chrome。</td></tr>
-      <tr><td>Chapter divider · 章节分隔</td><td class="num">—</td><td class="num">—</td><td class="why">本身是一次视觉重置；chrome 会破坏停顿感。</td></tr>
-      <tr><td>Standard · 标准内文</td><td class="num">●</td><td class="num">●</td><td class="why">默认形态。两个标记都在。</td></tr>
-      <tr><td>Stat-anchor · 数据锚点</td><td class="num">—</td><td class="num">●</td><td class="why">去掉页眉以突出数字；保留页码便于检索。</td></tr>
-      <tr><td>Comparison · 对照</td><td class="num">●</td><td class="num">●</td><td class="why">标准 chrome。</td></tr>
-      <tr><td>Pull-quote · 引文</td><td class="num">—</td><td class="num">●</td><td class="why">引文需要呼吸；页眉会挤压它。</td></tr>
-      <tr><td>Colophon · 版本页</td><td class="num">●</td><td class="num">●</td><td class="why">末页；完整 chrome 像是「合上书页」。</td></tr>
     </tbody>
   </table>
 </section>
