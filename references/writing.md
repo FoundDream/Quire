@@ -1,230 +1,92 @@
-# Quire · Writing — the content brain
+# Quire · Writing
 
-Quire's design system handles "looks professional." This file handles "reads credibly."
-Typography tells the reader *this is a serious document*; writing tells them
-*this is worth your time, you can trust it, you'll remember it.*
-
-For visual rules see `design.md`. For component HTML see `components.md`.
+Prose credibility for playbooks and white papers (10–80 pages). Visual rules: `design.md`. HTML: `assets/templates/`. Failure modes: `anti-patterns.md`.
 
 ---
 
-## The three reader goals
+## Reader goals
 
-Professional readers — operators, founders, investors, technical leads — don't read
-linearly. They scan, sample, and bail. Quire writing optimizes for three outcomes,
-in order:
+Operators scan, sample, bail. Every sentence must earn one of:
 
-1. **They keep reading** — every page passes the "is this worth the next page?" test
-2. **They trust the claims** — no single moment makes them doubt the rest
-3. **They remember the point** — a week later, they can repeat the argument
+1. **Keep reading** — worth the next page
+2. **Trust** — nothing triggers doubt
+3. **Remember** — they can repeat the argument a week later
 
-If a sentence doesn't earn one of these three, it's filler. Cut.
+Otherwise cut.
 
 ---
 
-## 1 · Make them keep reading
+## Core principles
 
-### Front-load the claim
-
-The first sentence of a paragraph is the topic sentence. Skimmers who only read
-sentence one should still extract the point.
-
-> ✗ For many years, organizations have wrestled with how AI changes their
->   processes. The answer turns out to be that…
->
-> ✓ AI changes internal processes by collapsing the gap between decision
->   and action.
-
-### Concrete subjects, not abstractions
-
-> ✗ It is critical that the right tools are used at the right time.
->
-> ✓ Founders pick the wrong tool when they default to the one they know best.
-
-### One claim per sentence
-
-Two `and`s or a comma-spliced second clause = split it. Long sentences hide
-weak claims; short sentences expose them.
-
-### Short paragraphs
-
-Three sentences average. Five maximum. One-sentence paragraphs allowed for
-rhythm and emphasis — use sparingly.
-
-### Specific beats vivid
-
-"A 50-page wall of body text in Calibri on white" beats "a dense, lengthy
-document." Specifics make scenes; abstractions make fog.
+- **Data over adjectives** — survives "how much?" No number → don't write it.
+- **Judgment over execution** — why you chose, what you predicted right; not what you shipped.
+- **Distinctive phrasing** — your words, not earnings-call vocabulary.
+- **Honest boundaries** — no inflated scope; no fake precision; credit collaborators.
+- **Sources before phrasing** — verify facts before "latest", versions, or market stats. User material > official docs > filings > credible media. Conflicts → ask, don't pick.
+- **Materials serve recognition** — logo / product or UI proof / accent color confirmed; mark gaps, don't substitute unrelated imagery. Figure redraws → _Schematic redrawn_; primary evidence → original + attribution.
+- **Term half-life (~8–10 pages)** — define on first use; re-annotate briefly when term returns after the window; don't re-annotate inside the window.
+- **CJK English density** — ≤ 1 unannotated English term per sentence; action glosses over concept labels (_rollout_ → 跑一遍生成).
 
 ---
 
-## 2 · Make them trust the claims
+## Playbook shape
 
-### Cite numbers, not adjectives
+**Arc**: cover → TOC → exec summary (≤ 1 page, 3–5 takeaways) → chapters → colophon.
 
-> ✗ A surprisingly large percentage of startups fail.
->
-> ✓ 42 % of startups fail because they built something nobody wanted.
->   *(CB Insights, 2024 post-mortem analysis)*
+**Per chapter**: claim paragraph (2–3 sentences, passes "so what?") → claim / evidence / conclusion. Inline source cues on external facts: `(Gartner, 2025)`, `per the 10-K`.
 
-### Name the gap when the source is missing
+**Density**: ~1 heading + 2–4 paragraphs + ≤ 1 figure per content page; merge chapters under 40 % page fill; bottom whitespace = draft defect. ≥ 1 data point per paragraph when possible. Headlines + H1s alone should tell the story.
 
-Vague claims with confident voice lose more credibility than honest gaps.
-
-- "Anecdotally, in our portfolio…"
-- "We don't have public data on this, but…"
-- "Industry estimates vary widely; the upper bound is…"
-
-Cutting the claim is also valid.
-
-### Take a position; hedging is fine, mush is not
-
-Hedged AI prose ("it depends," "in many cases," "may potentially") signals the
-writer doesn't actually know. Operators trust writers who commit.
-
-> ✗ Some experts believe that AI may potentially help certain founders to
->   perhaps accelerate validation in some cases.
->
-> ✓ AI accelerates validation by an order of magnitude — but only for teams
->   that already know what to validate. For teams that don't, it accelerates
->   the wrong thing.
-
-If you can't commit, name the trade-off explicitly. Stacking hedges is the worst
-of both worlds: no commitment, no clarity.
-
-### Falsifiable beats unfalsifiable
-
-A claim that *could be wrong* carries information. A claim that can't possibly
-be disputed carries none.
-
-> ✗ Strong teams build strong products.
->
-> ✓ Teams that ship a working prototype before customer discovery fail twice
->   as often as teams that interview first.
-
-Even if the second claim is contestable, it's worth contesting. The first is
-unfalsifiable filler.
-
-### Acknowledge the counterargument
-
-When you state a position, devote one sentence — not more — to the strongest
-counter. Readers trust writers who admit nuance more than writers who pretend
-it doesn't exist.
-
-> Even within validation-first teams, builders who skip the interview phase
-> sometimes ship faster — when the problem space is already saturated and
-> the question is execution, not direction.
+**Rhythm**: after > 5 lines of dense prose, break with callout, pull-quote, or figure (`SKILL.md` cadence; max 2 callouts per spread).
 
 ---
 
-## 3 · Make them remember
+## Keep reading
 
-### Name the pattern
-
-Operators retain ideas that have labels. "The validation loop." "Sharpening the
-hypothesis." A label gives the idea an address in memory.
-
-If a chapter introduces no named pattern, the chapter has no anchor — readers
-forget it within a day.
-
-### Vivid contrast
-
-Memory hooks on difference. Not "various tools for various stages" — instead,
-"interviews for the question, prototypes for the answer."
-
-### Concrete numbers beat round magnitudes
-
-"5 %" beats "a small portion." "Three days" beats "more than a day." Specific
-numbers stick; vague magnitudes evaporate.
-
-### Lead with what readers *don't* already believe
-
-If a point confirms the reader's prior, they file it as background and forget.
-If it contradicts an assumption, they remember it.
-
-> ✗ Validation is important.
->
-> ✓ Validation usually feels like progress when it's actually stalling — and
->   most teams can't tell the difference until quarter end.
-
-### Repeat the named pattern by its exact name
-
-If you introduced "the validation loop" on page 3, call it that — not "the
-process," not "the framework" — in every later reference. Synonym drift kills
-the memory hook.
+- First sentence = the claim. Concrete subject, not abstraction.
+- One claim per sentence; ~3 sentences per paragraph, 5 max.
+- Specific beats vivid ("50-page Calibri wall" not "dense document").
+- No opening ceremony — open falsifiable (`anti-patterns.md` #5).
 
 ---
 
-## The voice
+## Trust
 
-Quire reads as **a thoughtful operator talking to other operators**: confident,
-specific, willing to take a position, allergic to filler.
+- Numbers with source inline, or name the gap ("anecdotally…", "we don't have public data…"). Cutting is valid.
+- Magnitude beats false precision (`~$10M`, not `$9,876,543`).
+- Commit or name the trade-off — no hedge stacks (`anti-patterns.md` #7).
+- Claims should be falsifiable; one sentence for the strongest counter.
+- **Owned** vs **contributed** vs **coordinated** — don't inflate.
 
-Reference voices:
-- Stripe Press essays — long-form, opinionated, footnoted
-- Stratechery — analytical, framework-driven
-- The Economist — third-person, declarative, no hedging
-- a16z guides — pattern-named, prescriptive
-
-What the voice is *not*:
-- LinkedIn thought-leader — over-emphatic, formulaic
-- Marketing brochure — adjective-heavy, vague
-- Academic paper — passive voice, hedge-heavy
-- Tutorial — procedural, pedestrian
+> ✗ Strong teams build strong products.  
+> ✓ Teams that ship before customer discovery fail 2× as often as teams that interview first.
 
 ---
 
-## The cut list
+## Remember
 
-Editor-mode pass removes:
-
-- **"In today's [adjective] world"** — every variation
-- **"It is important to note that"** — say the thing
-- **"Many [experts/companies] believe"** — name who, or cut
-- **"Game-changer", "revolutionize", "unlock", "empower"** — marketing residue
-- **"Best practices"** unless followed by exactly 3 named practices
-- **Adjective stacks** — "innovative, scalable, seamless" → pick one or none
-- **Rhetorical questions in body** — make the claim directly
-- **Filler transitions** — "That said,", "With that in mind,", "It's worth noting,"
-- **Stacked hedges** — "perhaps potentially in some cases may"
-- **Confirmations of the obvious** — "Software is built by engineers"
-- **Emoji** — Quire is bound, not chatted
-
-When the user wrote it that way, surface the cut as a suggestion; don't silently
-edit substance.
+- Each chapter needs a **named pattern** ("the validation loop") — repeat the exact name, unify spellings of terms used 3+ times.
+- Contrast sticks: "interviews for the question, prototypes for the answer."
+- Prefer measured numbers and before/after (`800ms → 120ms`). Lead with what contradicts priors.
 
 ---
 
-## Numbers, citations, units
+## Figures, emphasis, numbers
 
-- Numbers under 10: spell out ("three founders")
-- Numbers 10+: numerals ("12 founders")
-- Percentages: numeral + symbol, no space ("42%")
-- Currency: full unit on first mention ("$50K ARR"), short form after
-- Time ranges: "3+ days", not "3 or more days"
-- Tabular-nums in tables and stat blocks
+**Figure copy** (tighter than body): no slogan/bait (白搭, 一图看懂, 爆款); prefer paradigm over product names that age; caption = why it matters (tradeoff, boundary, insight) — not title restate or flow narration.
 
-Inline citations beat footnotes for editorial PDFs:
+**Emphasis**: ≤ 2 `span.hl` per line; numbers or distinctive phrases only — never adjectives; color only, no extra bold (`design.md`).
 
-> ✓ Per CB Insights' 2024 post-mortem analysis, 42 % of failures…
->
-> ✗ 42 % of failures¹ … (footnote at page bottom)
+**Format**: `5,000+`, `42%`, `→`, `2026.04` in tight layouts; CJK uses `「」`, half-width digits in metrics, space around Latin product names.
 
-If a footnote is unavoidable, use superscript numerals + a `.notes` block at
-chapter end. Page-bottom footnotes break the cream rhythm.
-
-When the source is missing, write a hedged magnitude ("low double digits, per
-industry estimates") rather than fabricating a precise number.
+**Units**: spell out numbers under 10 in prose; inline citations over footnotes (else superscript + `.notes` at chapter end). Tabular-nums in stat blocks.
 
 ---
 
-## Credibility audit — run before delivery
+## Voice and cuts
 
-- [ ] Every chapter opener leads with a claim that could be contested
-- [ ] Every number cites a source or names the gap
-- [ ] Every chapter introduces or reinforces a named pattern
-- [ ] No paragraph buries its claim past the first sentence
-- [ ] No "in today's world / it is important / game-changer" residue
-- [ ] At least one paragraph per chapter acknowledges the counterargument
-- [ ] Every pull-quote passes the "could a thoughtful reader disagree?" test
-- [ ] Named patterns are repeated by their exact name, not paraphrased
+**Voice**: thoughtful operator to operators — confident, specific, positioned. Not LinkedIn, brochure, hedge-mush, or procedural tutorial (`anti-patterns.md` #12).
+
+**Cut on edit**: today's-world openers; "important to note"; unnamed "experts"; unlock/empower/leverage/pioneer; CN 拥抱/赋能/本质是/不仅而且; EN em-dash piles / "worth noting"; best practices without 3 named practices; adjective stacks; rhetorical questions; filler transitions; obvious confirmations; emoji. Surface cuts to the user — don't silently rewrite their substance.
+
+Full symptom/fix pairs: `anti-patterns.md` #5–12.

@@ -5,7 +5,7 @@ Scans Quire templates for violations of the 10 invariants.
 
 Usage:
     python3 scripts/check.py                         # check all templates
-    python3 scripts/check.py assets/templates/playbook-en.html
+    python3 scripts/check.py assets/templates/playbook.html
 """
 from __future__ import annotations
 

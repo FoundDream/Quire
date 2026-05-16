@@ -61,9 +61,9 @@ A standard Quire document follows this rhythm:
 
 ## Step 3 · Fill the template
 
-1. Open `assets/templates/playbook-en.html` (English) as the starting frame.
-2. Replace the `{{PLACEHOLDER}}` tokens with real content. Do not add new sections that don't exist in the frame — Quire's rhythm is intentional.
-3. For each chapter, use one of the four content-page archetypes from `references/components.md`:
+1. Open `assets/templates/playbook.html` (working frame) or `assets/output/quire-playbook.html` (12-page reference with all archetypes) as the starting point.
+2. Replace the content with real material. Do not add new sections that don't exist in the frame — Quire's rhythm is intentional.
+3. For each chapter, pick one of the four content-page archetypes (spec in `references/design.md` §4):
    - **Standard** — h1 + lead + h2/h3 + paragraphs
    - **Stat-anchor** — oversized figure block as the page hero
    - **Comparison** — three-column compare table + commentary
@@ -85,13 +85,12 @@ For full export instructions, see `references/production.md`.
 
 ## Reference docs
 
-| File                          | When to load                                                 |
-| ----------------------------- | ------------------------------------------------------------ |
-| `references/design.md`        | Full design system (color, type, spacing, the 10 invariants) |
-| `references/components.md`    | Page archetypes and HTML snippets for each                   |
+| File                          | When to load                                                       |
+| ----------------------------- | ------------------------------------------------------------------ |
+| `references/design.md`        | Full design system (color, type, spacing, archetypes, components)  |
 | `references/writing.md`       | Content brain — how to write prose readers finish, trust, remember |
-| `references/anti-patterns.md` | Common ways AI-generated playbooks go wrong                  |
-| `references/production.md`    | HTML → PDF export, font embedding, print pitfalls            |
+| `references/anti-patterns.md` | Common ways AI-generated playbooks go wrong                        |
+| `references/production.md`    | HTML → PDF export, font embedding, print pitfalls                  |
 
 Load only the file you need for the current task. Do not pre-load everything.
 

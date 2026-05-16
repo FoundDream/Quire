@@ -260,4 +260,18 @@ Asymmetric horizontal margins (left tighter than right) leave breathing room on 
 - Label: 10pt body, `--ink-soft`, max 24 em width.
 - Top + bottom rule in `--rule`, vertical padding 14pt.
 
-The 10 invariants live in `SKILL.md`; this file contains the underlying spec.
+### Inline highlight (`.hl`)
+
+`<span class="hl">phrase</span>` → accent color + 500 weight. Max 1–2 per page; more becomes decoration.
+
+### Term-of-art `<em>`
+
+`<em>` renders **upright** (no italic), accent color. Use for terms of art, not emphasis.
+
+### Diagrams
+
+Inline `<svg>` only — never embedded PNG / screenshots. Use accent + warm grays, no second design language. (Not yet implemented in the current template.)
+
+---
+
+Working HTML for all page archetypes lives in `assets/templates/playbook.html` and `assets/output/quire-playbook.html`. Copy from there, do not redesign. The 10 invariants live in `SKILL.md`.

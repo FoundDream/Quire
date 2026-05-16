@@ -1,6 +1,6 @@
 # Quire · Production Runbook
 
-How to take a Quire HTML template and ship it as a PDF that prints correctly on A4 / US-Letter, with embedded fonts, even page count, and no rendering surprises.
+How to take a Quire HTML template and ship it as a PDF, with embedded fonts, even page count, and no rendering surprises.
 
 Three parts: **HTML → PDF**, **Verify**, **Pitfalls**.
 
@@ -21,20 +21,27 @@ Best fidelity, font-embedding handled automatically, works with Google Fonts lin
   --no-pdf-header-footer \
   --print-to-pdf-no-header \
   --print-to-pdf="output.pdf" \
-  "file://$(pwd)/playbook-en.html"
+  "file://$(pwd)/playbook.html"
 ```
 
 Linux equivalents:
+
 ```bash
 google-chrome --headless=new --disable-gpu --no-pdf-header-footer \
-  --print-to-pdf="output.pdf" "file://$(pwd)/playbook-en.html"
+  --print-to-pdf="output.pdf" "file://$(pwd)/playbook.html"
 ```
 
 The `@page { size: ...; margin: 0 }` block in the template controls paper size. Make sure it matches your intended paper:
 
 ```css
-@page { size: 11in 8.5in; margin: 0; }   /* US-Letter landscape */
-@page { size: A4; margin: 22mm 24mm; }    /* A4 portrait */
+@page {
+  size: 11in 8.5in;
+  margin: 0;
+} /* US-Letter landscape */
+@page {
+  size: A4;
+  margin: 22mm 24mm;
+} /* A4 portrait */
 ```
 
 ### Path B · WeasyPrint (when you need full control over @page rules)
@@ -42,7 +49,7 @@ The `@page { size: ...; margin: 0 }` block in the template controls paper size. 
 Best for documents that need running headers, page-counter strings, or strict pagination control.
 
 ```bash
-weasyprint playbook-en.html output.pdf
+weasyprint playbook.html output.pdf
 ```
 
 WeasyPrint requires `@font-face` declarations with `src: url(...)` pointing to local font files in `assets/fonts/`. It does not load Google Fonts links automatically.
@@ -73,6 +80,7 @@ pdffonts output.pdf
 Expected: every font name should show `yes` under "emb" column. If any font shows `no`, it will fall back to a system substitute on machines without that font installed.
 
 If Fraunces shows as not embedded, verify:
+
 1. Web-font import URL is reachable
 2. `font-display: swap` is set so headless Chrome waits for fonts before printing
 3. For WeasyPrint, the `@font-face` `src: url()` path resolves at build time
@@ -90,6 +98,7 @@ Quire's print convention: even page count. If the document ends with a content p
 There's no automated tool. Manual check: open the PDF, page through, and confirm no single page has the accent color on more than 15 % of its visible surface. Chapter dividers (using lightened tint) are exempt.
 
 If a content page is over-using accent, the most likely culprits are:
+
 - Tag pills clustering in one paragraph (split them)
 - A run of `.hl` highlights in consecutive sentences (cut to 1–2 per page)
 - Stat-anchor and pull-quote on the same page (split into two pages)
@@ -97,6 +106,7 @@ If a content page is over-using accent, the most likely culprits are:
 ### 2.4 · Widow / orphan check
 
 Page through and look for:
+
 - A page that ends with a single line of a paragraph (orphan top of next page = widow)
 - A page that begins with a single trailing line from the previous page
 
@@ -105,6 +115,7 @@ In CSS, the template sets `widows: 3; orphans: 3;` to prevent this — if it's s
 ### 2.5 · Color-on-color contrast
 
 For chapter dividers (text on tint background):
+
 - Title in `--ink` (`#1a1a1a`) on `--accent-clay-tint` (`#f0d5c7`) → contrast ratio ~ 9.8 ✓
 - Title in `--ink` on `--accent-iris-tint` (`#cbcadb`) → contrast ratio ~ 8.6 ✓
 
@@ -133,8 +144,9 @@ If you've changed accent colors or tints, run them through a WCAG contrast check
 **Fix**: every `font-family` declaration that may contain CJK must include a fallback chain:
 
 ```css
-font-family: "Fraunces", "Source Han Serif SC", "Noto Serif CJK SC",
-             "Songti SC", "STSong", Georgia, serif;
+font-family:
+  "Fraunces", "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", "STSong",
+  Georgia, serif;
 ```
 
 Including `@page` footer text, `pre`, `code`, and SVG `<text>` labels.
@@ -148,7 +160,9 @@ Including `@page` footer text, `pre`, `code`, and SVG `<text>` labels.
 ```css
 .cover-title {
   font-family: var(--font-serif);
-  font-variation-settings: "opsz" 144, "SOFT" 30;
+  font-variation-settings:
+    "opsz" 144,
+    "SOFT" 30;
 }
 ```
 
@@ -179,7 +193,12 @@ Browsers do not auto-pick optical sizes — you must set the axis.
 **Fix**: use CSS Paged Media `@page` content counters, not `position: fixed`:
 
 ```css
-@page { @bottom-right { content: counter(page); font-family: var(--font-sans); } }
+@page {
+  @bottom-right {
+    content: counter(page);
+    font-family: var(--font-sans);
+  }
+}
 ```
 
 ### Pitfall 9 · Long URLs breaking the layout
@@ -216,7 +235,7 @@ A minimal `scripts/build.sh` for users on macOS:
 #!/usr/bin/env bash
 set -euo pipefail
 
-INPUT="${1:-playbook-en.html}"
+INPUT="${1:-playbook.html}"
 OUTPUT="${INPUT%.html}.pdf"
 
 CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
@@ -242,6 +261,7 @@ pdfinfo "$OUTPUT" | grep Pages
 ## What gets shipped
 
 A delivered Quire document is:
+
 - One `.pdf` file (US-Letter or A4, even page count, embedded fonts)
 - One `.html` source file (so the user can re-export after edits)
 - Optionally: `assets/fonts/*.woff2` if the user needs the document to be self-contained without internet

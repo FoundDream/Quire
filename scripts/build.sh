@@ -2,15 +2,15 @@
 # Quire build script — HTML → PDF via headless Chrome.
 #
 # Usage:
-#   ./scripts/build.sh                                    # build playbook-en.html
-#   ./scripts/build.sh assets/templates/playbook-en.html
+#   ./scripts/build.sh                                    # build playbook.html
+#   ./scripts/build.sh assets/templates/playbook.html
 #   ./scripts/build.sh path/to/your.html out.pdf
 
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
-INPUT="${1:-$ROOT/assets/templates/playbook-en.html}"
+INPUT="${1:-$ROOT/assets/templates/playbook.html}"
 OUTPUT="${2:-${INPUT%.html}.pdf}"
 
 if [[ ! -f "$INPUT" ]]; then

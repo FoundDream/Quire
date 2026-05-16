@@ -54,13 +54,3 @@ Every 5–7 content pages need a visual reset: chapter divider, pull-quote page,
 | User wants slides           | Suggest a slides skill — Quire is for read-not-presented documents |
 | User asks for "data viz"    | Use SVG inline; do not embed PNG screenshots from BI tools         |
 | Document needs Chinese text | Switch to `playbook-zh.html`, use Source Han Serif as body         |
-
-## Pre-flight checklist (run before delivery)
-
-- [ ] Page count is even (covers + dividers prefer right-hand)
-- [ ] Accent color ≤ 5 % per page, checked manually
-- [ ] No widows / orphans (last paragraph of every page ≥ 2 lines)
-- [ ] No more than 2 callouts per spread
-- [ ] Every chapter has a divider, even short ones
-- [ ] Print export tested at correct paper size (A4 or US-Letter)
-- [ ] Fonts embedded in PDF (verify via `pdffonts output.pdf`)
