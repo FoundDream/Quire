@@ -1,50 +1,46 @@
 # Quire Design System
 
-Quire's aesthetic compresses into one sentence: **cream canvas, single accent, serif carries hierarchy, cadence is everything.**
+Quire's aesthetic compresses into one sentence: **cool canvas, sky-blue accent, serif carries hierarchy, the document feels composed.**
 
-This is not a slide template or a UI framework. It is a constraint system for **multi-page bound documents** — the spiritual descendant of editorial print, adapted for AI-generated output.
+This is not a slide template or a UI framework. It is a constraint system for **editorial documents in print or screen-PDF form** — playbooks, white papers, resumes, single-page reports — the spiritual descendant of editorial print, adapted for AI-generated output.
 
 ---
 
 ## 1. Color
 
+The entire system is **cold-toned and chromatically monochrome**: one accent, one canvas family, one gray scale. There is no secondary chromatic hue anywhere in the document.
+
 ### Surface
 
 ```css
---cream: #faf9f5; /* Page background — primary canvas */
---cream-soft: #f5f4ed; /* Slightly warmer fallback */
---ivory: #fffefa; /* Lifted card / sidebar */
---rule: #d6d3c8; /* Primary divider line */
---rule-soft: #e5e3d8; /* Secondary divider line */
+--canvas:       #f6f8fb; /* Page background — cool white with hint of blue */
+--canvas-soft:  #eef1f6; /* Lifted card / sidebar surface */
+--rule:         #dce0e6; /* Primary divider line */
+--rule-soft:    #e8ebf0; /* Secondary divider line */
 ```
 
-**Forbidden**: `#ffffff` pure white as page background. Any `#f3f4f6` / `#f8f9fa` cool-gray surface.
+**Forbidden**: `#ffffff` pure white (default-doc tell). Any warm-cream surface like `#faf9f5` (previous Quire heritage; now retired). Any saturated tinted background.
 
 ### Text
 
 ```css
---ink: #1a1a1a; /* Primary text — deep but not pure black */
---ink-soft: #3d3d3a; /* Secondary text, table headers */
---ink-muted: #6b6a64; /* Captions, metadata */
---ink-faint: #8c8a82; /* Page numbers, footnotes */
+--ink:        #16181d; /* Primary text — near-black, cool undertone */
+--ink-soft:   #3d4148; /* Secondary text, table headers */
+--ink-muted:  #6b6f78; /* Captions, metadata */
+--ink-faint:  #8c919b; /* Page numbers, footnotes */
 ```
 
-**All grays must have a yellow-brown undertone.** In `rgb()`, warm gray follows `R ≥ G > B` with small gaps (e.g. `rgb(107, 106, 100)`). Cool gray is `R = G = B` or `R < G < B` — forbidden.
+**All grays cool-toned.** In `rgb()`, every gray must follow `B ≥ G ≥ R` with the blue channel slightly higher (e.g. `rgb(107, 111, 120)`). Warm grays where `R > B` — forbidden. Pure neutral `R = G = B` — also forbidden; the system has temperature.
 
-### Accent (one per document, ≤ 5 % surface)
+### Accent
 
 ```css
---accent-clay: #d97757;
---accent-clay-tint: #f0d5c7;
---accent-sage: #629987;
---accent-sage-tint: #bcd1ca;
---accent-iris: #827dbd;
---accent-iris-tint: #cbcadb;
---accent-ink: #1b365d;
---accent-ink-tint: #e4ecf5;
---accent-rust: #a04b3a;
---accent-rust-tint: #e6c8be;
+--accent:       #3a82c4; /* Clear-noon sky blue — single chromatic color */
+--accent-tint:  #b8d6f0; /* 35 % accent + 65 % canvas */
+--accent-deep:  #2a6299; /* Darker variant — links on tint, body emphasis */
 ```
+
+**There is no second accent.** Anything that needs to be "different" uses gray-scale weight differentiation, not a second color.
 
 **Where the accent appears**:
 
@@ -52,16 +48,25 @@ This is not a slide template or a UI framework. It is a constraint system for **
 - Pull-quote left rule
 - Stat figures (large numbers)
 - Table header bottom-border
-- Link underline
-- Tag pill backgrounds (use the `-tint` variant, solid hex only)
+- Link underline (use `--accent-deep` for body links to pass WCAG AA)
+- Tag pill backgrounds (use `--accent-tint`, solid hex only)
+- Chapter divider page-fills (use `--accent-tint`, never the full `--accent`)
 
 **Where the accent does NOT appear**:
 
 - Body text (always `--ink`)
-- Heading text (always `--ink`, accent goes on the eyebrow above)
-- Page background of content pages (always cream)
+- Heading text (always `--ink`; accent goes on the eyebrow above)
+- Page background of content pages (always `--canvas`)
+- Any chart series that isn't the "primary" one (use grays for secondary series)
 
-**Tint variants** are 65 % cream + 35 % accent — only used for chapter divider page-fills.
+### The anti-LinkedIn guard
+
+This palette deliberately rejects the LinkedIn aesthetic — saturated corporate blue + orange highlights + bold thought-leader typography. Concrete bans:
+
+- No second chromatic hue, ever. No orange engagement color, no green for "success," no red for "warning."
+- No personal-brand chrome — no avatar circles, no signature boxes, no badges, no certified-icon decorations.
+- No accent on `border-radius` larger than 3pt — pill-shaped buttons read as profile UI.
+- Saturation cap: the accent at `#3a82c4` is already at the cap. Do not invent more-saturated blues (`#0a66c2` is LinkedIn; `#0077FF` is consumer-tech; both off-limits).
 
 ---
 
@@ -82,7 +87,7 @@ This is not a slide template or a UI framework. It is a constraint system for **
 --font-mono: "JetBrains Mono", "SF Mono", Menlo, monospace;
 ```
 
-**Why Fraunces**: it's a variable font with two unusual axes — `opsz` (optical size, 9–144) and `SOFT` (corner softness, 30–100). At display sizes set `opsz: 144, SOFT: 30` for crisp editorial titles; at body set `opsz: 14, SOFT: 50` for warm reading texture.
+**Why Fraunces**: it's a variable font with two unusual axes — `opsz` (optical size, 9–144) and `SOFT` (corner softness, 30–100). At display sizes set `opsz: 144, SOFT: 30` for crisp editorial titles; at body set `opsz: 14, SOFT: 50` for a slightly humanized reading texture.
 
 If Fraunces unavailable, Tiempos Text → Source Serif Pro → Iowan Old Style → Georgia. Avoid stopping at Georgia — that's where "Word document feel" leaks in.
 
@@ -152,7 +157,7 @@ Asymmetric horizontal margins (left tighter than right) leave breathing room on 
 
 ### Cover
 
-- Full-bleed cream, **or** full-bleed accent (founder-style splash).
+- Full-bleed canvas, **or** full-bleed accent (used only on the main cover; never on chapter dividers).
 - Display title at 36–48pt, weight 500, max 14ch line length.
 - Eyebrow above title in sans-serif, accent color, +0.06em tracking.
 - Subtitle below in serif italic-alternative (upright lighter weight if no italic).
@@ -160,7 +165,7 @@ Asymmetric horizontal margins (left tighter than right) leave breathing room on 
 
 ### Chapter divider
 
-- Page-fill is the **lightened tint** of the document's accent (e.g. `#f0d5c7` for clay).
+- Page-fill is `--accent-tint` (`#b8d6f0`), never the full-saturation `--accent`.
 - Two text elements only: chapter number (eyebrow style) + chapter title (display size).
 - No body text. No page number on dividers.
 - Always positioned to start on a right-hand page (odd page number) in print binding.
@@ -242,7 +247,7 @@ Asymmetric horizontal margins (left tighter than right) leave breathing room on 
 <span class="tag">CHAT</span>
 ```
 
-- Background: solid hex tint (e.g. `--accent-clay-tint`), never rgba.
+- Background: `--accent-tint` (solid hex, never rgba).
 - Text: sans-serif, accent color (darkened to ensure WCAG AA on tint).
 - Padding: 2pt vertical, 7pt horizontal.
 - Border-radius: 2pt (subtle — never pill-shaped unless the document is consumer-facing).
@@ -270,7 +275,7 @@ Asymmetric horizontal margins (left tighter than right) leave breathing room on 
 
 ### Diagrams
 
-Inline `<svg>` only — never embedded PNG / screenshots. Use accent + warm grays, no second design language. (Not yet implemented in the current template.)
+Inline `<svg>` only — never embedded PNG / screenshots. Use accent + cool grays only; no second chromatic hue in chart series (secondary series use gray-scale, not a second color). (Not yet implemented in the current template.)
 
 ---
 

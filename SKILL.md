@@ -1,11 +1,11 @@
 ---
 name: quire
-description: 'Typeset multi-page playbooks, white papers, and editorial PDFs on a cream canvas with a single accent color and serif hierarchy. Triggers on "做 playbook / 白皮书 / 指南 / editorial PDF" or "make a playbook / white paper / long-form guide".'
+description: 'Typeset editorial documents on a cool canvas with a single sky-blue accent and serif hierarchy. First format is multi-page playbooks; the same system also handles resumes, white papers, and single-page A4 reports. Triggers on "做 playbook / 白皮书 / 简历 / 报告 / editorial PDF" or "make a playbook / white paper / resume / single-page report".'
 ---
 
 # Quire
 
-Constraint system for multi-page editorial PDFs. Four page archetypes: **cover · chapter divider · content · pull-quote**. Cream canvas, one accent color, serif hierarchy.
+A cold-toned, chromatically monochrome design system for editorial documents. Single accent (sky blue `#3a82c4`), single serif carries hierarchy, no second color anywhere. Output formats: playbook (default), resume, white paper, single-page report — each a "format profile" of the same underlying system.
 
 ---
 
@@ -21,23 +21,21 @@ Confirm with the user when ambiguous. A 4-page document is a brochure, not a qui
 
 ---
 
-## Step 1 · Pick the accent color
+## Step 1 · The palette is locked
 
-Quire uses **one accent color per document**, applied to ≤ 5 % of total surface area (chapter eyebrows, pull-quote rules, stat figures, link underlines, table header borders).
+Quire has **one accent color, system-wide**: sky blue `#3a82c4`. There is no palette to pick from. There is no second chromatic hue allowed anywhere in the document.
 
-Pre-tuned palette (all desaturated, paired with the cream canvas `#faf9f5`):
+| Token            | Hex       | Use                                       |
+| ---------------- | --------- | ----------------------------------------- |
+| `--canvas`       | `#f6f8fb` | Page background (cool white)              |
+| `--ink`          | `#16181d` | Primary text                              |
+| `--accent`       | `#3a82c4` | Eyebrows, stat figures, table rules, tags |
+| `--accent-tint`  | `#b8d6f0` | Chapter divider page-fill, tag bg         |
+| `--accent-deep`  | `#2a6299` | Body links, emphasis on tint backgrounds  |
 
-| Token           | Hex       | Mood                      |
-| --------------- | --------- | ------------------------- |
-| `--accent-clay` | `#d97757` | Warm, narrative (default) |
-| `--accent-sage` | `#629987` | Calm, operations-focused  |
-| `--accent-iris` | `#827dbd` | Strategic, future-facing  |
-| `--accent-ink`  | `#1B365D` | Formal, financial         |
-| `--accent-rust` | `#a04b3a` | Editorial, opinionated    |
+If the user requests a brand color, ask explicitly whether they want to override the system or stay on-brand-for-Quire. Quire's identity *is* this blue. Swapping it produces a different system.
 
-If the user mentions a brand color, use it directly — but verify the hex value passes WCAG AA on cream (`#faf9f5`). If contrast fails, darken to the closest accessible variant before applying.
-
-For chapter divider backgrounds, derive a **lightened tint** of the accent (mix 65 % cream + 35 % accent) — never use the accent at full saturation as a page-fill.
+For chapter divider backgrounds, use `--accent-tint`. **Never use `--accent` at full saturation as a page-fill** — that's marketing splash, not editorial.
 
 ---
 
@@ -46,13 +44,13 @@ For chapter divider backgrounds, derive a **lightened tint** of the accent (mix 
 A standard Quire document follows this rhythm:
 
 ```
-[1]   Cover                  ← full-bleed accent or cream + oversized title
-[2]   Table of contents      ← cream, eyebrow + numbered list
-[3]   Chapter 01 divider     ← lightened-accent tint, chapter number + title
-[4–N] Chapter 01 content     ← cream, h1/h2/h3/p/callout/table/blockquote
+[1]   Cover                  ← full-bleed accent or canvas + oversized title
+[2]   Table of contents      ← canvas, eyebrow + numbered list
+[3]   Chapter 01 divider     ← accent-tint fill, chapter number + title
+[4–N] Chapter 01 content     ← canvas, h1/h2/h3/p/callout/table/blockquote
 [N+1] Chapter 02 divider
 …
-[end] Resources / colophon   ← cream, references and credits
+[end] Resources / colophon   ← canvas, references and credits
 ```
 
 **Rule of cadence**: every 5–7 content pages need one visual reset — a chapter divider, a full-page pull-quote, or a stat-block page.
@@ -100,13 +98,13 @@ Load only the file you need for the current task. Do not pre-load everything.
 
 These are the rules Quire will not break. Each has a real cost — think before overriding.
 
-1. **Cream canvas `#faf9f5`**, never pure white.
-2. **One accent color** per document, ≤ 5 % surface area.
-3. **All grays are warm-toned** (R ≥ G > B). No cool blue-grays.
-4. **One serif family** carries hierarchy (display + body). Sans-serif only for eyebrows, page numbers, table headers, and tags.
-5. **Two weights only**: 400 regular, 500 medium. No 600+, no synthetic bold, no italic body text.
-6. **Line-height**: titles 1.05–1.20, body 1.55–1.70.
-7. **Letter-spacing**: display titles `-0.02em ~ -0.03em`; eyebrows and small caps `+0.04em ~ +0.08em`; body 0.
-8. **Chapter dividers** use lightened accent tints, never full-saturation page fills.
-9. **No drop shadows, no gradients, no blur effects.** Depth comes from rule lines and warm tints.
+1. **Cool canvas `#f6f8fb`**, never pure white. Never a warm cream.
+2. **Sky blue `#3a82c4` is the only chromatic color** in the document. No second hue — no orange engagement, no green success, no red warning.
+3. **All grays cool-toned** (`B ≥ G ≥ R`). No warm yellow-brown grays. No pure-neutral `R = G = B` either.
+4. **One serif family** carries hierarchy. Sans only for UI chrome (eyebrows, page numbers, table headers, tags).
+5. **Two weights only**: 400 regular, 500 medium. No 600+, no synthetic bold, no italic body.
+6. **Typography mechanics**: titles tight (-0.02em to -0.03em), eyebrows loose (+0.04em to +0.08em), body 0; line-heights 1.05–1.20 for titles, 1.55–1.70 for body.
+7. **Chapter dividers use the `--accent-tint`**, never the full-saturation accent.
+8. **No drop shadows, no gradients, no blur.** `border-radius` ≤ 3pt. Depth comes from rule lines and tints.
+9. **No personal-brand chrome** — no avatar circles, no signature boxes, no badges, no italic quote cards. Quire is editorial, not a profile page.
 10. **Every callout has a label** (Exercise / Note / Think / Warning). Unlabelled blockquotes drift into decoration.

@@ -116,10 +116,11 @@ In CSS, the template sets `widows: 3; orphans: 3;` to prevent this — if it's s
 
 For chapter dividers (text on tint background):
 
-- Title in `--ink` (`#1a1a1a`) on `--accent-clay-tint` (`#f0d5c7`) → contrast ratio ~ 9.8 ✓
-- Title in `--ink` on `--accent-iris-tint` (`#cbcadb`) → contrast ratio ~ 8.6 ✓
+- Title in `--ink` (`#16181d`) on `--accent-tint` (`#b8d6f0`) → contrast ratio ~ 11.3 ✓
+- Body link in `--accent-deep` (`#2a6299`) on `--canvas` (`#f6f8fb`) → contrast ratio ~ 6.9 ✓
+- Eyebrow in `--accent` (`#3a82c4`) on `--canvas` → contrast ratio ~ 3.6 (passes AA Large only — fine for 13pt+ uppercase labels)
 
-If you've changed accent colors or tints, run them through a WCAG contrast checker. Minimum: 4.5 for body text, 3.0 for large titles (≥ 18pt bold or ≥ 24pt regular).
+If you've changed the accent or tint, run them through a WCAG contrast checker. Minimum: 4.5 for body text, 3.0 for large titles (≥ 18pt bold or ≥ 24pt regular). For body links, use `--accent-deep`.
 
 ---
 
@@ -129,7 +130,7 @@ If you've changed accent colors or tints, run them through a WCAG contrast check
 
 **Symptom**: tag pills with `background: rgba(...)` render as two stacked rectangles in PDF, fine on screen.
 
-**Fix**: convert all rgba backgrounds to solid hex. The `-tint` accent variants in `design.md` are pre-computed for this purpose (e.g. `--accent-clay-tint: #f0d5c7` equals `rgba(217,119,87,0.15)` over cream).
+**Fix**: convert all rgba backgrounds to solid hex. The `--accent-tint` token (`#b8d6f0`) is pre-computed as `--accent` 35 % over `--canvas` 65 %, and should be used everywhere a translucent accent fill is wanted.
 
 ### Pitfall 2 · Headless Chrome print margin defaults
 

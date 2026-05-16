@@ -10,17 +10,18 @@
       rel="stylesheet"
     />
     <style>
-      /* Design tokens */
+      /* Design tokens — sky blue, single accent, cold-toned */
       :root {
-        --cream: #faf9f5;
-        --cream-soft: #f5f4ed;
-        --ink: #1a1a1a;
-        --ink-soft: #4a4a4a;
-        --ink-muted: #6b6a64;
-        --rule: #d6d3c8;
+        --canvas: #f6f8fb;
+        --canvas-soft: #eef1f6;
+        --ink: #16181d;
+        --ink-soft: #3d4148;
+        --ink-muted: #6b6f78;
+        --rule: #dce0e6;
 
-        --accent: #d97757;
-        --accent-tint: #f0d5c7;
+        --accent: #3a82c4;
+        --accent-tint: #b8d6f0;
+        --accent-deep: #2a6299;
 
         --font-serif:
           "Fraunces", "Tiempos Text", "Source Serif Pro", Georgia, serif;
@@ -44,7 +45,7 @@
         padding: 0;
       }
       body {
-        background: #e6e4dc;
+        background: #e5e8ec;
         font-family: var(--font-serif);
         font-variation-settings: var(--serif-text);
         color: var(--ink);
@@ -58,7 +59,7 @@
         width: var(--page-w);
         height: var(--page-h);
         margin: 24px auto;
-        background: var(--cream);
+        background: var(--canvas);
         position: relative;
         overflow: hidden;
         page-break-after: always;
@@ -482,7 +483,7 @@
       }
       @media print {
         body {
-          background: var(--cream);
+          background: var(--canvas);
         }
         .page {
           margin: 0;
@@ -499,7 +500,7 @@
       <p class="eyebrow">A Design System Playbook · 2026</p>
       <h1>The Playbook, Bound.</h1>
       <p class="subtitle">
-        A constraint system for multi-page editorial PDFs — cream canvas, single
+        A constraint system for editorial documents — cool canvas, single
         accent, serif carries hierarchy.
       </p>
       <span class="page-num">Quire</span>
@@ -578,14 +579,15 @@
     <!-- 5. Stat-anchor — demonstrates archetype -->
     <section class="page stat-page">
       <p class="chapter-tag">Chapter 01 · The Problem</p>
-      <div class="stat-figure">5%</div>
+      <div class="stat-figure">1</div>
       <p class="stat-label">
-        The maximum surface area Quire allows for any accent color, across the
-        entire document.
+        The number of chromatic colors in a Quire document. Sky blue
+        <code>#3a82c4</code> &mdash; and nothing else.
       </p>
       <p class="stat-caption">
-        More than that and the document reads as a marketing brochure, not an
-        editorial book. Below 5%, restraint becomes the brand.
+        Every "category color," every "success green," every "warning red"
+        spends visual budget. A document that needs differentiation uses gray
+        weight, not a second hue.
       </p>
       <span class="footer">05</span>
     </section>
@@ -609,58 +611,58 @@
         composed rather than templated.
       </p>
 
-      <h3>Color · one accent per document, ≤ 5 % surface</h3>
+      <h3>Color · single accent, no second hue</h3>
 
-      <p class="swatch-group-label">Surface and text</p>
+      <p class="swatch-group-label">Surface and text · cool grays (B ≥ G ≥ R)</p>
       <div class="swatch-row">
         <div class="swatch">
-          <div class="swatch-block" style="background: #faf9f5"></div>
-          <div class="swatch-name">Cream</div>
-          <div class="swatch-hex">#faf9f5</div>
+          <div class="swatch-block" style="background: #f6f8fb"></div>
+          <div class="swatch-name">Canvas</div>
+          <div class="swatch-hex">#f6f8fb</div>
         </div>
         <div class="swatch">
-          <div class="swatch-block" style="background: #1a1a1a"></div>
+          <div class="swatch-block" style="background: #16181d"></div>
           <div class="swatch-name">Ink</div>
-          <div class="swatch-hex">#1a1a1a</div>
+          <div class="swatch-hex">#16181d</div>
         </div>
         <div class="swatch">
-          <div class="swatch-block" style="background: #6b6a64"></div>
+          <div class="swatch-block" style="background: #6b6f78"></div>
           <div class="swatch-name">Ink-muted</div>
-          <div class="swatch-hex">#6b6a64</div>
+          <div class="swatch-hex">#6b6f78</div>
         </div>
         <div class="swatch">
-          <div class="swatch-block" style="background: #d6d3c8"></div>
+          <div class="swatch-block" style="background: #dce0e6"></div>
           <div class="swatch-name">Rule</div>
-          <div class="swatch-hex">#d6d3c8</div>
+          <div class="swatch-hex">#dce0e6</div>
         </div>
       </div>
 
-      <p class="swatch-group-label">Accent · pick one per document</p>
+      <p class="swatch-group-label">Accent · sky blue, locked system-wide</p>
       <div class="swatch-row">
         <div class="swatch">
-          <div class="swatch-block" style="background: #d97757"></div>
-          <div class="swatch-name">Clay</div>
-          <div class="swatch-hex">#d97757</div>
+          <div class="swatch-block" style="background: #b8d6f0"></div>
+          <div class="swatch-name">Accent-tint</div>
+          <div class="swatch-hex">#b8d6f0</div>
         </div>
         <div class="swatch">
-          <div class="swatch-block" style="background: #629987"></div>
-          <div class="swatch-name">Sage</div>
-          <div class="swatch-hex">#629987</div>
+          <div class="swatch-block" style="background: #3a82c4"></div>
+          <div class="swatch-name">Accent</div>
+          <div class="swatch-hex">#3a82c4</div>
         </div>
         <div class="swatch">
-          <div class="swatch-block" style="background: #827dbd"></div>
-          <div class="swatch-name">Iris</div>
-          <div class="swatch-hex">#827dbd</div>
+          <div class="swatch-block" style="background: #2a6299"></div>
+          <div class="swatch-name">Accent-deep</div>
+          <div class="swatch-hex">#2a6299</div>
         </div>
-        <div class="swatch">
-          <div class="swatch-block" style="background: #1b365d"></div>
-          <div class="swatch-name">Ink</div>
-          <div class="swatch-hex">#1B365D</div>
+        <div class="swatch" style="opacity: 0.3">
+          <div class="swatch-block" style="background: #f6f8fb; border: 1px dashed var(--ink-muted)"></div>
+          <div class="swatch-name">— no second hue —</div>
+          <div class="swatch-hex">forbidden</div>
         </div>
-        <div class="swatch">
-          <div class="swatch-block" style="background: #a04b3a"></div>
-          <div class="swatch-name">Rust</div>
-          <div class="swatch-hex">#a04b3a</div>
+        <div class="swatch" style="opacity: 0.3">
+          <div class="swatch-block" style="background: #f6f8fb; border: 1px dashed var(--ink-muted)"></div>
+          <div class="swatch-name">— no second hue —</div>
+          <div class="swatch-hex">forbidden</div>
         </div>
       </div>
 
@@ -705,7 +707,7 @@
           <tr>
             <td>Canvas</td>
             <td>Pure white <code>#ffffff</code></td>
-            <td>Cream <code>#faf9f5</code></td>
+            <td>Cool canvas <code>#f6f8fb</code></td>
           </tr>
           <tr>
             <td>Body font</td>
@@ -714,13 +716,13 @@
           </tr>
           <tr>
             <td>Grays</td>
-            <td>Cool blue-gray (R = G = B)</td>
-            <td>Warm yellow-brown (R ≥ G > B)</td>
+            <td>Neutral or warm (`R ≥ B`)</td>
+            <td>Cool-toned (`B ≥ G ≥ R`)</td>
           </tr>
           <tr>
             <td>Accent colors</td>
             <td>Multi-color, no ceiling</td>
-            <td>One accent, ≤ 5 % surface</td>
+            <td>Sky blue only, no second hue</td>
           </tr>
           <tr>
             <td>Rhythm</td>
@@ -765,7 +767,7 @@
       <h3>The archetypes</h3>
       <ul>
         <li>
-          <strong>Cover</strong> — page 1, full-bleed accent or cream, oversized
+          <strong>Cover</strong> — page 1, full-bleed accent or canvas, oversized
           title
         </li>
         <li>
@@ -818,10 +820,10 @@
       <h2>This playbook was set with Quire.</h2>
 
       <p>
-        Twelve pages, one accent color (clay <code>#d97757</code>), one serif
-        family (Fraunces), one sans for chrome (Inter Tight). Eleven content
-        pages plus this colophon. Page count is even; covers and dividers fall
-        on odd pages.
+        Twelve pages, one accent color (sky blue <code>#3a82c4</code>), one
+        serif family (Fraunces), one sans for chrome (Inter Tight). Eleven
+        content pages plus this colophon. Page count is even; covers and
+        dividers fall on odd pages.
       </p>
 
       <p>

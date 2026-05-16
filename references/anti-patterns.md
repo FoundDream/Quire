@@ -10,7 +10,7 @@ For prose-level moves see `writing.md`. For build/export failures see `productio
 
 ### 1. The Word document leak
 
-**Symptom** — cream canvas but body in Times / Calibri / Arial; no eyebrows, no rule lines.
+**Symptom** — cool canvas but body in Times / Calibri / Arial; no eyebrows, no rule lines.
 
 **Fix** — verify the Fraunces + Inter Tight web-font import loaded. `pdffonts output.pdf` lists embedded fonts; a system serif in the list = fallback fired.
 

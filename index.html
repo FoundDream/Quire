@@ -1,0 +1,1695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Quire — A design system for editorial documents</title>
+<meta name="description" content="One sky-blue accent, no second color, serif carries hierarchy. Quire turns AI-generated content into editorial PDFs — playbooks, white papers, resumes, single-page reports.">
+<meta property="og:title" content="Quire — A design system for editorial documents">
+<meta property="og:description" content="One sky-blue accent, no second color, serif carries hierarchy.">
+<meta property="og:type" content="website">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..700,30..100&family=Inter+Tight:wght@400..600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ============================================
+     EDIT HERE — every section below uses these tokens
+     ============================================ */
+  :root {
+    /* Surface */
+    --canvas:       #f6f8fb;
+    --canvas-soft:  #eef1f6;
+    --rule:         #dce0e6;
+    --rule-soft:    #e8ebf0;
+
+    /* Text — cool grays, B ≥ G ≥ R */
+    --ink:          #16181d;
+    --ink-soft:     #3d4148;
+    --ink-muted:    #6b6f78;
+    --ink-faint:    #8c919b;
+
+    /* Accent — single sky blue */
+    --accent:       #3a82c4;
+    --accent-tint:  #b8d6f0;
+    --accent-deep:  #2a6299;
+
+    /* Fonts */
+    --font-serif:   "Fraunces", "Tiempos Text", "Source Serif Pro", Georgia, serif;
+    --font-sans:    "Inter Tight", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --font-mono:    "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+
+    --serif-display: "opsz" 144, "SOFT" 30;
+    --serif-text:    "opsz" 14, "SOFT" 50;
+
+    /* Spacing */
+    --sp-xs:  3pt;
+    --sp-sm:  5pt;
+    --sp-md:  10pt;
+    --sp-lg:  18pt;
+    --sp-xl:  28pt;
+    --sp-2xl: 50pt;
+    --sp-3xl: 90pt;
+  }
+
+  /* ============================================
+     Page chrome — this file's own layout
+     ============================================ */
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--canvas);
+    color: var(--ink);
+    font-family: var(--font-serif);
+    font-variation-settings: var(--serif-text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  main {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 60px 64px 120px;
+  }
+
+  /* ============================================
+     Language toggle (top-right of hero)
+     ============================================ */
+  .lang-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    letter-spacing: 0.02em;
+  }
+  .lang-toggle a {
+    color: var(--ink-muted);
+    text-decoration: none;
+  }
+  .lang-toggle a:hover { color: var(--accent-deep); }
+  .lang-toggle a.active { color: var(--ink); }
+  .lang-toggle .sep { color: var(--ink-faint); }
+
+  .hero-lang {
+    position: absolute;
+    top: 36px;
+    right: 0;
+  }
+
+  /* ============================================
+     Hero
+     ============================================ */
+  .hero {
+    position: relative;
+    padding: 90px 0 80px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 80px;
+  }
+  .hero-title {
+    font-family: var(--font-serif);
+    font-variation-settings: var(--serif-display);
+    font-size: 88px;
+    line-height: 1.02;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    margin: 0 0 28px;
+    max-width: 14ch;
+    color: var(--ink);
+  }
+  .hero-lede {
+    font-family: var(--font-serif);
+    font-size: 19px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    max-width: 62ch;
+    margin: 0 0 38px;
+  }
+  .hero-lede strong { font-weight: 500; color: var(--ink); }
+
+  .cta-row {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .cta {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    padding: 13px 22px;
+    border: 1px solid var(--accent);
+    color: var(--accent-deep);
+    text-decoration: none;
+    background: transparent;
+    transition: background 0.15s ease;
+  }
+  .cta:hover { background: var(--accent-tint); }
+  .cta.primary {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+  .cta.primary:hover { background: var(--accent-deep); border-color: var(--accent-deep); }
+  .cta-arrow {
+    margin-left: 4px;
+    display: inline-block;
+    transition: transform 0.15s ease;
+  }
+  .cta:hover .cta-arrow { transform: translateX(2px); }
+
+  /* ============================================
+     Formats · profile table
+     ============================================ */
+  table.formats {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-sans);
+    font-size: 13.5px;
+  }
+  table.formats th, table.formats td {
+    text-align: left;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  table.formats th {
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 11px;
+    color: var(--accent);
+    border-bottom: 1.5px solid var(--accent);
+  }
+  table.formats td.fmt-name {
+    font-family: var(--font-serif);
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  table.formats td.fmt-status {
+    font-family: var(--font-mono);
+    font-size: 12px;
+  }
+  .status-live  { color: var(--accent-deep); }
+  .status-soon  { color: var(--ink-muted); }
+
+  /* ============================================
+     See-demo · playbook page previews
+     ============================================ */
+  .preview-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin: 24px 0 16px;
+  }
+  .preview-page {
+    aspect-ratio: 11 / 8.5;
+    background: var(--canvas);
+    border: 1px solid var(--rule);
+    position: relative;
+    overflow: hidden;
+    font-family: var(--font-sans);
+    font-size: 8px;
+    color: var(--ink-faint);
+  }
+  .preview-page.cover { background: var(--accent); }
+  .preview-page.cover .pv-eyebrow,
+  .preview-page.cover .pv-title { color: #fff; }
+  .preview-page.tint { background: var(--accent-tint); }
+
+  .preview-page .pv-eyebrow {
+    position: absolute;
+    top: 16px;
+    left: 14px;
+    font-size: 7px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.95;
+  }
+  .preview-page .pv-title {
+    position: absolute;
+    bottom: 14px;
+    left: 14px;
+    right: 14px;
+    font-family: var(--font-serif);
+    font-size: 14px;
+    line-height: 1.1;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .preview-page .pv-content {
+    position: absolute;
+    top: 32px;
+    left: 14px;
+    right: 30px;
+  }
+  .preview-page .pv-line {
+    height: 2px;
+    background: var(--ink-faint);
+    margin-bottom: 4px;
+  }
+  .preview-page .pv-line.med { width: 78%; }
+  .preview-page .pv-line.short { width: 50%; }
+  .preview-page .pv-h2 {
+    height: 4px;
+    background: var(--ink);
+    margin-bottom: 10px;
+    width: 60%;
+  }
+  .preview-page .pv-stat {
+    position: absolute;
+    top: 42%;
+    left: 14px;
+    font-family: var(--font-serif);
+    font-size: 38px;
+    line-height: 1;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .preview-page .pv-quote {
+    position: absolute;
+    top: 32%;
+    left: 20px;
+    right: 20px;
+    border-left: 2px solid var(--accent);
+    padding-left: 8px;
+  }
+
+  /* ============================================
+     Part divider
+     ============================================ */
+  .part-divider {
+    margin: 60px 0 60px;
+    padding-top: 60px;
+    border-top: 1px solid var(--rule);
+  }
+  .part-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin: 0 0 8px;
+  }
+  .part-title {
+    font-family: var(--font-serif);
+    font-variation-settings: "opsz" 60, "SOFT" 40;
+    font-size: 42px;
+    line-height: 1.1;
+    font-weight: 500;
+    letter-spacing: -0.026em;
+    margin: 0 0 16px;
+    color: var(--ink);
+  }
+  .part-desc {
+    font-family: var(--font-serif);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    max-width: 64ch;
+    margin: 0;
+  }
+
+  /* ============================================
+     Hide old doc-header (now replaced by hero)
+     ============================================ */
+  .doc-header { display: none; }
+
+  /* Document header */
+  .doc-header { margin-bottom: 80px; }
+  .doc-eyebrow {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin: 0 0 18px;
+  }
+  .doc-title {
+    font-family: var(--font-serif);
+    font-variation-settings: var(--serif-display);
+    font-size: 68px;
+    line-height: 1.04;
+    font-weight: 500;
+    letter-spacing: -0.028em;
+    margin: 0 0 22px;
+    max-width: 16ch;
+  }
+  .doc-subtitle {
+    font-family: var(--font-sans);
+    font-size: 17px;
+    color: var(--ink-soft);
+    line-height: 1.55;
+    max-width: 64ch;
+    margin: 0;
+    font-weight: 400;
+  }
+
+  /* Section */
+  section { margin-bottom: 88px; }
+  section.section-tight { margin-bottom: 60px; }
+
+  .section-eyebrow {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin: 0 0 10px;
+  }
+  .section-title {
+    font-family: var(--font-serif);
+    font-variation-settings: "opsz" 60, "SOFT" 40;
+    font-size: 36px;
+    line-height: 1.1;
+    font-weight: 500;
+    letter-spacing: -0.022em;
+    margin: 0 0 14px;
+  }
+  .section-desc {
+    font-family: var(--font-serif);
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    max-width: 64ch;
+    margin: 0 0 36px;
+  }
+  .section-divider {
+    border: 0;
+    border-top: 1px solid var(--rule);
+    margin: 0 0 64px;
+  }
+
+  .sub-title {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 32px 0 14px;
+  }
+
+  /* ============================================
+     Swatch grid (color section)
+     ============================================ */
+  .swatch-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  .swatch { font-family: var(--font-sans); font-size: 12px; line-height: 1.4; }
+  .swatch-block {
+    height: 84px;
+    border: 1px solid var(--rule);
+    margin-bottom: 10px;
+  }
+  .swatch-name {
+    color: var(--ink);
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+  .swatch-hex {
+    color: var(--ink-muted);
+    font-family: var(--font-mono);
+    font-size: 11px;
+  }
+  .swatch-use {
+    color: var(--ink-muted);
+    font-size: 11px;
+    margin-top: 2px;
+  }
+
+  /* Banned swatches */
+  .swatch.banned .swatch-block {
+    position: relative;
+    border: 1px dashed var(--ink-faint);
+  }
+  .swatch.banned .swatch-block::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to top right, transparent calc(50% - 1px), var(--ink-faint) 50%, transparent calc(50% + 1px));
+  }
+  .swatch.banned .swatch-name { color: var(--ink-faint); }
+
+  /* ============================================
+     Typography section
+     ============================================ */
+  .type-row {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    align-items: baseline;
+    gap: 32px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .type-meta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ink-muted);
+    line-height: 1.55;
+  }
+  .type-meta strong {
+    color: var(--ink);
+    font-weight: 500;
+    font-family: var(--font-sans);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: 11px;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .type-sample { color: var(--ink); }
+  .type-sample.serif { font-family: var(--font-serif); }
+  .type-sample.sans { font-family: var(--font-sans); }
+
+  /* Letter-spacing demo */
+  .ls-demo {
+    margin: 12px 0;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .ls-demo .ls-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ink-muted);
+    margin-bottom: 4px;
+  }
+  .ls-demo .ls-sample.title {
+    font-family: var(--font-serif);
+    font-variation-settings: var(--serif-display);
+    font-size: 36px;
+    font-weight: 500;
+    letter-spacing: -0.024em;
+    color: var(--ink);
+  }
+  .ls-demo .ls-sample.eyebrow {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .ls-demo .ls-sample.body {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    letter-spacing: 0;
+    color: var(--ink);
+  }
+
+  /* ============================================
+     Spacing scale (visual ruler)
+     ============================================ */
+  .spacing-row {
+    display: grid;
+    grid-template-columns: 60px 80px 1fr 1fr;
+    align-items: center;
+    gap: 20px;
+    padding: 10px 0;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-muted);
+  }
+  .spacing-row .sp-name { color: var(--accent); font-weight: 500; }
+  .spacing-row .sp-bar { background: var(--accent-tint); height: 16px; }
+  .spacing-row .sp-use { font-family: var(--font-sans); color: var(--ink-soft); }
+
+  /* ============================================
+     Page archetype thumbnails
+     ============================================ */
+  .archetype-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .archetype {
+    font-family: var(--font-sans);
+    font-size: 11px;
+  }
+  .arch-thumb {
+    width: 100%;
+    aspect-ratio: 11 / 8.5;
+    background: var(--canvas);
+    border: 1px solid var(--rule);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+  .arch-thumb-bg-accent { background: var(--accent); }
+  .arch-thumb-bg-tint   { background: var(--accent-tint); }
+
+  .arch-name {
+    color: var(--ink);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    font-size: 11px;
+  }
+  .arch-desc { color: var(--ink-muted); margin-top: 3px; line-height: 1.5; }
+
+  /* Thumb internals — small primitives */
+  .arch-thumb .t-title {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
+    height: 14px;
+    background: var(--ink);
+    opacity: 0.7;
+  }
+  .arch-thumb .t-title.short { width: 60%; }
+  .arch-thumb .t-title.white { background: #fff; opacity: 0.95; }
+  .arch-thumb .t-eyebrow {
+    position: absolute;
+    bottom: 30px;
+    left: 12px;
+    width: 30%;
+    height: 4px;
+    background: var(--accent);
+  }
+  .arch-thumb .t-eyebrow.white { background: rgba(255,255,255,0.7); }
+  .arch-thumb .t-line {
+    height: 3px;
+    background: var(--ink-faint);
+    margin-bottom: 5px;
+  }
+  .arch-thumb .t-content {
+    position: absolute;
+    top: 14px;
+    left: 12px;
+    right: 32px;
+  }
+  .arch-thumb .t-line.short { width: 45%; }
+  .arch-thumb .t-line.med   { width: 75%; }
+  .arch-thumb .t-h2 {
+    height: 6px;
+    background: var(--ink);
+    margin-bottom: 12px;
+    width: 70%;
+  }
+  .arch-thumb .t-stat {
+    position: absolute;
+    top: 38%;
+    left: 12px;
+    font-family: var(--font-serif);
+    font-size: 36px;
+    color: var(--accent);
+    font-weight: 500;
+    line-height: 1;
+  }
+  .arch-thumb .t-quote {
+    position: absolute;
+    top: 30%;
+    left: 24px;
+    right: 24px;
+    border-left: 2px solid var(--accent);
+    padding-left: 8px;
+  }
+  .arch-thumb .t-toc {
+    position: absolute;
+    top: 38%;
+    left: 12px;
+    right: 12px;
+  }
+  .arch-thumb .t-toc .t-toc-row {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 6px;
+    font-family: var(--font-mono);
+    font-size: 6px;
+    color: var(--ink-muted);
+  }
+  .arch-thumb .t-toc .t-toc-row .num { color: var(--accent); width: 8px; }
+  .arch-thumb .t-toc .t-toc-row .ttl { flex: 1; height: 2px; background: var(--rule); }
+  .arch-thumb .t-table {
+    position: absolute;
+    top: 35%;
+    left: 12px;
+    right: 12px;
+  }
+  .arch-thumb .t-table .t-table-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 4px;
+    margin-bottom: 5px;
+  }
+  .arch-thumb .t-table .t-table-cell { height: 3px; background: var(--ink-faint); }
+  .arch-thumb .t-table .t-table-row.head .t-table-cell {
+    background: var(--accent);
+    height: 2px;
+  }
+
+  /* ============================================
+     Live component demos
+     ============================================ */
+  .demo {
+    margin: 16px 0 32px;
+    padding: 28px 32px;
+    background: var(--canvas-soft);
+    border: 1px solid var(--rule);
+  }
+
+  /* Callout */
+  .demo-callout {
+    font-family: var(--font-serif);
+    font-size: 14.5px;
+    line-height: 1.6;
+    padding: 4px 0 4px 16px;
+    border-left: 2px solid var(--accent);
+    margin: 0 0 16px;
+    max-width: 70ch;
+  }
+  .demo-callout:last-child { margin-bottom: 0; }
+  .demo-callout .label {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-right: 8px;
+  }
+  .demo-callout.note {
+    border-color: var(--ink-muted);
+    color: var(--ink-soft);
+    font-size: 13.5px;
+  }
+  .demo-callout.note .label { color: var(--ink-muted); }
+  .demo-callout.warning {
+    border-color: var(--accent-deep);
+  }
+  .demo-callout.warning .label { color: var(--accent-deep); }
+
+  /* Compare table */
+  table.compare {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-sans);
+    font-size: 13px;
+  }
+  table.compare th, table.compare td {
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  table.compare th {
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 11px;
+    color: var(--accent);
+    border-bottom: 1.5px solid var(--accent);
+  }
+  table.compare td { font-family: var(--font-serif); font-size: 14px; }
+
+  /* Tag pill */
+  .tag {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-size: 10.5px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--accent-deep);
+    background: var(--accent-tint);
+    padding: 3px 9px;
+    border-radius: 2px;
+    margin-right: 6px;
+  }
+
+  /* Stat block */
+  .stat-block {
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding: 18px 0;
+    display: flex;
+    align-items: baseline;
+    gap: 22px;
+  }
+  .stat-figure {
+    font-family: var(--font-serif);
+    font-variation-settings: var(--serif-display);
+    font-size: 64px;
+    line-height: 1;
+    color: var(--accent);
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+  }
+  .stat-label {
+    font-family: var(--font-serif);
+    font-size: 14.5px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    max-width: 36ch;
+    margin: 0;
+  }
+
+  /* Inline highlight + em */
+  .hl {
+    color: var(--accent);
+    font-weight: 500;
+  }
+  em {
+    font-style: normal;
+    color: var(--accent);
+  }
+  .demo-prose {
+    font-family: var(--font-serif);
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--ink);
+    max-width: 64ch;
+    margin: 0;
+  }
+
+  /* ============================================
+     Cadence visualization
+     ============================================ */
+  .cadence-track {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 6px;
+    margin: 18px 0 12px;
+  }
+  .cad-page {
+    aspect-ratio: 11 / 14;
+    background: var(--canvas);
+    border: 1px solid var(--rule);
+    position: relative;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--ink-faint);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 4px;
+  }
+  .cad-page.cover  { background: var(--accent); border-color: var(--accent); color: rgba(255,255,255,0.7); }
+  .cad-page.divider { background: var(--accent-tint); border-color: var(--accent-tint); color: var(--ink-soft); }
+  .cad-page.stat::before {
+    content: "1";
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-serif);
+    font-size: 22px;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .cad-page.stat { color: transparent; }
+  .cad-page.quote::before {
+    content: "";
+    position: absolute;
+    top: 30%;
+    bottom: 30%;
+    left: 4px;
+    width: 2px;
+    background: var(--accent);
+  }
+  .cadence-legend {
+    display: flex;
+    gap: 24px;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    color: var(--ink-soft);
+    margin-top: 14px;
+  }
+  .cadence-legend .swatch-mini {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 1px solid var(--rule);
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+
+  /* ============================================
+     Density rules table
+     ============================================ */
+  table.density-rules {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-sans);
+    font-size: 13.5px;
+  }
+  table.density-rules th, table.density-rules td {
+    text-align: left;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--rule);
+  }
+  table.density-rules th {
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 11px;
+    color: var(--accent);
+    border-bottom: 1.5px solid var(--accent);
+  }
+  table.density-rules td.num {
+    font-family: var(--font-mono);
+    color: var(--accent-deep);
+    font-weight: 500;
+  }
+  table.density-rules td.why {
+    color: var(--ink-soft);
+    font-family: var(--font-serif);
+  }
+
+  /* ============================================
+     10 invariants list
+     ============================================ */
+  ol.invariants {
+    list-style: none;
+    counter-reset: inv;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 32px;
+  }
+  ol.invariants li {
+    counter-increment: inv;
+    padding: 16px 18px 16px 56px;
+    position: relative;
+    background: var(--canvas-soft);
+    font-family: var(--font-serif);
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--ink);
+  }
+  ol.invariants li::before {
+    content: counter(inv, decimal-leading-zero);
+    position: absolute;
+    left: 18px;
+    top: 16px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  /* ============================================
+     Code / mono spans
+     ============================================ */
+  code, .mono {
+    font-family: var(--font-mono);
+    font-size: 0.92em;
+    color: var(--accent-deep);
+  }
+
+  /* Section anchor (sticky-ish numbering above title) */
+  .anchor {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+</style>
+</head>
+<body>
+
+<main>
+
+<!-- =============================================
+     Hero
+     ============================================= -->
+<section class="hero">
+  <span class="lang-toggle hero-lang">
+    <a href="index.html" class="active">EN</a>
+    <span class="sep">/</span>
+    <a href="index-zh.html">中</a>
+  </span>
+  <h1 class="hero-title">Quire</h1>
+  <p class="hero-lede">A design system for editorial documents — <strong>playbooks, white papers, resumes, single-page reports</strong>.</p>
+  <div class="cta-row">
+    <a href="https://github.com/FoundDream/Quire" class="cta primary" target="_blank" rel="noopener">View on GitHub <span class="cta-arrow">→</span></a>
+    <a href="assets/output/quire-playbook.pdf" class="cta" target="_blank" rel="noopener">See the demo PDF</a>
+  </div>
+</section>
+
+<!-- =============================================
+     Formats
+     ============================================= -->
+<section id="formats">
+  <p class="anchor">Introduction</p>
+  <p class="section-eyebrow">Output forms</p>
+  <h2 class="section-title">One language, four format profiles.</h2>
+  <p class="section-desc">
+    The same palette, typography, and component library produce different
+    document shapes. Today the playbook profile is fully implemented; the
+    others share the system and ship next.
+  </p>
+
+  <table class="formats">
+    <thead>
+      <tr>
+        <th>Profile</th>
+        <th>Pages</th>
+        <th>Format</th>
+        <th>Cadence</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="fmt-name">Playbook</td>
+        <td>10–80</td>
+        <td>11×8.5in landscape</td>
+        <td>Visual reset every 5–7 pages</td>
+        <td class="fmt-status status-live">● live</td>
+      </tr>
+      <tr>
+        <td class="fmt-name">White paper</td>
+        <td>8–30</td>
+        <td>A4 portrait</td>
+        <td>Visual reset every 5–7 pages</td>
+        <td class="fmt-status status-soon">○ next</td>
+      </tr>
+      <tr>
+        <td class="fmt-name">Resume</td>
+        <td>1–2</td>
+        <td>A4 / Letter portrait</td>
+        <td>Single rhythm, no cadence rule</td>
+        <td class="fmt-status status-soon">○ next</td>
+      </tr>
+      <tr>
+        <td class="fmt-name">Single-page report</td>
+        <td>1</td>
+        <td>A4 portrait</td>
+        <td>Single rhythm, no cadence rule</td>
+        <td class="fmt-status status-soon">○ next</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+<hr class="section-divider">
+
+<!-- =============================================
+     See the demo · playbook page previews
+     ============================================= -->
+<section id="see">
+  <p class="anchor">Introduction</p>
+  <p class="section-eyebrow">See it</p>
+  <h2 class="section-title">A 12-page self-introducing playbook.</h2>
+  <p class="section-desc">
+    The same system, applied to introduce itself. Four content archetypes,
+    three chapter dividers, one stat-anchor, one pull-quote, one colophon. Page
+    count even. Cadence keeps to the 5–7 rule.
+  </p>
+
+  <div class="preview-grid">
+    <div class="preview-page cover">
+      <div class="pv-eyebrow">Quire · 2026</div>
+      <div class="pv-title">The Playbook, Bound.</div>
+    </div>
+    <div class="preview-page tint">
+      <div class="pv-eyebrow">Chapter 02</div>
+      <div class="pv-title">The Constraint Language</div>
+    </div>
+    <div class="preview-page">
+      <div class="pv-content">
+        <div class="pv-h2"></div>
+        <div class="pv-line"></div>
+        <div class="pv-line med"></div>
+        <div class="pv-line"></div>
+        <div class="pv-line short"></div>
+        <div class="pv-line med"></div>
+      </div>
+    </div>
+    <div class="preview-page">
+      <div class="pv-stat">1</div>
+    </div>
+  </div>
+
+  <div class="cta-row" style="margin-top: 24px;">
+    <a href="assets/output/quire-playbook.pdf" class="cta primary" target="_blank" rel="noopener">Open the PDF <span class="cta-arrow">→</span></a>
+    <a href="assets/output/quire-playbook.html" class="cta" target="_blank" rel="noopener">View HTML source</a>
+  </div>
+</section>
+
+<!-- =============================================
+     Part divider before design system
+     ============================================= -->
+<section class="part-divider" id="system">
+  <p class="part-eyebrow">Reference</p>
+  <h2 class="part-title">The design system</h2>
+  <p class="part-desc">
+    Every token, archetype, component, and rule visualized below. Edit the
+    <code>:root</code> CSS variables at the top of this file to retheme —
+    every section below is composed from them.
+  </p>
+</section>
+
+<!-- =============================================
+     Header (legacy — now hidden via CSS)
+     ============================================= -->
+<header class="doc-header">
+  <p class="doc-eyebrow">Quire · v1 · 2026</p>
+  <h1 class="doc-title">Design System Reference</h1>
+  <p class="doc-subtitle">
+    Every token, archetype, component, and rule on one page. Edit
+    <code>:root</code> at the top of this file to retheme; every section below
+    is composed from those variables.
+  </p>
+</header>
+
+<!-- =============================================
+     1. COLOR
+     ============================================= -->
+<section>
+  <p class="anchor">01 / 08</p>
+  <p class="section-eyebrow">Tokens</p>
+  <h2 class="section-title">Color</h2>
+  <p class="section-desc">
+    Cold-toned and chromatically monochrome. One accent, one canvas family, one
+    cool gray scale. There is no second chromatic hue.
+  </p>
+
+  <p class="sub-title">Surface</p>
+  <div class="swatch-grid">
+    <div class="swatch">
+      <div class="swatch-block" style="background: var(--canvas)"></div>
+      <div class="swatch-name">canvas</div>
+      <div class="swatch-hex">#f6f8fb</div>
+      <div class="swatch-use">page background</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-block" style="background: var(--canvas-soft)"></div>
+      <div class="swatch-name">canvas-soft</div>
+      <div class="swatch-hex">#eef1f6</div>
+      <div class="swatch-use">lifted card / sidebar</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-block" style="background: var(--rule)"></div>
+      <div class="swatch-name">rule</div>
+      <div class="swatch-hex">#dce0e6</div>
+      <div class="swatch-use">primary divider</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-block" style="background: var(--rule-soft)"></div>
+      <div class="swatch-name">rule-soft</div>
+      <div class="swatch-hex">#e8ebf0</div>
+      <div class="swatch-use">secondary divider</div>
+    </div>
+  </div>
+
+  <p class="sub-title">Text — cool grays, B ≥ G ≥ R</p>
+  <div class="swatch-grid">
+    <div class="swatch">
+      <div class="swatch-block" style="background: var(--ink)"></div>
+      <div class="swatch-name">ink</div>
+      <div class="swatch-hex">#16181d</div>
+      <div class="swatch-use">primary text</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-block" style="background: var(--ink-soft)"></div>
+      <div class="swatch-name">ink-soft</div>
+      <div class="swatch-hex">#3d4148</div>
+      <div class="swatch-use">secondary text</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-block" style="background: var(--ink-muted)"></div>
+      <div class="swatch-name">ink-muted</div>
+      <div class="swatch-hex">#6b6f78</div>
+      <div class="swatch-use">captions, metadata</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-block" style="background: var(--ink-faint)"></div>
+      <div class="swatch-name">ink-faint</div>
+      <div class="swatch-hex">#8c919b</div>
+      <div class="swatch-use">page numbers, footnotes</div>
+    </div>
+  </div>
+
+  <p class="sub-title">Accent — sky blue, locked system-wide</p>
+  <div class="swatch-grid">
+    <div class="swatch">
+      <div class="swatch-block" style="background: var(--accent-tint)"></div>
+      <div class="swatch-name">accent-tint</div>
+      <div class="swatch-hex">#b8d6f0</div>
+      <div class="swatch-use">chapter divider fill, tag bg</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-block" style="background: var(--accent)"></div>
+      <div class="swatch-name">accent</div>
+      <div class="swatch-hex">#3a82c4</div>
+      <div class="swatch-use">eyebrows, tags, table rules</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-block" style="background: var(--accent-deep)"></div>
+      <div class="swatch-name">accent-deep</div>
+      <div class="swatch-hex">#2a6299</div>
+      <div class="swatch-use">body links, AA accent text</div>
+    </div>
+    <div class="swatch banned">
+      <div class="swatch-block" style="background: var(--canvas)"></div>
+      <div class="swatch-name">— no second hue —</div>
+      <div class="swatch-hex">forbidden</div>
+      <div class="swatch-use">no orange, green, red</div>
+    </div>
+  </div>
+
+  <p class="sub-title">Banned — common AI defaults to avoid</p>
+  <div class="swatch-grid">
+    <div class="swatch banned">
+      <div class="swatch-block" style="background: #ffffff"></div>
+      <div class="swatch-name">pure white</div>
+      <div class="swatch-hex">#ffffff</div>
+      <div class="swatch-use">default-doc tell</div>
+    </div>
+    <div class="swatch banned">
+      <div class="swatch-block" style="background: #faf9f5"></div>
+      <div class="swatch-name">warm cream</div>
+      <div class="swatch-hex">#faf9f5</div>
+      <div class="swatch-use">retired Quire heritage</div>
+    </div>
+    <div class="swatch banned">
+      <div class="swatch-block" style="background: #0a66c2"></div>
+      <div class="swatch-name">LinkedIn blue</div>
+      <div class="swatch-hex">#0a66c2</div>
+      <div class="swatch-use">too saturated, corporate</div>
+    </div>
+    <div class="swatch banned">
+      <div class="swatch-block" style="background: #6b6a64"></div>
+      <div class="swatch-name">warm gray</div>
+      <div class="swatch-hex">#6b6a64</div>
+      <div class="swatch-use">R > B — wrong temperature</div>
+    </div>
+  </div>
+</section>
+<hr class="section-divider">
+
+<!-- =============================================
+     2. TYPOGRAPHY
+     ============================================= -->
+<section>
+  <p class="anchor">02 / 08</p>
+  <p class="section-eyebrow">Tokens</p>
+  <h2 class="section-title">Typography</h2>
+  <p class="section-desc">
+    One serif (Fraunces, variable) carries every hierarchy from cover title to
+    body. Sans (Inter Tight) only for UI chrome. Two weights — <code>400</code>
+    and <code>500</code>. No bold, no italic body.
+  </p>
+
+  <p class="sub-title">Type scale</p>
+  <div class="type-row">
+    <div class="type-meta"><strong>Display</strong>36pt · 500 · lh 1.05<br>cover title, chapter divider</div>
+    <div class="type-sample serif" style="font-size: 48px; font-weight: 500; letter-spacing: -0.026em; line-height: 1.05; font-variation-settings: var(--serif-display);">The Playbook, Bound.</div>
+  </div>
+  <div class="type-row">
+    <div class="type-meta"><strong>H1</strong>22pt · 500 · lh 1.18<br>chapter / section open</div>
+    <div class="type-sample serif" style="font-size: 30px; font-weight: 500; letter-spacing: -0.018em; line-height: 1.15; font-variation-settings: 'opsz' 60, 'SOFT' 40;">Turning weak signals into testable hypotheses</div>
+  </div>
+  <div class="type-row">
+    <div class="type-meta"><strong>H2</strong>16pt · 500 · lh 1.25<br>subsection title</div>
+    <div class="type-sample serif" style="font-size: 22px; font-weight: 500; letter-spacing: -0.014em; line-height: 1.25;">Restate the signal as a hypothesis</div>
+  </div>
+  <div class="type-row">
+    <div class="type-meta"><strong>H3 / Eyebrow</strong>13pt · 500 · +0.04em<br>sans-serif, uppercase</div>
+    <div class="type-sample sans" style="font-size: 14px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent);">Chapter 03 · The Validation Loop</div>
+  </div>
+  <div class="type-row">
+    <div class="type-meta"><strong>Lead</strong>11pt · 400 · lh 1.55<br>chapter intro paragraph</div>
+    <div class="type-sample serif" style="font-size: 17px; line-height: 1.55; color: var(--ink-soft);">Every team collects customer signals — interviews, support tickets, churn calls. Most treat them as confirmation.</div>
+  </div>
+  <div class="type-row">
+    <div class="type-meta"><strong>Body</strong>10pt · 400 · lh 1.65<br>reading body</div>
+    <div class="type-sample serif" style="font-size: 15.5px; line-height: 1.65;">A signal is observation; a hypothesis is a prediction with a fail condition. "Users want better onboarding" is a signal — a hypothesis names a metric, a magnitude, and a timeframe.</div>
+  </div>
+  <div class="type-row">
+    <div class="type-meta"><strong>Caption</strong>9pt · 400 · lh 1.45<br>figure captions, notes</div>
+    <div class="type-sample serif" style="font-size: 12px; line-height: 1.45; color: var(--ink-muted);">Source: CB Insights, 2024 post-mortem analysis of 110 failed startups.</div>
+  </div>
+  <div class="type-row">
+    <div class="type-meta"><strong>Label</strong>9pt · 500 · uppercase<br>eyebrows, tag pills</div>
+    <div class="type-sample sans" style="font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent);">Exercise · Note · Think · Warning</div>
+  </div>
+
+  <p class="sub-title">Letter-spacing — the one thing AI gets wrong</p>
+  <div class="ls-demo">
+    <div class="ls-label">titles: tight, −0.022em to −0.028em</div>
+    <div class="ls-sample title">Finding Product-Market Fit</div>
+  </div>
+  <div class="ls-demo">
+    <div class="ls-label">eyebrows: loose, +0.06em to +0.08em</div>
+    <div class="ls-sample eyebrow">A Founder's Playbook · 2026</div>
+  </div>
+  <div class="ls-demo">
+    <div class="ls-label">body: 0 (or −0.003em with Fraunces)</div>
+    <div class="ls-sample body">A signal is observation; a hypothesis is a prediction with a fail condition.</div>
+  </div>
+
+  <p class="sub-title">Fraunces variable axes — opsz × SOFT</p>
+  <div class="type-row">
+    <div class="type-meta"><strong>Display setting</strong>opsz 144 · SOFT 30<br>crisp, editorial</div>
+    <div class="type-sample serif" style="font-size: 56px; font-weight: 500; letter-spacing: -0.026em; font-variation-settings: 'opsz' 144, 'SOFT' 30;">Quarterly</div>
+  </div>
+  <div class="type-row">
+    <div class="type-meta"><strong>Body setting</strong>opsz 14 · SOFT 50<br>warmer, more humanized</div>
+    <div class="type-sample serif" style="font-size: 56px; font-weight: 500; letter-spacing: -0.026em; font-variation-settings: 'opsz' 14, 'SOFT' 50;">Quarterly</div>
+  </div>
+</section>
+<hr class="section-divider">
+
+<!-- =============================================
+     3. SPACING
+     ============================================= -->
+<section>
+  <p class="anchor">03 / 08</p>
+  <p class="section-eyebrow">Tokens</p>
+  <h2 class="section-title">Spacing</h2>
+  <p class="section-desc">
+    Base unit <strong>4pt</strong>. Seven tiers cover everything from inline
+    adjacency to cover hero gap. Page margins are asymmetric — left tighter
+    than right — to give breathing room for page numbers and marginalia.
+  </p>
+
+  <p class="sub-title">Scale</p>
+  <div class="spacing-row">
+    <div class="sp-name">xs</div>
+    <div>3pt</div>
+    <div><div class="sp-bar" style="width: 4%"></div></div>
+    <div class="sp-use">inline adjacent elements</div>
+  </div>
+  <div class="spacing-row">
+    <div class="sp-name">sm</div>
+    <div>5pt</div>
+    <div><div class="sp-bar" style="width: 6%"></div></div>
+    <div class="sp-use">tag padding, dense layout</div>
+  </div>
+  <div class="spacing-row">
+    <div class="sp-name">md</div>
+    <div>10pt</div>
+    <div><div class="sp-bar" style="width: 11%"></div></div>
+    <div class="sp-use">component interior padding</div>
+  </div>
+  <div class="spacing-row">
+    <div class="sp-name">lg</div>
+    <div>18pt</div>
+    <div><div class="sp-bar" style="width: 20%"></div></div>
+    <div class="sp-use">between paragraphs / inside cards</div>
+  </div>
+  <div class="spacing-row">
+    <div class="sp-name">xl</div>
+    <div>28pt</div>
+    <div><div class="sp-bar" style="width: 31%"></div></div>
+    <div class="sp-use">below h1 / h2 titles</div>
+  </div>
+  <div class="spacing-row">
+    <div class="sp-name">2xl</div>
+    <div>50pt</div>
+    <div><div class="sp-bar" style="width: 56%"></div></div>
+    <div class="sp-use">between major sections</div>
+  </div>
+  <div class="spacing-row">
+    <div class="sp-name">3xl</div>
+    <div>90pt</div>
+    <div><div class="sp-bar" style="width: 100%"></div></div>
+    <div class="sp-use">cover title → subtitle gap</div>
+  </div>
+
+  <p class="sub-title">Page margins · asymmetric (left tighter)</p>
+  <table class="density-rules" style="max-width: 600px;">
+    <thead>
+      <tr><th>Format</th><th>T / R / B / L</th><th>Notes</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>A4 portrait</td><td class="num">22 / 24 / 24 / 22 mm</td><td class="why">White paper, resume</td></tr>
+      <tr><td>Letter portrait</td><td class="num">.85 / .95 / .95 / .85 in</td><td class="why">Resume, single-page</td></tr>
+      <tr><td>Landscape (playbook)</td><td class="num">18 / 22 / 22 / 18 mm</td><td class="why">Default playbook profile</td></tr>
+    </tbody>
+  </table>
+</section>
+<hr class="section-divider">
+
+<!-- =============================================
+     4. PAGE ARCHETYPES
+     ============================================= -->
+<section>
+  <p class="anchor">04 / 08</p>
+  <p class="section-eyebrow">Structure</p>
+  <h2 class="section-title">Page archetypes</h2>
+  <p class="section-desc">
+    Every page in a Quire document belongs to one of seven archetypes. Each
+    archetype is a fixed structure: changing the structure produces a different
+    archetype, never a hybrid.
+  </p>
+
+  <div class="archetype-grid">
+    <div class="archetype">
+      <div class="arch-thumb arch-thumb-bg-accent">
+        <div class="t-eyebrow white"></div>
+        <div class="t-title white"></div>
+      </div>
+      <div class="arch-name">Cover</div>
+      <div class="arch-desc">Page 1. Full-bleed accent or canvas. Oversized title, no page number.</div>
+    </div>
+
+    <div class="archetype">
+      <div class="arch-thumb">
+        <div class="t-content"><div class="t-h2" style="width: 50%"></div></div>
+        <div class="t-toc">
+          <div class="t-toc-row"><span class="num">01</span><span class="ttl"></span></div>
+          <div class="t-toc-row"><span class="num">02</span><span class="ttl"></span></div>
+          <div class="t-toc-row"><span class="num">03</span><span class="ttl"></span></div>
+          <div class="t-toc-row"><span class="num">04</span><span class="ttl"></span></div>
+        </div>
+      </div>
+      <div class="arch-name">TOC</div>
+      <div class="arch-desc">Page 2. Eyebrow + numbered list with leader rules.</div>
+    </div>
+
+    <div class="archetype">
+      <div class="arch-thumb arch-thumb-bg-tint">
+        <div class="t-eyebrow"></div>
+        <div class="t-title short"></div>
+      </div>
+      <div class="arch-name">Chapter divider</div>
+      <div class="arch-desc">Accent-tint fill. Chapter number + title. No body, no page number.</div>
+    </div>
+
+    <div class="archetype">
+      <div class="arch-thumb">
+        <div class="t-content">
+          <div class="t-h2"></div>
+          <div class="t-line med"></div>
+          <div class="t-line"></div>
+          <div class="t-line med"></div>
+          <div class="t-line short"></div>
+          <div class="t-line"></div>
+          <div class="t-line med"></div>
+          <div class="t-line short"></div>
+        </div>
+      </div>
+      <div class="arch-name">Standard content</div>
+      <div class="arch-desc">Most pages. h1 + lead + h2/h3 + paragraphs + callouts.</div>
+    </div>
+
+    <div class="archetype">
+      <div class="arch-thumb">
+        <div class="t-stat">42%</div>
+      </div>
+      <div class="arch-name">Stat-anchor</div>
+      <div class="arch-desc">Once or twice per document. Oversized figure as page hero.</div>
+    </div>
+
+    <div class="archetype">
+      <div class="arch-thumb">
+        <div class="t-content"><div class="t-h2" style="width: 50%"></div></div>
+        <div class="t-table">
+          <div class="t-table-row head">
+            <div class="t-table-cell"></div>
+            <div class="t-table-cell"></div>
+            <div class="t-table-cell"></div>
+          </div>
+          <div class="t-table-row">
+            <div class="t-table-cell"></div>
+            <div class="t-table-cell"></div>
+            <div class="t-table-cell"></div>
+          </div>
+          <div class="t-table-row">
+            <div class="t-table-cell"></div>
+            <div class="t-table-cell"></div>
+            <div class="t-table-cell"></div>
+          </div>
+          <div class="t-table-row">
+            <div class="t-table-cell"></div>
+            <div class="t-table-cell"></div>
+            <div class="t-table-cell"></div>
+          </div>
+        </div>
+      </div>
+      <div class="arch-name">Comparison</div>
+      <div class="arch-desc">Trade-offs. 3-column compare table.</div>
+    </div>
+
+    <div class="archetype">
+      <div class="arch-thumb">
+        <div class="t-quote">
+          <div class="t-line"></div>
+          <div class="t-line med"></div>
+          <div class="t-line short"></div>
+        </div>
+      </div>
+      <div class="arch-name">Pull-quote</div>
+      <div class="arch-desc">Once per chapter. Half-page editorial quote with left accent rule.</div>
+    </div>
+
+    <div class="archetype">
+      <div class="arch-thumb">
+        <div class="t-content" style="top: 22px;">
+          <div class="t-line short"></div>
+          <div class="t-line med"></div>
+          <div class="t-line"></div>
+          <div class="t-line med"></div>
+          <div class="t-line short"></div>
+        </div>
+      </div>
+      <div class="arch-name">Colophon</div>
+      <div class="arch-desc">Final page. Resources, credits, file map.</div>
+    </div>
+  </div>
+</section>
+<hr class="section-divider">
+
+<!-- =============================================
+     5. COMPONENTS
+     ============================================= -->
+<section>
+  <p class="anchor">05 / 08</p>
+  <p class="section-eyebrow">Building blocks</p>
+  <h2 class="section-title">Components</h2>
+  <p class="section-desc">
+    Live demos. Each component below is what the templates actually render —
+    copy the CSS class names from this file into your own.
+  </p>
+
+  <p class="sub-title">Callout · 4 label variants</p>
+  <div class="demo">
+    <div class="demo-callout">
+      <span class="label">Exercise</span>
+      Pick the loudest signal from last week's interviews. Rewrite it as one
+      sentence containing a metric, a magnitude, and a timeframe.
+    </div>
+    <div class="demo-callout note">
+      <span class="label">Note</span>
+      A discovery cycle that produces no killed hypotheses isn't validating —
+      it's rationalizing the roadmap you already have.
+    </div>
+    <div class="demo-callout">
+      <span class="label">Think</span>
+      Would you bet a sprint on this hypothesis being true?
+    </div>
+    <div class="demo-callout warning">
+      <span class="label">Warning</span>
+      Shipping before security review is the most common pre-launch breach.
+    </div>
+  </div>
+
+  <p class="sub-title">Compare table</p>
+  <div class="demo">
+    <table class="compare">
+      <thead>
+        <tr>
+          <th>If you're testing…</th>
+          <th>Use</th>
+          <th>Why</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Whether the problem is real and frequent</td><td><strong>Discovery interview</strong></td><td>Open-ended; surfaces unprompted workarounds</td></tr>
+        <tr><td>Willingness to pay or commit</td><td><strong>Pre-sale / LOI</strong></td><td>Behavior is the only honest signal</td></tr>
+        <tr><td>Whether a specific solution is usable</td><td><strong>Prototype test</strong></td><td>Reveals where assumptions break</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="sub-title">Tag pill</p>
+  <div class="demo">
+    <span class="tag">Cover</span>
+    <span class="tag">Chapter divider</span>
+    <span class="tag">Stat-anchor</span>
+    <span class="tag">Pull-quote</span>
+  </div>
+
+  <p class="sub-title">Stat block</p>
+  <div class="demo">
+    <div class="stat-block">
+      <div class="stat-figure">42%</div>
+      <p class="stat-label">
+        of startups failed because they built something nobody wanted — before
+        agentic coding made shipping a prototype an afternoon's work.
+      </p>
+    </div>
+  </div>
+
+  <p class="sub-title">Inline highlight <code>.hl</code> and term of art <code>&lt;em&gt;</code></p>
+  <div class="demo">
+    <p class="demo-prose">
+      AI changes internal processes by collapsing the gap between
+      <span class="hl">decision and action</span>. The shift isn't speed — it's
+      that the team becomes <em>orchestrator of agents</em> rather than
+      individual contributor. <span class="hl">Both</span> are valid moves; the
+      first uses accent color and 500 weight, the second is the
+      <em>term-of-art</em> convention.
+    </p>
+  </div>
+</section>
+<hr class="section-divider">
+
+<!-- =============================================
+     6. CADENCE
+     ============================================= -->
+<section>
+  <p class="anchor">06 / 08</p>
+  <p class="section-eyebrow">Rhythm</p>
+  <h2 class="section-title">Cadence rule</h2>
+  <p class="section-desc">
+    Every 5–7 content pages, the eye needs a visual reset — a chapter divider,
+    a stat-anchor, or a pull-quote. Without it, readers lose orientation.
+    Cadence is what separates a book from a transcript.
+  </p>
+
+  <p class="sub-title">Visualized · a 12-page playbook</p>
+  <div class="cadence-track">
+    <div class="cad-page cover">01</div>
+    <div class="cad-page">02</div>
+    <div class="cad-page divider">03</div>
+    <div class="cad-page">04</div>
+    <div class="cad-page stat">05</div>
+    <div class="cad-page divider">06</div>
+    <div class="cad-page">07</div>
+    <div class="cad-page">08</div>
+    <div class="cad-page divider">09</div>
+    <div class="cad-page quote">10</div>
+    <div class="cad-page">11</div>
+    <div class="cad-page">12</div>
+  </div>
+  <div class="cadence-legend">
+    <span><span class="swatch-mini" style="background: var(--accent);"></span>cover</span>
+    <span><span class="swatch-mini" style="background: var(--accent-tint);"></span>chapter divider</span>
+    <span><span class="swatch-mini" style="background: var(--canvas);"></span>content (incl. stat-anchor, pull-quote)</span>
+  </div>
+</section>
+<hr class="section-divider">
+
+<!-- =============================================
+     7. DENSITY RULES
+     ============================================= -->
+<section>
+  <p class="anchor">07 / 08</p>
+  <p class="section-eyebrow">Quantitative limits</p>
+  <h2 class="section-title">Density limits</h2>
+  <p class="section-desc">
+    A document violates Quire when any of these limits is exceeded. They prevent
+    the most common AI failure mode: treating every page as if it were the
+    most important page.
+  </p>
+
+  <table class="density-rules">
+    <thead>
+      <tr>
+        <th>Element</th>
+        <th>Limit</th>
+        <th>Why</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Callouts (Exercise / Note / Think)</td>
+        <td class="num">≤ 2 per spread</td>
+        <td class="why">Three or more makes the page feel like an annotated lesson, not a chapter.</td>
+      </tr>
+      <tr>
+        <td>Pull-quote pages</td>
+        <td class="num">≤ 1 per chapter</td>
+        <td class="why">Pull-quotes punctuate. Two in a chapter becomes decoration.</td>
+      </tr>
+      <tr>
+        <td>Stat-anchor pages</td>
+        <td class="num">≤ 2 per document</td>
+        <td class="why">Stats anchor; over-use turns the document into an infographic.</td>
+      </tr>
+      <tr>
+        <td>Accent surface (per page)</td>
+        <td class="num">judgment call</td>
+        <td class="why">The 5 % cap was retired. The principle holds: one accent should still feel scarce.</td>
+      </tr>
+      <tr>
+        <td>Inline <code>.hl</code> highlights</td>
+        <td class="num">≤ 2 per page</td>
+        <td class="why">Highlight everything = highlight nothing.</td>
+      </tr>
+      <tr>
+        <td>Visual reset (cadence)</td>
+        <td class="num">every 5–7 content pages</td>
+        <td class="why">Beyond seven, readers lose orientation in long documents.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+<hr class="section-divider">
+
+<!-- =============================================
+     8. 10 INVARIANTS
+     ============================================= -->
+<section>
+  <p class="anchor">08 / 08</p>
+  <p class="section-eyebrow">Hard rules</p>
+  <h2 class="section-title">The 10 invariants</h2>
+  <p class="section-desc">
+    The rules Quire will not break. Each has a real cost — think before
+    overriding any of them.
+  </p>
+
+  <ol class="invariants">
+    <li>Cool canvas <code>#f6f8fb</code>, never pure white, never a warm cream.</li>
+    <li>Sky blue <code>#3a82c4</code> is the only chromatic color — no second hue.</li>
+    <li>All grays cool-toned (<code>B ≥ G ≥ R</code>). No warm yellow-brown grays.</li>
+    <li>One serif family carries hierarchy. Sans only for UI chrome.</li>
+    <li>Two weights only: 400 / 500. No bold, no italic body.</li>
+    <li>Typography mechanics: titles tight, eyebrows loose, body zero.</li>
+    <li>Chapter dividers use <code>--accent-tint</code>, never full-saturation.</li>
+    <li>No shadows, no gradients, no blur. <code>border-radius</code> ≤ 3pt.</li>
+    <li>No personal-brand chrome — no avatars, badges, signature boxes.</li>
+    <li>Every callout has a label; unlabelled blockquotes drift into decoration.</li>
+  </ol>
+</section>
+
+<footer style="margin-top: 80px; padding-top: 36px; border-top: 1px solid var(--rule); font-family: var(--font-sans); font-size: 12px; color: var(--ink-muted); line-height: 1.7;">
+  <p style="margin: 0 0 8px;">
+    <span style="font-family: var(--font-serif); font-size: 16px; font-weight: 500; color: var(--ink); letter-spacing: -0.012em;">Quire</span>
+    · A design system for editorial documents · v1 · 2026
+  </p>
+  <p style="margin: 0 0 8px;">
+    <a href="https://github.com/FoundDream/Quire" style="color: var(--accent-deep); text-decoration: none; border-bottom: 1px solid var(--accent-tint);" target="_blank" rel="noopener">GitHub</a>
+    &nbsp;·&nbsp;
+    <a href="https://github.com/FoundDream/Quire/blob/main/LICENSE" style="color: var(--accent-deep); text-decoration: none; border-bottom: 1px solid var(--accent-tint);" target="_blank" rel="noopener">MIT License</a>
+  </p>
+  <p style="margin: 0;">Edit <code>:root</code> in <code>index.html</code> to retheme; every section above is composed from those variables.</p>
+</footer>
+
+</main>
+
+</body>
+</html>

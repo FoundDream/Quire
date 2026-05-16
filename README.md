@@ -1,45 +1,63 @@
 <div align="center">
   <h1>Quire</h1>
-  <p><b>The playbook, bound.</b></p>
-  <p>A constraint system for multi-page playbooks, white papers, and editorial PDFs.</p>
+  <p><b>One sky-blue, four formats, no second color.</b></p>
+  <p>A cold-toned, chromatically monochrome design system for editorial documents.</p>
 </div>
 
-## Why
+## What it is
 
-A _quire_ is the printer's term for a bundle of folded sheets stitched into a single signature — the smallest unit of a bound book.
+Quire is a constraint system for editorial documents — playbooks, white papers, resumes, single-page reports — that share one design language and produce print-ready PDFs. Cool canvas, single sky-blue accent, serif carries hierarchy, no second color anywhere.
+
+## Format profiles
+
+| Profile      | Pages | Format             | Cadence              |
+| ------------ | ----- | ------------------ | -------------------- |
+| Playbook     | 10–80 | 11×8.5in landscape | Reset every 5–7 pages |
+| White paper  | 8–30  | A4 portrait        | Reset every 5–7 pages |
+| Resume       | 1–2   | A4 / Letter        | No cadence rule      |
+| Single-page  | 1     | A4 portrait        | No cadence rule      |
+
+Today, only the playbook profile is implemented; others share the same palette and typography.
+
+## Palette
+
+```
+canvas       #f6f8fb     cool white, never pure white
+ink          #16181d     primary text, cool-toned near-black
+accent       #3a82c4     sky blue — the only chromatic color
+accent-tint  #b8d6f0     chapter divider fill, tag background
+accent-deep  #2a6299     body links, AA-passing accent text
+```
+
+The accent is locked. There is no palette to pick from, and no second chromatic hue allowed.
 
 ## Structure
 
-- **`SKILL.md`** — the agent's entry point: triggers, decision steps, page-sequence rules
-- **`CHEATSHEET.md`** — one-page quick reference for the 10 invariants
-- **`references/`** — full design spec, component library, writing voice, anti-patterns, production runbook
-- **`assets/templates/`** — bilingual HTML templates (EN + ZH) ready to fill
-- **`scripts/`** — build and lint utilities, font verification, packaging
-
-## Accent palette
-
-```
-clay   #d97757    warm, narrative (default)
-sage   #629987    calm, operations-focused
-iris   #827dbd    strategic, future-facing
-ink    #1B365D    formal, financial
-rust   #a04b3a    editorial, opinionated
-```
-
-One accent color per document, ≤ 5 % of total surface area. Chapter dividers use the lightened tint.
+- **`SKILL.md`** — agent entry point: triggers, decision steps, 10 invariants
+- **`CHEATSHEET.md`** — one-page quick reference
+- **`references/`** — full spec (design / writing / anti-patterns / production)
+- **`assets/templates/`** — fillable HTML templates
+- **`assets/output/`** — rendered demos (the self-introducing playbook lives here)
+- **`scripts/`** — build (`build.sh`), linter (`check.py`)
 
 ## Triggers
 
-In any chat, Quire activates on:
+- "做一份 playbook / 白皮书 / 简历 / 报告"
+- "build me a playbook / typeset a white paper / make a resume / single-page report"
+- "turn this content into an editorial PDF"
 
-- "做一份 playbook / 白皮书 / founder 指南"
-- "build me a playbook / typeset a white paper / make this a founder's guide"
-- "turn this content into an editorial PDF / chapter dividers"
-- Mentions of multi-page editorial output ≥ 10 pages
+## What it deliberately is not
 
-## Inspired by
+Quire is the opposite of:
 
-Structure and some design principles learned from [tw93/kami](https://github.com/tw93/kami).
+- **LinkedIn** — no saturated corporate blue, no orange highlights, no personal-brand chrome
+- **Default Word doc** — no pure white, no Calibri, no cool blue-gray defaults
+- **Marketing brochure** — no multi-color charts, no gradients, no infographic decoration
+- **Profile / dashboard UI** — no avatar circles, no badges, no card shadows, no pill buttons
+
+## Inspired by, departed from
+
+The repository structure was originally learned from [tw93/kami](https://github.com/tw93/kami). The current palette, single-accent rule, and anti-LinkedIn stance are Quire's own.
 
 ## License
 

@@ -1,36 +1,33 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Playbook Template — Product Discovery sample</title>
+<title>Quire Playbook — Product Discovery sample</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..700,30..100&family=Inter+Tight:wght@400..600&display=swap" rel="stylesheet">
 <style>
-  /* Design tokens — change here to retheme */
+  /* Design tokens — sky blue, single accent, cold-toned */
   :root {
-    --cream:        #faf9f5;   /* 内文奶油底 */
-    --ink:          #1a1a1a;   /* 正文字色 */
-    --ink-soft:     #4a4a4a;   /* 次级字色 */
-    --rule:         #d6d3c8;   /* 分隔线 */
+    --canvas:       #f6f8fb;
+    --canvas-soft:  #eef1f6;
+    --rule:         #dce0e6;
+    --rule-soft:    #e8ebf0;
 
-    /* 章节封面色板（直接从原 PDF 取色） */
-    --c-orange:     #d97757;
-    --c-green:      #629987;
-    --c-purple:     #827dbd;
-    --c-mint:       #bcd1ca;
-    --c-mauve:      #cbcadb;
-    --c-peach:      #f0d5c7;
+    --ink:          #16181d;
+    --ink-soft:     #3d4148;
+    --ink-muted:    #6b6f78;
 
-    /* 字体 —— 用 Fraunces (Tiempos 替代) + Inter Tight (Styrene 替代) */
+    --accent:       #3a82c4;
+    --accent-tint:  #b8d6f0;
+    --accent-deep:  #2a6299;
+
     --font-serif:   "Fraunces", "Tiempos Text", "Source Serif Pro", Georgia, serif;
     --font-sans:    "Inter Tight", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
-    /* Fraunces 可变轴：让 display 用更紧的光学尺寸、低 SOFT 值（更硬朗）*/
-    --serif-display-settings: "opsz" 144, "SOFT" 30;
-    --serif-text-settings:    "opsz" 14,  "SOFT" 50;
+    --serif-display: "opsz" 144, "SOFT" 30;
+    --serif-text:    "opsz" 14,  "SOFT" 50;
 
-    /* 页面尺寸（横版，接近原 PDF 11×8.5） */
     --page-w: 1100px;
     --page-h: 850px;
   }
@@ -38,9 +35,9 @@
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
   body {
-    background: #e6e4dc;
+    background: #e5e8ec;
     font-family: var(--font-serif);
-    font-variation-settings: var(--serif-text-settings);
+    font-variation-settings: var(--serif-text);
     color: var(--ink);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -52,45 +49,41 @@
     width: var(--page-w);
     height: var(--page-h);
     margin: 24px auto;
-    background: var(--cream);
+    background: var(--canvas);
     position: relative;
     overflow: hidden;
     page-break-after: always;
   }
   @media screen {
-    /* Subtle screen-only depth via outline (not box-shadow, lint-safe) */
     .page { outline: 1px solid var(--rule); }
   }
 
   /* Cover / chapter divider */
   .cover {
-    color: #fff;
     padding: 90px 110px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end; /* 文字偏下 */
+    justify-content: flex-end;
+    color: var(--ink);
   }
-  .cover.bg-orange  { background: var(--c-orange); color: #fff; }
-  .cover.bg-green   { background: var(--c-green);  color: #fff; }
-  .cover.bg-purple  { background: var(--c-purple); color: #fff; }
-  .cover.bg-mint    { background: var(--c-mint);   color: var(--ink); }
-  .cover.bg-mauve   { background: var(--c-mauve);  color: var(--ink); }
-  .cover.bg-peach   { background: var(--c-peach);  color: var(--ink); }
+  .cover.bg-accent       { background: var(--accent);      color: #fff; }
+  .cover.bg-accent-tint  { background: var(--accent-tint); color: var(--ink); }
 
   .cover .chapter-num {
     font-family: var(--font-sans);
     font-size: 18px;
-    letter-spacing: .04em;
+    letter-spacing: 0.06em;
     margin: 0 0 28px;
-    opacity: .92;
-    font-weight: 400;
+    opacity: 0.92;
+    font-weight: 500;
+    text-transform: uppercase;
   }
   .cover h1 {
     font-family: var(--font-serif);
-    font-variation-settings: var(--serif-display-settings);
+    font-variation-settings: var(--serif-display);
     font-size: 78px;
     line-height: 1.04;
-    font-weight: 360;
+    font-weight: 500;
     letter-spacing: -0.022em;
     margin: 0 0 12px;
     max-width: 14ch;
@@ -100,99 +93,115 @@
     right: 60px;
     bottom: 50px;
     font-family: var(--font-sans);
-    font-size: 14px;
-    opacity: .85;
+    font-size: 13px;
+    opacity: 0.85;
+    letter-spacing: 0.04em;
   }
 
-  /* 主封面（区别于章节封面）—— 标题更大、副标题在下 */
-  .cover-main h1 { font-size: 96px; max-width: 12ch; letter-spacing: -0.028em; font-weight: 340; }
+  /* Main cover — larger title, with subtitle */
+  .cover-main h1 {
+    font-size: 96px;
+    max-width: 12ch;
+    letter-spacing: -0.028em;
+    font-weight: 500;
+  }
   .cover-main .subtitle {
     font-family: var(--font-sans);
     font-size: 22px;
     margin-top: 24px;
-    opacity: .9;
-    max-width: 30ch;
+    opacity: 0.9;
+    max-width: 32ch;
+    font-weight: 400;
   }
 
   /* Content page */
   .content {
-    padding: 70px 130px 70px 90px; /* 左右非对称留白 */
+    padding: 70px 130px 70px 90px;
     color: var(--ink);
   }
   .content .chapter-tag {
     font-family: var(--font-sans);
     font-size: 13px;
-    color: var(--ink-soft);
-    letter-spacing: .03em;
+    color: var(--ink-muted);
+    letter-spacing: 0.04em;
     margin: 0 0 8px;
+    text-transform: uppercase;
   }
   .content h2 {
     font-family: var(--font-serif);
     font-variation-settings: "opsz" 60, "SOFT" 40;
     font-size: 38px;
     line-height: 1.12;
-    font-weight: 380;
+    font-weight: 500;
     letter-spacing: -0.02em;
     margin: 0 0 36px;
   }
   .content h3 {
     font-family: var(--font-sans);
-    font-size: 16px;
-    font-weight: 600;
-    margin: 28px 0 10px;
-    letter-spacing: -0.01em;
+    font-size: 14px;
+    font-weight: 500;
+    margin: 28px 0 8px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--accent);
   }
   .content p {
     font-family: var(--font-serif);
-    font-variation-settings: var(--serif-text-settings);
+    font-variation-settings: var(--serif-text);
     font-size: 15.5px;
-    line-height: 1.7;
+    line-height: 1.65;
     letter-spacing: -0.003em;
     margin: 0 0 14px;
+    max-width: 62ch;
   }
   .content ul, .content ol {
     font-family: var(--font-serif);
     font-size: 15.5px;
-    line-height: 1.65;
+    line-height: 1.6;
     padding-left: 22px;
     margin: 8px 0 16px;
+    max-width: 60ch;
   }
   .content li { margin-bottom: 6px; }
-  .content li::marker { color: var(--ink-soft); }
+  .content li::marker { color: var(--ink-muted); }
 
-  /* 强调段：粗体起头 */
-  .lede strong { font-weight: 600; }
+  .lede { color: var(--ink-soft); }
+  .lede strong { font-weight: 500; color: var(--ink); }
 
-  /* Callout：Exercise / Note / Think */
+  /* Callout — Exercise / Note / Think */
   .callout {
     font-family: var(--font-serif);
     font-size: 15px;
     line-height: 1.6;
     padding: 4px 0 4px 16px;
-    border-left: 2px solid var(--ink);
+    border-left: 2px solid var(--accent);
     margin: 14px 0 18px;
+    max-width: 60ch;
   }
   .callout .label {
     font-family: var(--font-sans);
-    font-weight: 600;
-    font-size: 13px;
-    letter-spacing: .04em;
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    margin-right: 6px;
+    color: var(--accent);
+    margin-right: 8px;
   }
   .callout.note {
-    border-color: var(--ink-soft);
+    border-color: var(--ink-muted);
     color: var(--ink-soft);
     font-size: 13.5px;
   }
+  .callout.note .label { color: var(--ink-muted); }
 
-  /* 对照表 */
+  /* Comparison table */
   table.compare {
     width: 100%;
     border-collapse: collapse;
     font-family: var(--font-sans);
     font-size: 13.5px;
     margin: 20px 0;
+    max-width: 820px;
   }
   table.compare th,
   table.compare td {
@@ -202,27 +211,33 @@
     vertical-align: top;
   }
   table.compare th {
-    font-weight: 600;
-    border-bottom: 1.5px solid var(--ink);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 12px;
+    color: var(--accent);
+    border-bottom: 1.5px solid var(--accent);
   }
+  table.compare td { font-family: var(--font-serif); font-size: 14.5px; }
 
-  /* 页脚：页码 */
+  /* Footer (page number) */
   .content .footer {
     position: absolute;
     bottom: 36px;
     right: 130px;
     font-family: var(--font-sans);
     font-size: 12px;
-    color: var(--ink-soft);
+    color: var(--ink-muted);
+    letter-spacing: 0.04em;
   }
 
   /* Print / PDF export */
   @page {
-    size: 11in 8.5in;   /* 横版 letter，匹配原 PDF */
+    size: 11in 8.5in;
     margin: 0;
   }
   @media print {
-    body { background: var(--cream); }
+    body { background: var(--canvas); }
     .page {
       margin: 0;
       outline: none;
@@ -234,23 +249,23 @@
 </head>
 <body>
 
-<!-- 1. Main cover -->
-<section class="page cover cover-main bg-orange">
+<!-- 1. Main cover — full sky-blue, white title -->
+<section class="page cover cover-main bg-accent">
   <p class="chapter-num">A Product Discovery Playbook · 2026</p>
   <h1>Finding Product-Market Fit</h1>
   <p class="subtitle">A 90-day discipline for early-stage product teams.</p>
   <span class="page-num">01</span>
 </section>
 
-<!-- 2. Chapter divider — dark bg, reverse text -->
-<section class="page cover bg-green">
+<!-- 2. Chapter divider — accent-tint fill, ink text -->
+<section class="page cover bg-accent-tint">
   <p class="chapter-num">Chapter 02</p>
   <h1>Why most discovery work doesn't stick</h1>
   <span class="page-num">05</span>
 </section>
 
-<!-- 3. Chapter divider — light bg, dark text -->
-<section class="page cover bg-mint">
+<!-- 3. Chapter divider -->
+<section class="page cover bg-accent-tint">
   <p class="chapter-num">Chapter 03</p>
   <h1>The Validation Loop</h1>
   <span class="page-num">08</span>
@@ -336,7 +351,7 @@
     </tbody>
   </table>
 
-  <p style="color: var(--ink-soft); font-size: 14px; margin-top: 20px;">
+  <p style="color: var(--ink-muted); font-size: 14px; margin-top: 20px;">
     The cheapest test that can kill the hypothesis is always the right one.
     Don't skip a five-call discovery round to jump straight to a prototype.
   </p>
