@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Quire · White Paper · The Validation Discipline</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..700,30..100&family=Inter+Tight:wght@400..600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* Design tokens */
+  :root {
+    --canvas:       #f6f8fb;
+    --canvas-soft:  #eef1f6;
+    --rule:         #dce0e6;
+    --rule-soft:    #e8ebf0;
+
+    --ink:          #16181d;
+    --ink-soft:     #3d4148;
+    --ink-muted:    #6b6f78;
+    --ink-faint:    #8c919b;
+
+    --accent:       #3a82c4;
+    --accent-tint:  #b8d6f0;
+    --accent-deep:  #2a6299;
+
+    --font-serif:   "Fraunces", "Tiempos Text", "Source Serif Pro", Georgia, serif;
+    --font-sans:    "Inter Tight", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --font-mono:    "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+
+    --serif-display: "opsz" 144, "SOFT" 30;
+    --serif-text:    "opsz" 14,  "SOFT" 50;
+
+    --stroke-rule:   1px;
+    --stroke-accent: 1.5px;
+    --stroke-quote:  2px;
+
+    --r-none: 0;
+    --r-sm:   2pt;
+    --r-md:   3pt;
+
+    /* A4 portrait at 96dpi */
+    --page-w: 794px;
+    --page-h: 1123px;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: #e5e8ec;
+    font-family: var(--font-serif);
+    font-variation-settings: var(--serif-text);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Page container */
+  .page {
+    width: var(--page-w);
+    height: var(--page-h);
+    margin: 24px auto;
+    background: var(--canvas);
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+  }
+  @media screen {
+    .page { outline: 1px solid var(--rule); }
+  }
+
+  /* Cover / chapter divider */
+  .cover {
+    padding: 96px 72px 110px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    color: var(--ink);
+  }
+  .cover.bg-accent       { background: var(--accent);      color: #fff; }
+  .cover.bg-accent-tint  { background: var(--accent-tint); color: var(--ink); }
+
+  .cover .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    margin: 0 0 28px;
+    opacity: 0.92;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+  .cover h1 {
+    font-family: var(--font-serif);
+    font-variation-settings: var(--serif-display);
+    font-size: 60px;
+    line-height: 1.04;
+    font-weight: 500;
+    letter-spacing: -0.024em;
+    margin: 0 0 14px;
+    max-width: 12ch;
+  }
+  .cover-main h1 {
+    font-size: 76px;
+    max-width: 10ch;
+    letter-spacing: -0.028em;
+  }
+  .cover-main .subtitle {
+    font-family: var(--font-sans);
+    font-size: 18px;
+    margin-top: 22px;
+    opacity: 0.9;
+    max-width: 30ch;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  /* TOC */
+  .toc { padding: 110px 91px 91px; }
+  .toc .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 30px;
+    font-weight: 500;
+  }
+  .toc h2 {
+    font-family: var(--font-serif);
+    font-variation-settings: "opsz" 60, "SOFT" 40;
+    font-size: 38px;
+    line-height: 1.12;
+    font-weight: 500;
+    letter-spacing: -0.022em;
+    margin: 0 0 42px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { padding: 0; margin: 0; }
+  .toc-item {
+    display: flex;
+    align-items: baseline;
+    padding: 12px 0;
+    border-bottom: var(--stroke-rule) solid var(--rule);
+    font-family: var(--font-serif);
+    font-size: 16px;
+    color: inherit;
+    text-decoration: none;
+  }
+  .toc-num {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    color: var(--accent);
+    width: 48px;
+    letter-spacing: 0.04em;
+    font-size: 13px;
+  }
+  .toc-title { flex: 1; color: var(--ink); }
+  .toc-page {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Content page */
+  .content { padding: 83px 91px; color: var(--ink); }
+  .content .chapter-tag {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    color: var(--ink-muted);
+    letter-spacing: 0.06em;
+    margin: 0 0 8px;
+    text-transform: uppercase;
+  }
+  .content h2 {
+    font-family: var(--font-serif);
+    font-variation-settings: "opsz" 60, "SOFT" 40;
+    font-size: 32px;
+    line-height: 1.15;
+    font-weight: 500;
+    letter-spacing: -0.018em;
+    margin: 0 0 28px;
+    max-width: 22ch;
+  }
+  .content h3 {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 500;
+    margin: 24px 0 8px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .content p {
+    font-family: var(--font-serif);
+    font-variation-settings: var(--serif-text);
+    font-size: 13.5px;
+    line-height: 1.65;
+    letter-spacing: -0.003em;
+    margin: 0 0 12px;
+    max-width: 58ch;
+  }
+  .content ul, .content ol {
+    font-family: var(--font-serif);
+    font-size: 13.5px;
+    line-height: 1.6;
+    padding-left: 20px;
+    margin: 8px 0 14px;
+    max-width: 56ch;
+  }
+  .content li { margin-bottom: 6px; }
+  .content li::marker { color: var(--ink-muted); }
+
+  .lede { color: var(--ink-soft); font-size: 14.5px; }
+  .lede strong { font-weight: 500; color: var(--ink); }
+
+  /* Callout */
+  .callout {
+    font-family: var(--font-serif);
+    font-size: 13.5px;
+    line-height: 1.6;
+    padding: 4px 0 4px 14px;
+    border-left: var(--stroke-quote) solid var(--accent);
+    margin: 14px 0 16px;
+    max-width: 56ch;
+  }
+  .callout .label {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-right: 8px;
+  }
+  .callout.note {
+    border-color: var(--ink-muted);
+    color: var(--ink-soft);
+    font-size: 12.5px;
+  }
+  .callout.note .label { color: var(--ink-muted); }
+
+  /* Stat-anchor page */
+  .stat-page {
+    padding: 100px 91px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .stat-page .chapter-tag {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    color: var(--ink-muted);
+    letter-spacing: 0.06em;
+    margin: 0 0 50px;
+    text-transform: uppercase;
+  }
+  .stat-figure {
+    font-family: var(--font-serif);
+    font-variation-settings: var(--serif-display);
+    font-size: 180px;
+    line-height: 0.9;
+    color: var(--accent);
+    font-weight: 500;
+    letter-spacing: -0.04em;
+    font-variant-numeric: tabular-nums;
+    margin: 0 0 22px;
+  }
+  .stat-label {
+    font-family: var(--font-serif);
+    font-size: 19px;
+    line-height: 1.45;
+    color: var(--ink);
+    max-width: 28ch;
+    margin: 0 0 12px;
+    font-weight: 400;
+  }
+  .stat-caption {
+    font-family: var(--font-sans);
+    font-size: 11.5px;
+    color: var(--ink-muted);
+    max-width: 44ch;
+    margin: 8px 0 0;
+    line-height: 1.55;
+  }
+
+  /* Compare table */
+  table.compare {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-sans);
+    font-size: 12.5px;
+    margin: 16px 0;
+  }
+  table.compare th, table.compare td {
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: var(--stroke-rule) solid var(--rule);
+    vertical-align: top;
+  }
+  table.compare th {
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 11px;
+    color: var(--accent);
+    border-bottom: var(--stroke-accent) solid var(--accent);
+  }
+  table.compare td { font-family: var(--font-serif); font-size: 13px; }
+
+  /* Pull-quote page */
+  .pullquote {
+    padding: 140px 91px 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .pullquote .chapter-tag {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    color: var(--ink-muted);
+    letter-spacing: 0.06em;
+    margin: 0 0 56px;
+    text-transform: uppercase;
+  }
+  .pullquote blockquote {
+    font-family: var(--font-serif);
+    font-variation-settings: "opsz" 80, "SOFT" 35;
+    font-size: 30px;
+    line-height: 1.28;
+    font-weight: 500;
+    letter-spacing: -0.014em;
+    color: var(--ink);
+    margin: 0;
+    padding: 6px 0 6px 22px;
+    border-left: var(--stroke-quote) solid var(--accent);
+    max-width: 22ch;
+  }
+  .pullquote cite {
+    display: block;
+    font-family: var(--font-sans);
+    font-style: normal;
+    font-size: 12px;
+    color: var(--ink-muted);
+    margin-top: 32px;
+    margin-left: 24px;
+    letter-spacing: 0.04em;
+  }
+
+  /* Colophon */
+  .colophon { padding: 110px 91px; }
+  .colophon .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 30px;
+    font-weight: 500;
+  }
+  .colophon h2 {
+    font-family: var(--font-serif);
+    font-variation-settings: "opsz" 60, "SOFT" 40;
+    font-size: 30px;
+    line-height: 1.15;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    margin: 0 0 28px;
+  }
+  .colophon p {
+    font-family: var(--font-serif);
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin: 0 0 12px;
+    max-width: 58ch;
+  }
+  .colophon .file-list {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--ink-muted);
+    margin-top: 28px;
+    line-height: 1.9;
+  }
+
+  /* Running header */
+  .running-head {
+    position: absolute;
+    top: 40px;
+    left: 91px;
+    right: 91px;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--ink-faint);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* Page number */
+  .page-num {
+    position: absolute;
+    bottom: 40px;
+    right: 91px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--ink-faint);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.04em;
+  }
+
+  /* Cover / divider: no chrome (per design system) */
+  .cover .running-head, .cover .page-num { display: none; }
+  /* Stat-anchor & pull-quote: page # only (header dropped) */
+  .stat-page .running-head, .pullquote .running-head { display: none; }
+
+  /* Print / PDF export */
+  @page { size: A4; margin: 0; }
+  @media print {
+    body { background: var(--canvas); }
+    .page {
+      margin: 0;
+      outline: none;
+      width: 210mm;
+      height: 297mm;
+    }
+  }
+
+  /* PDF download button — hidden in print */
+  .view-pdf {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    padding: 8px 14px;
+    background: var(--canvas, #f6f8fb);
+    color: var(--accent-deep, #2a6299);
+    border: 1.5px solid var(--accent, #3a82c4);
+    font-family: var(--font-sans, "Inter Tight", sans-serif);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2pt;
+    transition: background 0.15s, color 0.15s;
+  }
+  .view-pdf:hover {
+    background: var(--accent, #3a82c4);
+    color: #fff;
+  }
+  @media print {
+    .view-pdf { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<a class="view-pdf" href="quire-white-paper.pdf" target="_blank" rel="noopener">View PDF →</a>
+
+<!-- 01 · Cover -->
+<section class="page cover cover-main bg-accent">
+  <p class="eyebrow">A Quire White Paper · 2026</p>
+  <h1>The Validation Discipline</h1>
+  <p class="subtitle">Why most product discovery rationalizes the roadmap teams already have — and how to design tests that actually kill weak hypotheses.</p>
+</section>
+
+<!-- 02 · TOC -->
+<section class="page toc">
+  <p class="eyebrow">Contents</p>
+  <h2>The Validation Discipline</h2>
+  <ul class="toc-list">
+    <li><a class="toc-item" href="#sec-01"><span class="toc-num">01</span><span class="toc-title">Why discovery breaks down</span><span class="toc-page">03</span></a></li>
+    <li><a class="toc-item" href="#sec-02"><span class="toc-num">02</span><span class="toc-title">Turning weak signals into testable hypotheses</span><span class="toc-page">04</span></a></li>
+    <li><a class="toc-item" href="#sec-03"><span class="toc-num">03</span><span class="toc-title">The cost of unkilled hypotheses</span><span class="toc-page">05</span></a></li>
+    <li><a class="toc-item" href="#sec-04"><span class="toc-num">04</span><span class="toc-title">Picking the right validation method</span><span class="toc-page">07</span></a></li>
+    <li><a class="toc-item" href="#sec-05"><span class="toc-num">05</span><span class="toc-title">Method selection &amp; decision rules</span><span class="toc-page">08</span></a></li>
+    <li><a class="toc-item" href="#sec-06"><span class="toc-num">06</span><span class="toc-title">Colophon &amp; references</span><span class="toc-page">10</span></a></li>
+  </ul>
+</section>
+
+<!-- 03 · Chapter 01 divider -->
+<section id="sec-01" class="page cover bg-accent-tint">
+  <p class="eyebrow">Chapter 01</p>
+  <h1>Where Discovery Breaks Down</h1>
+</section>
+
+<!-- 04 · Standard content -->
+<section id="sec-02" class="page content">
+  <div class="running-head"><span>Quire · The Validation Discipline</span><span>Ch 02 · Signals → Hypotheses</span></div>
+
+  <p class="chapter-tag">Chapter 02 · Signals → Hypotheses</p>
+  <h2>Turning weak signals into testable hypotheses</h2>
+
+  <p class="lede">
+    Every team collects customer signals &mdash; interviews, support tickets, churn calls.
+    Most treat them as confirmation. <strong>The discipline that produces product-market
+    fit is the opposite</strong>: take the noisiest signal, restate it as a falsifiable
+    hypothesis, and design the cheapest test that could kill it.
+  </p>
+
+  <h3>Restate the signal as a hypothesis</h3>
+  <p>
+    A signal is observation; a hypothesis is a prediction with a fail condition.
+    "Users want better onboarding" is a signal. "If we shorten onboarding from
+    nine steps to three, day-7 retention will rise by &ge; 5 points" is a hypothesis.
+    The difference is whether the statement can be wrong in a way you can measure.
+  </p>
+
+  <div class="callout">
+    <span class="label">Exercise</span>
+    Pick the loudest signal from last week's interviews. Rewrite it as one sentence
+    containing a metric, a magnitude, and a timeframe. If you can't, the signal
+    isn't sharp enough to act on yet &mdash; keep collecting.
+  </div>
+
+  <h3>Design tests you can finish in a week</h3>
+  <ul>
+    <li>One hypothesis, one metric, one decision rule &mdash; written before the test starts.</li>
+    <li>If the test takes more than a sprint, you're building, not validating.</li>
+    <li>Negative results count. Track them &mdash; they're cheaper to act on than positive ones.</li>
+  </ul>
+
+  <div class="callout note">
+    <span class="label">Note</span>
+    A discovery cycle that produces no killed hypotheses isn't validating &mdash; it's
+    rationalizing the roadmap you already have.
+  </div>
+
+  <span class="page-num">04</span>
+</section>
+
+<!-- 05 · Stat-anchor -->
+<section id="sec-03" class="page stat-page">
+  <p class="chapter-tag">Chapter 02 · Why this matters</p>
+  <div class="stat-figure">42%</div>
+  <p class="stat-label">of startups failed because they built something nobody wanted — before agentic coding made shipping a prototype an afternoon's work.</p>
+  <p class="stat-caption">Source: CB Insights, 2024 post-mortem analysis of 110 failed startups. The shortest distance from idea to wrong product has never been smaller.</p>
+  <span class="page-num">05</span>
+</section>
+
+<!-- 06 · Chapter 02 divider -->
+<section class="page cover bg-accent-tint">
+  <p class="eyebrow">Chapter 03</p>
+  <h1>Choosing the Right Test</h1>
+</section>
+
+<!-- 07 · Standard content -->
+<section id="sec-04" class="page content">
+  <div class="running-head"><span>Quire · The Validation Discipline</span><span>Ch 03 · Choosing the Test</span></div>
+
+  <p class="chapter-tag">Chapter 03 · Choosing the Test</p>
+  <h2>What you're measuring decides the method</h2>
+
+  <p class="lede">
+    Discovery tools are not interchangeable. A method that's right for measuring
+    desire is wrong for measuring willingness to pay. The most common mistake is
+    picking a method by familiarity, not by question.
+  </p>
+
+  <h3>Three questions, three tools</h3>
+  <p>
+    Every discovery question collapses into one of three shapes: is the problem
+    real, will the user commit, and can the solution work. Each has a single
+    cheapest test that answers it.
+  </p>
+
+  <ul>
+    <li><strong>Real and frequent</strong> &mdash; interviews surface the unprompted workarounds users have already built.</li>
+    <li><strong>Worth paying for</strong> &mdash; pre-sales or LOIs are the only signal that survives wishful thinking.</li>
+    <li><strong>Usable as designed</strong> &mdash; a prototype reveals where assumptions break in 30 minutes of observation.</li>
+  </ul>
+
+  <div class="callout">
+    <span class="label">Think</span>
+    Before commissioning the next test, write down which of the three questions
+    it's answering. If it's answering two, you're conflating discovery with
+    delivery &mdash; split the work into separate cycles.
+  </div>
+
+  <span class="page-num">07</span>
+</section>
+
+<!-- 08 · Comparison content -->
+<section id="sec-05" class="page content">
+  <div class="running-head"><span>Quire · The Validation Discipline</span><span>Ch 03 · Choosing the Test</span></div>
+
+  <p class="chapter-tag">Chapter 03 · Choosing the Test</p>
+  <h2>Method by question</h2>
+
+  <p class="lede">
+    Reference table for the three shapes above. The cheapest test that can kill
+    the hypothesis is always the right one &mdash; don't skip a five-call discovery
+    round to jump straight to a prototype.
+  </p>
+
+  <table class="compare">
+    <thead>
+      <tr>
+        <th style="width: 32%">If you're testing&hellip;</th>
+        <th style="width: 26%">Use</th>
+        <th>Why this and not another</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Whether the problem is real and frequent</td>
+        <td><strong>Discovery interview</strong></td>
+        <td>Open-ended; surfaces unprompted language and workarounds</td>
+      </tr>
+      <tr>
+        <td>Willingness to pay or commit</td>
+        <td><strong>Pre-sale / LOI</strong></td>
+        <td>Behavior is the only honest signal; opinions inflate</td>
+      </tr>
+      <tr>
+        <td>Whether a specific solution is usable</td>
+        <td><strong>Prototype test</strong></td>
+        <td>Concrete artifact; reveals where assumptions break</td>
+      </tr>
+      <tr>
+        <td>Whether the market is large enough</td>
+        <td><strong>Cohort math + LOIs</strong></td>
+        <td>Top-down market sizing alone is a brochure, not a test</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p style="color: var(--ink-muted); font-size: 12px; margin-top: 18px;">
+    The table is intentionally exhaustive only for these four questions. Adding
+    a fifth row should mean you've identified a fifth shape of question, not a
+    fifth tool for the same one.
+  </p>
+
+  <span class="page-num">08</span>
+</section>
+
+<!-- 09 · Pull-quote -->
+<section class="page pullquote">
+  <p class="chapter-tag">Chapter 03 · Closing argument</p>
+  <blockquote>
+    "If a discovery cycle produces no killed hypotheses, you weren't validating — you were rationalizing the roadmap."
+  </blockquote>
+  <cite>— The Validation Discipline, Chapter 03</cite>
+  <span class="page-num">09</span>
+</section>
+
+<!-- 10 · Colophon -->
+<section id="sec-06" class="page colophon">
+  <p class="eyebrow">Colophon</p>
+  <h2>About this paper</h2>
+
+  <p>
+    <strong>The Validation Discipline</strong> is a Quire white paper template
+    — a 10-page A4-portrait demonstration of Quire's editorial design system
+    applied to long-form analytical writing. The argument and citations are
+    illustrative; the typesetting is production.
+  </p>
+
+  <p>
+    Typeset with <strong>Fraunces</strong> (variable serif, opsz + SOFT axes)
+    for hierarchy, <strong>Inter Tight</strong> for UI chrome, and
+    <strong>JetBrains Mono</strong> for running headers and page numbers. Single
+    accent: sky blue <code>#3a82c4</code>. No second chromatic hue anywhere in
+    the document.
+  </p>
+
+  <div class="file-list">
+    Template &nbsp;&nbsp;assets/templates/white-paper.html<br>
+    Source &nbsp;&nbsp;&nbsp;&nbsp;assets/output/quire-white-paper.html<br>
+    Print &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assets/output/quire-white-paper.pdf<br>
+    System &nbsp;&nbsp;&nbsp;&nbsp;references/design.md
+  </div>
+
+  <span class="page-num">10</span>
+</section>
+
+</body>
+</html>

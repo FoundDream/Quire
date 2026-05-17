@@ -236,9 +236,38 @@
       height: 297mm;
     }
   }
+
+  /* PDF download button — hidden in print */
+  .view-pdf {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    padding: 8px 14px;
+    background: var(--canvas, #f6f8fb);
+    color: var(--accent-deep, #2a6299);
+    border: 1.5px solid var(--accent, #3a82c4);
+    font-family: var(--font-sans, "Inter Tight", sans-serif);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2pt;
+    transition: background 0.15s, color 0.15s;
+  }
+  .view-pdf:hover {
+    background: var(--accent, #3a82c4);
+    color: #fff;
+  }
+  @media print {
+    .view-pdf { display: none; }
+  }
 </style>
 </head>
 <body>
+
+<a class="view-pdf" href="quire-single-page.pdf" target="_blank" rel="noopener">View PDF →</a>
 
 <section class="page">
 

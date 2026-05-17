@@ -1,0 +1,895 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Quire · A Playbook for Editorial PDFs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..700,30..100&family=Inter+Tight:wght@400..600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Design tokens — sky blue, single accent, cold-toned */
+      :root {
+        --canvas: #f6f8fb;
+        --canvas-soft: #eef1f6;
+        --ink: #16181d;
+        --ink-soft: #3d4148;
+        --ink-muted: #6b6f78;
+        --rule: #dce0e6;
+
+        --accent: #3a82c4;
+        --accent-tint: #b8d6f0;
+        --accent-deep: #2a6299;
+
+        --font-serif:
+          "Fraunces", "Tiempos Text", "Source Serif Pro", Georgia, serif;
+        --font-sans:
+          "Inter Tight", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+
+        --serif-display: "opsz" 144, "SOFT" 30;
+        --serif-text: "opsz" 14, "SOFT" 50;
+
+        --page-w: 1100px;
+        --page-h: 850px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background: #e5e8ec;
+        font-family: var(--font-serif);
+        font-variation-settings: var(--serif-text);
+        color: var(--ink);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+      }
+
+      /* Page container — screen preview */
+      .page {
+        width: var(--page-w);
+        height: var(--page-h);
+        margin: 24px auto;
+        background: var(--canvas);
+        position: relative;
+        overflow: hidden;
+        page-break-after: always;
+      }
+      @media screen {
+        .page {
+          outline: 1px solid var(--rule);
+        }
+      }
+
+      /* Cover */
+      .cover {
+        padding: 90px 110px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+      .cover.fullbleed-accent {
+        background: var(--accent);
+        color: #fff;
+      }
+      .cover.tint {
+        background: var(--accent-tint);
+        color: var(--ink);
+      }
+
+      .cover .eyebrow {
+        font-family: var(--font-sans);
+        font-size: 14px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin: 0 0 28px;
+        opacity: 0.92;
+        font-weight: 500;
+      }
+      .cover h1 {
+        font-family: var(--font-serif);
+        font-variation-settings: var(--serif-display);
+        font-size: 78px;
+        line-height: 1.04;
+        font-weight: 500;
+        letter-spacing: -0.024em;
+        margin: 0 0 12px;
+        max-width: 14ch;
+      }
+      .cover .subtitle {
+        font-family: var(--font-sans);
+        font-size: 20px;
+        margin-top: 22px;
+        opacity: 0.9;
+        max-width: 36ch;
+        font-weight: 400;
+      }
+      .cover-main h1 {
+        font-size: 100px;
+        max-width: 11ch;
+        letter-spacing: -0.028em;
+      }
+      .cover .page-num {
+        position: absolute;
+        right: 50px;
+        bottom: 44px;
+        font-family: var(--font-sans);
+        font-size: 13px;
+        opacity: 0.8;
+        letter-spacing: 0.04em;
+      }
+
+      /* TOC */
+      .toc {
+        padding: 90px 130px 70px 90px;
+      }
+      .toc .eyebrow {
+        font-family: var(--font-sans);
+        font-size: 13px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin: 0 0 36px;
+        font-weight: 500;
+      }
+      .toc h2 {
+        font-family: var(--font-serif);
+        font-variation-settings:
+          "opsz" 60,
+          "SOFT" 40;
+        font-size: 42px;
+        line-height: 1.1;
+        font-weight: 500;
+        letter-spacing: -0.02em;
+        margin: 0 0 50px;
+      }
+      .toc-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .toc-list li {
+        padding: 0;
+        margin: 0;
+      }
+      .toc-item {
+        display: flex;
+        align-items: baseline;
+        padding: 14px 0;
+        border-bottom: 1px solid var(--rule);
+        font-family: var(--font-serif);
+        font-size: 18px;
+        color: inherit;
+        text-decoration: none;
+      }
+      .toc-num {
+        font-family: var(--font-sans);
+        font-weight: 500;
+        color: var(--accent);
+        width: 56px;
+        letter-spacing: 0.04em;
+      }
+      .toc-title {
+        flex: 1;
+        color: var(--ink);
+      }
+      .toc-page {
+        font-family: var(--font-sans);
+        font-size: 14px;
+        color: var(--ink-muted);
+      }
+
+      /* Content page */
+      .content {
+        padding: 70px 130px 70px 90px;
+        color: var(--ink);
+      }
+      .content .chapter-tag {
+        font-family: var(--font-sans);
+        font-size: 13px;
+        color: var(--ink-muted);
+        letter-spacing: 0.04em;
+        margin: 0 0 8px;
+      }
+      .content h2 {
+        font-family: var(--font-serif);
+        font-variation-settings:
+          "opsz" 60,
+          "SOFT" 40;
+        font-size: 38px;
+        line-height: 1.12;
+        font-weight: 500;
+        letter-spacing: -0.022em;
+        margin: 0 0 32px;
+        max-width: 26ch;
+      }
+      .content h3 {
+        font-family: var(--font-sans);
+        font-size: 14px;
+        font-weight: 500;
+        margin: 26px 0 8px;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        color: var(--accent);
+      }
+      .content p {
+        font-family: var(--font-serif);
+        font-variation-settings: var(--serif-text);
+        font-size: 15.5px;
+        line-height: 1.65;
+        letter-spacing: -0.003em;
+        margin: 0 0 14px;
+        max-width: 60ch;
+      }
+      .content ul,
+      .content ol {
+        font-family: var(--font-serif);
+        font-size: 15.5px;
+        line-height: 1.6;
+        padding-left: 22px;
+        margin: 6px 0 14px;
+        max-width: 58ch;
+      }
+      .content li {
+        margin-bottom: 5px;
+      }
+      .content li::marker {
+        color: var(--ink-muted);
+      }
+      .lede {
+        color: var(--ink-soft);
+      }
+      .lede strong {
+        font-weight: 500;
+        color: var(--ink);
+      }
+
+      /* Callout */
+      .callout {
+        font-family: var(--font-serif);
+        font-size: 14.5px;
+        line-height: 1.55;
+        padding: 4px 0 4px 16px;
+        border-left: 2px solid var(--accent);
+        margin: 16px 0 18px;
+        max-width: 58ch;
+      }
+      .callout .label {
+        font-family: var(--font-sans);
+        font-weight: 500;
+        font-size: 12px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-right: 8px;
+      }
+      .callout.note {
+        border-color: var(--ink-muted);
+        color: var(--ink-soft);
+        font-size: 13.5px;
+      }
+      .callout.note .label {
+        color: var(--ink-muted);
+      }
+
+      /* Stat-anchor */
+      .stat-page {
+        padding: 100px 130px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .stat-page .chapter-tag {
+        font-family: var(--font-sans);
+        font-size: 13px;
+        color: var(--ink-muted);
+        letter-spacing: 0.04em;
+        margin: 0 0 60px;
+      }
+      .stat-figure {
+        font-family: var(--font-serif);
+        font-variation-settings: var(--serif-display);
+        font-size: 220px;
+        line-height: 0.9;
+        color: var(--accent);
+        font-weight: 500;
+        letter-spacing: -0.04em;
+        font-variant-numeric: tabular-nums;
+        margin: 0 0 24px;
+      }
+      .stat-label {
+        font-family: var(--font-serif);
+        font-size: 22px;
+        line-height: 1.45;
+        color: var(--ink);
+        max-width: 32ch;
+        margin: 0 0 12px;
+        font-weight: 400;
+      }
+      .stat-caption {
+        font-family: var(--font-sans);
+        font-size: 13px;
+        color: var(--ink-muted);
+        max-width: 50ch;
+        margin: 8px 0 0;
+        line-height: 1.55;
+      }
+
+      /* Swatch grid (visual token reference) */
+      .swatch-row {
+        display: flex;
+        gap: 10px;
+        margin: 10px 0 18px;
+        max-width: 620px;
+      }
+      .swatch {
+        flex: 1;
+        font-family: var(--font-sans);
+        font-size: 11px;
+        line-height: 1.3;
+      }
+      .swatch-block {
+        height: 42px;
+        margin-bottom: 6px;
+        border: 1px solid var(--rule);
+      }
+      .swatch-name {
+        color: var(--ink);
+        font-weight: 500;
+        letter-spacing: 0.02em;
+      }
+      .swatch-hex {
+        color: var(--ink-muted);
+        font-variant-numeric: tabular-nums;
+        font-size: 10.5px;
+      }
+      .swatch-group-label {
+        font-family: var(--font-sans);
+        font-size: 10.5px;
+        color: var(--ink-muted);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin: 6px 0 4px;
+        font-weight: 500;
+      }
+
+      /* Comparison table */
+      table.compare {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: var(--font-sans);
+        font-size: 14px;
+        margin: 18px 0;
+        max-width: 800px;
+      }
+      table.compare th,
+      table.compare td {
+        text-align: left;
+        padding: 14px 18px;
+        border-bottom: 1px solid var(--rule);
+        vertical-align: top;
+      }
+      table.compare th {
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        font-size: 12px;
+        color: var(--accent);
+        border-bottom: 1.5px solid var(--accent);
+      }
+      table.compare td {
+        font-family: var(--font-serif);
+        font-size: 14.5px;
+      }
+
+      /* Pull-quote page */
+      .pullquote {
+        padding: 130px 130px 90px 90px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .pullquote .chapter-tag {
+        font-family: var(--font-sans);
+        font-size: 13px;
+        color: var(--ink-muted);
+        letter-spacing: 0.04em;
+        margin: 0 0 60px;
+      }
+      .pullquote blockquote {
+        font-family: var(--font-serif);
+        font-variation-settings:
+          "opsz" 80,
+          "SOFT" 35;
+        font-size: 36px;
+        line-height: 1.25;
+        font-weight: 500;
+        letter-spacing: -0.014em;
+        color: var(--ink);
+        margin: 0;
+        padding: 6px 0 6px 26px;
+        border-left: 3px solid var(--accent);
+        max-width: 22ch;
+      }
+      .pullquote cite {
+        display: block;
+        font-family: var(--font-sans);
+        font-style: normal;
+        font-size: 13px;
+        color: var(--ink-muted);
+        margin-top: 36px;
+        margin-left: 29px;
+        letter-spacing: 0.04em;
+      }
+
+      /* Colophon */
+      .colophon {
+        padding: 110px 130px;
+      }
+      .colophon .eyebrow {
+        font-family: var(--font-sans);
+        font-size: 13px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin: 0 0 32px;
+        font-weight: 500;
+      }
+      .colophon h2 {
+        font-family: var(--font-serif);
+        font-variation-settings:
+          "opsz" 60,
+          "SOFT" 40;
+        font-size: 34px;
+        line-height: 1.15;
+        font-weight: 500;
+        letter-spacing: -0.02em;
+        margin: 0 0 32px;
+      }
+      .colophon p {
+        font-family: var(--font-serif);
+        font-size: 14.5px;
+        line-height: 1.7;
+        color: var(--ink-soft);
+        margin: 0 0 12px;
+        max-width: 60ch;
+      }
+      .colophon .file-list {
+        font-family: var(--font-sans);
+        font-size: 12.5px;
+        color: var(--ink-muted);
+        margin-top: 30px;
+        line-height: 1.9;
+      }
+
+      /* Page footer (number) */
+      .footer {
+        position: absolute;
+        bottom: 36px;
+        right: 130px;
+        font-family: var(--font-sans);
+        font-size: 12px;
+        color: var(--ink-muted);
+        letter-spacing: 0.04em;
+      }
+
+      /* Print / PDF export */
+      @page {
+        size: 11in 8.5in;
+        margin: 0;
+      }
+      @media print {
+        body {
+          background: var(--canvas);
+        }
+        .page {
+          margin: 0;
+          outline: none;
+          width: 11in;
+          height: 8.5in;
+        }
+      }
+
+      /* PDF download button — hidden in print */
+      .view-pdf {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 9999;
+        padding: 8px 14px;
+        background: var(--canvas, #f6f8fb);
+        color: var(--accent-deep, #2a6299);
+        border: 1.5px solid var(--accent, #3a82c4);
+        font-family: var(--font-sans, "Inter Tight", sans-serif);
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        text-decoration: none;
+        border-radius: 2pt;
+        transition: background 0.15s, color 0.15s;
+      }
+      .view-pdf:hover {
+        background: var(--accent, #3a82c4);
+        color: #fff;
+      }
+      @media print {
+        .view-pdf { display: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="view-pdf" href="quire-playbook.pdf" target="_blank" rel="noopener">View PDF →</a>
+    <!-- 1. Main cover — full-bleed accent -->
+    <section class="page cover cover-main fullbleed-accent">
+      <p class="eyebrow">A Design System Playbook · 2026</p>
+      <h1>The Playbook, Bound.</h1>
+      <p class="subtitle">
+        A constraint system for editorial documents — cool canvas, single
+        accent, serif carries hierarchy.
+      </p>
+      <span class="page-num">Quire</span>
+    </section>
+
+    <!-- 2. Table of contents -->
+    <section class="page toc">
+      <p class="eyebrow">Contents</p>
+      <h2>What's inside this playbook</h2>
+      <ul class="toc-list">
+        <li>
+          <a class="toc-item" href="#ch-01">
+            <span class="toc-num">01</span>
+            <span class="toc-title">The problem with default PDFs</span>
+            <span class="toc-page">03</span>
+          </a>
+        </li>
+        <li>
+          <a class="toc-item" href="#ch-02">
+            <span class="toc-num">02</span>
+            <span class="toc-title">The constraint language — four pillars</span>
+            <span class="toc-page">06</span>
+          </a>
+        </li>
+        <li>
+          <a class="toc-item" href="#ch-03">
+            <span class="toc-num">03</span>
+            <span class="toc-title"
+              >The page archetypes — how Quire composes a document</span
+            >
+            <span class="toc-page">09</span>
+          </a>
+        </li>
+      </ul>
+      <span class="footer">02</span>
+    </section>
+
+    <!-- 3. Chapter 01 divider — tint background -->
+    <section id="ch-01" class="page cover tint">
+      <p class="eyebrow">Chapter 01</p>
+      <h1>The Problem</h1>
+      <span class="page-num">03</span>
+    </section>
+
+    <!-- 4. Content — standard page with callout -->
+    <section class="page content">
+      <p class="chapter-tag">Chapter 01 · The Problem</p>
+      <h2>Word document gray is not neutral — it's stale</h2>
+
+      <p class="lede">
+        AI can produce a 50-page playbook in minutes.
+        <strong
+          >Most of them land as gray Calibri walls on pure-white pages</strong
+        >
+        — technically readable, but nothing about the page invites you to keep
+        reading.
+      </p>
+
+      <h3>Why this happens</h3>
+      <p>
+        Without a constraint system, every session drifts toward defaults —
+        system fonts, blue-gray neutrals, no rhythm. The output looks like a
+        Word document because that's what training data is full of.
+      </p>
+
+      <h3>What's missing</h3>
+      <p>
+        Not capability. Not effort. The missing piece is <em>discipline</em>: a
+        small set of rules that an agent will not break, no matter how the
+        prompt drifts.
+      </p>
+
+      <div class="callout">
+        <span class="label">Note</span>
+        Polished typography on bad content is "polished mediocrity." Quire's job
+        is the typography. You bring the argument.
+      </div>
+
+      <span class="footer">04</span>
+    </section>
+
+    <!-- 5. Stat-anchor — demonstrates archetype -->
+    <section class="page stat-page">
+      <p class="chapter-tag">Chapter 01 · The Problem</p>
+      <div class="stat-figure">1</div>
+      <p class="stat-label">
+        The number of chromatic colors in a Quire document. Sky blue
+        <code>#3a82c4</code> &mdash; and nothing else.
+      </p>
+      <p class="stat-caption">
+        Every "category color," every "success green," every "warning red"
+        spends visual budget. A document that needs differentiation uses gray
+        weight, not a second hue.
+      </p>
+      <span class="footer">05</span>
+    </section>
+
+    <!-- 6. Chapter 02 divider -->
+    <section id="ch-02" class="page cover tint">
+      <p class="eyebrow">Chapter 02</p>
+      <h1>The Constraint Language</h1>
+      <span class="page-num">06</span>
+    </section>
+
+    <!-- 7. Content — the four pillars with color swatches -->
+    <section class="page content">
+      <p class="chapter-tag">Chapter 02 · The Constraint Language</p>
+      <h2>Four constraints carry everything</h2>
+
+      <p class="lede">
+        Quire is not a UI framework. It's
+        <strong>four pillars and ten rules</strong> — enough structure for
+        consistent output, narrow enough that every document still feels
+        composed rather than templated.
+      </p>
+
+      <h3>Color · single accent, no second hue</h3>
+
+      <p class="swatch-group-label">Surface and text · cool grays (B ≥ G ≥ R)</p>
+      <div class="swatch-row">
+        <div class="swatch">
+          <div class="swatch-block" style="background: #f6f8fb"></div>
+          <div class="swatch-name">Canvas</div>
+          <div class="swatch-hex">#f6f8fb</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-block" style="background: #16181d"></div>
+          <div class="swatch-name">Ink</div>
+          <div class="swatch-hex">#16181d</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-block" style="background: #6b6f78"></div>
+          <div class="swatch-name">Ink-muted</div>
+          <div class="swatch-hex">#6b6f78</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-block" style="background: #dce0e6"></div>
+          <div class="swatch-name">Rule</div>
+          <div class="swatch-hex">#dce0e6</div>
+        </div>
+      </div>
+
+      <p class="swatch-group-label">Accent · sky blue, locked system-wide</p>
+      <div class="swatch-row">
+        <div class="swatch">
+          <div class="swatch-block" style="background: #b8d6f0"></div>
+          <div class="swatch-name">Accent-tint</div>
+          <div class="swatch-hex">#b8d6f0</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-block" style="background: #3a82c4"></div>
+          <div class="swatch-name">Accent</div>
+          <div class="swatch-hex">#3a82c4</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-block" style="background: #2a6299"></div>
+          <div class="swatch-name">Accent-deep</div>
+          <div class="swatch-hex">#2a6299</div>
+        </div>
+        <div class="swatch" style="opacity: 0.3">
+          <div class="swatch-block" style="background: #f6f8fb; border: 1px dashed var(--ink-muted)"></div>
+          <div class="swatch-name">— no second hue —</div>
+          <div class="swatch-hex">forbidden</div>
+        </div>
+        <div class="swatch" style="opacity: 0.3">
+          <div class="swatch-block" style="background: #f6f8fb; border: 1px dashed var(--ink-muted)"></div>
+          <div class="swatch-name">— no second hue —</div>
+          <div class="swatch-hex">forbidden</div>
+        </div>
+      </div>
+
+      <h3>Type, spacing, cadence</h3>
+      <ul>
+        <li>
+          <strong>Type</strong> — one serif (Fraunces) carries 78pt to 10pt;
+          sans for chrome only; two weights (400/500).
+        </li>
+        <li>
+          <strong>Spacing</strong> — 4pt base, seven tiers, asymmetric margins
+          (left tighter than right).
+        </li>
+        <li>
+          <strong>Cadence</strong> — every 5–7 content pages, reset the eye with
+          a divider, pull-quote, or stat page.
+        </li>
+      </ul>
+
+      <span class="footer">07</span>
+    </section>
+
+    <!-- 8. Comparison — three-column table -->
+    <section class="page content">
+      <p class="chapter-tag">Chapter 02 · The Constraint Language</p>
+      <h2>Default document vs. Quire</h2>
+
+      <p class="lede">
+        Same content, different rules. The defaults are not neutral — they
+        encode decisions that fight against editorial reading.
+      </p>
+
+      <table class="compare">
+        <thead>
+          <tr>
+            <th style="width: 22%">Element</th>
+            <th style="width: 36%">Default doc</th>
+            <th>Quire</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Canvas</td>
+            <td>Pure white <code>#ffffff</code></td>
+            <td>Cool canvas <code>#f6f8fb</code></td>
+          </tr>
+          <tr>
+            <td>Body font</td>
+            <td>Calibri / Arial fallback</td>
+            <td>Fraunces, opsz 14, SOFT 50</td>
+          </tr>
+          <tr>
+            <td>Grays</td>
+            <td>Neutral or warm (`R ≥ B`)</td>
+            <td>Cool-toned (`B ≥ G ≥ R`)</td>
+          </tr>
+          <tr>
+            <td>Accent colors</td>
+            <td>Multi-color, no ceiling</td>
+            <td>Sky blue only, no second hue</td>
+          </tr>
+          <tr>
+            <td>Rhythm</td>
+            <td>Continuous body wall</td>
+            <td>Visual reset every 5–7 pages</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <span class="footer">08</span>
+    </section>
+
+    <!-- 9. Chapter 03 divider -->
+    <section id="ch-03" class="page cover tint">
+      <p class="eyebrow">Chapter 03</p>
+      <h1>The Page Archetypes</h1>
+      <span class="page-num">09</span>
+    </section>
+
+    <!-- 10. Pull-quote — demonstrates archetype -->
+    <section class="page pullquote">
+      <p class="chapter-tag">Chapter 03 · The Page Archetypes</p>
+      <blockquote>
+        A 50-page wall of body text is not a book — it's a transcript. The
+        rhythm is what makes it readable.
+      </blockquote>
+      <cite>— Quire design notes</cite>
+      <span class="footer">10</span>
+    </section>
+
+    <!-- 11. Content — cadence rule explained -->
+    <section class="page content">
+      <p class="chapter-tag">Chapter 03 · The Page Archetypes</p>
+      <h2>Seven archetypes, one rule of cadence</h2>
+
+      <p class="lede">
+        Every page in a Quire document belongs to one of seven archetypes. The
+        discipline isn't picking the right one — it's
+        <strong>knowing when to break the rhythm</strong>.
+      </p>
+
+      <h3>The archetypes</h3>
+      <ul>
+        <li>
+          <strong>Cover</strong> — page 1, full-bleed accent or canvas, oversized
+          title
+        </li>
+        <li>
+          <strong>TOC</strong> — page 2, eyebrow + numbered list with leader
+          rules
+        </li>
+        <li>
+          <strong>Chapter divider</strong> — lightened-accent tint, chapter
+          number + title only
+        </li>
+        <li>
+          <strong>Standard content</strong> — most pages, h1/h2/h3, body, lists,
+          callouts
+        </li>
+        <li>
+          <strong>Stat-anchor</strong> — used 1–2× per document, oversized
+          figure as hero
+        </li>
+        <li>
+          <strong>Comparison</strong> — three-column compare table introducing a
+          trade-off
+        </li>
+        <li>
+          <strong>Pull-quote</strong> — half-page editorial quote, max one per
+          chapter
+        </li>
+      </ul>
+
+      <h3>The cadence rule</h3>
+      <p>
+        Every 5–7 content pages must contain a visual reset: a chapter divider,
+        a pull-quote page, or a stat-anchor. Without it, readers lose
+        orientation. With it, they skim productively — and come back to the
+        parts that earn their attention.
+      </p>
+
+      <div class="callout">
+        <span class="label">Exercise</span>
+        Count pages between resets in your last long-form document. If any
+        stretch goes over seven content pages, you've found where readers
+        stopped.
+      </div>
+
+      <span class="footer">11</span>
+    </section>
+
+    <!-- 12. Colophon -->
+    <section class="page colophon">
+      <p class="eyebrow">Colophon</p>
+      <h2>This playbook was set with Quire.</h2>
+
+      <p>
+        Twelve pages, one accent color (sky blue <code>#3a82c4</code>), one
+        serif family (Fraunces), one sans for chrome (Inter Tight). Eleven
+        content pages plus this colophon. Page count is even; covers and
+        dividers fall on odd pages.
+      </p>
+
+      <p>
+        Quire is a constraint system, not a generator. It can compose this
+        document because the document follows its own rules. If a Quire-styled
+        output ever breaks these rules, the rules — not the document — are
+        wrong.
+      </p>
+
+      <div class="file-list">
+        SKILL.md · CHEATSHEET.md · references/design.md<br />
+        assets/templates/playbook.html<br />
+        Inspired by
+        <a
+          href="https://github.com/tw93/kami"
+          style="
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid var(--accent);
+          "
+          >tw93/kami</a
+        >
+        · MIT License
+      </div>
+
+      <span class="footer">12</span>
+    </section>
+  </body>
+</html>

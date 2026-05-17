@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Quire Slides — sample deck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..700,30..100&family=Inter+Tight:wght@400..600&display=swap" rel="stylesheet">
+<style>
+  /* Design tokens — sky blue, single accent, cold-toned */
+  :root {
+    --canvas:       #f6f8fb;
+    --canvas-soft:  #eef1f6;
+    --rule:         #dce0e6;
+    --rule-soft:    #e8ebf0;
+
+    --ink:          #16181d;
+    --ink-soft:     #3d4148;
+    --ink-muted:    #6b6f78;
+
+    --accent:       #3a82c4;
+    --accent-tint:  #b8d6f0;
+    --accent-deep:  #2a6299;
+
+    --font-serif:   "Fraunces", "Tiempos Text", "Source Serif Pro", Georgia, serif;
+    --font-sans:    "Inter Tight", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+    --serif-display: "opsz" 144, "SOFT" 30;
+    --serif-text:    "opsz" 14,  "SOFT" 50;
+
+    /* 16:9 design canvas */
+    --slide-w: 1280px;
+    --slide-h: 720px;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    background: #1a1c20;
+    font-family: var(--font-serif);
+    font-variation-settings: var(--serif-text);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow: hidden;
+  }
+
+  /* Stage — centers the slide, scales it to viewport while preserving 16:9 */
+  .stage {
+    position: fixed;
+    inset: 0;
+    display: grid;
+    place-items: center;
+  }
+  .deck {
+    position: relative;
+    width: var(--slide-w);
+    height: var(--slide-h);
+    transform-origin: center center;
+    /* JS sets --scale based on viewport */
+    transform: scale(var(--scale, 1));
+  }
+
+  /* A single slide */
+  .slide {
+    position: absolute;
+    inset: 0;
+    width: var(--slide-w);
+    height: var(--slide-h);
+    background: var(--canvas);
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 200ms ease;
+  }
+  .slide.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Title / divider slides */
+  .slide.title,
+  .slide.divider {
+    padding: 96px 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  .slide.title.bg-accent       { background: var(--accent);      color: #fff; }
+  .slide.divider.bg-accent-tint { background: var(--accent-tint); color: var(--ink); }
+
+  .slide .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 18px;
+    letter-spacing: 0.06em;
+    margin: 0 0 28px;
+    opacity: 0.92;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+  .slide.title h1 {
+    font-family: var(--font-serif);
+    font-variation-settings: var(--serif-display);
+    font-size: 104px;
+    line-height: 1.02;
+    font-weight: 500;
+    letter-spacing: -0.028em;
+    margin: 0 0 18px;
+    max-width: 14ch;
+  }
+  .slide.title .subtitle {
+    font-family: var(--font-sans);
+    font-size: 24px;
+    margin: 0;
+    opacity: 0.9;
+    max-width: 36ch;
+    font-weight: 400;
+  }
+  .slide.divider h1 {
+    font-family: var(--font-serif);
+    font-variation-settings: var(--serif-display);
+    font-size: 88px;
+    line-height: 1.04;
+    font-weight: 500;
+    letter-spacing: -0.024em;
+    margin: 0;
+    max-width: 16ch;
+  }
+
+  /* Content slide */
+  .slide.content {
+    padding: 90px 140px 90px 120px;
+    color: var(--ink);
+  }
+  .slide.content .chapter-tag {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: var(--ink-muted);
+    letter-spacing: 0.06em;
+    margin: 0 0 14px;
+    text-transform: uppercase;
+  }
+  .slide.content h2 {
+    font-family: var(--font-serif);
+    font-variation-settings: "opsz" 60, "SOFT" 40;
+    font-size: 52px;
+    line-height: 1.1;
+    font-weight: 500;
+    letter-spacing: -0.022em;
+    margin: 0 0 40px;
+    max-width: 22ch;
+  }
+  .slide.content h3 {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 500;
+    margin: 28px 0 10px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .slide.content p {
+    font-family: var(--font-serif);
+    font-variation-settings: var(--serif-text);
+    font-size: 22px;
+    line-height: 1.55;
+    letter-spacing: -0.003em;
+    margin: 0 0 18px;
+    max-width: 42ch;
+  }
+  .slide.content ul,
+  .slide.content ol {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    line-height: 1.55;
+    padding-left: 24px;
+    margin: 10px 0 20px;
+    max-width: 44ch;
+  }
+  .slide.content li { margin-bottom: 10px; }
+  .slide.content li::marker { color: var(--ink-muted); }
+
+  .lede { color: var(--ink-soft); }
+  .lede strong { font-weight: 500; color: var(--ink); }
+
+  /* Stat slide — oversized figure */
+  .slide.stat {
+    padding: 100px 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .slide.stat .stat-figure {
+    font-family: var(--font-serif);
+    font-variation-settings: "opsz" 144, "SOFT" 30;
+    font-size: 240px;
+    line-height: 0.9;
+    color: var(--accent);
+    letter-spacing: -0.04em;
+    margin: 0 0 30px;
+  }
+  .slide.stat .stat-label {
+    font-family: var(--font-sans);
+    font-size: 18px;
+    color: var(--ink-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    font-weight: 500;
+  }
+  .slide.stat .stat-caption {
+    font-family: var(--font-serif);
+    font-size: 28px;
+    line-height: 1.4;
+    max-width: 28ch;
+    margin: 0;
+    color: var(--ink-soft);
+  }
+
+  /* Quote slide */
+  .slide.quote {
+    padding: 100px 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .slide.quote blockquote {
+    font-family: var(--font-serif);
+    font-variation-settings: "opsz" 96, "SOFT" 40;
+    font-size: 54px;
+    line-height: 1.18;
+    letter-spacing: -0.018em;
+    margin: 0 0 36px;
+    max-width: 22ch;
+    font-weight: 500;
+    color: var(--ink);
+    border-left: 3px solid var(--accent);
+    padding-left: 36px;
+  }
+  .slide.quote .attribution {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    color: var(--ink-muted);
+    letter-spacing: 0.04em;
+    margin-left: 39px;
+  }
+  .slide.quote .attribution strong {
+    color: var(--ink-soft);
+    font-weight: 500;
+  }
+
+  /* Two-column compare slide */
+  .slide.compare {
+    padding: 90px 120px;
+  }
+  .slide.compare h2 {
+    font-family: var(--font-serif);
+    font-variation-settings: "opsz" 60, "SOFT" 40;
+    font-size: 44px;
+    line-height: 1.1;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    margin: 0 0 40px;
+  }
+  .slide.compare .chapter-tag {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: var(--ink-muted);
+    letter-spacing: 0.06em;
+    margin: 0 0 14px;
+    text-transform: uppercase;
+  }
+  .slide.compare table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-sans);
+    font-size: 17px;
+  }
+  .slide.compare th,
+  .slide.compare td {
+    text-align: left;
+    padding: 18px 22px;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  .slide.compare th {
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 13px;
+    color: var(--accent);
+    border-bottom: 1.5px solid var(--accent);
+  }
+  .slide.compare td {
+    font-family: var(--font-serif);
+    font-size: 19px;
+    line-height: 1.45;
+  }
+
+  /* Callout inside content */
+  .callout {
+    font-family: var(--font-serif);
+    font-size: 19px;
+    line-height: 1.5;
+    padding: 6px 0 6px 20px;
+    border-left: 2px solid var(--accent);
+    margin: 18px 0 22px;
+    max-width: 44ch;
+  }
+  .callout .label {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-right: 10px;
+  }
+
+  /* Chrome — progress bar + counter + hint */
+  .progress {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: rgba(255,255,255,0.06);
+    z-index: 10;
+  }
+  .progress .bar {
+    height: 100%;
+    background: var(--accent);
+    width: 0%;
+    transition: width 220ms ease;
+  }
+  .counter {
+    position: fixed;
+    bottom: 22px;
+    right: 28px;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.06em;
+    z-index: 10;
+    font-variant-numeric: tabular-nums;
+  }
+  .hint {
+    position: fixed;
+    bottom: 22px;
+    left: 28px;
+    font-family: var(--font-sans);
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.04em;
+    z-index: 10;
+    transition: opacity 400ms ease;
+  }
+  .hint.fade { opacity: 0; }
+
+  /* Print — one slide per page, all visible */
+  @page {
+    size: 13.333in 7.5in;  /* 16:9 */
+    margin: 0;
+  }
+  @media print {
+    body { background: var(--canvas); overflow: visible; }
+    .stage { position: static; display: block; }
+    .deck { transform: none; width: 13.333in; height: auto; }
+    .slide {
+      position: relative;
+      inset: auto;
+      width: 13.333in;
+      height: 7.5in;
+      opacity: 1 !important;
+      visibility: visible !important;
+      page-break-after: always;
+    }
+    .progress, .counter, .hint { display: none; }
+  }
+
+  /* PDF download button — hidden in print */
+  .view-pdf {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    padding: 8px 14px;
+    background: var(--canvas, #f6f8fb);
+    color: var(--accent-deep, #2a6299);
+    border: 1.5px solid var(--accent, #3a82c4);
+    font-family: var(--font-sans, "Inter Tight", sans-serif);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2pt;
+    transition: background 0.15s, color 0.15s;
+  }
+  .view-pdf:hover {
+    background: var(--accent, #3a82c4);
+    color: #fff;
+  }
+  @media print {
+    .view-pdf { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<a class="view-pdf" href="quire-slides.pdf" target="_blank" rel="noopener">View PDF →</a>
+
+<div class="progress"><div class="bar" id="progressBar"></div></div>
+
+<div class="stage">
+  <div class="deck" id="deck">
+
+    <!-- 1. Title cover -->
+    <section class="slide title bg-accent active">
+      <p class="eyebrow">A Product Discovery Deck · 2026</p>
+      <h1>Finding Product-Market Fit</h1>
+      <p class="subtitle">A 90-day discipline for early-stage product teams.</p>
+    </section>
+
+    <!-- 2. Section divider -->
+    <section class="slide divider bg-accent-tint">
+      <p class="eyebrow">Chapter 01</p>
+      <h1>Why most discovery work doesn't stick</h1>
+    </section>
+
+    <!-- 3. Content — heading + lede + list -->
+    <section class="slide content">
+      <p class="chapter-tag">Chapter 01 · The problem</p>
+      <h2>Discovery is collected, not practiced</h2>
+      <p class="lede">
+        Every team collects customer signals &mdash; interviews, tickets, churn calls.
+        Most treat them as <strong>confirmation</strong>, not as falsifiable input.
+      </p>
+      <h3>Three failure modes</h3>
+      <ul>
+        <li>Signals are catalogued but never restated as hypotheses.</li>
+        <li>Tests are run to validate, not to falsify.</li>
+        <li>Negative results are quietly discarded.</li>
+      </ul>
+    </section>
+
+    <!-- 4. Stat slide -->
+    <section class="slide stat">
+      <p class="stat-label">Median across 200 teams</p>
+      <p class="stat-figure">63%</p>
+      <p class="stat-caption">
+        of "discovery interviews" end without a written, falsifiable hypothesis.
+      </p>
+    </section>
+
+    <!-- 5. Section divider -->
+    <section class="slide divider bg-accent-tint">
+      <p class="eyebrow">Chapter 02</p>
+      <h1>The Validation Loop</h1>
+    </section>
+
+    <!-- 6. Content with callout -->
+    <section class="slide content">
+      <p class="chapter-tag">Chapter 02 · The Validation Loop</p>
+      <h2>Restate the signal as a hypothesis</h2>
+      <p class="lede">
+        A signal is observation; a hypothesis is a prediction with a fail condition.
+      </p>
+      <div class="callout">
+        <span class="label">Exercise</span>
+        Pick last week's loudest signal. Rewrite it as one sentence containing
+        a metric, a magnitude, and a timeframe.
+      </div>
+    </section>
+
+    <!-- 7. Comparison table -->
+    <section class="slide compare">
+      <p class="chapter-tag">Chapter 02 · The Validation Loop</p>
+      <h2>Picking the right validation method</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 32%">If you're testing…</th>
+            <th style="width: 24%">Use</th>
+            <th>Why</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Whether the problem is real and frequent</td>
+            <td><strong>Discovery interview</strong></td>
+            <td>Surfaces unprompted language and workarounds</td>
+          </tr>
+          <tr>
+            <td>Willingness to pay or commit</td>
+            <td><strong>Pre-sale / LOI</strong></td>
+            <td>Behavior is the only honest signal; opinions inflate</td>
+          </tr>
+          <tr>
+            <td>Whether a specific solution is usable</td>
+            <td><strong>Prototype test</strong></td>
+            <td>Concrete artifact; reveals where assumptions break</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 8. Pull quote -->
+    <section class="slide quote">
+      <blockquote>
+        A discovery cycle that produces no killed hypotheses isn't validating &mdash;
+        it's rationalizing the roadmap you already have.
+      </blockquote>
+      <p class="attribution"><strong>— Notebook</strong>, week 4</p>
+    </section>
+
+    <!-- 9. Closing -->
+    <section class="slide title bg-accent">
+      <p class="eyebrow">End · Thank you</p>
+      <h1>Ship one killed hypothesis per week.</h1>
+      <p class="subtitle">That's the whole practice.</p>
+    </section>
+
+  </div>
+</div>
+
+<div class="counter" id="counter">01 / 09</div>
+<div class="hint" id="hint">↑ ↓ to navigate · Space next · Home/End jump</div>
+
+<script>
+(function () {
+  const slides   = Array.from(document.querySelectorAll('.slide'));
+  const deck     = document.getElementById('deck');
+  const counter  = document.getElementById('counter');
+  const bar      = document.getElementById('progressBar');
+  const hint     = document.getElementById('hint');
+  const total    = slides.length;
+  let   index    = 0;
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+
+  function render() {
+    slides.forEach((s, i) => s.classList.toggle('active', i === index));
+    counter.textContent = pad(index + 1) + ' / ' + pad(total);
+    bar.style.width = ((index + 1) / total * 100) + '%';
+    // sync URL hash without scrolling
+    history.replaceState(null, '', '#' + (index + 1));
+  }
+
+  function go(delta) {
+    const next = Math.min(total - 1, Math.max(0, index + delta));
+    if (next !== index) { index = next; render(); }
+  }
+  function jump(to) {
+    const next = Math.min(total - 1, Math.max(0, to));
+    if (next !== index) { index = next; render(); }
+  }
+
+  // Scale the 1280×720 deck to fit the viewport while preserving aspect
+  function fit() {
+    const pad = 32;  // leave some breathing room
+    const sx = (window.innerWidth  - pad) / 1280;
+    const sy = (window.innerHeight - pad) / 720;
+    deck.style.setProperty('--scale', Math.min(sx, sy));
+  }
+  window.addEventListener('resize', fit);
+  fit();
+
+  // Keyboard
+  document.addEventListener('keydown', (e) => {
+    // ignore when modifier keys are held — leave browser shortcuts alone
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+
+    switch (e.key) {
+      case 'ArrowDown':
+      case 'ArrowRight':
+      case 'PageDown':
+      case ' ':           // Space
+        e.preventDefault(); go(+1); break;
+      case 'ArrowUp':
+      case 'ArrowLeft':
+      case 'PageUp':
+        e.preventDefault(); go(-1); break;
+      case 'Home':
+        e.preventDefault(); jump(0); break;
+      case 'End':
+        e.preventDefault(); jump(total - 1); break;
+      default:
+        // number keys 1–9 jump directly
+        if (/^[1-9]$/.test(e.key)) {
+          e.preventDefault(); jump(parseInt(e.key, 10) - 1);
+        }
+    }
+  });
+
+  // Click anywhere on the deck → next; right side specifically also advances
+  deck.addEventListener('click', (e) => {
+    // don't hijack clicks on selectable text (drags / triple-click)
+    if (window.getSelection().toString()) return;
+    go(+1);
+  });
+
+  // Touch — swipe up/down
+  let touchY = null;
+  document.addEventListener('touchstart', (e) => {
+    touchY = e.touches[0].clientY;
+  }, { passive: true });
+  document.addEventListener('touchend', (e) => {
+    if (touchY === null) return;
+    const dy = e.changedTouches[0].clientY - touchY;
+    if (Math.abs(dy) > 40) go(dy < 0 ? +1 : -1);
+    touchY = null;
+  });
+
+  // Initial — honor #N in URL
+  const fromHash = parseInt((location.hash || '').replace('#', ''), 10);
+  if (!isNaN(fromHash) && fromHash >= 1 && fromHash <= total) {
+    index = fromHash - 1;
+  }
+  render();
+
+  // Fade out the hint after 4s
+  setTimeout(() => hint.classList.add('fade'), 4000);
+})();
+</script>
+
+</body>
+</html>
