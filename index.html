@@ -222,6 +222,90 @@
   .status-soon  { color: var(--ink-muted); }
 
   /* ============================================
+     Output thumbnails · five real screenshots
+     ============================================ */
+  .output-thumbs {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 20px 18px;
+    margin: 32px 0 8px;
+  }
+  .output-thumb {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0;
+  }
+  .output-thumb .thumb-meta,
+  .output-thumb .thumb-links { margin: 0; }
+  /* Desktop layout: row 1 = portraits ×3, row 2 = landscape + slides */
+  .output-thumb.is-portrait  { grid-column: span 2; }
+  .output-thumb.is-landscape { grid-column: span 3; }
+  .output-thumb.is-deck      { grid-column: span 3; }
+  .thumb-frame {
+    display: block;
+    border: 1px solid var(--rule);
+    background: var(--canvas);
+    overflow: hidden;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+  }
+  .thumb-frame.is-portrait  { aspect-ratio: 794 / 1123; }
+  .thumb-frame.is-landscape { aspect-ratio: 11 / 8.5; }
+  .thumb-frame.is-deck      { aspect-ratio: 16 / 9; }
+  .thumb-frame img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .thumb-frame:hover {
+    border-color: var(--accent);
+    box-shadow: 0 6px 22px -12px rgba(13, 138, 206, 0.45);
+    transform: translateY(-1px);
+  }
+  .thumb-meta {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .thumb-label {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--ink);
+  }
+  .thumb-format {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .thumb-links {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    color: var(--ink-muted);
+  }
+  .thumb-links a {
+    color: var(--accent-deep);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+  .thumb-links a:hover { border-bottom-color: var(--accent-deep); }
+  .thumb-links .sep { color: var(--ink-faint); margin: 0 6px; }
+  @media (max-width: 880px) {
+    .output-thumbs { grid-template-columns: 1fr 1fr; gap: 18px; }
+    .output-thumb.is-portrait,
+    .output-thumb.is-landscape,
+    .output-thumb.is-deck { grid-column: span 1; }
+  }
+  @media (max-width: 520px) {
+    .output-thumbs { grid-template-columns: 1fr; }
+  }
+
+  /* ============================================
      See-demo · playbook page previews
      ============================================ */
   .preview-grid {
@@ -1182,12 +1266,77 @@
     </tbody>
   </table>
 
-  <div class="cta-row" style="margin-top: 24px;">
-    <a href="assets/output/quire-playbook.html" class="cta" target="_blank" rel="noopener">Playbook <span class="cta-arrow">→</span></a>
-    <a href="assets/output/quire-white-paper.html" class="cta" target="_blank" rel="noopener">White paper <span class="cta-arrow">→</span></a>
-    <a href="assets/output/quire-single-page.html" class="cta" target="_blank" rel="noopener">Single-page <span class="cta-arrow">→</span></a>
-    <a href="assets/output/quire-landing-page.html" class="cta" target="_blank" rel="noopener">Landing page <span class="cta-arrow">→</span></a>
-    <a href="assets/output/quire-slides.html" class="cta" target="_blank" rel="noopener">Slides <span class="cta-arrow">→</span></a>
+  <div class="output-thumbs" aria-label="Output previews">
+    <figure class="output-thumb is-portrait">
+      <a class="thumb-frame is-portrait" href="assets/output/quire-white-paper.html" target="_blank" rel="noopener" aria-label="Open white paper">
+        <img src="assets/output/screenshots/quire-white-paper.png" alt="White paper cover — “The Validation Discipline,” serif title on sky-blue ground" loading="lazy">
+      </a>
+      <figcaption class="thumb-meta">
+        <span class="thumb-label">White paper</span>
+        <span class="thumb-format">A4 portrait</span>
+      </figcaption>
+      <p class="thumb-links">
+        <a href="assets/output/quire-white-paper.html" target="_blank" rel="noopener">HTML</a>
+        <span class="sep">·</span>
+        <a href="assets/output/quire-white-paper.pdf" target="_blank" rel="noopener">PDF</a>
+      </p>
+    </figure>
+    <figure class="output-thumb is-portrait">
+      <a class="thumb-frame is-portrait" href="assets/output/quire-single-page.html" target="_blank" rel="noopener" aria-label="Open single-page report">
+        <img src="assets/output/screenshots/quire-single-page.png" alt="Single-page report — one-pager brief with three stat columns" loading="lazy">
+      </a>
+      <figcaption class="thumb-meta">
+        <span class="thumb-label">Single-page report</span>
+        <span class="thumb-format">A4 portrait, fixed</span>
+      </figcaption>
+      <p class="thumb-links">
+        <a href="assets/output/quire-single-page.html" target="_blank" rel="noopener">HTML</a>
+        <span class="sep">·</span>
+        <a href="assets/output/quire-single-page.pdf" target="_blank" rel="noopener">PDF</a>
+      </p>
+    </figure>
+    <figure class="output-thumb is-portrait">
+      <a class="thumb-frame is-portrait" href="assets/output/quire-landing-page.html" target="_blank" rel="noopener" aria-label="Open landing page">
+        <img src="assets/output/screenshots/quire-landing-page.png" alt="Landing page — continuous A4-width manifesto, flows and paginates" loading="lazy">
+      </a>
+      <figcaption class="thumb-meta">
+        <span class="thumb-label">Landing page</span>
+        <span class="thumb-format">A4 width, flows</span>
+      </figcaption>
+      <p class="thumb-links">
+        <a href="assets/output/quire-landing-page.html" target="_blank" rel="noopener">HTML</a>
+        <span class="sep">·</span>
+        <a href="assets/output/quire-landing-page.pdf" target="_blank" rel="noopener">PDF</a>
+      </p>
+    </figure>
+    <figure class="output-thumb is-landscape">
+      <a class="thumb-frame is-landscape" href="assets/output/quire-playbook.html" target="_blank" rel="noopener" aria-label="Open playbook">
+        <img src="assets/output/screenshots/quire-playbook.png" alt="Playbook cover — “The Playbook, Bound.” on a landscape sky-blue page" loading="lazy">
+      </a>
+      <figcaption class="thumb-meta">
+        <span class="thumb-label">Playbook</span>
+        <span class="thumb-format">11×8.5in landscape</span>
+      </figcaption>
+      <p class="thumb-links">
+        <a href="assets/output/quire-playbook.html" target="_blank" rel="noopener">HTML</a>
+        <span class="sep">·</span>
+        <a href="assets/output/quire-playbook.pdf" target="_blank" rel="noopener">PDF</a>
+      </p>
+    </figure>
+    <figure class="output-thumb is-deck">
+      <a class="thumb-frame is-deck" href="assets/output/quire-slides.html" target="_blank" rel="noopener" aria-label="Open slide deck">
+        <img src="assets/output/screenshots/quire-slides.png" alt="Slide deck — title slide “Finding Product-Market Fit,” 16:9" loading="lazy">
+      </a>
+      <figcaption class="thumb-meta">
+        <span class="thumb-label">Slides</span>
+        <span class="thumb-format">16:9 HTML deck</span>
+      </figcaption>
+      <p class="thumb-links">
+        <a href="assets/output/quire-slides.html" target="_blank" rel="noopener">HTML</a>
+        <span class="sep">·</span>
+        <a href="assets/output/quire-slides.pdf" target="_blank" rel="noopener">PDF</a>
+      </p>
+    </figure>
   </div>
 </section>
 <hr class="section-divider">
