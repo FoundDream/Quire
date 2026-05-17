@@ -30,7 +30,7 @@ Quire has **one accent color, system-wide**: sky blue `#1cb2f5`. There is no pal
 | `--ink`          | `#131b2a` | Primary text                              |
 | `--accent`       | `#1cb2f5` | Eyebrows, stat figures, table rules, tags |
 | `--accent-tint`  | `#c8ebfa` | Chapter divider page-fill, tag bg         |
-| `--accent-deep`  | `#02669e` | Body links, emphasis on tint backgrounds  |
+| `--accent-deep`  | `#0d8ace` | Body links, emphasis on tint backgrounds  |
 
 If the user requests a brand color, ask explicitly whether they want to override the system or stay on-brand-for-Quire. Quire's identity *is* this blue. Swapping it produces a different system.
 

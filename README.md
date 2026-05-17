@@ -25,7 +25,7 @@ canvas       #fcfbf8     warm vellum, never pure white
 ink          #131b2a     primary text, cool-toned near-black
 accent       #1cb2f5     sky blue — the only chromatic color
 accent-tint  #c8ebfa     chapter divider fill, tag background
-accent-deep  #02669e     body links, AA-passing accent text
+accent-deep  #0d8ace     body links, AA-passing accent text
 ```
 
 The accent is locked. There is no palette to pick from, and no second chromatic hue allowed.

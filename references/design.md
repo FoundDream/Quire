@@ -37,7 +37,7 @@ The system pairs **warm vellum surfaces with cool type and a single cool accent*
 ```css
 --accent:       #1cb2f5; /* Clear-noon sky blue — single chromatic color */
 --accent-tint:  #c8ebfa; /* 35 % accent + 65 % canvas */
---accent-deep:  #02669e; /* Darker variant — links on tint, body emphasis */
+--accent-deep:  #0d8ace; /* Darker variant — links on tint, body emphasis */
 ```
 
 **There is no second accent.** Anything that needs to be "different" uses gray-scale weight differentiation, not a second color.

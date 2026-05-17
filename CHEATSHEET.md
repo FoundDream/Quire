@@ -26,7 +26,7 @@ One-page quick reference. Scan before filling a template. Full spec in `referenc
 
 --accent:       #1cb2f5;   /* sky blue — the only chromatic color */
 --accent-tint:  #c8ebfa;   /* chapter divider fill, tag bg */
---accent-deep:  #02669e;   /* body links, AA-passing accent text */
+--accent-deep:  #0d8ace;   /* body links, AA-passing accent text */
 
 --stroke-rule:   1px;      /* dividers, table rows, card border */
 --stroke-accent: 1.5px;    /* under table heads */
