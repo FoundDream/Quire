@@ -117,6 +117,10 @@ The accent is locked. There is no palette to pick from, and no second chromatic 
 
 The repository structure was originally learned from [tw93/kami](https://github.com/tw93/kami). ♥️
 
+## Community
+
+Discuss on [Linux DO](https://linux.do).
+
 ## License
 
 MIT.
