@@ -52,13 +52,23 @@ One command, works with Claude Code, Cursor, Codex, Goose, and every other agent
 npx skills add FoundDream/Quire
 ```
 
-Then ask in natural language:
+Claude Code
 
-- "做一份关于 X 的 playbook"
-- "把这份内容排成白皮书"
-- "turn this into an editorial PDF"
+```bash
+npx skills add FoundDream/Quire -a claude-code -g -y
+```
 
-The skill picks the right format profile and produces HTML + PDF.
+Codex
+
+```bash
+npx skills add FoundDream/Quire -a codex -g -y
+```
+
+Generic agents
+
+```bash
+npx skills add FoundDream/Quire -a '*' -g -y
+```
 
 ### Manual install (no Node required)
 
@@ -67,24 +77,6 @@ git clone https://github.com/FoundDream/Quire.git ~/.claude/skills/quire
 ```
 
 For project-scoped install, clone into `<project>/.claude/skills/quire` instead.
-
-### As HTML templates (no agent required)
-
-```bash
-git clone https://github.com/FoundDream/Quire.git
-cd Quire
-open assets/templates/playbook.html
-```
-
-Edit any template in `assets/templates/` directly. Shared design tokens live in `assets/styles/quire-type.css`.
-
-### Render HTML → PDF
-
-```bash
-./scripts/build.sh assets/templates/playbook.html
-```
-
-Outputs a print-ready PDF next to the source file. Requires Google Chrome (auto-detected on macOS).
 
 ## Palette
 
@@ -114,18 +106,9 @@ The accent is locked. There is no palette to pick from, and no second chromatic 
 - "build me a playbook / typeset a white paper / single-page report"
 - "turn this content into an editorial PDF"
 
-## What it deliberately is not
+## Inspired by
 
-Quire is the opposite of:
-
-- **LinkedIn** — no saturated corporate blue, no orange highlights, no personal-brand chrome
-- **Default Word doc** — no pure white, no Calibri, no cool blue-gray defaults
-- **Marketing brochure** — no multi-color charts, no gradients, no infographic decoration
-- **Profile / dashboard UI** — no avatar circles, no badges, no card shadows, no pill buttons
-
-## Inspired by, departed from
-
-The repository structure was originally learned from [tw93/kami](https://github.com/tw93/kami). The current palette, single-accent rule, and anti-LinkedIn stance are Quire's own.
+The repository structure was originally learned from [tw93/kami](https://github.com/tw93/kami). ♥️
 
 ## License
 
