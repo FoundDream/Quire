@@ -10,7 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..700,30..100&family=Inter+Tight:wght@400..600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles/quire-type.css">
 <style>
   /* ============================================
      EDIT HERE — every section below uses these tokens
@@ -32,14 +32,6 @@
     --accent:       #3a82c4;
     --accent-tint:  #b8d6f0;
     --accent-deep:  #2a6299;
-
-    /* Fonts */
-    --font-serif:   "Fraunces", "Tiempos Text", "Source Serif Pro", Georgia, serif;
-    --font-sans:    "Inter Tight", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    --font-mono:    "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
-
-    --serif-display: "opsz" 144, "SOFT" 30;
-    --serif-text:    "opsz" 14, "SOFT" 50;
 
     /* Spacing */
     --sp-xs:  3pt;
@@ -794,69 +786,6 @@
   }
 
   /* ============================================
-     Cadence visualization
-     ============================================ */
-  .cadence-track {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: 6px;
-    margin: 18px 0 12px;
-  }
-  .cad-page {
-    aspect-ratio: 11 / 14;
-    background: var(--canvas);
-    border: 1px solid var(--rule);
-    position: relative;
-    font-family: var(--font-mono);
-    font-size: 9px;
-    color: var(--ink-faint);
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    padding-bottom: 4px;
-  }
-  .cad-page.cover  { background: var(--accent); border-color: var(--accent); color: rgba(255,255,255,0.7); }
-  .cad-page.divider { background: var(--accent-tint); border-color: var(--accent-tint); color: var(--ink-soft); }
-  .cad-page.stat::before {
-    content: "1";
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-serif);
-    font-size: 22px;
-    color: var(--accent);
-    font-weight: 500;
-  }
-  .cad-page.stat { color: transparent; }
-  .cad-page.quote::before {
-    content: "";
-    position: absolute;
-    top: 30%;
-    bottom: 30%;
-    left: 4px;
-    width: 2px;
-    background: var(--accent);
-  }
-  .cadence-legend {
-    display: flex;
-    gap: 24px;
-    font-family: var(--font-sans);
-    font-size: 11px;
-    color: var(--ink-soft);
-    margin-top: 14px;
-  }
-  .cadence-legend .swatch-mini {
-    display: inline-block;
-    width: 14px;
-    height: 14px;
-    border: 1px solid var(--rule);
-    margin-right: 6px;
-    vertical-align: middle;
-  }
-
-  /* ============================================
      Density rules table
      ============================================ */
   table.density-rules {
@@ -1126,7 +1055,6 @@
         <th>Profile</th>
         <th>Pages</th>
         <th>Format</th>
-        <th>Cadence</th>
         <th>Status</th>
       </tr>
     </thead>
@@ -1135,35 +1063,30 @@
         <td class="fmt-name">Playbook</td>
         <td>10–80</td>
         <td>11×8.5in landscape</td>
-        <td>Visual reset every 5–7 pages</td>
         <td class="fmt-status status-live">● live</td>
       </tr>
       <tr>
         <td class="fmt-name">White paper</td>
         <td>8–30</td>
         <td>A4 portrait</td>
-        <td>Visual reset every 5–7 pages</td>
         <td class="fmt-status status-live">● live</td>
       </tr>
       <tr>
         <td class="fmt-name">Single-page report</td>
         <td>1</td>
         <td>A4 portrait, fixed</td>
-        <td>Single rhythm, no cadence rule</td>
         <td class="fmt-status status-live">● live</td>
       </tr>
       <tr>
         <td class="fmt-name">Landing page</td>
         <td>continuous</td>
         <td>A4 width, flows + paginates</td>
-        <td>Single rhythm, no cadence rule</td>
         <td class="fmt-status status-live">● live</td>
       </tr>
       <tr>
         <td class="fmt-name">Slides</td>
         <td>5–60</td>
         <td>16:9 HTML deck, arrow-key nav</td>
-        <td>One idea per slide, no cadence rule</td>
         <td class="fmt-status status-live">● live</td>
       </tr>
     </tbody>
@@ -1185,17 +1108,16 @@
 <section id="see">
   <p class="anchor">Introduction</p>
   <p class="section-eyebrow">See it</p>
-  <h2 class="section-title">A 12-page self-introducing playbook.</h2>
+  <h2 class="section-title">An 11-page self-introducing playbook.</h2>
   <p class="section-desc">
     The same system, applied to introduce itself. Four content archetypes,
-    three chapter dividers, one stat-anchor, one pull-quote, one colophon. Page
-    count even. Cadence keeps to the 5–7 rule.
+    three chapter dividers, one stat-anchor, one pull-quote, one colophon.
   </p>
 
   <div class="preview-grid">
     <div class="preview-page cover">
       <div class="pv-eyebrow">Quire · 2026</div>
-      <div class="pv-title">The Playbook, Bound.</div>
+      <div class="pv-title">The Playbook, Typeset.</div>
     </div>
     <div class="preview-page tint">
       <div class="pv-eyebrow">Chapter 02</div>
@@ -1252,7 +1174,7 @@
      1. COLOR
      ============================================= -->
 <section>
-  <p class="anchor">01 / 12</p>
+  <p class="anchor">01 / 10</p>
   <p class="section-eyebrow">Tokens</p>
   <h2 class="section-title">Color</h2>
   <p class="section-desc">
@@ -1351,7 +1273,7 @@
      2. TYPOGRAPHY
      ============================================= -->
 <section>
-  <p class="anchor">02 / 12</p>
+  <p class="anchor">02 / 10</p>
   <p class="section-eyebrow">Tokens</p>
   <h2 class="section-title">Typography</h2>
   <p class="section-desc">
@@ -1363,7 +1285,7 @@
   <p class="sub-title">Type scale</p>
   <div class="type-row">
     <div class="type-meta"><strong>Display</strong>36pt · 500 · lh 1.05<br>cover title, chapter divider</div>
-    <div class="type-sample serif" style="font-size: 48px; font-weight: 500; letter-spacing: -0.026em; line-height: 1.05; font-variation-settings: var(--serif-display);">The Playbook, Bound.</div>
+    <div class="type-sample serif" style="font-size: 48px; font-weight: 500; letter-spacing: -0.026em; line-height: 1.05; font-variation-settings: var(--serif-display);">The Playbook, Typeset.</div>
   </div>
   <div class="type-row">
     <div class="type-meta"><strong>H1</strong>22pt · 500 · lh 1.18<br>chapter / section open</div>
@@ -1424,7 +1346,7 @@
      3. SPACING
      ============================================= -->
 <section>
-  <p class="anchor">03 / 12</p>
+  <p class="anchor">03 / 10</p>
   <p class="section-eyebrow">Tokens</p>
   <h2 class="section-title">Spacing</h2>
   <p class="section-desc">
@@ -1494,7 +1416,7 @@
      4. STROKES & RADII
      ============================================= -->
 <section>
-  <p class="anchor">04 / 12</p>
+  <p class="anchor">04 / 10</p>
   <p class="section-eyebrow">Tokens</p>
   <h2 class="section-title">Strokes &amp; radii</h2>
   <p class="section-desc">
@@ -1561,7 +1483,7 @@
      5. PAGE ARCHETYPES
      ============================================= -->
 <section>
-  <p class="anchor">05 / 12</p>
+  <p class="anchor">05 / 10</p>
   <p class="section-eyebrow">Structure</p>
   <h2 class="section-title">Page archetypes</h2>
   <p class="section-desc">
@@ -1691,7 +1613,7 @@
      6. PAGE CHROME
      ============================================= -->
 <section>
-  <p class="anchor">06 / 12</p>
+  <p class="anchor">06 / 10</p>
   <p class="section-eyebrow">Structure</p>
   <h2 class="section-title">Page chrome</h2>
   <p class="section-desc">
@@ -1710,12 +1632,12 @@
       <tr>
         <td>Running header</td>
         <td class="num">mono 8pt · ink-faint · +0.04em</td>
-        <td class="why">12pt above top trim. Left: document name. Right: current chapter title.</td>
+        <td class="why">12pt above top edge. Left: document name. Right: current chapter title.</td>
       </tr>
       <tr>
         <td>Page number</td>
         <td class="num">mono 9pt · ink-faint · tabular-nums</td>
-        <td class="why">12pt below bottom trim. Outside edge — right on recto, left on verso (portrait); right corner (landscape).</td>
+        <td class="why">12pt below bottom edge. Outer corner — right (portrait or landscape).</td>
       </tr>
       <tr>
         <td>Margin rule (optional)</td>
@@ -1731,7 +1653,7 @@
      7. COMPONENTS
      ============================================= -->
 <section>
-  <p class="anchor">07 / 12</p>
+  <p class="anchor">07 / 10</p>
   <p class="section-eyebrow">Building blocks</p>
   <h2 class="section-title">Components</h2>
   <p class="section-desc">
@@ -1843,7 +1765,7 @@
       <div class="fig-image">[ image · 16:9 · canvas + 1px rule ]</div>
       <figcaption>
         <span class="fig-num">Figure 02</span>
-        A 12-page cadence track. Cover at 01, chapter dividers at 03 / 06 / 09, stat-anchor at 05, pull-quote at 10. Every visual reset falls within the 5–7 page window.
+        Standard figure variant. Canvas background with a 1px rule, caption beneath in sans. Figure number lives in <code>--accent</code>; everything else stays in cool gray.
       </figcaption>
     </figure>
 
@@ -1851,7 +1773,7 @@
       <div class="fig-image">[ full-bleed · accent · for covers, stat-anchors ]</div>
       <figcaption>
         <span class="fig-num">Figure 03</span>
-        Full-bleed variant. No border; image extends to the trim. Reserved for covers, chapter dividers, and stat-anchor backgrounds.
+        Full-bleed variant. No border; image extends to the page edge. Reserved for covers, chapter dividers, and stat-anchor backgrounds.
       </figcaption>
     </figure>
   </div>
@@ -1862,7 +1784,7 @@
      8. DIAGRAMS
      ============================================= -->
 <section>
-  <p class="anchor">08 / 12</p>
+  <p class="anchor">08 / 10</p>
   <p class="section-eyebrow">Building blocks</p>
   <h2 class="section-title">Diagrams</h2>
   <p class="section-desc">
@@ -2012,46 +1934,10 @@
 <hr class="section-divider">
 
 <!-- =============================================
-     9. CADENCE
+     9. DENSITY RULES
      ============================================= -->
 <section>
-  <p class="anchor">09 / 12</p>
-  <p class="section-eyebrow">Rhythm</p>
-  <h2 class="section-title">Cadence rule</h2>
-  <p class="section-desc">
-    Every 5–7 content pages, the eye needs a visual reset — a chapter divider,
-    a stat-anchor, or a pull-quote. Without it, readers lose orientation.
-    Cadence is what separates a book from a transcript.
-  </p>
-
-  <p class="sub-title">Visualized · a 12-page playbook</p>
-  <div class="cadence-track">
-    <div class="cad-page cover">01</div>
-    <div class="cad-page">02</div>
-    <div class="cad-page divider">03</div>
-    <div class="cad-page">04</div>
-    <div class="cad-page stat">05</div>
-    <div class="cad-page divider">06</div>
-    <div class="cad-page">07</div>
-    <div class="cad-page">08</div>
-    <div class="cad-page divider">09</div>
-    <div class="cad-page quote">10</div>
-    <div class="cad-page">11</div>
-    <div class="cad-page">12</div>
-  </div>
-  <div class="cadence-legend">
-    <span><span class="swatch-mini" style="background: var(--accent);"></span>cover</span>
-    <span><span class="swatch-mini" style="background: var(--accent-tint);"></span>chapter divider</span>
-    <span><span class="swatch-mini" style="background: var(--canvas);"></span>content (incl. stat-anchor, pull-quote)</span>
-  </div>
-</section>
-<hr class="section-divider">
-
-<!-- =============================================
-     10. DENSITY RULES
-     ============================================= -->
-<section>
-  <p class="anchor">10 / 12</p>
+  <p class="anchor">09 / 10</p>
   <p class="section-eyebrow">Quantitative limits</p>
   <h2 class="section-title">Density limits</h2>
   <p class="section-desc">
@@ -2094,78 +1980,16 @@
         <td class="num">≤ 2 per page</td>
         <td class="why">Highlight everything = highlight nothing.</td>
       </tr>
-      <tr>
-        <td>Visual reset (cadence)</td>
-        <td class="num">every 5–7 content pages</td>
-        <td class="why">Beyond seven, readers lose orientation in long documents.</td>
-      </tr>
     </tbody>
   </table>
 </section>
 <hr class="section-divider">
 
 <!-- =============================================
-     11. PRINT RULES
+     10. 10 INVARIANTS
      ============================================= -->
 <section>
-  <p class="anchor">11 / 12</p>
-  <p class="section-eyebrow">Output</p>
-  <h2 class="section-title">Print rules</h2>
-  <p class="section-desc">
-    Constraints that only bite when exporting to PDF for press or bind. Screen-
-    only documents may ignore them; anything destined for paper cannot.
-  </p>
-
-  <table class="density-rules">
-    <thead>
-      <tr><th>Constraint</th><th>Value</th><th>Why</th></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Bleed</td>
-        <td class="num">3 mm all sides</td>
-        <td class="why">Required on covers, chapter dividers, and any full-bleed figure. Extend the background past the trim line.</td>
-      </tr>
-      <tr>
-        <td>Safe area</td>
-        <td class="num">5 mm inside trim</td>
-        <td class="why">No text or critical mark closer than 5 mm to the trim — binding tolerance eats the rest.</td>
-      </tr>
-      <tr>
-        <td>Page-break inside</td>
-        <td class="num">avoid</td>
-        <td class="why">Callouts, stat-blocks, figures, and compare tables must not split across pages.</td>
-      </tr>
-      <tr>
-        <td>Widows &amp; orphans</td>
-        <td class="num">≥ 2 lines</td>
-        <td class="why">A single trailing or leading line of a paragraph reads as a typesetting error.</td>
-      </tr>
-      <tr>
-        <td>Hyphenation</td>
-        <td class="num">off in headings; on in body</td>
-        <td class="why">Headings break by sense, not syllable. Justified body reads better with hyphens on.</td>
-      </tr>
-      <tr>
-        <td>Image resolution</td>
-        <td class="num">≥ 300 dpi at print size</td>
-        <td class="why">Below 300 dpi, detailed images soften visibly once bound.</td>
-      </tr>
-      <tr>
-        <td>Color space</td>
-        <td class="num">sRGB authoring · CMYK soft-proof</td>
-        <td class="why">Sky-blue accent shifts on press; check the proof before committing to a print run.</td>
-      </tr>
-    </tbody>
-  </table>
-</section>
-<hr class="section-divider">
-
-<!-- =============================================
-     12. 10 INVARIANTS
-     ============================================= -->
-<section>
-  <p class="anchor">12 / 12</p>
+  <p class="anchor">10 / 10</p>
   <p class="section-eyebrow">Hard rules</p>
   <h2 class="section-title">The 10 invariants</h2>
   <p class="section-desc">

@@ -51,21 +51,26 @@ One-page quick reference. Scan before filling a template. Full spec in `referenc
 --r-sm:          2pt;      /* tag pills */
 --r-md:          3pt;      /* small components, max allowed */
 
---font-serif:   "Fraunces", "Tiempos Text", "Source Serif Pro", Georgia, serif;
---font-sans:    "Inter Tight", "Inter", -apple-system, sans-serif;
+/* Typography source: assets/styles/quire-type.css */
+--type-editorial: "Fraunces", "Tiempos Text", "Source Serif Pro", "Iowan Old Style", Georgia, serif;
+--type-interface: "Inter Tight", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+--type-code:      "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+
+--type-axis-display: "opsz" 144, "SOFT" 30;
+--type-axis-text:    "opsz" 14, "SOFT" 50;
 ```
 
 ## Format profiles
 
 Quire is one design language, multiple output forms. Each profile inherits the palette and typography; only physical constraints and rhythm differ.
 
-| Profile        | Pages   | Page size                  | Cadence rule              |
-| -------------- | ------- | -------------------------- | ------------------------- |
-| Playbook       | 10–80   | 11×8.5in landscape         | Reset every 5–7 pages     |
-| White paper    | 8–30    | A4 portrait                | Reset every 5–7 pages     |
-| Single-page    | 1       | A4 portrait                | No cadence                |
-| Landing page   | cont.   | A4 width, flows + paginates | No cadence               |
-| Slides         | 5–60    | 16:9 HTML deck, 1280×720   | One idea per slide        |
+| Profile        | Pages   | Page size                   |
+| -------------- | ------- | --------------------------- |
+| Playbook       | 10–80   | 11×8.5in landscape          |
+| White paper    | 8–30    | A4 portrait                 |
+| Single-page    | 1       | A4 portrait                 |
+| Landing page   | cont.   | A4 width, flows + paginates |
+| Slides         | 5–60    | 16:9 HTML deck, 1280×720    |
 
 ## Anti-LinkedIn guard
 

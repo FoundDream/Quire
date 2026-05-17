@@ -10,7 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..700,30..100&family=Inter+Tight:wght@400..600&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+SC:wght@400;500&family=Noto+Sans+SC:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles/quire-type.css">
 <style>
   /* ============================================
      EDIT HERE — every section below uses these tokens
@@ -32,14 +32,6 @@
     --accent:       #3a82c4;
     --accent-tint:  #b8d6f0;
     --accent-deep:  #2a6299;
-
-    /* Fonts — Fraunces/Inter Tight handle Latin; Noto Serif/Sans SC handle CJK */
-    --font-serif:   "Fraunces", "Noto Serif SC", "Source Han Serif SC", "Songti SC", Georgia, serif;
-    --font-sans:    "Inter Tight", "Noto Sans SC", "Source Han Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
-    --font-mono:    "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
-
-    --serif-display: "opsz" 144, "SOFT" 30;
-    --serif-text:    "opsz" 14, "SOFT" 50;
 
     /* Spacing */
     --sp-xs:  3pt;
@@ -794,69 +786,6 @@
   }
 
   /* ============================================
-     Cadence visualization
-     ============================================ */
-  .cadence-track {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: 6px;
-    margin: 18px 0 12px;
-  }
-  .cad-page {
-    aspect-ratio: 11 / 14;
-    background: var(--canvas);
-    border: 1px solid var(--rule);
-    position: relative;
-    font-family: var(--font-mono);
-    font-size: 9px;
-    color: var(--ink-faint);
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    padding-bottom: 4px;
-  }
-  .cad-page.cover  { background: var(--accent); border-color: var(--accent); color: rgba(255,255,255,0.7); }
-  .cad-page.divider { background: var(--accent-tint); border-color: var(--accent-tint); color: var(--ink-soft); }
-  .cad-page.stat::before {
-    content: "1";
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-serif);
-    font-size: 22px;
-    color: var(--accent);
-    font-weight: 500;
-  }
-  .cad-page.stat { color: transparent; }
-  .cad-page.quote::before {
-    content: "";
-    position: absolute;
-    top: 30%;
-    bottom: 30%;
-    left: 4px;
-    width: 2px;
-    background: var(--accent);
-  }
-  .cadence-legend {
-    display: flex;
-    gap: 24px;
-    font-family: var(--font-sans);
-    font-size: 11px;
-    color: var(--ink-soft);
-    margin-top: 14px;
-  }
-  .cadence-legend .swatch-mini {
-    display: inline-block;
-    width: 14px;
-    height: 14px;
-    border: 1px solid var(--rule);
-    margin-right: 6px;
-    vertical-align: middle;
-  }
-
-  /* ============================================
      Density rules table
      ============================================ */
   table.density-rules {
@@ -1100,7 +1029,7 @@
     <a href="index-zh.html" class="active">中</a>
   </span>
   <h1 class="hero-title">Quire</h1>
-  <p class="hero-lede">面向 <strong>playbook、白皮书、单页报告、landing page 与幻灯片</strong> 的编辑型排版系统。一种天蓝强调色，衬线负责层级，输出可直接装订的 PDF。</p>
+  <p class="hero-lede">面向 <strong>playbook、白皮书、单页报告、landing page 与幻灯片</strong> 的编辑型排版系统。一种天蓝强调色，衬线负责层级，输出已排版完成的 PDF。</p>
   <div class="cta-row">
     <a href="https://github.com/FoundDream/Quire" class="cta primary" target="_blank" rel="noopener">在 GitHub 查看 <span class="cta-arrow">→</span></a>
     <a href="assets/output/quire-playbook.pdf" class="cta" target="_blank" rel="noopener">查看示例 PDF</a>
@@ -1124,7 +1053,6 @@
         <th>形态</th>
         <th>页数</th>
         <th>开本</th>
-        <th>节奏</th>
         <th>状态</th>
       </tr>
     </thead>
@@ -1133,35 +1061,30 @@
         <td class="fmt-name">Playbook</td>
         <td>10–80</td>
         <td>11×8.5in 横版</td>
-        <td>每 5–7 页一次视觉重置</td>
         <td class="fmt-status status-live">● 已上线</td>
       </tr>
       <tr>
         <td class="fmt-name">白皮书</td>
         <td>8–30</td>
         <td>A4 竖版</td>
-        <td>每 5–7 页一次视觉重置</td>
         <td class="fmt-status status-live">● 已上线</td>
       </tr>
       <tr>
         <td class="fmt-name">单页报告</td>
         <td>1</td>
         <td>A4 竖版，固定一张</td>
-        <td>单页节奏，不适用 cadence 规则</td>
         <td class="fmt-status status-live">● 已上线</td>
       </tr>
       <tr>
         <td class="fmt-name">Landing page</td>
         <td>连续滚动</td>
         <td>A4 宽，自由生长 + 自动分页</td>
-        <td>单页节奏，不适用 cadence 规则</td>
         <td class="fmt-status status-live">● 已上线</td>
       </tr>
       <tr>
         <td class="fmt-name">幻灯片</td>
         <td>5–60</td>
         <td>16:9 HTML 演示，方向键切换</td>
-        <td>一张一个观点，不适用 cadence 规则</td>
         <td class="fmt-status status-live">● 已上线</td>
       </tr>
     </tbody>
@@ -1183,15 +1106,15 @@
 <section id="see">
   <p class="anchor">引言</p>
   <p class="section-eyebrow">示例</p>
-  <h2 class="section-title">12 页 playbook，用 Quire 介绍 Quire。</h2>
+  <h2 class="section-title">11 页 playbook，用 Quire 介绍 Quire。</h2>
   <p class="section-desc">
-    同一套设计系统排版自身：4 种内文原型、3 个章节分隔页、1 个 stat-anchor、1 个 pull-quote、1 个 colophon。总页数为偶数；节奏严格遵循每 5–7 页一次视觉重置。
+    同一套设计系统排版自身：4 种内文原型、3 个章节分隔页、1 个 stat-anchor、1 个 pull-quote、1 个 colophon。
   </p>
 
   <div class="preview-grid">
     <div class="preview-page cover">
       <div class="pv-eyebrow">Quire · 2026</div>
-      <div class="pv-title">The Playbook, Bound.</div>
+      <div class="pv-title">The Playbook, Typeset.</div>
     </div>
     <div class="preview-page tint">
       <div class="pv-eyebrow">Chapter 02</div>
@@ -1246,7 +1169,7 @@
      1. COLOR
      ============================================= -->
 <section>
-  <p class="anchor">01 / 12</p>
+  <p class="anchor">01 / 10</p>
   <p class="section-eyebrow">Tokens</p>
   <h2 class="section-title">颜色</h2>
   <p class="section-desc">
@@ -1344,7 +1267,7 @@
      2. TYPOGRAPHY
      ============================================= -->
 <section>
-  <p class="anchor">02 / 12</p>
+  <p class="anchor">02 / 10</p>
   <p class="section-eyebrow">Tokens</p>
   <h2 class="section-title">字体</h2>
   <p class="section-desc">
@@ -1354,7 +1277,7 @@
   <p class="sub-title">字号阶梯</p>
   <div class="type-row">
     <div class="type-meta"><strong>Display</strong>36pt · 500 · lh 1.05<br>封面标题、章节封面</div>
-    <div class="type-sample serif" style="font-size: 48px; font-weight: 500; letter-spacing: -0.026em; line-height: 1.05; font-variation-settings: var(--serif-display);">装订成册的 Playbook</div>
+    <div class="type-sample serif" style="font-size: 48px; font-weight: 500; letter-spacing: -0.026em; line-height: 1.05; font-variation-settings: var(--serif-display);">排版完成的 Playbook</div>
   </div>
   <div class="type-row">
     <div class="type-meta"><strong>H1</strong>22pt · 500 · lh 1.18<br>章节 / 小节起首</div>
@@ -1415,7 +1338,7 @@
      3. SPACING
      ============================================= -->
 <section>
-  <p class="anchor">03 / 12</p>
+  <p class="anchor">03 / 10</p>
   <p class="section-eyebrow">Tokens</p>
   <h2 class="section-title">间距</h2>
   <p class="section-desc">
@@ -1483,7 +1406,7 @@
      4. STROKES & RADII
      ============================================= -->
 <section>
-  <p class="anchor">04 / 12</p>
+  <p class="anchor">04 / 10</p>
   <p class="section-eyebrow">Tokens</p>
   <h2 class="section-title">描边 &amp; 圆角</h2>
   <p class="section-desc">
@@ -1550,7 +1473,7 @@
      5. PAGE ARCHETYPES
      ============================================= -->
 <section>
-  <p class="anchor">05 / 12</p>
+  <p class="anchor">05 / 10</p>
   <p class="section-eyebrow">结构</p>
   <h2 class="section-title">页面原型</h2>
   <p class="section-desc">
@@ -1678,7 +1601,7 @@
      6. PAGE CHROME
      ============================================= -->
 <section>
-  <p class="anchor">06 / 12</p>
+  <p class="anchor">06 / 10</p>
   <p class="section-eyebrow">结构</p>
   <h2 class="section-title">页眉与页码</h2>
   <p class="section-desc">
@@ -1693,12 +1616,12 @@
       <tr>
         <td>Running header · 页眉</td>
         <td class="num">mono 8pt · ink-faint · +0.04em</td>
-        <td class="why">距上裁切线 12pt。左：文档名；右：当前章节标题。</td>
+        <td class="why">距上边缘 12pt。左：文档名；右：当前章节标题。</td>
       </tr>
       <tr>
         <td>Page number · 页码</td>
         <td class="num">mono 9pt · ink-faint · tabular-nums</td>
-        <td class="why">距下裁切线 12pt。外侧——竖版正面右下、背面左下；横版统一右下。</td>
+        <td class="why">距下边缘 12pt，右下角（竖版与横版一致）。</td>
       </tr>
       <tr>
         <td>Margin rule · 边距细线（可选）</td>
@@ -1714,7 +1637,7 @@
      7. COMPONENTS
      ============================================= -->
 <section>
-  <p class="anchor">07 / 12</p>
+  <p class="anchor">07 / 10</p>
   <p class="section-eyebrow">基础组件</p>
   <h2 class="section-title">组件</h2>
   <p class="section-desc">
@@ -1817,7 +1740,7 @@
       <div class="fig-image">[ 图片 · 16:9 · canvas + 1px 边框 ]</div>
       <figcaption>
         <span class="fig-num">Figure 02</span>
-        一份 12 页 playbook 的节奏图。封面在 01；章节分隔在 03 / 06 / 09；stat-anchor 在 05；pull-quote 在 10。每次视觉重置都落在 5–7 页窗口内。
+        标准图变体。canvas 背景配 1px 边框，图注在下、用无衬线；图号落在 <code>--accent</code>，其余维持冷灰。
       </figcaption>
     </figure>
 
@@ -1825,7 +1748,7 @@
       <div class="fig-image">[ 满铺 · accent · 用于封面、stat-anchor ]</div>
       <figcaption>
         <span class="fig-num">Figure 03</span>
-        满铺变体：无边框，画面延伸至裁切线。仅用于封面、章节分隔与 stat-anchor 背景。
+        满铺变体：无边框，画面延伸至页面边缘。仅用于封面、章节分隔与 stat-anchor 背景。
       </figcaption>
     </figure>
   </div>
@@ -1836,7 +1759,7 @@
      8. DIAGRAMS
      ============================================= -->
 <section>
-  <p class="anchor">08 / 12</p>
+  <p class="anchor">08 / 10</p>
   <p class="section-eyebrow">基础组件</p>
   <h2 class="section-title">图表与图示</h2>
   <p class="section-desc">
@@ -1986,44 +1909,10 @@
 <hr class="section-divider">
 
 <!-- =============================================
-     9. CADENCE
+     9. DENSITY RULES
      ============================================= -->
 <section>
-  <p class="anchor">09 / 12</p>
-  <p class="section-eyebrow">节奏</p>
-  <h2 class="section-title">页面节奏（Cadence）</h2>
-  <p class="section-desc">
-    每 5–7 页正文需一次视觉重置——章节分隔、stat-anchor 或 pull-quote 均可。缺少重置，读者容易迷失。节奏是把「成书」与「打字稿」分开的那条线。
-  </p>
-
-  <p class="sub-title">可视化 · 一份 12 页 playbook</p>
-  <div class="cadence-track">
-    <div class="cad-page cover">01</div>
-    <div class="cad-page">02</div>
-    <div class="cad-page divider">03</div>
-    <div class="cad-page">04</div>
-    <div class="cad-page stat">05</div>
-    <div class="cad-page divider">06</div>
-    <div class="cad-page">07</div>
-    <div class="cad-page">08</div>
-    <div class="cad-page divider">09</div>
-    <div class="cad-page quote">10</div>
-    <div class="cad-page">11</div>
-    <div class="cad-page">12</div>
-  </div>
-  <div class="cadence-legend">
-    <span><span class="swatch-mini" style="background: var(--accent);"></span>封面</span>
-    <span><span class="swatch-mini" style="background: var(--accent-tint);"></span>章节分隔</span>
-    <span><span class="swatch-mini" style="background: var(--canvas);"></span>正文（含 stat-anchor、pull-quote）</span>
-  </div>
-</section>
-<hr class="section-divider">
-
-<!-- =============================================
-     10. DENSITY RULES
-     ============================================= -->
-<section>
-  <p class="anchor">10 / 12</p>
+  <p class="anchor">09 / 10</p>
   <p class="section-eyebrow">用量上限</p>
   <h2 class="section-title">密度限值</h2>
   <p class="section-desc">
@@ -2064,77 +1953,16 @@
         <td class="num">每页 ≤ 2 处</td>
         <td class="why">处处强调等于没有强调。</td>
       </tr>
-      <tr>
-        <td>视觉重置(cadence)</td>
-        <td class="num">每 5–7 页内文</td>
-        <td class="why">超过 7 页无重置，读者在长文中易迷失。</td>
-      </tr>
     </tbody>
   </table>
 </section>
 <hr class="section-divider">
 
 <!-- =============================================
-     11. PRINT RULES
+     10. 10 INVARIANTS
      ============================================= -->
 <section>
-  <p class="anchor">11 / 12</p>
-  <p class="section-eyebrow">输出</p>
-  <h2 class="section-title">印刷规则</h2>
-  <p class="section-desc">
-    只有导出 PDF 用于印刷或装订时才生效的约束。仅供屏幕阅读的文档可以忽略；要落到纸上的文档不行。
-  </p>
-
-  <table class="density-rules">
-    <thead>
-      <tr><th>约束</th><th>取值</th><th>原因</th></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Bleed · 出血</td>
-        <td class="num">四边各 3 mm</td>
-        <td class="why">封面、章节分隔与所有满铺图必用——将背景延伸过裁切线。</td>
-      </tr>
-      <tr>
-        <td>Safe area · 安全区</td>
-        <td class="num">距裁切线内 5 mm</td>
-        <td class="why">文字与关键元素均不可靠近裁切线 5 mm 以内——装订误差会吃掉这段空间。</td>
-      </tr>
-      <tr>
-        <td>Page-break inside · 元素内分页</td>
-        <td class="num">避免</td>
-        <td class="why">Callout、stat-block、figure、对照表不能被分页打断。</td>
-      </tr>
-      <tr>
-        <td>Widows &amp; orphans · 孤行寡行</td>
-        <td class="num">≥ 2 行</td>
-        <td class="why">段首或段尾只剩 1 行，会被读成排版错误。</td>
-      </tr>
-      <tr>
-        <td>Hyphenation · 连字符</td>
-        <td class="num">标题关闭；正文开启</td>
-        <td class="why">标题按语义断行，不按音节；正文两端对齐时开启连字符更易读。</td>
-      </tr>
-      <tr>
-        <td>Image resolution · 图片分辨率</td>
-        <td class="num">实印尺寸下 ≥ 300 dpi</td>
-        <td class="why">低于 300 dpi 的图，装订后细节会明显发软。</td>
-      </tr>
-      <tr>
-        <td>Color space · 色彩空间</td>
-        <td class="num">编辑 sRGB；印前 CMYK 软打样</td>
-        <td class="why">天蓝在印刷上会有色偏；下印前先做一次色彩校样。</td>
-      </tr>
-    </tbody>
-  </table>
-</section>
-<hr class="section-divider">
-
-<!-- =============================================
-     12. 10 INVARIANTS
-     ============================================= -->
-<section>
-  <p class="anchor">12 / 12</p>
+  <p class="anchor">10 / 10</p>
   <p class="section-eyebrow">硬规则</p>
   <h2 class="section-title">10 条不变式</h2>
   <p class="section-desc">

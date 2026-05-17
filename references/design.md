@@ -2,7 +2,7 @@
 
 Quire's aesthetic compresses into one sentence: **cool canvas, sky-blue accent, serif carries hierarchy, the document feels composed.**
 
-This is not a slide template or a UI framework. It is a constraint system for **editorial documents in print or screen-PDF form** — playbooks, white papers, single-page reports — the spiritual descendant of editorial print, adapted for AI-generated output.
+This is not a slide template or a UI framework. It is a constraint system for **editorial screen-PDF documents** — playbooks, white papers, single-page reports — the spiritual descendant of editorial typography, adapted for AI-generated output.
 
 ---
 
@@ -72,40 +72,43 @@ This palette deliberately rejects the LinkedIn aesthetic — saturated corporate
 
 ## 2. Typography
 
-### Stack
+### Source
+
+The canonical implementation lives in `assets/styles/quire-type.css`. Templates
+and showcase pages must link that file instead of copying font stacks inline.
+
+### Roles
 
 ```css
-/* Single serif handles display + body. */
---font-serif:
-  "Fraunces", "Tiempos Text", "Source Serif Pro", "Iowan Old Style", Georgia,
-  serif;
-
-/* Sans only for UI chrome — eyebrows, page numbers, table headers, tags. */
---font-sans: "Inter Tight", "Inter", -apple-system, sans-serif;
-
-/* Mono — code blocks only, with CJK fallback if document mixes Chinese. */
---font-mono: "JetBrains Mono", "SF Mono", Menlo, monospace;
+--type-editorial: Fraunces stack;   /* titles, body, quotes, stat figures */
+--type-interface: Inter Tight stack; /* eyebrows, table heads, tags, buttons */
+--type-code: JetBrains Mono stack;   /* code, version strings, page chrome */
 ```
+
+Legacy aliases (`--font-serif`, `--font-sans`, `--font-mono`) are kept for
+existing templates, but new work should think in roles: editorial, interface,
+code.
 
 **Why Fraunces**: it's a variable font with two unusual axes — `opsz` (optical size, 9–144) and `SOFT` (corner softness, 30–100). At display sizes set `opsz: 144, SOFT: 30` for crisp editorial titles; at body set `opsz: 14, SOFT: 50` for a slightly humanized reading texture.
 
 If Fraunces unavailable, Tiempos Text → Source Serif Pro → Iowan Old Style → Georgia. Avoid stopping at Georgia — that's where "Word document feel" leaks in.
 
-### Size scale (print, pt)
+For Chinese documents, the same roles receive CJK fallback via `:lang(zh)`:
+editorial adds Noto/Source Han serif; interface adds Noto/Source Han sans.
 
-| Role    | Size | Weight | Line-height | Use                                |
-| ------- | ---- | ------ | ----------- | ---------------------------------- |
-| Display | 36   | 500    | 1.05        | Cover title, chapter divider title |
-| H1      | 22   | 500    | 1.18        | Chapter / section open             |
-| H2      | 16   | 500    | 1.25        | Subsection title                   |
-| H3      | 13   | 500    | 1.30        | Inline section break               |
-| Lead    | 11   | 400    | 1.55        | Chapter intro paragraph            |
-| Body    | 10   | 400    | 1.65        | Reading body                       |
-| Caption | 9    | 400    | 1.45        | Figure captions, table notes       |
-| Label   | 9    | 500    | 1.30        | Eyebrows, tag pills, page corners  |
-| Tiny    | 8.5  | 400    | 1.40        | Footers, metadata                  |
+### Type levels (pt)
 
-Screen px ≈ pt × 1.33 (10pt ≈ 13.3px). Minimum floor: web ≥ 12px, print ≥ 8.5pt.
+| Level    | Size | Weight | Line-height | Tracking  | Use                                |
+| -------- | ---- | ------ | ----------- | --------- | ---------------------------------- |
+| Display  | 36   | 500    | 1.05        | -0.026em  | Cover title, chapter divider title |
+| Title    | 22   | 500    | 1.18        | -0.018em  | Chapter / section open             |
+| Subtitle | 16   | 500    | 1.25        | -0.014em  | Subsection title                   |
+| Body     | 10   | 400    | 1.65        | -0.003em  | Reading body                       |
+| Caption  | 9    | 400    | 1.45        | 0         | Figure captions, table notes       |
+| Label    | 9    | 500    | 1.30        | +0.06em   | Eyebrows, tag pills, page corners  |
+| Tiny     | 8.5  | 400    | 1.40        | +0.04em   | Footers, metadata                  |
+
+Screen px ≈ pt × 1.33 (10pt ≈ 13.3px). Minimum floor: 8.5pt (≈ 11.3px).
 
 ### Weights
 
@@ -175,7 +178,7 @@ Three line weights cover every divider, table head, and quote bar. Radii stay fl
 --r-md:   3pt;   /* small contained components — the maximum allowed */
 ```
 
-**Forbidden**: any radius greater than 3pt. Pill-shaped buttons and rounded cards read as profile-page UI; Quire is editorial print, not app chrome.
+**Forbidden**: any radius greater than 3pt. Pill-shaped buttons and rounded cards read as profile-page UI; Quire is editorial typography, not app chrome.
 
 ---
 
@@ -194,7 +197,6 @@ Three line weights cover every divider, table head, and quote bar. Radii stay fl
 - Page-fill is `--accent-tint` (`#b8d6f0`), never the full-saturation `--accent`.
 - Two text elements only: chapter number (eyebrow style) + chapter title (display size).
 - No body text. No page number on dividers.
-- Always positioned to start on a right-hand page (odd page number) in print binding.
 
 ### Standard content
 
@@ -233,16 +235,14 @@ Running header and page number are the only marks outside the content area. Tiny
 
 ### Running header
 
-- Position: 12pt above the top trim line.
+- Position: 12pt above the top edge.
 - Style: `mono 8pt`, `--ink-faint`, `+0.04em` tracking.
 - Content: document name (left) · current chapter title (right).
 - Landscape may compress to chapter title only when the document name is long.
 
 ### Page number
 
-- Position: 12pt below the bottom trim line, outside edge.
-  - Portrait: right corner on recto pages, left corner on verso.
-  - Landscape: right corner on every page.
+- Position: 12pt below the bottom edge, right corner.
 - Style: `mono 9pt`, `--ink-faint`, `tabular-nums`.
 - Suppressed on cover and chapter dividers.
 
@@ -388,22 +388,6 @@ Three list variants, all serif-bodied. Use lists in body paragraphs; lists insid
 ### Diagrams
 
 Inline `<svg>` only — never embedded PNG / screenshots. Use accent + cool grays only; no second chromatic hue in chart series (secondary series use gray-scale, not a second color). For the eight chart and diagram archetypes (horizontal bar, annotated line, system diagram, sparkline, process flow, dot/range, 2×2 quadrant, timeline) plus the small-multiples rule for multivariate data, see `diagrams.md`.
-
----
-
-## 8. Print rules
-
-Design-level constraints that only bite on PDF exports for press or bind. Screen-only documents may ignore them. For the mechanics (CSS / WeasyPrint / headless Chrome), see `production.md`.
-
-| Constraint        | Value                            | Notes                                                 |
-| ----------------- | -------------------------------- | ----------------------------------------------------- |
-| Bleed             | 3 mm all sides                   | Required on covers, dividers, full-bleed figures      |
-| Safe area         | 5 mm inside trim                 | No text or critical mark closer to the trim           |
-| Page-break inside | avoid                            | Callouts, stat-blocks, figures, tables must not split |
-| Widows / orphans  | ≥ 2 lines                        | Single trailing or leading line reads as error        |
-| Hyphenation       | off in headings, on in body      | Headings break by sense; justified body needs hyphens |
-| Image resolution  | ≥ 300 dpi at print size          | Below this, detail softens once bound                 |
-| Color space       | sRGB authoring · CMYK soft-proof | Sky blue shifts on press; check before committing     |
 
 ---
 

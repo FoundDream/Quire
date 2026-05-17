@@ -6,17 +6,17 @@
 
 ## What it is
 
-Quire is a constraint system for editorial documents — playbooks, white papers, single-page reports — that share one design language and produce print-ready PDFs. Cool canvas, single sky-blue accent, serif carries hierarchy, no second color anywhere.
+Quire is a constraint system for editorial documents — playbooks, white papers, single-page reports — that share one design language and produce typeset PDFs. Cool canvas, single sky-blue accent, serif carries hierarchy, no second color anywhere.
 
 ## Format profiles
 
-| Profile      | Pages       | Format                  | Cadence              |
-| ------------ | ----------- | ----------------------- | -------------------- |
-| Playbook     | 10–80       | 11×8.5in landscape      | Reset every 5–7 pages |
-| White paper  | 8–30        | A4 portrait             | Reset every 5–7 pages |
-| Single-page  | 1           | A4 portrait, fixed      | No cadence rule      |
-| Landing page | continuous  | A4 width, flows + paginates | No cadence rule  |
-| Slides       | 5–60        | 16:9 HTML deck, 1280×720 | One idea per slide  |
+| Profile      | Pages       | Format                      |
+| ------------ | ----------- | --------------------------- |
+| Playbook     | 10–80       | 11×8.5in landscape          |
+| White paper  | 8–30        | A4 portrait                 |
+| Single-page  | 1           | A4 portrait, fixed          |
+| Landing page | continuous  | A4 width, flows + paginates |
+| Slides       | 5–60        | 16:9 HTML deck, 1280×720    |
 
 ## Palette
 
@@ -35,6 +35,7 @@ The accent is locked. There is no palette to pick from, and no second chromatic 
 - **`SKILL.md`** — agent entry point: triggers, decision steps, 10 invariants
 - **`CHEATSHEET.md`** — one-page quick reference
 - **`references/`** — full spec (design / writing / anti-patterns / production)
+- **`assets/styles/`** — shared system CSS (typography source of truth)
 - **`assets/templates/`** — fillable HTML templates
 - **`assets/output/`** — rendered demos (the self-introducing playbook lives here)
 - **`scripts/`** — build (`build.sh`), linter (`check.py`)

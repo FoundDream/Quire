@@ -2,7 +2,7 @@
 
 Eight inline-SVG archetypes that survive Quire's monochrome constraint. Copy the SVG block, swap data, ship.
 
-This file covers **what to draw, how to draw it, and when not to**. For broader visual rules (color, type, page chrome) see `design.md`. For diagram-specific anti-patterns see `anti-patterns.md` §13–16.
+This file covers **what to draw, how to draw it, and when not to**. For broader visual rules (color, type, page chrome) see `design.md`. For diagram-specific anti-patterns see `anti-patterns.md` #5–8.
 
 ---
 
@@ -91,7 +91,7 @@ Every diagram lives inside `<figure class="fig">` with a `<figcaption>`. Caption
 
 ### Implementation
 
-- **Inline SVG only.** Never `<img src="chart.png">`, never embedded raster, never D3 / Chart.js / Mermaid output (their default styling will leak — see `anti-patterns.md` §16).
+- **Inline SVG only.** Never `<img src="chart.png">`, never embedded raster, never D3 / Chart.js / Mermaid output (their default styling will leak — see `anti-patterns.md` #8).
 - SVG inherits CSS variables from the page — author with `var(--accent)` etc., not hex literals.
 - `role="img"` and `<title>` for accessibility.
 
@@ -497,4 +497,4 @@ Horizontal axis with event markers. Labels alternate above / below to avoid coll
 | Editorial concept frame           | 2×2 quadrant (§4.7)          |
 | Events on a date axis             | Timeline (§4.8)              |
 | > 1 categorical series            | Small multiples (§1)         |
-| Donut / pie / stacked / 3D / etc. | Forbidden — see `anti-patterns.md` §13–16 |
+| Donut / pie / stacked / 3D / etc. | Forbidden — see `anti-patterns.md` #5–8 |

@@ -37,7 +37,7 @@ Otherwise cut.
 
 **Density**: ~1 heading + 2–4 paragraphs + ≤ 1 figure per content page; merge chapters under 40 % page fill; bottom whitespace = draft defect. ≥ 1 data point per paragraph when possible. Headlines + H1s alone should tell the story.
 
-**Rhythm**: after > 5 lines of dense prose, break with callout, pull-quote, or figure (`SKILL.md` cadence; max 2 callouts per spread).
+**Rhythm**: after > 5 lines of dense prose, break with callout, pull-quote, or figure (max 2 callouts per spread).
 
 ---
 
@@ -46,7 +46,7 @@ Otherwise cut.
 - First sentence = the claim. Concrete subject, not abstraction.
 - One claim per sentence; ~3 sentences per paragraph, 5 max.
 - Specific beats vivid ("50-page Calibri wall" not "dense document").
-- No opening ceremony — open falsifiable (`anti-patterns.md` #5).
+- No opening ceremony — open falsifiable (`anti-patterns.md` #9).
 
 ---
 
@@ -54,7 +54,7 @@ Otherwise cut.
 
 - Numbers with source inline, or name the gap ("anecdotally…", "we don't have public data…"). Cutting is valid.
 - Magnitude beats false precision (`~$10M`, not `$9,876,543`).
-- Commit or name the trade-off — no hedge stacks (`anti-patterns.md` #7).
+- Commit or name the trade-off — no hedge stacks (`anti-patterns.md` #11).
 - Claims should be falsifiable; one sentence for the strongest counter.
 - **Owned** vs **contributed** vs **coordinated** — don't inflate.
 
@@ -85,8 +85,8 @@ Otherwise cut.
 
 ## Voice and cuts
 
-**Voice**: thoughtful operator to operators — confident, specific, positioned. Not LinkedIn, brochure, hedge-mush, or procedural tutorial (`anti-patterns.md` #12).
+**Voice**: thoughtful operator to operators — confident, specific, positioned. Not LinkedIn, brochure, hedge-mush, or procedural tutorial (`anti-patterns.md` #16).
 
 **Cut on edit**: today's-world openers; "important to note"; unnamed "experts"; unlock/empower/leverage/pioneer; CN 拥抱/赋能/本质是/不仅而且; EN em-dash piles / "worth noting"; best practices without 3 named practices; adjective stacks; rhetorical questions; filler transitions; obvious confirmations; emoji. Surface cuts to the user — don't silently rewrite their substance.
 
-Full symptom/fix pairs: `anti-patterns.md` #5–12.
+Full symptom/fix pairs: `anti-patterns.md` #9–16.

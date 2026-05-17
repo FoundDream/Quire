@@ -1,6 +1,6 @@
 # Quire · Production Runbook
 
-How to take a Quire HTML template and ship it as a PDF, with embedded fonts, even page count, and no rendering surprises.
+How to take a Quire HTML template and ship it as a PDF, with embedded fonts and no rendering surprises.
 
 Three parts: **HTML → PDF**, **Verify**, **Pitfalls**.
 
@@ -12,7 +12,7 @@ Quire supports two export paths. Pick based on your environment.
 
 ### Path A · Headless Chrome (recommended)
 
-Best fidelity, font-embedding handled automatically, works with Google Fonts links.
+Best fidelity, font-embedding handled automatically, works with the shared Google Fonts import in `assets/styles/quire-type.css`.
 
 ```bash
 "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
@@ -85,15 +85,7 @@ If Fraunces shows as not embedded, verify:
 2. `font-display: swap` is set so headless Chrome waits for fonts before printing
 3. For WeasyPrint, the `@font-face` `src: url()` path resolves at build time
 
-### 2.2 · Page count parity
-
-```bash
-pdfinfo output.pdf | grep Pages
-```
-
-Quire's print convention: even page count. If the document ends with a content page on a left (verso) side leaving a blank verso, insert a colophon or "Resources" page.
-
-### 2.3 · Accent surface ratio
+### 2.2 · Accent surface ratio
 
 There's no automated tool. Manual check: open the PDF, page through, and confirm no single page has the accent color on more than 15 % of its visible surface. Chapter dividers (using lightened tint) are exempt.
 
@@ -103,7 +95,7 @@ If a content page is over-using accent, the most likely culprits are:
 - A run of `.hl` highlights in consecutive sentences (cut to 1–2 per page)
 - Stat-anchor and pull-quote on the same page (split into two pages)
 
-### 2.4 · Widow / orphan check
+### 2.3 · Widow / orphan check
 
 Page through and look for:
 
@@ -112,7 +104,7 @@ Page through and look for:
 
 In CSS, the template sets `widows: 3; orphans: 3;` to prevent this — if it's still occurring, your content is likely too dense for the page size. Either tighten leading or move a paragraph break.
 
-### 2.5 · Color-on-color contrast
+### 2.4 · Color-on-color contrast
 
 For chapter dividers (text on tint background):
 
@@ -124,7 +116,7 @@ If you've changed the accent or tint, run them through a WCAG contrast checker. 
 
 ---
 
-## Part 3 · 12 known pitfalls
+## Part 3 · 11 known pitfalls
 
 ### Pitfall 1 · WeasyPrint double rectangle on rgba tags
 
@@ -175,19 +167,13 @@ Browsers do not auto-pick optical sizes — you must set the axis.
 
 **Fix**: add `break-inside: avoid` to `.callout` and `blockquote` rules.
 
-### Pitfall 6 · Chapter divider on a left-hand page
-
-**Symptom**: chapter divider appears on a verso page in print binding, breaking the right-hand convention.
-
-**Fix**: add `break-before: right` (CSS Paged Media) to `.page.cover.bg-*` rules. WeasyPrint and Prince support this; headless Chrome respects it as of v110+.
-
-### Pitfall 7 · Embedded font subset missing glyphs
+### Pitfall 6 · Embedded font subset missing glyphs
 
 **Symptom**: PDF embeds fonts but a specific glyph (em-dash, fancy quote) renders as a fallback.
 
 **Fix**: subset embedding can drop rare glyphs. Either disable subsetting (larger file) or include a "test glyph" string at the end of the document with all expected punctuation, forcing them into the subset.
 
-### Pitfall 8 · `position: fixed` page numbers
+### Pitfall 7 · `position: fixed` page numbers
 
 **Symptom**: page numbers from `position: fixed` show on the wrong page or duplicate.
 
@@ -202,29 +188,29 @@ Browsers do not auto-pick optical sizes — you must set the axis.
 }
 ```
 
-### Pitfall 9 · Long URLs breaking the layout
+### Pitfall 8 · Long URLs breaking the layout
 
 **Symptom**: a citation contains a long URL that doesn't break, pushing past the right margin.
 
 **Fix**: add `overflow-wrap: anywhere` (or `word-break: break-word` for older engines) on `.citation` and `.note` classes. Or shorten URLs to a label form.
 
-### Pitfall 10 · Mixed pt + px units
+### Pitfall 9 · Mixed pt + px units
 
-**Symptom**: at 100 % zoom on screen everything looks fine; at print scale H1 is tiny relative to the page.
+**Symptom**: at 100 % zoom on screen everything looks fine; at PDF page scale H1 is tiny relative to the page.
 
-**Fix**: pick one unit per template. Quire print templates: `pt` for type, `mm` for margins. Quire screen templates: `px` / `rem` throughout.
+**Fix**: pick one unit per template. Quire fixed-page templates: `pt` for type, `mm` for margins. Quire flowing templates: `px` / `rem` throughout.
 
-### Pitfall 11 · Stat-figure tabular-num not applied
+### Pitfall 10 · Stat-figure tabular-num not applied
 
 **Symptom**: "$1,234,567" stat figure has uneven digit spacing.
 
 **Fix**: add `font-variant-numeric: tabular-nums` on `.stat-figure` and any `<td>` containing numbers. Without this, proportional digits cause misalignment.
 
-### Pitfall 12 · Cover page bleeding into TOC on small screens
+### Pitfall 11 · Cover page bleeding into TOC on small screens
 
 **Symptom**: when previewing the HTML in browser at narrow widths, cover content overflows into TOC area.
 
-**Fix**: covers and content pages must each be wrapped in `<section class="page">` with explicit `min-height: 100vh` (screen) or fixed page height (print). The `page-break-after: always` rule does the rest.
+**Fix**: covers and content pages must each be wrapped in `<section class="page">` with explicit `min-height: 100vh` (screen) or fixed page height (PDF). The `page-break-after: always` rule does the rest.
 
 ---
 
@@ -263,8 +249,8 @@ pdfinfo "$OUTPUT" | grep Pages
 
 A delivered Quire document is:
 
-- One `.pdf` file (US-Letter or A4, even page count, embedded fonts)
+- One `.pdf` file (US-Letter or A4, embedded fonts)
 - One `.html` source file (so the user can re-export after edits)
 - Optionally: `assets/fonts/*.woff2` if the user needs the document to be self-contained without internet
 
-That's it. No PowerPoint export, no editable Word doc, no Figma file. Quire is for shipping bound documents, not for round-tripping through other tools.
+That's it. No PowerPoint export, no editable Word doc, no Figma file. Quire is for shipping typeset PDFs, not for round-tripping through other tools.

@@ -52,8 +52,6 @@ A standard Quire document follows this rhythm:
 [end] Resources / colophon   ← canvas, references and credits
 ```
 
-**Rule of cadence**: every 5–7 content pages need one visual reset — a chapter divider, a full-page pull-quote, or a stat-block page.
-
 **Clickable TOC**: each TOC row must be an `<a href="#sec-NN">` (not a `<span>`), and the section it points to must carry the matching `id`. Headless Chrome preserves these as internal GoTo links in the PDF. Inherit color and remove the underline so the row looks identical to a span. Reference patterns: `assets/output/quire-playbook.html` (`#ch-01` style) and `assets/output/quire-white-paper.html` (`#sec-01` style).
 
 **Diagrams**: when data or process warrants visual support, use the eight inline-SVG archetypes in `references/diagrams.md`. Default bias is to *not* draw — see §0.
@@ -72,10 +70,10 @@ Pick a template:
 
 | Profile      | Format                          | Template                             | Use for                                                                                  |
 | ------------ | ------------------------------- | ------------------------------------ | ---------------------------------------------------------------------------------------- |
-| Playbook     | 10–80 pp, 11×8.5in landscape    | `assets/templates/playbook.html`     | Long-form editorial. `assets/output/quire-playbook.html` is a 12-page reference.         |
+| Playbook     | 10–80 pp, 11×8.5in landscape    | `assets/templates/playbook.html`     | Long-form editorial. `assets/output/quire-playbook.html` is an 11-page reference.         |
 | White paper  | 8–30 pp, A4 portrait            | `assets/templates/white-paper.html`  | Research-style documents. `assets/output/quire-white-paper.html` is a 10-page reference. |
 | Single-page  | 1 pp, A4 portrait               | `assets/templates/single-page.html`  | Briefs, posters, executive summaries. Capped at one A4 sheet.                            |
-| Landing page | Continuous, A4 width, paginates | `assets/templates/landing-page.html` | Long-form scroll for web reading; no chapter dividers, no cadence.                       |
+| Landing page | Continuous, A4 width, paginates | `assets/templates/landing-page.html` | Long-form scroll for web reading; no chapter dividers.                       |
 | Slides       | 16:9, 1280×720, on-screen deck  | `assets/templates/slides.html`       | Talks and walk-throughs; one idea per slide, no body paragraphs.                         |
 
 Then:
@@ -93,8 +91,8 @@ Then:
 
 Use when no template fits — manifestos, posters, scrolly case studies, invitations, custom page sizes, anything off the shelf. Higher variance, but still Quire as long as the 10 invariants below hold.
 
-1. Start from a blank HTML. Load `references/design.md` in full — it is the system's source of truth (tokens, typography, spacing, strokes, components, print rules).
-2. Inherit the `:root` token block verbatim (cool canvas, single accent, Fraunces + Inter Tight, two weights). Do not re-derive colors or pick new fonts — that produces a different system, not a Quire variant.
+1. Start from a blank HTML. Load `references/design.md` in full — it is the system's source of truth (tokens, typography, spacing, strokes, components).
+2. Link `assets/styles/quire-type.css` for typography, then inherit the local `:root` color / spacing / stroke tokens verbatim. Do not re-derive colors or pick new fonts — that produces a different system, not a Quire variant.
 3. Decide page size, rhythm, and chrome from scratch, but stay inside the invariants. If a requirement forces you to break one, surface it to the user before proceeding — don't quietly bend the system.
 
 Templates are one productization of Quire. Mode B is Quire without the productization.
@@ -122,7 +120,7 @@ For full export instructions, see `references/production.md`.
 | `references/writing.md`       | Content brain — how to write prose readers finish, trust, remember |
 | `references/diagrams.md`      | Inline-SVG chart and diagram archetypes (8) + small-multiples rule |
 | `references/anti-patterns.md` | Common ways AI-generated playbooks go wrong                        |
-| `references/production.md`    | HTML → PDF export, font embedding, print pitfalls                  |
+| `references/production.md`    | HTML → PDF export, font embedding, rendering pitfalls              |
 
 Load only the file you need for the current task. Do not pre-load everything.
 

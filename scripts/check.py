@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Quire design-system linter.
 
-Scans Quire templates for violations of the 10 invariants.
+Scans Quire templates and shared system CSS for violations of the 10 invariants.
 
 Usage:
     python3 scripts/check.py                         # check all templates
@@ -15,6 +15,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = ROOT / "assets" / "templates"
+TYPE_CSS = ROOT / "assets" / "styles" / "quire-type.css"
 
 
 # Patterns that indicate a violation. (regex, severity, message)
@@ -94,6 +95,8 @@ def main():
         targets = [Path(arg) for arg in sys.argv[1:]]
     else:
         targets = sorted(TEMPLATES_DIR.glob("*.html"))
+        if TYPE_CSS.exists():
+            targets.append(TYPE_CSS)
 
     if not targets:
         print("No templates found.", file=sys.stderr)
