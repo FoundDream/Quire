@@ -5,6 +5,12 @@
   <p>A cold-toned, chromatically monochrome design system for editorial documents.</p>
 </div>
 
+## The name
+
+A *quire* is the oldest unit of bookmaking — a sheaf of folded sheets, gathered before they became a book. Many quires, bound together, made a codex.
+
+Not a template, not a theme. The unit you compose editorial documents from.
+
 ## What it is
 
 Quire is a constraint system for editorial documents — playbooks, white papers, single-page reports — that share one design language and produce typeset PDFs. Cool canvas, single sky-blue accent, serif carries hierarchy, no second color anywhere.
