@@ -1,11 +1,11 @@
 ---
 name: quire
-description: 'Typeset editorial documents on a cool canvas with a single sky-blue accent and serif hierarchy. First format is multi-page playbooks; the same system also handles white papers, single-page A4 reports, long-form landing pages, and HTML slide decks. Triggers on "做 playbook / 白皮书 / 报告 / landing page / 幻灯片 / editorial PDF" or "make a playbook / white paper / single-page report / landing page / slides".'
+description: 'Typeset editorial documents on warm vellum with a single sky-blue accent and serif hierarchy. First format is multi-page playbooks; the same system also handles white papers, single-page A4 reports, long-form landing pages, and HTML slide decks. Triggers on "做 playbook / 白皮书 / 报告 / landing page / 幻灯片 / editorial PDF" or "make a playbook / white paper / single-page report / landing page / slides".'
 ---
 
 # Quire
 
-A cold-toned, chromatically monochrome design system for editorial documents. Single accent (sky blue `#3a82c4`), single serif carries hierarchy, no second color anywhere. Output formats: playbook (default), white paper, single-page report, landing page, slide deck — each a "format profile" of the same underlying system.
+A warm-paper, cool-ink, chromatically monochrome design system for editorial documents. Single accent (sky blue `#1cb2f5`), single serif carries hierarchy, no second color anywhere. Output formats: playbook (default), white paper, single-page report, landing page, slide deck — each a "format profile" of the same underlying system.
 
 ---
 
@@ -22,15 +22,15 @@ Confirm with the user when ambiguous. A 4-page document is a brochure, not a qui
 
 ## Step 1 · The palette is locked
 
-Quire has **one accent color, system-wide**: sky blue `#3a82c4`. There is no palette to pick from. There is no second chromatic hue allowed anywhere in the document.
+Quire has **one accent color, system-wide**: sky blue `#1cb2f5`. There is no palette to pick from. There is no second chromatic hue allowed anywhere in the document.
 
 | Token            | Hex       | Use                                       |
 | ---------------- | --------- | ----------------------------------------- |
-| `--canvas`       | `#f6f8fb` | Page background (cool white)              |
-| `--ink`          | `#16181d` | Primary text                              |
-| `--accent`       | `#3a82c4` | Eyebrows, stat figures, table rules, tags |
-| `--accent-tint`  | `#b8d6f0` | Chapter divider page-fill, tag bg         |
-| `--accent-deep`  | `#2a6299` | Body links, emphasis on tint backgrounds  |
+| `--canvas`       | `#fcfbf8` | Page background (warm vellum)              |
+| `--ink`          | `#131b2a` | Primary text                              |
+| `--accent`       | `#1cb2f5` | Eyebrows, stat figures, table rules, tags |
+| `--accent-tint`  | `#c8ebfa` | Chapter divider page-fill, tag bg         |
+| `--accent-deep`  | `#02669e` | Body links, emphasis on tint backgrounds  |
 
 If the user requests a brand color, ask explicitly whether they want to override the system or stay on-brand-for-Quire. Quire's identity *is* this blue. Swapping it produces a different system.
 
@@ -89,11 +89,11 @@ Then:
 
 ### Mode B · System-constrained (free-form)
 
-Use when no template fits — manifestos, posters, scrolly case studies, invitations, custom page sizes, anything off the shelf. Higher variance, but still Quire as long as the 10 invariants below hold.
+Use when no template fits — manifestos, posters, scrolly case studies, invitations, custom page sizes, anything off the shelf. Higher variance, but still Quire as long as the design system (`references/design.md` §1–§4) is respected.
 
 1. Start from a blank HTML. Load `references/design.md` in full — it is the system's source of truth (tokens, typography, spacing, strokes, components).
 2. Link `assets/styles/quire-type.css` for typography, then inherit the local `:root` color / spacing / stroke tokens verbatim. Do not re-derive colors or pick new fonts — that produces a different system, not a Quire variant.
-3. Decide page size, rhythm, and chrome from scratch, but stay inside the invariants. If a requirement forces you to break one, surface it to the user before proceeding — don't quietly bend the system.
+3. Decide page size, rhythm, and chrome from scratch, but stay inside the design system's hard rules. If a requirement forces you to break one, surface it to the user before proceeding — don't quietly bend the system.
 
 Templates are one productization of Quire. Mode B is Quire without the productization.
 
@@ -123,22 +123,3 @@ For full export instructions, see `references/production.md`.
 | `references/production.md`    | HTML → PDF export, font embedding, rendering pitfalls              |
 
 Load only the file you need for the current task. Do not pre-load everything.
-
----
-
-## The 10 invariants
-
-These are the rules Quire will not break. In Mode A the templates already encode them; in Mode B they are the floor that defines "still Quire" — satisfy them and the result belongs to the system, regardless of format. Each has a real cost — think before overriding.
-
-| Category | Rule                                                       | Specifics                                                                        |
-| -------- | ---------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| Color    | Cool canvas `#f6f8fb`                                      | Never pure white. Never a warm cream.                                            |
-| Color    | Sky blue `#3a82c4` is the only chromatic color             | No second hue — no orange engagement, no green success, no red warning.          |
-| Color    | All grays cool-toned (`B ≥ G ≥ R`)                         | No warm yellow-brown grays. No pure-neutral `R = G = B`.                         |
-| Color    | Chapter dividers use `--accent-tint`                       | Never the full-saturation accent as page-fill.                                   |
-| Type     | One serif family carries hierarchy                         | Sans only for UI chrome (eyebrows, page numbers, table headers, tags).           |
-| Type     | Two weights only: 400 regular, 500 medium                  | No 600+, no synthetic bold, no italic body.                                      |
-| Type     | Titles −0.02 to −0.03em, eyebrows +0.04 to +0.08em, body 0 | Line-heights 1.05–1.20 titles, 1.55–1.70 body.                                   |
-| Form     | No drop shadows, gradients, or blur                        | `border-radius` ≤ 3pt; strokes ≤ 2px. Depth comes from rule lines and tints.     |
-| Form     | No personal-brand chrome                                   | No avatar circles, signature boxes, badges, italic quote cards.                  |
-| Form     | Every callout has a label                                  | Exercise / Note / Think / Warning. Unlabelled blockquotes drift into decoration. |

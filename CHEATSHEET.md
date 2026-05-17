@@ -2,21 +2,6 @@
 
 One-page quick reference. Scan before filling a template. Full spec in `references/design.md`.
 
-## The 10 invariants
-
-| Category | Rule                                               | Detail                                                  |
-| -------- | -------------------------------------------------- | ------------------------------------------------------- |
-| Color    | Cool canvas `#f6f8fb`                              | Never pure white, never a warm cream                    |
-| Color    | Sky blue `#3a82c4` is the only chromatic color     | No second hue                                           |
-| Color    | All grays cool-toned (`B ≥ G ≥ R`)                 | No warm yellow-brown grays                              |
-| Color    | Chapter dividers use `--accent-tint`               | Never full-saturation fills                             |
-| Type     | One serif family carries hierarchy                 | Sans-serif only for UI chrome                           |
-| Type     | Two weights only: 400 / 500                        | No bold (600+), no italic body                          |
-| Type     | Titles tight (-0.02em+), eyebrows loose (+0.04em+) | Line-height 1.05–1.20 / 1.55–1.70                       |
-| Form     | No shadows, gradients, or blur                     | `border-radius` ≤ 3pt; strokes ≤ 2px                    |
-| Form     | No personal-brand chrome                           | No avatars, badges, signature boxes, italic quote cards |
-| Form     | Every callout has a label                          | Unlabelled blockquotes drift into decoration            |
-
 ## Page archetypes
 
 | Type             | When to use                 | Visual signal                                          |
@@ -32,16 +17,16 @@ One-page quick reference. Scan before filling a template. Full spec in `referenc
 ## Token snapshot
 
 ```css
---canvas:       #f6f8fb;   /* page background */
---canvas-soft:  #eef1f6;   /* lifted surface */
---ink:          #16181d;   /* primary text */
---ink-soft:     #3d4148;   /* secondary text */
---ink-muted:    #6b6f78;   /* captions */
---rule:         #dce0e6;   /* divider line */
+--canvas:       #fcfbf8;   /* page background */
+--canvas-soft:  #f5f3ee;   /* lifted surface */
+--ink:          #131b2a;   /* primary text */
+--ink-soft:     #38465a;   /* secondary text */
+--ink-muted:    #647184;   /* captions */
+--rule:         #e3dfd4;   /* divider line */
 
---accent:       #3a82c4;   /* sky blue — the only chromatic color */
---accent-tint:  #b8d6f0;   /* chapter divider fill, tag bg */
---accent-deep:  #2a6299;   /* body links, AA-passing accent text */
+--accent:       #1cb2f5;   /* sky blue — the only chromatic color */
+--accent-tint:  #c8ebfa;   /* chapter divider fill, tag bg */
+--accent-deep:  #02669e;   /* body links, AA-passing accent text */
 
 --stroke-rule:   1px;      /* dividers, table rows, card border */
 --stroke-accent: 1.5px;    /* under table heads */

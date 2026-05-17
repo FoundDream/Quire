@@ -10,7 +10,7 @@ For prose-level moves see `writing.md`. For build/export failures see `productio
 
 | # | Name | Symptom | Fix |
 | --- | --- | --- | --- |
-| 1 | Word document leak | Cool canvas but body in Times / Calibri / Arial; no eyebrows, no rule lines. | Verify `assets/styles/quire-type.css` loaded and its Fraunces + Inter Tight import resolved. `pdffonts output.pdf` lists embedded fonts; a system serif in the list = fallback fired. |
+| 1 | Word document leak | Warm vellum but body in Times / Calibri / Arial; no eyebrows, no rule lines. | Verify `assets/styles/quire-type.css` loaded and its Fraunces + Inter Tight import resolved. `pdffonts output.pdf` lists embedded fonts; a system serif in the list = fallback fired. |
 | 2 | Two-color brand sprawl | Cover orange, callouts blue, table headers green — "because variety." | One accent per document. Anything additional must be a tint of the same accent. The 5% surface cap enforces this naturally. |
 | 3 | Decorative blockquotes | Italicized loose paragraphs in `<blockquote>` with no label, no rule, no citation. | `<blockquote>` is the pull-quote component only (one per chapter, left rule + citation). Sidebar commentary → `.callout.note`; emphasis → `<strong>` or `.hl`. |
 | 4 | Page numbers on covers and dividers | Cover page reads "01" in the corner. | Suppress with `@page:first` for the cover; `.page.cover .page-num { display: none }` for chapter dividers. First numbered page is the TOC. |
@@ -23,7 +23,7 @@ Entries below are symptoms when `diagrams.md` rules are skipped.
 
 | # | Name | Symptom | Fix |
 | --- | --- | --- | --- |
-| 5 | Second hue for a second series | Line chart: blue line for Product A, orange for Product B. Or each bar category gets its own color. | Small multiples (one panel per series, identical axes; see `diagrams.md` §1). If they won't fit: line style (solid vs dashed), `--accent` for the focal series, gray for the rest. Never a second chromatic hue — breaks SKILL.md invariant #2. |
+| 5 | Second hue for a second series | Line chart: blue line for Product A, orange for Product B. Or each bar category gets its own color. | Small multiples (one panel per series, identical axes; see `diagrams.md` §1). If they won't fit: line style (solid vs dashed), `--accent` for the focal series, gray for the rest. Never a second chromatic hue — breaks `design.md` §1 (single-accent rule). |
 | 6 | Donut / pie chart | 4–6 segment donut filling a third of the page, each segment a different tint. | Replace with a horizontal bar chart (`diagrams.md` §4.1). Bars are more accurate, encode rank directly, and survive the one-accent constraint. |
 | 7 | Free-floating legend | Corner box: `■ Series 1   ■ Series 2   ■ Series 3`. Eye ping-pongs between legend and data. | Label data directly. End-of-line labels matching line color; bar value labels at bar ends. See `diagrams.md` §4.2. |
 | 8 | Chart-library default styling leak | Drop shadows, 8pt rounded corners, Helvetica axis labels, rgba grays, watermark. Chart looks Mermaid- or Chart.js-shaped. | Hand-write inline SVG per `diagrams.md` §4. Never paste exported PNG or library-default SVG. Those defaults violate strokes, radii, color, and typography at once. |

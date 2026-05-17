@@ -17,21 +17,21 @@
      ============================================ */
   :root {
     /* Surface */
-    --canvas:       #f6f8fb;
-    --canvas-soft:  #eef1f6;
-    --rule:         #dce0e6;
-    --rule-soft:    #e8ebf0;
+    --canvas:       #fcfbf8;
+    --canvas-soft:  #f5f3ee;
+    --rule:         #e3dfd4;
+    --rule-soft:    #ece8db;
 
     /* Text — cool grays, B ≥ G ≥ R */
-    --ink:          #16181d;
-    --ink-soft:     #3d4148;
-    --ink-muted:    #6b6f78;
-    --ink-faint:    #8c919b;
+    --ink:          #131b2a;
+    --ink-soft:     #38465a;
+    --ink-muted:    #647184;
+    --ink-faint:    #94a3b8;
 
     /* Accent — single sky blue */
-    --accent:       #3a82c4;
-    --accent-tint:  #b8d6f0;
-    --accent-deep:  #2a6299;
+    --accent:       #1cb2f5;
+    --accent-tint:  #c8ebfa;
+    --accent-deep:  #02669e;
 
     /* Spacing */
     --sp-xs:  3pt;
@@ -454,67 +454,190 @@
   /* ============================================
      Typography section
      ============================================ */
-  .type-row {
+  .font-role-grid {
     display: grid;
-    grid-template-columns: 200px 1fr;
-    align-items: baseline;
-    gap: 32px;
-    padding: 20px 0;
-    border-bottom: 1px solid var(--rule-soft);
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin: 28px 0 34px;
   }
-  .type-meta {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--ink-muted);
-    line-height: 1.55;
+  .font-role {
+    border-top: 1.5px solid var(--accent);
+    padding-top: 14px;
+    min-height: 150px;
   }
-  .type-meta strong {
-    color: var(--ink);
-    font-weight: 500;
+  .font-role .role-label {
     font-family: var(--font-sans);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
     font-size: 11px;
-    display: block;
-    margin-bottom: 4px;
-  }
-  .type-sample { color: var(--ink); }
-  .type-sample.serif { font-family: var(--font-serif); }
-  .type-sample.sans { font-family: var(--font-sans); }
-
-  /* Letter-spacing demo */
-  .ls-demo {
-    margin: 12px 0;
-    padding: 16px 0;
-    border-bottom: 1px solid var(--rule-soft);
-  }
-  .ls-demo .ls-label {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--ink-muted);
-    margin-bottom: 4px;
-  }
-  .ls-demo .ls-sample.title {
-    font-family: var(--font-serif);
-    font-variation-settings: var(--serif-display);
-    font-size: 36px;
     font-weight: 500;
-    letter-spacing: -0.024em;
-    color: var(--ink);
-  }
-  .ls-demo .ls-sample.eyebrow {
-    font-family: var(--font-sans);
-    font-size: 12px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--accent);
-    font-weight: 500;
+    margin: 0 0 10px;
   }
-  .ls-demo .ls-sample.body {
-    font-family: var(--font-serif);
-    font-size: 15px;
-    letter-spacing: 0;
+  .font-role .role-face {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    min-height: 52px;
+    margin: 0 0 12px;
     color: var(--ink);
+    line-height: 0.92;
+  }
+  .font-role.editorial .role-face {
+    font-family: var(--font-serif);
+    font-variation-settings: var(--serif-display);
+    font-size: 40px;
+    font-weight: 500;
+    letter-spacing: -0.026em;
+  }
+  .font-role.interface .role-face {
+    font-family: var(--font-sans);
+    font-size: 29px;
+    font-weight: 500;
+    letter-spacing: -0.012em;
+  }
+  .font-role.code .role-face {
+    font-family: var(--font-mono);
+    font-size: 28px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+  .font-role .role-cjk {
+    display: inline-block;
+    color: var(--ink-soft);
+    line-height: 0.92;
+  }
+  .font-role.editorial .role-cjk { font-size: 0.92em; }
+  .font-role.interface .role-cjk { font-size: 0.92em; }
+  .font-role.editorial .role-cjk {
+    font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+  }
+  .font-role.interface .role-cjk {
+    font-family: "Noto Sans SC", "Source Han Sans SC", "PingFang SC", sans-serif;
+  }
+  .font-role .role-use {
+    font-family: var(--font-serif);
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+  .font-source {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    line-height: 1.55;
+    color: var(--ink-muted);
+    padding: 12px 0 20px;
+    border-bottom: 1px solid var(--rule-soft);
+    margin: -20px 0 24px;
+  }
+
+  .font-axis-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+    margin: -6px 0 34px;
+  }
+  .font-axis-card {
+    border-top: 1px solid var(--rule);
+    padding-top: 14px;
+  }
+  .axis-sample {
+    font-family: var(--font-serif);
+    font-size: 42px;
+    font-weight: 500;
+    letter-spacing: -0.026em;
+    line-height: 1;
+    color: var(--ink);
+  }
+  .axis-sample.display { font-variation-settings: "opsz" 144, "SOFT" 30; }
+  .axis-sample.text { font-variation-settings: "opsz" 14, "SOFT" 50; }
+  .axis-label {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    line-height: 1.45;
+    color: var(--ink-muted);
+    margin-top: 8px;
+  }
+
+  .scale-panel {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 40px;
+    align-items: start;
+    margin: 22px 0 34px;
+    padding: 22px 0 26px;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .scale-table {
+    display: grid;
+    gap: 0;
+    border-top: 1px solid var(--rule-soft);
+  }
+  .scale-spec {
+    display: grid;
+    grid-template-columns: 82px 1fr;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--rule-soft);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    line-height: 1.45;
+    color: var(--ink-muted);
+  }
+  .scale-spec strong {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .scale-showcase {
+    display: grid;
+    gap: 12px;
+  }
+  .scale-display {
+    font-family: var(--font-serif);
+    font-variation-settings: var(--serif-display);
+    font-size: 48px;
+    font-weight: 500;
+    letter-spacing: -0.026em;
+    line-height: 1.04;
+    color: var(--ink);
+    max-width: 12ch;
+  }
+  .scale-title {
+    font-family: var(--font-serif);
+    font-variation-settings: "opsz" 60, "SOFT" 40;
+    font-size: 30px;
+    font-weight: 500;
+    letter-spacing: -0.018em;
+    line-height: 1.15;
+    color: var(--ink);
+    max-width: 22ch;
+  }
+  .scale-label {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .scale-body {
+    font-family: var(--font-serif);
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    max-width: 58ch;
+  }
+  .scale-caption {
+    font-family: var(--font-serif);
+    font-size: 12px;
+    line-height: 1.45;
+    color: var(--ink-muted);
   }
 
   /* ============================================
@@ -818,39 +941,6 @@
   }
 
   /* ============================================
-     10 invariants list
-     ============================================ */
-  ol.invariants {
-    list-style: none;
-    counter-reset: inv;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px 32px;
-  }
-  ol.invariants li {
-    counter-increment: inv;
-    padding: 16px 18px 16px 56px;
-    position: relative;
-    background: var(--canvas-soft);
-    font-family: var(--font-serif);
-    font-size: 14.5px;
-    line-height: 1.55;
-    color: var(--ink);
-  }
-  ol.invariants li::before {
-    content: counter(inv, decimal-leading-zero);
-    position: absolute;
-    left: 18px;
-    top: 16px;
-    font-family: var(--font-mono);
-    font-size: 13px;
-    color: var(--accent);
-    font-weight: 500;
-  }
-
-  /* ============================================
      Code / mono spans
      ============================================ */
   code, .mono {
@@ -1013,6 +1103,13 @@
     color: var(--ink-muted);
     margin-top: 8px;
   }
+
+  @media (max-width: 760px) {
+    main { padding: 42px 24px 80px; }
+    .font-role-grid { grid-template-columns: 1fr; }
+    .font-axis-grid { grid-template-columns: 1fr; }
+    .scale-panel { grid-template-columns: 1fr; gap: 22px; }
+  }
 </style>
 </head>
 <body>
@@ -1174,11 +1271,11 @@
      1. COLOR
      ============================================= -->
 <section>
-  <p class="anchor">01 / 10</p>
+  <p class="anchor">01 / 9</p>
   <p class="section-eyebrow">Tokens</p>
   <h2 class="section-title">Color</h2>
   <p class="section-desc">
-    Cold-toned and chromatically monochrome. One accent, one canvas family, one
+    Warm-paper, cool-ink and chromatically monochrome. One accent, one canvas family, one
     cool gray scale. There is no second chromatic hue.
   </p>
 
@@ -1187,25 +1284,25 @@
     <div class="swatch">
       <div class="swatch-block" style="background: var(--canvas)"></div>
       <div class="swatch-name">canvas</div>
-      <div class="swatch-hex">#f6f8fb</div>
+      <div class="swatch-hex">#fcfbf8</div>
       <div class="swatch-use">page background</div>
     </div>
     <div class="swatch">
       <div class="swatch-block" style="background: var(--canvas-soft)"></div>
       <div class="swatch-name">canvas-soft</div>
-      <div class="swatch-hex">#eef1f6</div>
+      <div class="swatch-hex">#f5f3ee</div>
       <div class="swatch-use">lifted card / sidebar</div>
     </div>
     <div class="swatch">
       <div class="swatch-block" style="background: var(--rule)"></div>
       <div class="swatch-name">rule</div>
-      <div class="swatch-hex">#dce0e6</div>
+      <div class="swatch-hex">#e3dfd4</div>
       <div class="swatch-use">primary divider</div>
     </div>
     <div class="swatch">
       <div class="swatch-block" style="background: var(--rule-soft)"></div>
       <div class="swatch-name">rule-soft</div>
-      <div class="swatch-hex">#e8ebf0</div>
+      <div class="swatch-hex">#ece8db</div>
       <div class="swatch-use">secondary divider</div>
     </div>
   </div>
@@ -1215,25 +1312,25 @@
     <div class="swatch">
       <div class="swatch-block" style="background: var(--ink)"></div>
       <div class="swatch-name">ink</div>
-      <div class="swatch-hex">#16181d</div>
+      <div class="swatch-hex">#131b2a</div>
       <div class="swatch-use">primary text</div>
     </div>
     <div class="swatch">
       <div class="swatch-block" style="background: var(--ink-soft)"></div>
       <div class="swatch-name">ink-soft</div>
-      <div class="swatch-hex">#3d4148</div>
+      <div class="swatch-hex">#38465a</div>
       <div class="swatch-use">secondary text</div>
     </div>
     <div class="swatch">
       <div class="swatch-block" style="background: var(--ink-muted)"></div>
       <div class="swatch-name">ink-muted</div>
-      <div class="swatch-hex">#6b6f78</div>
+      <div class="swatch-hex">#647184</div>
       <div class="swatch-use">captions, metadata</div>
     </div>
     <div class="swatch">
       <div class="swatch-block" style="background: var(--ink-faint)"></div>
       <div class="swatch-name">ink-faint</div>
-      <div class="swatch-hex">#8c919b</div>
+      <div class="swatch-hex">#94a3b8</div>
       <div class="swatch-use">page numbers, footnotes</div>
     </div>
   </div>
@@ -1243,19 +1340,19 @@
     <div class="swatch">
       <div class="swatch-block" style="background: var(--accent-tint)"></div>
       <div class="swatch-name">accent-tint</div>
-      <div class="swatch-hex">#b8d6f0</div>
+      <div class="swatch-hex">#c8ebfa</div>
       <div class="swatch-use">chapter divider fill, tag bg</div>
     </div>
     <div class="swatch">
       <div class="swatch-block" style="background: var(--accent)"></div>
       <div class="swatch-name">accent</div>
-      <div class="swatch-hex">#3a82c4</div>
+      <div class="swatch-hex">#1cb2f5</div>
       <div class="swatch-use">eyebrows, tags, table rules</div>
     </div>
     <div class="swatch">
       <div class="swatch-block" style="background: var(--accent-deep)"></div>
       <div class="swatch-name">accent-deep</div>
-      <div class="swatch-hex">#2a6299</div>
+      <div class="swatch-hex">#02669e</div>
       <div class="swatch-use">body links, AA accent text</div>
     </div>
     <div class="swatch banned">
@@ -1273,7 +1370,7 @@
      2. TYPOGRAPHY
      ============================================= -->
 <section>
-  <p class="anchor">02 / 10</p>
+  <p class="anchor">02 / 9</p>
   <p class="section-eyebrow">Tokens</p>
   <h2 class="section-title">Typography</h2>
   <p class="section-desc">
@@ -1282,63 +1379,57 @@
     and <code>500</code>. No bold, no italic body.
   </p>
 
+  <p class="sub-title">Font roles</p>
+  <div class="font-role-grid">
+    <div class="font-role editorial">
+      <p class="role-label">Editorial</p>
+      <p class="role-face">Fraunces <span class="role-cjk">文</span></p>
+      <p class="role-use">The document voice: titles, body, quotes, and stat figures. Chinese pairs with Noto Serif SC.</p>
+    </div>
+    <div class="font-role interface">
+      <p class="role-label">Interface</p>
+      <p class="role-face">Inter Tight <span class="role-cjk">字</span></p>
+      <p class="role-use">Quiet chrome: eyebrows, table headers, buttons, labels, and tags. Chinese pairs with Noto Sans SC.</p>
+    </div>
+    <div class="font-role code">
+      <p class="role-label">Code</p>
+      <p class="role-face">JetBrains Mono</p>
+      <p class="role-use">Mechanical detail: code, version strings, page chrome, and metadata.</p>
+    </div>
+  </div>
+  <p class="font-source">
+    Source: <code>assets/styles/quire-type.css</code> defines the three roles, Fraunces axes, type levels, legacy aliases, and Chinese font pairing.
+  </p>
+  <div class="font-axis-grid">
+    <div class="font-axis-card">
+      <div class="axis-sample display">Quarterly</div>
+      <div class="axis-label">display axis<br>opsz 144 · SOFT 30</div>
+    </div>
+    <div class="font-axis-card">
+      <div class="axis-sample text">Quarterly</div>
+      <div class="axis-label">text axis<br>opsz 14 · SOFT 50</div>
+    </div>
+  </div>
+
   <p class="sub-title">Type scale</p>
-  <div class="type-row">
-    <div class="type-meta"><strong>Display</strong>36pt · 500 · lh 1.05<br>cover title, chapter divider</div>
-    <div class="type-sample serif" style="font-size: 48px; font-weight: 500; letter-spacing: -0.026em; line-height: 1.05; font-variation-settings: var(--serif-display);">The Playbook, Typeset.</div>
-  </div>
-  <div class="type-row">
-    <div class="type-meta"><strong>H1</strong>22pt · 500 · lh 1.18<br>chapter / section open</div>
-    <div class="type-sample serif" style="font-size: 30px; font-weight: 500; letter-spacing: -0.018em; line-height: 1.15; font-variation-settings: 'opsz' 60, 'SOFT' 40;">Turning weak signals into testable hypotheses</div>
-  </div>
-  <div class="type-row">
-    <div class="type-meta"><strong>H2</strong>16pt · 500 · lh 1.25<br>subsection title</div>
-    <div class="type-sample serif" style="font-size: 22px; font-weight: 500; letter-spacing: -0.014em; line-height: 1.25;">Restate the signal as a hypothesis</div>
-  </div>
-  <div class="type-row">
-    <div class="type-meta"><strong>H3 / Eyebrow</strong>13pt · 500 · +0.04em<br>sans-serif, uppercase</div>
-    <div class="type-sample sans" style="font-size: 14px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent);">Chapter 03 · The Validation Loop</div>
-  </div>
-  <div class="type-row">
-    <div class="type-meta"><strong>Lead</strong>11pt · 400 · lh 1.55<br>chapter intro paragraph</div>
-    <div class="type-sample serif" style="font-size: 17px; line-height: 1.55; color: var(--ink-soft);">Every team collects customer signals — interviews, support tickets, churn calls. Most treat them as confirmation.</div>
-  </div>
-  <div class="type-row">
-    <div class="type-meta"><strong>Body</strong>10pt · 400 · lh 1.65<br>reading body</div>
-    <div class="type-sample serif" style="font-size: 15.5px; line-height: 1.65;">A signal is observation; a hypothesis is a prediction with a fail condition. "Users want better onboarding" is a signal — a hypothesis names a metric, a magnitude, and a timeframe.</div>
-  </div>
-  <div class="type-row">
-    <div class="type-meta"><strong>Caption</strong>9pt · 400 · lh 1.45<br>figure captions, notes</div>
-    <div class="type-sample serif" style="font-size: 12px; line-height: 1.45; color: var(--ink-muted);">Source: CB Insights, 2024 post-mortem analysis of 110 failed startups.</div>
-  </div>
-  <div class="type-row">
-    <div class="type-meta"><strong>Label</strong>9pt · 500 · uppercase<br>eyebrows, tag pills</div>
-    <div class="type-sample sans" style="font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent);">Exercise · Note · Think · Warning</div>
+  <div class="scale-panel">
+    <div class="scale-table">
+      <div class="scale-spec"><strong>Display</strong><span>36pt · 500 · lh 1.05<br>cover, chapter divider</span></div>
+      <div class="scale-spec"><strong>Title</strong><span>22pt · 500 · lh 1.18<br>section open</span></div>
+      <div class="scale-spec"><strong>Subtitle</strong><span>16pt · 500 · lh 1.25<br>subsection</span></div>
+      <div class="scale-spec"><strong>Body</strong><span>10pt · 400 · lh 1.65<br>reading text</span></div>
+      <div class="scale-spec"><strong>Caption</strong><span>9pt · 400 · lh 1.45<br>notes, sources</span></div>
+      <div class="scale-spec"><strong>Label</strong><span>9pt · 500 · lh 1.30<br>chrome</span></div>
+    </div>
+    <div class="scale-showcase">
+      <div class="scale-label">Chapter 03 · The Validation Loop</div>
+      <div class="scale-display">The Playbook, Typeset.</div>
+      <div class="scale-title">Turning weak signals into testable hypotheses</div>
+      <div class="scale-body">A signal is observation; a hypothesis is a prediction with a fail condition. The scale keeps editorial hierarchy clear without introducing extra families or heavy weights.</div>
+      <div class="scale-caption">Source: Quire type levels, defined in <code>assets/styles/quire-type.css</code>.</div>
+    </div>
   </div>
 
-  <p class="sub-title">Letter-spacing — the one thing AI gets wrong</p>
-  <div class="ls-demo">
-    <div class="ls-label">titles: tight, −0.022em to −0.028em</div>
-    <div class="ls-sample title">Finding Product-Market Fit</div>
-  </div>
-  <div class="ls-demo">
-    <div class="ls-label">eyebrows: loose, +0.06em to +0.08em</div>
-    <div class="ls-sample eyebrow">A Founder's Playbook · 2026</div>
-  </div>
-  <div class="ls-demo">
-    <div class="ls-label">body: 0 (or −0.003em with Fraunces)</div>
-    <div class="ls-sample body">A signal is observation; a hypothesis is a prediction with a fail condition.</div>
-  </div>
-
-  <p class="sub-title">Fraunces variable axes — opsz × SOFT</p>
-  <div class="type-row">
-    <div class="type-meta"><strong>Display setting</strong>opsz 144 · SOFT 30<br>crisp, editorial</div>
-    <div class="type-sample serif" style="font-size: 56px; font-weight: 500; letter-spacing: -0.026em; font-variation-settings: 'opsz' 144, 'SOFT' 30;">Quarterly</div>
-  </div>
-  <div class="type-row">
-    <div class="type-meta"><strong>Body setting</strong>opsz 14 · SOFT 50<br>warmer, more humanized</div>
-    <div class="type-sample serif" style="font-size: 56px; font-weight: 500; letter-spacing: -0.026em; font-variation-settings: 'opsz' 14, 'SOFT' 50;">Quarterly</div>
-  </div>
 </section>
 <hr class="section-divider">
 
@@ -1346,7 +1437,7 @@
      3. SPACING
      ============================================= -->
 <section>
-  <p class="anchor">03 / 10</p>
+  <p class="anchor">03 / 9</p>
   <p class="section-eyebrow">Tokens</p>
   <h2 class="section-title">Spacing</h2>
   <p class="section-desc">
@@ -1416,7 +1507,7 @@
      4. STROKES & RADII
      ============================================= -->
 <section>
-  <p class="anchor">04 / 10</p>
+  <p class="anchor">04 / 9</p>
   <p class="section-eyebrow">Tokens</p>
   <h2 class="section-title">Strokes &amp; radii</h2>
   <p class="section-desc">
@@ -1483,7 +1574,7 @@
      5. PAGE ARCHETYPES
      ============================================= -->
 <section>
-  <p class="anchor">05 / 10</p>
+  <p class="anchor">05 / 9</p>
   <p class="section-eyebrow">Structure</p>
   <h2 class="section-title">Page archetypes</h2>
   <p class="section-desc">
@@ -1613,7 +1704,7 @@
      6. PAGE CHROME
      ============================================= -->
 <section>
-  <p class="anchor">06 / 10</p>
+  <p class="anchor">06 / 9</p>
   <p class="section-eyebrow">Structure</p>
   <h2 class="section-title">Page chrome</h2>
   <p class="section-desc">
@@ -1653,7 +1744,7 @@
      7. COMPONENTS
      ============================================= -->
 <section>
-  <p class="anchor">07 / 10</p>
+  <p class="anchor">07 / 9</p>
   <p class="section-eyebrow">Building blocks</p>
   <h2 class="section-title">Components</h2>
   <p class="section-desc">
@@ -1784,7 +1875,7 @@
      8. DIAGRAMS
      ============================================= -->
 <section>
-  <p class="anchor">08 / 10</p>
+  <p class="anchor">08 / 9</p>
   <p class="section-eyebrow">Building blocks</p>
   <h2 class="section-title">Diagrams</h2>
   <p class="section-desc">
@@ -1937,7 +2028,7 @@
      9. DENSITY RULES
      ============================================= -->
 <section>
-  <p class="anchor">09 / 10</p>
+  <p class="anchor">09 / 9</p>
   <p class="section-eyebrow">Quantitative limits</p>
   <h2 class="section-title">Density limits</h2>
   <p class="section-desc">
@@ -1983,34 +2074,6 @@
     </tbody>
   </table>
 </section>
-<hr class="section-divider">
-
-<!-- =============================================
-     10. 10 INVARIANTS
-     ============================================= -->
-<section>
-  <p class="anchor">10 / 10</p>
-  <p class="section-eyebrow">Hard rules</p>
-  <h2 class="section-title">The 10 invariants</h2>
-  <p class="section-desc">
-    The rules Quire will not break. Each has a real cost — think before
-    overriding any of them.
-  </p>
-
-  <ol class="invariants">
-    <li>Cool canvas <code>#f6f8fb</code>, never pure white, never a warm cream.</li>
-    <li>Sky blue <code>#3a82c4</code> is the only chromatic color — no second hue.</li>
-    <li>All grays cool-toned (<code>B ≥ G ≥ R</code>). No warm yellow-brown grays.</li>
-    <li>One serif family carries hierarchy. Sans only for UI chrome.</li>
-    <li>Two weights only: 400 / 500. No bold, no italic body.</li>
-    <li>Typography mechanics: titles tight, eyebrows loose, body zero.</li>
-    <li>Chapter dividers use <code>--accent-tint</code>, never full-saturation.</li>
-    <li>No shadows, no gradients, no blur. <code>border-radius</code> ≤ 3pt.</li>
-    <li>No personal-brand chrome — no avatars, badges, signature boxes.</li>
-    <li>Every callout has a label; unlabelled blockquotes drift into decoration.</li>
-  </ol>
-</section>
-
 <footer style="margin-top: 80px; padding-top: 36px; border-top: 1px solid var(--rule); font-family: var(--font-sans); font-size: 12px; color: var(--ink-muted); line-height: 1.7;">
   <p style="margin: 0 0 8px;">
     <span style="font-family: var(--font-serif); font-size: 16px; font-weight: 500; color: var(--ink); letter-spacing: -0.012em;">Quire</span>

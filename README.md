@@ -1,12 +1,12 @@
 <div align="center">
   <h1>Quire</h1>
   <p><b>One sky-blue, five formats, no second color.</b></p>
-  <p>A cold-toned, chromatically monochrome design system for editorial documents.</p>
+  <p>A warm-paper, cool-ink, chromatically monochrome design system for editorial documents.</p>
 </div>
 
 ## What it is
 
-Quire is a constraint system for editorial documents — playbooks, white papers, single-page reports — that share one design language and produce typeset PDFs. Cool canvas, single sky-blue accent, serif carries hierarchy, no second color anywhere.
+Quire is a constraint system for editorial documents — playbooks, white papers, single-page reports — that share one design language and produce typeset PDFs. Warm vellum, single sky-blue accent, serif carries hierarchy, no second color anywhere.
 
 ## Format profiles
 
@@ -21,18 +21,18 @@ Quire is a constraint system for editorial documents — playbooks, white papers
 ## Palette
 
 ```
-canvas       #f6f8fb     cool white, never pure white
-ink          #16181d     primary text, cool-toned near-black
-accent       #3a82c4     sky blue — the only chromatic color
-accent-tint  #b8d6f0     chapter divider fill, tag background
-accent-deep  #2a6299     body links, AA-passing accent text
+canvas       #fcfbf8     warm vellum, never pure white
+ink          #131b2a     primary text, cool-toned near-black
+accent       #1cb2f5     sky blue — the only chromatic color
+accent-tint  #c8ebfa     chapter divider fill, tag background
+accent-deep  #02669e     body links, AA-passing accent text
 ```
 
 The accent is locked. There is no palette to pick from, and no second chromatic hue allowed.
 
 ## Structure
 
-- **`SKILL.md`** — agent entry point: triggers, decision steps, 10 invariants
+- **`SKILL.md`** — agent entry point: triggers, decision steps, working modes
 - **`CHEATSHEET.md`** — one-page quick reference
 - **`references/`** — full spec (design / writing / anti-patterns / production)
 - **`assets/styles/`** — shared system CSS (typography source of truth)

@@ -15,37 +15,30 @@
   --type-display-size: 36pt;
   --type-display-weight: 500;
   --type-display-line: 1.05;
-  --type-display-track: -0.026em;
 
   --type-title-size: 22pt;
   --type-title-weight: 500;
   --type-title-line: 1.18;
-  --type-title-track: -0.018em;
 
   --type-subtitle-size: 16pt;
   --type-subtitle-weight: 500;
   --type-subtitle-line: 1.25;
-  --type-subtitle-track: -0.014em;
 
   --type-body-size: 10pt;
   --type-body-weight: 400;
   --type-body-line: 1.65;
-  --type-body-track: -0.003em;
 
   --type-caption-size: 9pt;
   --type-caption-weight: 400;
   --type-caption-line: 1.45;
-  --type-caption-track: 0;
 
   --type-label-size: 9pt;
   --type-label-weight: 500;
   --type-label-line: 1.3;
-  --type-label-track: 0.06em;
 
   --type-tiny-size: 8.5pt;
   --type-tiny-weight: 400;
   --type-tiny-line: 1.4;
-  --type-tiny-track: 0.04em;
 
   /* Legacy aliases kept so existing templates stay stable. */
   --font-serif: var(--type-editorial);

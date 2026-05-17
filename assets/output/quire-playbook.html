@@ -10,18 +10,18 @@
       rel="stylesheet"
     />
     <style>
-      /* Design tokens — sky blue, single accent, cold-toned */
+      /* Design tokens — sky blue, single accent, warm-paper, cool-ink */
       :root {
-        --canvas: #f6f8fb;
-        --canvas-soft: #eef1f6;
-        --ink: #16181d;
-        --ink-soft: #3d4148;
-        --ink-muted: #6b6f78;
-        --rule: #dce0e6;
+        --canvas: #fcfbf8;
+        --canvas-soft: #f5f3ee;
+        --ink: #131b2a;
+        --ink-soft: #38465a;
+        --ink-muted: #647184;
+        --rule: #e3dfd4;
 
-        --accent: #3a82c4;
-        --accent-tint: #b8d6f0;
-        --accent-deep: #2a6299;
+        --accent: #1cb2f5;
+        --accent-tint: #c8ebfa;
+        --accent-deep: #02669e;
 
         --font-serif:
           "Fraunces", "Tiempos Text", "Source Serif Pro", Georgia, serif;
@@ -506,9 +506,9 @@
         right: 20px;
         z-index: 9999;
         padding: 8px 14px;
-        background: var(--canvas, #f6f8fb);
-        color: var(--accent-deep, #2a6299);
-        border: 1.5px solid var(--accent, #3a82c4);
+        background: var(--canvas, #fcfbf8);
+        color: var(--accent-deep, #02669e);
+        border: 1.5px solid var(--accent, #1cb2f5);
         font-family: var(--font-sans, "Inter Tight", sans-serif);
         font-size: 11px;
         font-weight: 500;
@@ -519,7 +519,7 @@
         transition: background 0.15s, color 0.15s;
       }
       .view-pdf:hover {
-        background: var(--accent, #3a82c4);
+        background: var(--accent, #1cb2f5);
         color: #fff;
       }
       @media print {
@@ -534,7 +534,7 @@
       <p class="eyebrow">A Design System Playbook · 2026</p>
       <h1>The Playbook, Bound.</h1>
       <p class="subtitle">
-        A constraint system for editorial documents — cool canvas, single
+        A constraint system for editorial documents — warm vellum, single
         accent, serif carries hierarchy.
       </p>
       <span class="page-num">Quire</span>
@@ -622,7 +622,7 @@
       <div class="stat-figure">1</div>
       <p class="stat-label">
         The number of chromatic colors in a Quire document. Sky blue
-        <code>#3a82c4</code> &mdash; and nothing else.
+        <code>#1cb2f5</code> &mdash; and nothing else.
       </p>
       <p class="stat-caption">
         Every "category color," every "success green," every "warning red"
@@ -656,51 +656,51 @@
       <p class="swatch-group-label">Surface and text · cool grays (B ≥ G ≥ R)</p>
       <div class="swatch-row">
         <div class="swatch">
-          <div class="swatch-block" style="background: #f6f8fb"></div>
+          <div class="swatch-block" style="background: #fcfbf8"></div>
           <div class="swatch-name">Canvas</div>
-          <div class="swatch-hex">#f6f8fb</div>
+          <div class="swatch-hex">#fcfbf8</div>
         </div>
         <div class="swatch">
-          <div class="swatch-block" style="background: #16181d"></div>
+          <div class="swatch-block" style="background: #131b2a"></div>
           <div class="swatch-name">Ink</div>
-          <div class="swatch-hex">#16181d</div>
+          <div class="swatch-hex">#131b2a</div>
         </div>
         <div class="swatch">
-          <div class="swatch-block" style="background: #6b6f78"></div>
+          <div class="swatch-block" style="background: #647184"></div>
           <div class="swatch-name">Ink-muted</div>
-          <div class="swatch-hex">#6b6f78</div>
+          <div class="swatch-hex">#647184</div>
         </div>
         <div class="swatch">
-          <div class="swatch-block" style="background: #dce0e6"></div>
+          <div class="swatch-block" style="background: #e3dfd4"></div>
           <div class="swatch-name">Rule</div>
-          <div class="swatch-hex">#dce0e6</div>
+          <div class="swatch-hex">#e3dfd4</div>
         </div>
       </div>
 
       <p class="swatch-group-label">Accent · sky blue, locked system-wide</p>
       <div class="swatch-row">
         <div class="swatch">
-          <div class="swatch-block" style="background: #b8d6f0"></div>
+          <div class="swatch-block" style="background: #c8ebfa"></div>
           <div class="swatch-name">Accent-tint</div>
-          <div class="swatch-hex">#b8d6f0</div>
+          <div class="swatch-hex">#c8ebfa</div>
         </div>
         <div class="swatch">
-          <div class="swatch-block" style="background: #3a82c4"></div>
+          <div class="swatch-block" style="background: #1cb2f5"></div>
           <div class="swatch-name">Accent</div>
-          <div class="swatch-hex">#3a82c4</div>
+          <div class="swatch-hex">#1cb2f5</div>
         </div>
         <div class="swatch">
-          <div class="swatch-block" style="background: #2a6299"></div>
+          <div class="swatch-block" style="background: #02669e"></div>
           <div class="swatch-name">Accent-deep</div>
-          <div class="swatch-hex">#2a6299</div>
+          <div class="swatch-hex">#02669e</div>
         </div>
         <div class="swatch" style="opacity: 0.3">
-          <div class="swatch-block" style="background: #f6f8fb; border: 1px dashed var(--ink-muted)"></div>
+          <div class="swatch-block" style="background: #fcfbf8; border: 1px dashed var(--ink-muted)"></div>
           <div class="swatch-name">— no second hue —</div>
           <div class="swatch-hex">forbidden</div>
         </div>
         <div class="swatch" style="opacity: 0.3">
-          <div class="swatch-block" style="background: #f6f8fb; border: 1px dashed var(--ink-muted)"></div>
+          <div class="swatch-block" style="background: #fcfbf8; border: 1px dashed var(--ink-muted)"></div>
           <div class="swatch-name">— no second hue —</div>
           <div class="swatch-hex">forbidden</div>
         </div>
@@ -743,7 +743,7 @@
           <tr>
             <td>Canvas</td>
             <td>Pure white <code>#ffffff</code></td>
-            <td>Cool canvas <code>#f6f8fb</code></td>
+            <td>Warm vellum <code>#fcfbf8</code></td>
           </tr>
           <tr>
             <td>Body font</td>
@@ -790,7 +790,7 @@
       <h2>This playbook was set with Quire.</h2>
 
       <p>
-        Eleven pages, one accent color (sky blue <code>#3a82c4</code>), one
+        Eleven pages, one accent color (sky blue <code>#1cb2f5</code>), one
         serif family (Fraunces), one sans for chrome (Inter Tight). Ten
         editorial pages plus this colophon.
       </p>

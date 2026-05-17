@@ -17,21 +17,21 @@
      ============================================ */
   :root {
     /* Surface */
-    --canvas:       #f6f8fb;
-    --canvas-soft:  #eef1f6;
-    --rule:         #dce0e6;
-    --rule-soft:    #e8ebf0;
+    --canvas:       #fcfbf8;
+    --canvas-soft:  #f5f3ee;
+    --rule:         #e3dfd4;
+    --rule-soft:    #ece8db;
 
     /* Text — cool grays, B ≥ G ≥ R */
-    --ink:          #16181d;
-    --ink-soft:     #3d4148;
-    --ink-muted:    #6b6f78;
-    --ink-faint:    #8c919b;
+    --ink:          #131b2a;
+    --ink-soft:     #38465a;
+    --ink-muted:    #647184;
+    --ink-faint:    #94a3b8;
 
     /* Accent — single sky blue */
-    --accent:       #3a82c4;
-    --accent-tint:  #b8d6f0;
-    --accent-deep:  #2a6299;
+    --accent:       #1cb2f5;
+    --accent-tint:  #c8ebfa;
+    --accent-deep:  #02669e;
 
     /* Spacing */
     --sp-xs:  3pt;
@@ -454,67 +454,190 @@
   /* ============================================
      Typography section
      ============================================ */
-  .type-row {
+  .font-role-grid {
     display: grid;
-    grid-template-columns: 200px 1fr;
-    align-items: baseline;
-    gap: 32px;
-    padding: 20px 0;
-    border-bottom: 1px solid var(--rule-soft);
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin: 28px 0 34px;
   }
-  .type-meta {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--ink-muted);
-    line-height: 1.55;
+  .font-role {
+    border-top: 1.5px solid var(--accent);
+    padding-top: 14px;
+    min-height: 150px;
   }
-  .type-meta strong {
-    color: var(--ink);
-    font-weight: 500;
+  .font-role .role-label {
     font-family: var(--font-sans);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
     font-size: 11px;
-    display: block;
-    margin-bottom: 4px;
-  }
-  .type-sample { color: var(--ink); }
-  .type-sample.serif { font-family: var(--font-serif); }
-  .type-sample.sans { font-family: var(--font-sans); }
-
-  /* Letter-spacing demo */
-  .ls-demo {
-    margin: 12px 0;
-    padding: 16px 0;
-    border-bottom: 1px solid var(--rule-soft);
-  }
-  .ls-demo .ls-label {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--ink-muted);
-    margin-bottom: 4px;
-  }
-  .ls-demo .ls-sample.title {
-    font-family: var(--font-serif);
-    font-variation-settings: var(--serif-display);
-    font-size: 36px;
     font-weight: 500;
-    letter-spacing: -0.024em;
-    color: var(--ink);
-  }
-  .ls-demo .ls-sample.eyebrow {
-    font-family: var(--font-sans);
-    font-size: 12px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--accent);
-    font-weight: 500;
+    margin: 0 0 10px;
   }
-  .ls-demo .ls-sample.body {
-    font-family: var(--font-serif);
-    font-size: 15px;
-    letter-spacing: 0;
+  .font-role .role-face {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    min-height: 52px;
+    margin: 0 0 12px;
     color: var(--ink);
+    line-height: 0.92;
+  }
+  .font-role.editorial .role-face {
+    font-family: var(--font-serif);
+    font-variation-settings: var(--serif-display);
+    font-size: 40px;
+    font-weight: 500;
+    letter-spacing: -0.026em;
+  }
+  .font-role.interface .role-face {
+    font-family: var(--font-sans);
+    font-size: 29px;
+    font-weight: 500;
+    letter-spacing: -0.012em;
+  }
+  .font-role.code .role-face {
+    font-family: var(--font-mono);
+    font-size: 28px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+  .font-role .role-cjk {
+    display: inline-block;
+    color: var(--ink-soft);
+    line-height: 0.92;
+  }
+  .font-role.editorial .role-cjk { font-size: 0.92em; }
+  .font-role.interface .role-cjk { font-size: 0.92em; }
+  .font-role.editorial .role-cjk {
+    font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+  }
+  .font-role.interface .role-cjk {
+    font-family: "Noto Sans SC", "Source Han Sans SC", "PingFang SC", sans-serif;
+  }
+  .font-role .role-use {
+    font-family: var(--font-serif);
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+  .font-source {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    line-height: 1.55;
+    color: var(--ink-muted);
+    padding: 12px 0 20px;
+    border-bottom: 1px solid var(--rule-soft);
+    margin: -20px 0 24px;
+  }
+
+  .font-axis-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+    margin: -6px 0 34px;
+  }
+  .font-axis-card {
+    border-top: 1px solid var(--rule);
+    padding-top: 14px;
+  }
+  .axis-sample {
+    font-family: var(--font-serif);
+    font-size: 42px;
+    font-weight: 500;
+    letter-spacing: -0.026em;
+    line-height: 1;
+    color: var(--ink);
+  }
+  .axis-sample.display { font-variation-settings: "opsz" 144, "SOFT" 30; }
+  .axis-sample.text { font-variation-settings: "opsz" 14, "SOFT" 50; }
+  .axis-label {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    line-height: 1.45;
+    color: var(--ink-muted);
+    margin-top: 8px;
+  }
+
+  .scale-panel {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 40px;
+    align-items: start;
+    margin: 22px 0 34px;
+    padding: 22px 0 26px;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .scale-table {
+    display: grid;
+    gap: 0;
+    border-top: 1px solid var(--rule-soft);
+  }
+  .scale-spec {
+    display: grid;
+    grid-template-columns: 82px 1fr;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--rule-soft);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    line-height: 1.45;
+    color: var(--ink-muted);
+  }
+  .scale-spec strong {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .scale-showcase {
+    display: grid;
+    gap: 12px;
+  }
+  .scale-display {
+    font-family: var(--font-serif);
+    font-variation-settings: var(--serif-display);
+    font-size: 48px;
+    font-weight: 500;
+    letter-spacing: -0.026em;
+    line-height: 1.04;
+    color: var(--ink);
+    max-width: 12ch;
+  }
+  .scale-title {
+    font-family: var(--font-serif);
+    font-variation-settings: "opsz" 60, "SOFT" 40;
+    font-size: 30px;
+    font-weight: 500;
+    letter-spacing: -0.018em;
+    line-height: 1.15;
+    color: var(--ink);
+    max-width: 22ch;
+  }
+  .scale-label {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .scale-body {
+    font-family: var(--font-serif);
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    max-width: 58ch;
+  }
+  .scale-caption {
+    font-family: var(--font-serif);
+    font-size: 12px;
+    line-height: 1.45;
+    color: var(--ink-muted);
   }
 
   /* ============================================
@@ -818,39 +941,6 @@
   }
 
   /* ============================================
-     10 invariants list
-     ============================================ */
-  ol.invariants {
-    list-style: none;
-    counter-reset: inv;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px 32px;
-  }
-  ol.invariants li {
-    counter-increment: inv;
-    padding: 16px 18px 16px 56px;
-    position: relative;
-    background: var(--canvas-soft);
-    font-family: var(--font-serif);
-    font-size: 14.5px;
-    line-height: 1.55;
-    color: var(--ink);
-  }
-  ol.invariants li::before {
-    content: counter(inv, decimal-leading-zero);
-    position: absolute;
-    left: 18px;
-    top: 16px;
-    font-family: var(--font-mono);
-    font-size: 13px;
-    color: var(--accent);
-    font-weight: 500;
-  }
-
-  /* ============================================
      Code / mono spans
      ============================================ */
   code, .mono {
@@ -1013,6 +1103,13 @@
     color: var(--ink-muted);
     margin-top: 8px;
   }
+
+  @media (max-width: 760px) {
+    main { padding: 42px 24px 80px; }
+    .font-role-grid { grid-template-columns: 1fr; }
+    .font-axis-grid { grid-template-columns: 1fr; }
+    .scale-panel { grid-template-columns: 1fr; gap: 22px; }
+  }
 </style>
 </head>
 <body>
@@ -1169,7 +1266,7 @@
      1. COLOR
      ============================================= -->
 <section>
-  <p class="anchor">01 / 10</p>
+  <p class="anchor">01 / 9</p>
   <p class="section-eyebrow">Tokens</p>
   <h2 class="section-title">颜色</h2>
   <p class="section-desc">
@@ -1181,25 +1278,25 @@
     <div class="swatch">
       <div class="swatch-block" style="background: var(--canvas)"></div>
       <div class="swatch-name">canvas</div>
-      <div class="swatch-hex">#f6f8fb</div>
+      <div class="swatch-hex">#fcfbf8</div>
       <div class="swatch-use">页面底色</div>
     </div>
     <div class="swatch">
       <div class="swatch-block" style="background: var(--canvas-soft)"></div>
       <div class="swatch-name">canvas-soft</div>
-      <div class="swatch-hex">#eef1f6</div>
+      <div class="swatch-hex">#f5f3ee</div>
       <div class="swatch-use">提升卡片 / 侧栏</div>
     </div>
     <div class="swatch">
       <div class="swatch-block" style="background: var(--rule)"></div>
       <div class="swatch-name">rule</div>
-      <div class="swatch-hex">#dce0e6</div>
+      <div class="swatch-hex">#e3dfd4</div>
       <div class="swatch-use">主分隔线</div>
     </div>
     <div class="swatch">
       <div class="swatch-block" style="background: var(--rule-soft)"></div>
       <div class="swatch-name">rule-soft</div>
-      <div class="swatch-hex">#e8ebf0</div>
+      <div class="swatch-hex">#ece8db</div>
       <div class="swatch-use">次级分隔线</div>
     </div>
   </div>
@@ -1209,25 +1306,25 @@
     <div class="swatch">
       <div class="swatch-block" style="background: var(--ink)"></div>
       <div class="swatch-name">ink</div>
-      <div class="swatch-hex">#16181d</div>
+      <div class="swatch-hex">#131b2a</div>
       <div class="swatch-use">主文字色</div>
     </div>
     <div class="swatch">
       <div class="swatch-block" style="background: var(--ink-soft)"></div>
       <div class="swatch-name">ink-soft</div>
-      <div class="swatch-hex">#3d4148</div>
+      <div class="swatch-hex">#38465a</div>
       <div class="swatch-use">次级文字色</div>
     </div>
     <div class="swatch">
       <div class="swatch-block" style="background: var(--ink-muted)"></div>
       <div class="swatch-name">ink-muted</div>
-      <div class="swatch-hex">#6b6f78</div>
+      <div class="swatch-hex">#647184</div>
       <div class="swatch-use">图注与元数据</div>
     </div>
     <div class="swatch">
       <div class="swatch-block" style="background: var(--ink-faint)"></div>
       <div class="swatch-name">ink-faint</div>
-      <div class="swatch-hex">#8c919b</div>
+      <div class="swatch-hex">#94a3b8</div>
       <div class="swatch-use">页码、脚注</div>
     </div>
   </div>
@@ -1237,19 +1334,19 @@
     <div class="swatch">
       <div class="swatch-block" style="background: var(--accent-tint)"></div>
       <div class="swatch-name">accent-tint</div>
-      <div class="swatch-hex">#b8d6f0</div>
+      <div class="swatch-hex">#c8ebfa</div>
       <div class="swatch-use">章节分隔底色、标签背景</div>
     </div>
     <div class="swatch">
       <div class="swatch-block" style="background: var(--accent)"></div>
       <div class="swatch-name">accent</div>
-      <div class="swatch-hex">#3a82c4</div>
+      <div class="swatch-hex">#1cb2f5</div>
       <div class="swatch-use">眉题、标签、表头线</div>
     </div>
     <div class="swatch">
       <div class="swatch-block" style="background: var(--accent-deep)"></div>
       <div class="swatch-name">accent-deep</div>
-      <div class="swatch-hex">#2a6299</div>
+      <div class="swatch-hex">#02669e</div>
       <div class="swatch-use">正文链接、AA 级强调色文字</div>
     </div>
     <div class="swatch banned">
@@ -1267,70 +1364,64 @@
      2. TYPOGRAPHY
      ============================================= -->
 <section>
-  <p class="anchor">02 / 10</p>
+  <p class="anchor">02 / 9</p>
   <p class="section-eyebrow">Tokens</p>
   <h2 class="section-title">字体</h2>
   <p class="section-desc">
-    Fraunces 可变衬线贯穿封面到正文；Inter Tight 无衬线仅用于页眉、页码等界面元素。字重只有 <code>400</code> 与 <code>500</code>：不加粗，正文不用斜体。中文由 Noto Serif SC / Noto Sans SC 回退。
+    Fraunces 可变衬线贯穿封面到正文；Inter Tight 无衬线仅用于页眉、页码等界面元素。字重只有 <code>400</code> 与 <code>500</code>：不加粗，正文不用斜体。中文由 Noto Serif SC / Noto Sans SC 接续。
   </p>
 
+  <p class="sub-title">字体角色</p>
+  <div class="font-role-grid">
+    <div class="font-role editorial">
+      <p class="role-label">Editorial</p>
+      <p class="role-face">Fraunces <span class="role-cjk">文</span></p>
+      <p class="role-use">编辑声音：标题、正文、引用与大数字。中文由 Noto Serif SC 接续。</p>
+    </div>
+    <div class="font-role interface">
+      <p class="role-label">Interface</p>
+      <p class="role-face">Inter Tight <span class="role-cjk">字</span></p>
+      <p class="role-use">界面声音：眉题、表头、按钮、标签与元信息。中文由 Noto Sans SC 接续。</p>
+    </div>
+    <div class="font-role code">
+      <p class="role-label">Code</p>
+      <p class="role-face">JetBrains Mono</p>
+      <p class="role-use">机器声音：代码、版本号、页眉页脚与坐标信息。</p>
+    </div>
+  </div>
+  <p class="font-source">
+    来源：<code>assets/styles/quire-type.css</code> 定义三类字体角色、Fraunces 可变轴、字号层级、旧变量别名与中文字体接续。
+  </p>
+  <div class="font-axis-grid">
+    <div class="font-axis-card">
+      <div class="axis-sample display">Quarterly</div>
+      <div class="axis-label">display axis<br>opsz 144 · SOFT 30</div>
+    </div>
+    <div class="font-axis-card">
+      <div class="axis-sample text">Quarterly</div>
+      <div class="axis-label">text axis<br>opsz 14 · SOFT 50</div>
+    </div>
+  </div>
+
   <p class="sub-title">字号阶梯</p>
-  <div class="type-row">
-    <div class="type-meta"><strong>Display</strong>36pt · 500 · lh 1.05<br>封面标题、章节封面</div>
-    <div class="type-sample serif" style="font-size: 48px; font-weight: 500; letter-spacing: -0.026em; line-height: 1.05; font-variation-settings: var(--serif-display);">排版完成的 Playbook</div>
-  </div>
-  <div class="type-row">
-    <div class="type-meta"><strong>H1</strong>22pt · 500 · lh 1.18<br>章节 / 小节起首</div>
-    <div class="type-sample serif" style="font-size: 30px; font-weight: 500; letter-spacing: -0.018em; line-height: 1.15; font-variation-settings: 'opsz' 60, 'SOFT' 40;">把模糊信号变成可证伪的假设</div>
-  </div>
-  <div class="type-row">
-    <div class="type-meta"><strong>H2</strong>16pt · 500 · lh 1.25<br>次级小节标题</div>
-    <div class="type-sample serif" style="font-size: 22px; font-weight: 500; letter-spacing: -0.014em; line-height: 1.25;">把信号重写成假设</div>
-  </div>
-  <div class="type-row">
-    <div class="type-meta"><strong>H3 / Eyebrow</strong>13pt · 500 · +0.04em<br>无衬线、全大写</div>
-    <div class="type-sample sans" style="font-size: 14px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent);">Chapter 03 · 验证回路</div>
-  </div>
-  <div class="type-row">
-    <div class="type-meta"><strong>Lead</strong>11pt · 400 · lh 1.55<br>章节起首引导段</div>
-    <div class="type-sample serif" style="font-size: 17px; line-height: 1.55; color: var(--ink-soft);">每支团队都在收集客户信号——访谈、工单、流失对话。多数团队把它们当成「方向没错」的佐证。</div>
-  </div>
-  <div class="type-row">
-    <div class="type-meta"><strong>Body</strong>10pt · 400 · lh 1.65<br>正文阅读字号</div>
-    <div class="type-sample serif" style="font-size: 15.5px; line-height: 1.65;">信号是观察；假设是带失败条件的预测。「用户想要更好的引导」是信号；「把引导从 9 步压到 3 步，第 7 日留存提升 ≥ 5 个百分点」才是假设。</div>
-  </div>
-  <div class="type-row">
-    <div class="type-meta"><strong>Caption</strong>9pt · 400 · lh 1.45<br>图注、注解</div>
-    <div class="type-sample serif" style="font-size: 12px; line-height: 1.45; color: var(--ink-muted);">来源：CB Insights，2024 年对 110 家失败创业公司的复盘分析。</div>
-  </div>
-  <div class="type-row">
-    <div class="type-meta"><strong>Label</strong>9pt · 500 · 大写<br>眉题、标签</div>
-    <div class="type-sample sans" style="font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent);">Exercise · Note · Think · Warning</div>
+  <div class="scale-panel">
+    <div class="scale-table">
+      <div class="scale-spec"><strong>Display</strong><span>36pt · 500 · lh 1.05<br>封面、章节封面</span></div>
+      <div class="scale-spec"><strong>Title</strong><span>22pt · 500 · lh 1.18<br>章节起首</span></div>
+      <div class="scale-spec"><strong>Subtitle</strong><span>16pt · 500 · lh 1.25<br>次级小节</span></div>
+      <div class="scale-spec"><strong>Body</strong><span>10pt · 400 · lh 1.65<br>正文阅读</span></div>
+      <div class="scale-spec"><strong>Caption</strong><span>9pt · 400 · lh 1.45<br>图注、来源</span></div>
+      <div class="scale-spec"><strong>Label</strong><span>9pt · 500 · lh 1.30<br>界面标记</span></div>
+    </div>
+    <div class="scale-showcase">
+      <div class="scale-label">Chapter 03 · 验证回路</div>
+      <div class="scale-display">排版完成的 Playbook</div>
+      <div class="scale-title">把模糊信号变成可证伪的假设</div>
+      <div class="scale-body">信号是观察；假设是带失败条件的预测。字号阶梯让编辑层级保持清楚，同时不引入额外字体或更重字重。</div>
+      <div class="scale-caption">来源：Quire type levels，定义于 <code>assets/styles/quire-type.css</code>。</div>
+    </div>
   </div>
 
-  <p class="sub-title">Letter-spacing · AI 最常做错的一件事</p>
-  <div class="ls-demo">
-    <div class="ls-label">标题：收紧，−0.022em 至 −0.028em</div>
-    <div class="ls-sample title">寻找产品与市场契合</div>
-  </div>
-  <div class="ls-demo">
-    <div class="ls-label">眉题：放开，+0.06em 至 +0.08em</div>
-    <div class="ls-sample eyebrow">A Founder's Playbook · 2026</div>
-  </div>
-  <div class="ls-demo">
-    <div class="ls-label">正文：0（Fraunces 可用 −0.003em）</div>
-    <div class="ls-sample body">信号是观察；假设是带失败条件的预测。</div>
-  </div>
-
-  <p class="sub-title">Fraunces 可变轴 · opsz × SOFT</p>
-  <div class="type-row">
-    <div class="type-meta"><strong>Display 设置</strong>opsz 144 · SOFT 30<br>利落，偏编辑感</div>
-    <div class="type-sample serif" style="font-size: 56px; font-weight: 500; letter-spacing: -0.026em; font-variation-settings: 'opsz' 144, 'SOFT' 30;">Quarterly</div>
-  </div>
-  <div class="type-row">
-    <div class="type-meta"><strong>Body 设置</strong>opsz 14 · SOFT 50<br>柔和，更接近手写感</div>
-    <div class="type-sample serif" style="font-size: 56px; font-weight: 500; letter-spacing: -0.026em; font-variation-settings: 'opsz' 14, 'SOFT' 50;">Quarterly</div>
-  </div>
 </section>
 <hr class="section-divider">
 
@@ -1338,7 +1429,7 @@
      3. SPACING
      ============================================= -->
 <section>
-  <p class="anchor">03 / 10</p>
+  <p class="anchor">03 / 9</p>
   <p class="section-eyebrow">Tokens</p>
   <h2 class="section-title">间距</h2>
   <p class="section-desc">
@@ -1406,7 +1497,7 @@
      4. STROKES & RADII
      ============================================= -->
 <section>
-  <p class="anchor">04 / 10</p>
+  <p class="anchor">04 / 9</p>
   <p class="section-eyebrow">Tokens</p>
   <h2 class="section-title">描边 &amp; 圆角</h2>
   <p class="section-desc">
@@ -1473,7 +1564,7 @@
      5. PAGE ARCHETYPES
      ============================================= -->
 <section>
-  <p class="anchor">05 / 10</p>
+  <p class="anchor">05 / 9</p>
   <p class="section-eyebrow">结构</p>
   <h2 class="section-title">页面原型</h2>
   <p class="section-desc">
@@ -1601,7 +1692,7 @@
      6. PAGE CHROME
      ============================================= -->
 <section>
-  <p class="anchor">06 / 10</p>
+  <p class="anchor">06 / 9</p>
   <p class="section-eyebrow">结构</p>
   <h2 class="section-title">页眉与页码</h2>
   <p class="section-desc">
@@ -1637,7 +1728,7 @@
      7. COMPONENTS
      ============================================= -->
 <section>
-  <p class="anchor">07 / 10</p>
+  <p class="anchor">07 / 9</p>
   <p class="section-eyebrow">基础组件</p>
   <h2 class="section-title">组件</h2>
   <p class="section-desc">
@@ -1759,7 +1850,7 @@
      8. DIAGRAMS
      ============================================= -->
 <section>
-  <p class="anchor">08 / 10</p>
+  <p class="anchor">08 / 9</p>
   <p class="section-eyebrow">基础组件</p>
   <h2 class="section-title">图表与图示</h2>
   <p class="section-desc">
@@ -1912,7 +2003,7 @@
      9. DENSITY RULES
      ============================================= -->
 <section>
-  <p class="anchor">09 / 10</p>
+  <p class="anchor">09 / 9</p>
   <p class="section-eyebrow">用量上限</p>
   <h2 class="section-title">密度限值</h2>
   <p class="section-desc">
@@ -1955,32 +2046,6 @@
       </tr>
     </tbody>
   </table>
-</section>
-<hr class="section-divider">
-
-<!-- =============================================
-     10. 10 INVARIANTS
-     ============================================= -->
-<section>
-  <p class="anchor">10 / 10</p>
-  <p class="section-eyebrow">硬规则</p>
-  <h2 class="section-title">10 条不变式</h2>
-  <p class="section-desc">
-    Quire 不会破的规则。每一条都有真实的代价 —— 想清楚再覆盖。
-  </p>
-
-  <ol class="invariants">
-    <li>冷调画布 <code>#f6f8fb</code>：不用纯白，不用暖奶油色。</li>
-    <li>天蓝 <code>#3a82c4</code> 是唯一强调色——不设第二彩色。</li>
-    <li>灰色一律冷调（<code>B ≥ G ≥ R</code>），不用暖黄褐灰。</li>
-    <li>衬线承担全部层级；无衬线仅用于界面元素。</li>
-    <li>字重仅 400 / 500：不加粗，正文不用斜体。</li>
-    <li>字距：标题收紧，眉题放开，正文为零。</li>
-    <li>章节分隔用 <code>--accent-tint</code>，不用满铺强调色。</li>
-    <li>无阴影、无渐变、无模糊；<code>border-radius</code> ≤ 3pt。</li>
-    <li>无个人品牌装饰——头像、徽章、签名框均不用。</li>
-    <li>每个 callout 须有 label；无 label 的 blockquote 易沦为装饰。</li>
-  </ol>
 </section>
 <footer style="margin-top: 80px; padding-top: 36px; border-top: 1px solid var(--rule); font-family: var(--font-sans); font-size: 12px; color: var(--ink-muted); line-height: 1.7;">
   <p style="margin: 0 0 8px;">

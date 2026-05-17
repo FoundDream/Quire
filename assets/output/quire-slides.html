@@ -7,20 +7,20 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..700,30..100&family=Inter+Tight:wght@400..600&display=swap" rel="stylesheet">
 <style>
-  /* Design tokens — sky blue, single accent, cold-toned */
+  /* Design tokens — sky blue, single accent, warm-paper, cool-ink */
   :root {
-    --canvas:       #f6f8fb;
-    --canvas-soft:  #eef1f6;
-    --rule:         #dce0e6;
-    --rule-soft:    #e8ebf0;
+    --canvas:       #fcfbf8;
+    --canvas-soft:  #f5f3ee;
+    --rule:         #e3dfd4;
+    --rule-soft:    #ece8db;
 
-    --ink:          #16181d;
-    --ink-soft:     #3d4148;
-    --ink-muted:    #6b6f78;
+    --ink:          #131b2a;
+    --ink-soft:     #38465a;
+    --ink-muted:    #647184;
 
-    --accent:       #3a82c4;
-    --accent-tint:  #b8d6f0;
-    --accent-deep:  #2a6299;
+    --accent:       #1cb2f5;
+    --accent-tint:  #c8ebfa;
+    --accent-deep:  #02669e;
 
     --font-serif:   "Fraunces", "Tiempos Text", "Source Serif Pro", Georgia, serif;
     --font-sans:    "Inter Tight", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -384,9 +384,9 @@
     right: 20px;
     z-index: 9999;
     padding: 8px 14px;
-    background: var(--canvas, #f6f8fb);
-    color: var(--accent-deep, #2a6299);
-    border: 1.5px solid var(--accent, #3a82c4);
+    background: var(--canvas, #fcfbf8);
+    color: var(--accent-deep, #02669e);
+    border: 1.5px solid var(--accent, #1cb2f5);
     font-family: var(--font-sans, "Inter Tight", sans-serif);
     font-size: 11px;
     font-weight: 500;
@@ -397,7 +397,7 @@
     transition: background 0.15s, color 0.15s;
   }
   .view-pdf:hover {
-    background: var(--accent, #3a82c4);
+    background: var(--accent, #1cb2f5);
     color: #fff;
   }
   @media print {

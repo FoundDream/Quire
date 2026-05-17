@@ -1,6 +1,6 @@
 # Quire Design System
 
-Quire's aesthetic compresses into one sentence: **cool canvas, sky-blue accent, serif carries hierarchy, the document feels composed.**
+Quire's aesthetic compresses into one sentence: **warm vellum paper, cool type, single sky-blue accent, serif carries hierarchy.**
 
 This is not a slide template or a UI framework. It is a constraint system for **editorial screen-PDF documents** — playbooks, white papers, single-page reports — the spiritual descendant of editorial typography, adapted for AI-generated output.
 
@@ -8,36 +8,36 @@ This is not a slide template or a UI framework. It is a constraint system for **
 
 ## 1. Color
 
-The entire system is **cold-toned and chromatically monochrome**: one accent, one canvas family, one gray scale. There is no secondary chromatic hue anywhere in the document.
+The system pairs **warm vellum surfaces with cool type and a single cool accent** — the classic editorial paper-vs-ink contrast, chromatically monochrome (one accent only, no secondary hue anywhere). Warm paper carries the document's tactility; cool ink and sky-blue accent carry its precision.
 
 ### Surface
 
 ```css
---canvas:       #f6f8fb; /* Page background — cool white with hint of blue */
---canvas-soft:  #eef1f6; /* Lifted card / sidebar surface */
---rule:         #dce0e6; /* Primary divider line */
---rule-soft:    #e8ebf0; /* Secondary divider line */
+--canvas:       #fcfbf8; /* Page background — warm vellum, R > G > B */
+--canvas-soft:  #f5f3ee; /* Lifted card / sidebar surface — same warm family */
+--rule:         #e3dfd4; /* Primary divider line — warm, matches canvas */
+--rule-soft:    #ece8db; /* Secondary divider line — warm, lifted */
 ```
 
-**Forbidden**: `#ffffff` pure white (default-doc tell). Any warm-cream surface like `#faf9f5` (previous Quire heritage; now retired). Any saturated tinted background.
+**Forbidden**: `#ffffff` pure white (default-doc tell). Any saturated tinted background. Pushing canvas warmer than `#f5ecd6` — that's where editorial vellum tips into "cream-colored stationery" and the document loses precision.
 
 ### Text
 
 ```css
---ink:        #16181d; /* Primary text — near-black, cool undertone */
---ink-soft:   #3d4148; /* Secondary text, table headers */
---ink-muted:  #6b6f78; /* Captions, metadata */
---ink-faint:  #8c919b; /* Page numbers, footnotes */
+--ink:        #131b2a; /* Primary text — near-black, cool undertone */
+--ink-soft:   #38465a; /* Secondary text, table headers */
+--ink-muted:  #647184; /* Captions, metadata */
+--ink-faint:  #94a3b8; /* Page numbers, footnotes */
 ```
 
-**All grays cool-toned.** In `rgb()`, every gray must follow `B ≥ G ≥ R` with the blue channel slightly higher (e.g. `rgb(107, 111, 120)`). Warm grays where `R > B` — forbidden. Pure neutral `R = G = B` — also forbidden; the system has temperature.
+**All text grays cool-toned** (this is the system's defining tension — warm paper, cool ink). Every `--ink-*` token must follow `B ≥ G ≥ R` with the blue channel meaningfully higher (e.g. `rgb(100, 113, 132)` for `--ink-muted`). Warm grays for text — forbidden. Pure neutral text — forbidden. Surface tokens (`--canvas`, `--rule`) go the other way: `R > G > B`, warm vellum family.
 
 ### Accent
 
 ```css
---accent:       #3a82c4; /* Clear-noon sky blue — single chromatic color */
---accent-tint:  #b8d6f0; /* 35 % accent + 65 % canvas */
---accent-deep:  #2a6299; /* Darker variant — links on tint, body emphasis */
+--accent:       #1cb2f5; /* Clear-noon sky blue — single chromatic color */
+--accent-tint:  #c8ebfa; /* 35 % accent + 65 % canvas */
+--accent-deep:  #02669e; /* Darker variant — links on tint, body emphasis */
 ```
 
 **There is no second accent.** Anything that needs to be "different" uses gray-scale weight differentiation, not a second color.
@@ -66,7 +66,7 @@ This palette deliberately rejects the LinkedIn aesthetic — saturated corporate
 - No second chromatic hue, ever. No orange engagement color, no green for "success," no red for "warning."
 - No personal-brand chrome — no avatar circles, no signature boxes, no badges, no certified-icon decorations.
 - No accent on `border-radius` larger than 3pt — pill-shaped buttons read as profile UI.
-- Saturation cap: the accent at `#3a82c4` is already at the cap. Do not invent more-saturated blues (`#0a66c2` is LinkedIn; `#0077FF` is consumer-tech; both off-limits).
+- Saturation cap: the accent at `#1cb2f5` is already at the cap. Do not invent more-saturated blues (`#0a66c2` is LinkedIn; `#0077FF` is consumer-tech; both off-limits).
 
 ---
 
@@ -93,20 +93,21 @@ code.
 
 If Fraunces unavailable, Tiempos Text → Source Serif Pro → Iowan Old Style → Georgia. Avoid stopping at Georgia — that's where "Word document feel" leaks in.
 
-For Chinese documents, the same roles receive CJK fallback via `:lang(zh)`:
-editorial adds Noto/Source Han serif; interface adds Noto/Source Han sans.
+For Chinese documents, the same roles receive Chinese font pairing via
+`:lang(zh)`: editorial adds Noto/Source Han serif; interface adds
+Noto/Source Han sans.
 
 ### Type levels (pt)
 
-| Level    | Size | Weight | Line-height | Tracking  | Use                                |
-| -------- | ---- | ------ | ----------- | --------- | ---------------------------------- |
-| Display  | 36   | 500    | 1.05        | -0.026em  | Cover title, chapter divider title |
-| Title    | 22   | 500    | 1.18        | -0.018em  | Chapter / section open             |
-| Subtitle | 16   | 500    | 1.25        | -0.014em  | Subsection title                   |
-| Body     | 10   | 400    | 1.65        | -0.003em  | Reading body                       |
-| Caption  | 9    | 400    | 1.45        | 0         | Figure captions, table notes       |
-| Label    | 9    | 500    | 1.30        | +0.06em   | Eyebrows, tag pills, page corners  |
-| Tiny     | 8.5  | 400    | 1.40        | +0.04em   | Footers, metadata                  |
+| Level    | Size | Weight | Line-height | Use                                |
+| -------- | ---- | ------ | ----------- | ---------------------------------- |
+| Display  | 36   | 500    | 1.05        | Cover title, chapter divider title |
+| Title    | 22   | 500    | 1.18        | Chapter / section open             |
+| Subtitle | 16   | 500    | 1.25        | Subsection title                   |
+| Body     | 10   | 400    | 1.65        | Reading body                       |
+| Caption  | 9    | 400    | 1.45        | Figure captions, table notes       |
+| Label    | 9    | 500    | 1.30        | Eyebrows, tag pills, page corners  |
+| Tiny     | 8.5  | 400    | 1.40        | Footers, metadata                  |
 
 Screen px ≈ pt × 1.33 (10pt ≈ 13.3px). Minimum floor: 8.5pt (≈ 11.3px).
 
@@ -115,18 +116,6 @@ Screen px ≈ pt × 1.33 (10pt ≈ 13.3px). Minimum floor: 8.5pt (≈ 11.3px).
 - **Body**: 400 only.
 - **Headings & labels**: 500 only.
 - **Forbidden**: 600, 700, 900. No synthetic bold. No italic body text. (`<em>` may render as upright + accent-color when needed.)
-
-### Letter-spacing
-
-| Context                | Value                             |
-| ---------------------- | --------------------------------- |
-| Display titles (24pt+) | `-0.022em ~ -0.028em`             |
-| H1 / H2                | `-0.01em ~ -0.02em`               |
-| Body                   | `0` (or `-0.003em` with Fraunces) |
-| Eyebrows / small caps  | `+0.04em ~ +0.08em`               |
-| Tag pills              | `+0.04em`                         |
-
-The single biggest typographic mistake in AI-generated documents: **default Word-style letter-spacing on display titles**. Always tighten display titles below `-0.02em`.
 
 ---
 
@@ -188,13 +177,13 @@ Three line weights cover every divider, table head, and quote bar. Radii stay fl
 
 - Full-bleed canvas, **or** full-bleed accent (used only on the main cover; never on chapter dividers).
 - Display title at 36–48pt, weight 500, max 14ch line length.
-- Eyebrow above title in sans-serif, accent color, +0.06em tracking.
+- Eyebrow above title in sans-serif, accent color.
 - Subtitle below in serif italic-alternative (upright lighter weight if no italic).
 - Page number absent on cover.
 
 ### Chapter divider
 
-- Page-fill is `--accent-tint` (`#b8d6f0`), never the full-saturation `--accent`.
+- Page-fill is `--accent-tint` (`#c8ebfa`), never the full-saturation `--accent`.
 - Two text elements only: chapter number (eyebrow style) + chapter title (display size).
 - No body text. No page number on dividers.
 
@@ -236,7 +225,7 @@ Running header and page number are the only marks outside the content area. Tiny
 ### Running header
 
 - Position: 12pt above the top edge.
-- Style: `mono 8pt`, `--ink-faint`, `+0.04em` tracking.
+- Style: `mono 8pt`, `--ink-faint`.
 - Content: document name (left) · current chapter title (right).
 - Landscape may compress to chapter title only when the document name is long.
 
@@ -278,7 +267,7 @@ A 1px `--ink-faint` hairline between header and body. Use only on documents over
 
 - Background: transparent, or `--ivory` for emphasis.
 - Left border: 2pt solid accent color (`Exercise`, `Think`) or `--ink-muted` (`Note`).
-- Label: sans-serif, uppercase, +0.06em tracking, accent color, 500 weight.
+- Label: sans-serif, uppercase, accent color, 500 weight.
 - Max 2 callouts per spread (two-page view).
 
 ### Table
@@ -391,4 +380,4 @@ Inline `<svg>` only — never embedded PNG / screenshots. Use accent + cool gray
 
 ---
 
-Working HTML for all page archetypes lives in `assets/templates/playbook.html` and `assets/output/quire-playbook.html`. Copy from there, do not redesign. The 10 invariants live in `SKILL.md`.
+Working HTML for all page archetypes lives in `assets/templates/playbook.html` and `assets/output/quire-playbook.html`. Copy from there, do not redesign.
