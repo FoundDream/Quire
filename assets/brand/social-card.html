@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Quire — social card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,500;8..60,600&family=Inter:wght@400;500&display=swap">
+<style>
+  html, body { margin: 0; padding: 0; }
+  body {
+    width: 1200px;
+    height: 630px;
+    background: #f7fbff;
+    color: #131b2a;
+    font-family: "Source Serif 4", Georgia, serif;
+    position: relative;
+    overflow: hidden;
+  }
+  .frame {
+    position: absolute;
+    inset: 56px;
+    border: 1.5px solid #d3e0ed;
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    align-items: center;
+    padding: 0 64px;
+    gap: 56px;
+  }
+  .mark { width: 240px; height: 240px; display: block; }
+  .right { display: flex; flex-direction: column; gap: 28px; }
+  .wordmark {
+    font-family: "Source Serif 4", Georgia, serif;
+    font-weight: 400;
+    font-size: 112px;
+    letter-spacing: -0.02em;
+    line-height: 0.9;
+    margin: 0;
+  }
+  .accent-rule {
+    width: 96px;
+    height: 3px;
+    background: #1cb2f5;
+    margin: 4px 0 0;
+  }
+  .tagline {
+    font-family: "Source Serif 4", Georgia, serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 30px;
+    line-height: 1.35;
+    color: #38465a;
+    margin: 0;
+    max-width: 640px;
+    letter-spacing: -0.005em;
+  }
+  .meta {
+    position: absolute;
+    left: 120px;
+    right: 120px;
+    bottom: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: "Inter", system-ui, sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #647184;
+  }
+  .meta .formats { color: #38465a; }
+</style>
+</head>
+<body>
+  <div class="frame">
+    <svg class="mark" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 162 500
+               A 350 350 0 1 0 862 500
+               A 350 350 0 1 0 162 500 Z
+               M 262 500
+               A 250 250 0 1 1 762 500
+               A 250 250 0 1 1 262 500 Z"
+            fill="#131b2a" fill-rule="evenodd"/>
+      <line x1="700" y1="700" x2="860" y2="860"
+            stroke="#1cb2f5" stroke-width="90" stroke-linecap="square"/>
+    </svg>
+    <div class="right">
+      <h1 class="wordmark">Quire</h1>
+      <div class="accent-rule"></div>
+      <p class="tagline">One sky-blue. No second color.<br>Serif carries hierarchy.</p>
+    </div>
+  </div>
+  <div class="meta">
+    <span>A design system for editorial documents</span>
+    <span class="formats">Playbook · White paper · Resume · Report</span>
+  </div>
+</body>
+</html>
