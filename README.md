@@ -13,16 +13,16 @@ Quire is a constraint system for editorial documents — playbooks, white papers
 <table>
   <tr>
     <td align="center" width="33%">
-      <a href="assets/output/quire-white-paper.html"><img src="assets/output/screenshots/quire-white-paper.png" alt="White paper — cover with serif title on sky-blue ground" width="100%"></a><br>
-      <sub><b>White paper</b> · A4 portrait · 8–30 pp<br><a href="assets/output/quire-white-paper.html">HTML</a> · <a href="assets/output/quire-white-paper.pdf">PDF</a></sub>
+      <a href="https://founddream.github.io/Quire/assets/output/quire-white-paper.html"><img src="assets/output/screenshots/quire-white-paper.png" alt="White paper — cover with serif title on sky-blue ground" width="100%"></a><br>
+      <sub><b>White paper</b> · A4 portrait · 8–30 pp<br><a href="https://founddream.github.io/Quire/assets/output/quire-white-paper.html">HTML</a> · <a href="https://founddream.github.io/Quire/assets/output/quire-white-paper.pdf">PDF</a></sub>
     </td>
     <td align="center" width="33%">
-      <a href="assets/output/quire-single-page.html"><img src="assets/output/screenshots/quire-single-page.png" alt="Single-page report — A4 brief with three stat columns" width="100%"></a><br>
-      <sub><b>Single-page report</b> · A4 portrait, fixed · 1 pp<br><a href="assets/output/quire-single-page.html">HTML</a> · <a href="assets/output/quire-single-page.pdf">PDF</a></sub>
+      <a href="https://founddream.github.io/Quire/assets/output/quire-single-page.html"><img src="assets/output/screenshots/quire-single-page.png" alt="Single-page report — A4 brief with three stat columns" width="100%"></a><br>
+      <sub><b>Single-page report</b> · A4 portrait, fixed · 1 pp<br><a href="https://founddream.github.io/Quire/assets/output/quire-single-page.html">HTML</a> · <a href="https://founddream.github.io/Quire/assets/output/quire-single-page.pdf">PDF</a></sub>
     </td>
     <td align="center" width="33%">
-      <a href="assets/output/quire-landing-page.html"><img src="assets/output/screenshots/quire-landing-page.png" alt="Landing page — continuous A4-width flowing manifesto" width="100%"></a><br>
-      <sub><b>Landing page</b> · A4 width, continuous<br><a href="assets/output/quire-landing-page.html">HTML</a> · <a href="assets/output/quire-landing-page.pdf">PDF</a></sub>
+      <a href="https://founddream.github.io/Quire/assets/output/quire-landing-page.html"><img src="assets/output/screenshots/quire-landing-page.png" alt="Landing page — continuous A4-width flowing manifesto" width="100%"></a><br>
+      <sub><b>Landing page</b> · A4 width, continuous<br><a href="https://founddream.github.io/Quire/assets/output/quire-landing-page.html">HTML</a> · <a href="https://founddream.github.io/Quire/assets/output/quire-landing-page.pdf">PDF</a></sub>
     </td>
   </tr>
 </table>
@@ -30,12 +30,12 @@ Quire is a constraint system for editorial documents — playbooks, white papers
 <table>
   <tr>
     <td align="center" width="62%">
-      <a href="assets/output/quire-playbook.html"><img src="assets/output/screenshots/quire-playbook.png" alt="Playbook cover — “The Playbook, Bound.” on landscape sky-blue ground" width="100%"></a><br>
-      <sub><b>Playbook</b> · 11×8.5in landscape · 10–80 pp<br><a href="assets/output/quire-playbook.html">HTML</a> · <a href="assets/output/quire-playbook.pdf">PDF</a></sub>
+      <a href="https://founddream.github.io/Quire/assets/output/quire-playbook.html"><img src="assets/output/screenshots/quire-playbook.png" alt="Playbook cover — “The Playbook, Bound.” on landscape sky-blue ground" width="100%"></a><br>
+      <sub><b>Playbook</b> · 11×8.5in landscape · 10–80 pp<br><a href="https://founddream.github.io/Quire/assets/output/quire-playbook.html">HTML</a> · <a href="https://founddream.github.io/Quire/assets/output/quire-playbook.pdf">PDF</a></sub>
     </td>
     <td align="center" width="38%">
-      <a href="assets/output/quire-slides.html"><img src="assets/output/screenshots/quire-slides.png" alt="Slide deck — “Finding Product-Market Fit” title slide" width="100%"></a><br>
-      <sub><b>Slides</b> · 16:9 HTML deck · 5–60 slides<br><a href="assets/output/quire-slides.html">HTML</a> · <a href="assets/output/quire-slides.pdf">PDF</a></sub>
+      <a href="https://founddream.github.io/Quire/assets/output/quire-slides.html"><img src="assets/output/screenshots/quire-slides.png" alt="Slide deck — “Finding Product-Market Fit” title slide" width="100%"></a><br>
+      <sub><b>Slides</b> · 16:9 HTML deck · 5–60 slides<br><a href="https://founddream.github.io/Quire/assets/output/quire-slides.html">HTML</a> · <a href="https://founddream.github.io/Quire/assets/output/quire-slides.pdf">PDF</a></sub>
     </td>
   </tr>
 </table>
