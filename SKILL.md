@@ -1,11 +1,11 @@
 ---
 name: quire
-description: 'Typeset editorial documents on warm vellum with a single sky-blue accent and serif hierarchy. First format is multi-page playbooks; the same system also handles white papers, single-page A4 reports, long-form landing pages, and HTML slide decks. Triggers on "做 playbook / 白皮书 / 报告 / landing page / 幻灯片 / editorial PDF" or "make a playbook / white paper / single-page report / landing page / slides".'
+description: 'Typeset editorial documents on cool canvas with a single sky-blue accent and serif hierarchy. First format is multi-page playbooks; the same system also handles white papers, single-page A4 reports, long-form landing pages, and HTML slide decks. Triggers on "做 playbook / 白皮书 / 报告 / landing page / 幻灯片 / editorial PDF" or "make a playbook / white paper / single-page report / landing page / slides".'
 ---
 
 # Quire
 
-A warm-paper, cool-ink, chromatically monochrome design system for editorial documents. Single accent (sky blue `#1cb2f5`), single serif carries hierarchy, no second color anywhere. Output formats: playbook (default), white paper, single-page report, landing page, slide deck — each a "format profile" of the same underlying system.
+A cold-toned, chromatically monochrome design system for editorial documents. Single accent (sky blue `#1cb2f5`), single serif carries hierarchy, no second color anywhere. Output formats: playbook (default), white paper, single-page report, landing page, slide deck — each a "format profile" of the same underlying system.
 
 ---
 
@@ -26,7 +26,7 @@ Quire has **one accent color, system-wide**: sky blue `#1cb2f5`. There is no pal
 
 | Token            | Hex       | Use                                       |
 | ---------------- | --------- | ----------------------------------------- |
-| `--canvas`       | `#fcfbf8` | Page background (warm vellum)              |
+| `--canvas`       | `#f7fbff` | Page background (cool white)              |
 | `--ink`          | `#131b2a` | Primary text                              |
 | `--accent`       | `#1cb2f5` | Eyebrows, stat figures, table rules, tags |
 | `--accent-tint`  | `#c8ebfa` | Chapter divider page-fill, tag bg         |

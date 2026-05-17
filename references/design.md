@@ -1,6 +1,6 @@
 # Quire Design System
 
-Quire's aesthetic compresses into one sentence: **warm vellum paper, cool type, single sky-blue accent, serif carries hierarchy.**
+Quire's aesthetic compresses into one sentence: **cool canvas, sky-blue accent, serif carries hierarchy, the document feels composed.**
 
 This is not a slide template or a UI framework. It is a constraint system for **editorial screen-PDF documents** — playbooks, white papers, single-page reports — the spiritual descendant of editorial typography, adapted for AI-generated output.
 
@@ -8,18 +8,18 @@ This is not a slide template or a UI framework. It is a constraint system for **
 
 ## 1. Color
 
-The system pairs **warm vellum surfaces with cool type and a single cool accent** — the classic editorial paper-vs-ink contrast, chromatically monochrome (one accent only, no secondary hue anywhere). Warm paper carries the document's tactility; cool ink and sky-blue accent carry its precision.
+The entire system is **cold-toned and chromatically monochrome**: one accent, one canvas family, one gray scale. There is no secondary chromatic hue anywhere in the document.
 
 ### Surface
 
 ```css
---canvas:       #fcfbf8; /* Page background — warm vellum, R > G > B */
---canvas-soft:  #f5f3ee; /* Lifted card / sidebar surface — same warm family */
---rule:         #e3dfd4; /* Primary divider line — warm, matches canvas */
---rule-soft:    #ece8db; /* Secondary divider line — warm, lifted */
+--canvas:       #f7fbff; /* Page background — cool white with hint of blue */
+--canvas-soft:  #edf3fa; /* Lifted card / sidebar surface */
+--rule:         #d3e0ed; /* Primary divider line */
+--rule-soft:    #e2ebf3; /* Secondary divider line */
 ```
 
-**Forbidden**: `#ffffff` pure white (default-doc tell). Any saturated tinted background. Pushing canvas warmer than `#f5ecd6` — that's where editorial vellum tips into "cream-colored stationery" and the document loses precision.
+**Forbidden**: `#ffffff` pure white (default-doc tell). Any warm-cream surface like `#faf9f5` (previous Quire heritage; now retired). Any saturated tinted background.
 
 ### Text
 
@@ -30,7 +30,7 @@ The system pairs **warm vellum surfaces with cool type and a single cool accent*
 --ink-faint:  #94a3b8; /* Page numbers, footnotes */
 ```
 
-**All text grays cool-toned** (this is the system's defining tension — warm paper, cool ink). Every `--ink-*` token must follow `B ≥ G ≥ R` with the blue channel meaningfully higher (e.g. `rgb(100, 113, 132)` for `--ink-muted`). Warm grays for text — forbidden. Pure neutral text — forbidden. Surface tokens (`--canvas`, `--rule`) go the other way: `R > G > B`, warm vellum family.
+**All grays cool-toned.** In `rgb()`, every gray must follow `B ≥ G ≥ R` with the blue channel meaningfully higher (e.g. `rgb(100, 113, 132)` for `--ink-muted`). Warm grays where `R > B` — forbidden. Pure neutral `R = G = B` — also forbidden; the system has temperature.
 
 ### Accent
 
@@ -356,23 +356,6 @@ Three list variants, all serif-bodied. Use lists in body paragraphs; lists insid
   <dd>An observation; not yet a claim.</dd>
 </dl>
 ```
-
-### Figure
-
-```html
-<figure class="fig">
-  <div class="fig-image"><!-- img / svg --></div>
-  <figcaption>
-    <span class="fig-num">Figure 02</span>
-    Caption explains why the image matters, not what it shows.
-  </figcaption>
-</figure>
-```
-
-- Default: 16:9 aspect, 1px `--rule` border, canvas background.
-- `<figure class="fig fig-bleed">`: full-bleed accent, no border — covers, chapter dividers, stat-anchor backgrounds only.
-- Caption is `--ink-muted` serif at 12.5pt; figure number is sans accent eyebrow.
-- Caption discipline (from `writing.md`): caption is the takeaway, not the title restated.
 
 ### Diagrams
 

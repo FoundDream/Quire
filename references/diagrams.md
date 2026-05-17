@@ -134,10 +134,6 @@ Add to your template's stylesheet:
 }
 ```
 
-`fig-bleed` (full-page accent background) is defined in `design.md` §7 — not repeated here.
-
----
-
 ## 4 · The eight archetypes
 
 Ordered by use frequency. Pick the one that fits the data; do not invent a ninth.

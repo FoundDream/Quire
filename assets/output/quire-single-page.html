@@ -7,12 +7,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..700,30..100&family=Inter+Tight:wght@400..600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  /* Design tokens — sky blue, single accent, warm-paper, cool-ink */
+  /* Design tokens — sky blue, single accent, cold-toned */
   :root {
-    --canvas:       #fcfbf8;
-    --canvas-soft:  #f5f3ee;
-    --rule:         #e3dfd4;
-    --rule-soft:    #ece8db;
+    --canvas:       #f7fbff;
+    --canvas-soft:  #edf3fa;
+    --rule:         #d3e0ed;
+    --rule-soft:    #e2ebf3;
 
     --ink:          #131b2a;
     --ink-soft:     #38465a;
@@ -244,7 +244,7 @@
     right: 20px;
     z-index: 9999;
     padding: 8px 14px;
-    background: var(--canvas, #fcfbf8);
+    background: var(--canvas, #f7fbff);
     color: var(--accent-deep, #0d8ace);
     border: 1.5px solid var(--accent, #1cb2f5);
     font-family: var(--font-sans, "Inter Tight", sans-serif);
@@ -282,7 +282,7 @@
     <p class="eyebrow">A design-system brief</p>
     <h1>One sky blue, five formats, no second color.</h1>
     <p class="lede">
-      Quire is a warm-paper, cool-ink, chromatically monochrome design system for editorial
+      Quire is a cold-toned, chromatically monochrome design system for editorial
       documents. <strong>One serif carries hierarchy, one accent carries emphasis,
       everything else is rule lines and tints.</strong> The same system produces
       playbooks, white papers, single-page reports, landing pages, and slide
@@ -305,7 +305,7 @@
     <div class="stat">
       <p class="figure">10</p>
       <p class="label">Invariants</p>
-      <p class="detail">Hard rules the system will not break: warm vellum, two weights, labelled callouts, no shadows.</p>
+      <p class="detail">Hard rules the system will not break: cool canvas, two weights, labelled callouts, no shadows.</p>
     </div>
   </div>
 
@@ -314,7 +314,7 @@
     <div>
       <h3>The palette is locked</h3>
       <p>
-        There is no palette to pick from. Warm vellum <span style="font-family:var(--font-mono); font-size:11.5px;">#fcfbf8</span>,
+        There is no palette to pick from. Cool canvas <span style="font-family:var(--font-mono); font-size:11.5px;">#f7fbff</span>,
         a single sky-blue accent, and four cool-toned inks. Swap any of them and you
         produce a different system — not a variant of Quire.
       </p>

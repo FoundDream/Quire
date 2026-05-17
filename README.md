@@ -1,12 +1,12 @@
 <div align="center">
   <h1>Quire</h1>
   <p><b>One sky-blue, five formats, no second color.</b></p>
-  <p>A warm-paper, cool-ink, chromatically monochrome design system for editorial documents.</p>
+  <p>A cold-toned, chromatically monochrome design system for editorial documents.</p>
 </div>
 
 ## What it is
 
-Quire is a constraint system for editorial documents — playbooks, white papers, single-page reports — that share one design language and produce typeset PDFs. Warm vellum, single sky-blue accent, serif carries hierarchy, no second color anywhere.
+Quire is a constraint system for editorial documents — playbooks, white papers, single-page reports — that share one design language and produce typeset PDFs. Cool canvas, single sky-blue accent, serif carries hierarchy, no second color anywhere.
 
 ## Format profiles
 
@@ -21,7 +21,7 @@ Quire is a constraint system for editorial documents — playbooks, white papers
 ## Palette
 
 ```
-canvas       #fcfbf8     warm vellum, never pure white
+canvas       #f7fbff     cool canvas, never pure white
 ink          #131b2a     primary text, cool-toned near-black
 accent       #1cb2f5     sky blue — the only chromatic color
 accent-tint  #c8ebfa     chapter divider fill, tag background

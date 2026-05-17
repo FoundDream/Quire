@@ -17,10 +17,10 @@
      ============================================ */
   :root {
     /* Surface */
-    --canvas:       #fcfbf8;
-    --canvas-soft:  #f5f3ee;
-    --rule:         #e3dfd4;
-    --rule-soft:    #ece8db;
+    --canvas:       #f7fbff;
+    --canvas-soft:  #edf3fa;
+    --rule:         #d3e0ed;
+    --rule-soft:    #e2ebf3;
 
     /* Text — cool grays, B ≥ G ≥ R */
     --ink:          #131b2a;
@@ -1030,26 +1030,6 @@
      ============================================ */
   figure.fig { margin: 0 0 24px; }
   figure.fig:last-child { margin-bottom: 0; }
-  figure.fig .fig-image {
-    background: var(--canvas);
-    border: 1px solid var(--rule);
-    aspect-ratio: 16 / 9;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--ink-faint);
-    letter-spacing: 0.04em;
-    position: relative;
-    overflow: hidden;
-  }
-  figure.fig.fig-bleed .fig-image {
-    background: var(--accent);
-    border: 0;
-    color: rgba(255,255,255,0.6);
-  }
   figure.fig figcaption {
     font-family: var(--font-serif);
     font-size: 12.5px;
@@ -1274,25 +1254,25 @@
     <div class="swatch">
       <div class="swatch-block" style="background: var(--canvas)"></div>
       <div class="swatch-name">canvas</div>
-      <div class="swatch-hex">#fcfbf8</div>
+      <div class="swatch-hex">#f7fbff</div>
       <div class="swatch-use">页面底色</div>
     </div>
     <div class="swatch">
       <div class="swatch-block" style="background: var(--canvas-soft)"></div>
       <div class="swatch-name">canvas-soft</div>
-      <div class="swatch-hex">#f5f3ee</div>
+      <div class="swatch-hex">#edf3fa</div>
       <div class="swatch-use">提升卡片 / 侧栏</div>
     </div>
     <div class="swatch">
       <div class="swatch-block" style="background: var(--rule)"></div>
       <div class="swatch-name">rule</div>
-      <div class="swatch-hex">#e3dfd4</div>
+      <div class="swatch-hex">#d3e0ed</div>
       <div class="swatch-use">主分隔线</div>
     </div>
     <div class="swatch">
       <div class="swatch-block" style="background: var(--rule-soft)"></div>
       <div class="swatch-name">rule-soft</div>
-      <div class="swatch-hex">#ece8db</div>
+      <div class="swatch-hex">#e2ebf3</div>
       <div class="swatch-use">次级分隔线</div>
     </div>
   </div>
@@ -1821,24 +1801,6 @@
     </dl>
   </div>
 
-  <p class="sub-title">Figure · 图片与题注</p>
-  <div class="demo">
-    <figure class="fig">
-      <div class="fig-image">[ 图片 · 16:9 · canvas + 1px 边框 ]</div>
-      <figcaption>
-        <span class="fig-num">Figure 02</span>
-        标准图变体。canvas 背景配 1px 边框，图注在下、用无衬线；图号落在 <code>--accent</code>，其余维持冷灰。
-      </figcaption>
-    </figure>
-
-    <figure class="fig fig-bleed">
-      <div class="fig-image">[ 满铺 · accent · 用于封面、stat-anchor ]</div>
-      <figcaption>
-        <span class="fig-num">Figure 03</span>
-        满铺变体：无边框，画面延伸至页面边缘。仅用于封面、章节分隔与 stat-anchor 背景。
-      </figcaption>
-    </figure>
-  </div>
 </section>
 <hr class="section-divider">
 

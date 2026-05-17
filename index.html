@@ -17,10 +17,10 @@
      ============================================ */
   :root {
     /* Surface */
-    --canvas:       #fcfbf8;
-    --canvas-soft:  #f5f3ee;
-    --rule:         #e3dfd4;
-    --rule-soft:    #ece8db;
+    --canvas:       #f7fbff;
+    --canvas-soft:  #edf3fa;
+    --rule:         #d3e0ed;
+    --rule-soft:    #e2ebf3;
 
     /* Text — cool grays, B ≥ G ≥ R */
     --ink:          #131b2a;
@@ -1030,26 +1030,6 @@
      ============================================ */
   figure.fig { margin: 0 0 24px; }
   figure.fig:last-child { margin-bottom: 0; }
-  figure.fig .fig-image {
-    background: var(--canvas);
-    border: 1px solid var(--rule);
-    aspect-ratio: 16 / 9;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--ink-faint);
-    letter-spacing: 0.04em;
-    position: relative;
-    overflow: hidden;
-  }
-  figure.fig.fig-bleed .fig-image {
-    background: var(--accent);
-    border: 0;
-    color: rgba(255,255,255,0.6);
-  }
   figure.fig figcaption {
     font-family: var(--font-serif);
     font-size: 12.5px;
@@ -1271,7 +1251,7 @@
   <p class="section-eyebrow">Tokens</p>
   <h2 class="section-title">Color</h2>
   <p class="section-desc">
-    Warm-paper, cool-ink and chromatically monochrome. One accent, one canvas family, one
+    Cold-toned and chromatically monochrome. One accent, one canvas family, one
     cool gray scale. There is no second chromatic hue.
   </p>
 
@@ -1280,25 +1260,25 @@
     <div class="swatch">
       <div class="swatch-block" style="background: var(--canvas)"></div>
       <div class="swatch-name">canvas</div>
-      <div class="swatch-hex">#fcfbf8</div>
+      <div class="swatch-hex">#f7fbff</div>
       <div class="swatch-use">page background</div>
     </div>
     <div class="swatch">
       <div class="swatch-block" style="background: var(--canvas-soft)"></div>
       <div class="swatch-name">canvas-soft</div>
-      <div class="swatch-hex">#f5f3ee</div>
+      <div class="swatch-hex">#edf3fa</div>
       <div class="swatch-use">lifted card / sidebar</div>
     </div>
     <div class="swatch">
       <div class="swatch-block" style="background: var(--rule)"></div>
       <div class="swatch-name">rule</div>
-      <div class="swatch-hex">#e3dfd4</div>
+      <div class="swatch-hex">#d3e0ed</div>
       <div class="swatch-use">primary divider</div>
     </div>
     <div class="swatch">
       <div class="swatch-block" style="background: var(--rule-soft)"></div>
       <div class="swatch-name">rule-soft</div>
-      <div class="swatch-hex">#ece8db</div>
+      <div class="swatch-hex">#e2ebf3</div>
       <div class="swatch-use">secondary divider</div>
     </div>
   </div>
@@ -1846,24 +1826,6 @@
     </dl>
   </div>
 
-  <p class="sub-title">Figure · image with caption</p>
-  <div class="demo">
-    <figure class="fig">
-      <div class="fig-image">[ image · 16:9 · canvas + 1px rule ]</div>
-      <figcaption>
-        <span class="fig-num">Figure 02</span>
-        Standard figure variant. Canvas background with a 1px rule, caption beneath in sans. Figure number lives in <code>--accent</code>; everything else stays in cool gray.
-      </figcaption>
-    </figure>
-
-    <figure class="fig fig-bleed">
-      <div class="fig-image">[ full-bleed · accent · for covers, stat-anchors ]</div>
-      <figcaption>
-        <span class="fig-num">Figure 03</span>
-        Full-bleed variant. No border; image extends to the page edge. Reserved for covers, chapter dividers, and stat-anchor backgrounds.
-      </figcaption>
-    </figure>
-  </div>
 </section>
 <hr class="section-divider">
 

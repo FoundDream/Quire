@@ -17,12 +17,12 @@ One-page quick reference. Scan before filling a template. Full spec in `referenc
 ## Token snapshot
 
 ```css
---canvas:       #fcfbf8;   /* page background */
---canvas-soft:  #f5f3ee;   /* lifted surface */
+--canvas:       #f7fbff;   /* page background */
+--canvas-soft:  #edf3fa;   /* lifted surface */
 --ink:          #131b2a;   /* primary text */
 --ink-soft:     #38465a;   /* secondary text */
 --ink-muted:    #647184;   /* captions */
---rule:         #e3dfd4;   /* divider line */
+--rule:         #d3e0ed;   /* divider line */
 
 --accent:       #1cb2f5;   /* sky blue — the only chromatic color */
 --accent-tint:  #c8ebfa;   /* chapter divider fill, tag bg */

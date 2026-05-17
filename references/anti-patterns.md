@@ -10,7 +10,7 @@ For prose-level moves see `writing.md`. For build/export failures see `productio
 
 | # | Name | Symptom | Fix |
 | --- | --- | --- | --- |
-| 1 | Word document leak | Warm vellum but body in Times / Calibri / Arial; no eyebrows, no rule lines. | Verify `assets/styles/quire-type.css` loaded and its Fraunces + Inter Tight import resolved. `pdffonts output.pdf` lists embedded fonts; a system serif in the list = fallback fired. |
+| 1 | Word document leak | Cool canvas but body in Times / Calibri / Arial; no eyebrows, no rule lines. | Verify `assets/styles/quire-type.css` loaded and its Fraunces + Inter Tight import resolved. `pdffonts output.pdf` lists embedded fonts; a system serif in the list = fallback fired. |
 | 2 | Two-color brand sprawl | Cover orange, callouts blue, table headers green — "because variety." | One accent per document. Anything additional must be a tint of the same accent. The 5% surface cap enforces this naturally. |
 | 3 | Decorative blockquotes | Italicized loose paragraphs in `<blockquote>` with no label, no rule, no citation. | `<blockquote>` is the pull-quote component only (one per chapter, left rule + citation). Sidebar commentary → `.callout.note`; emphasis → `<strong>` or `.hl`. |
 | 4 | Page numbers on covers and dividers | Cover page reads "01" in the corner. | Suppress with `@page:first` for the cover; `.page.cover .page-num { display: none }` for chapter dividers. First numbered page is the TOC. |
