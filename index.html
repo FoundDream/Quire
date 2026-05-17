@@ -306,6 +306,67 @@
   }
 
   /* ============================================
+     Install · code snippets + agent matrix
+     ============================================ */
+  .install-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px 32px;
+    margin: 28px 0 8px;
+  }
+  .install-card { margin: 0; }
+  .install-card h3 {
+    font-family: var(--font-serif);
+    font-size: 19px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    margin: 0 0 6px;
+    color: var(--ink);
+  }
+  .install-card .install-sub {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 12px;
+  }
+  .install-card p {
+    font-family: var(--font-serif);
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    margin: 0 0 12px;
+    max-width: 56ch;
+  }
+  .snippet {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: var(--ink);
+    background: var(--canvas-soft);
+    border: 1px solid var(--rule);
+    padding: 12px 16px;
+    margin: 0 0 10px;
+    overflow-x: auto;
+    white-space: pre;
+  }
+  .snippet-label {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    color: var(--ink-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin: 14px 0 6px;
+  }
+  .install-card .snippet-label:first-child { margin-top: 0; }
+  @media (max-width: 720px) {
+    .install-grid { grid-template-columns: 1fr; gap: 28px; }
+  }
+
+  /* ============================================
      See-demo · playbook page previews
      ============================================ */
   .preview-grid {
@@ -1209,6 +1270,50 @@
     <a href="assets/output/quire-playbook.pdf" class="cta" target="_blank" rel="noopener">See the demo PDF</a>
   </div>
 </section>
+
+<!-- =============================================
+     Install · agent skill + manual
+     ============================================= -->
+<section id="install">
+  <p class="anchor">Get started</p>
+  <p class="section-eyebrow">Install</p>
+  <h2 class="section-title">Two ways in.</h2>
+  <p class="section-desc">
+    Install as an agent skill and ask in natural language, or clone the
+    repo and edit the HTML templates directly. Both paths produce the same
+    output.
+  </p>
+
+  <div class="install-grid">
+    <figure class="install-card">
+      <p class="install-sub">Option 1 · recommended</p>
+      <h3>As an agent skill</h3>
+      <p>
+        One command. Works with Claude Code, Cursor, Codex, Goose, and every
+        other agent the <a href="https://github.com/vercel-labs/skills">skills</a>
+        CLI supports.
+      </p>
+      <span class="snippet-label">Any supported agent</span>
+      <code class="snippet">npx skills add FoundDream/Quire</code>
+      <span class="snippet-label">Claude Code (global, auto-confirm)</span>
+      <code class="snippet">npx skills add FoundDream/Quire -a claude-code -g -y</code>
+      <p>Then ask in natural language: “做一份关于 X 的 playbook”, “把这份内容排成白皮书”, “turn this into an editorial PDF”.</p>
+    </figure>
+
+    <figure class="install-card">
+      <p class="install-sub">Option 2 · no Node required</p>
+      <h3>Manual install</h3>
+      <p>Clone into your agent's skills directory.</p>
+      <span class="snippet-label">User-scoped (Claude Code)</span>
+      <code class="snippet">git clone https://github.com/FoundDream/Quire.git ~/.claude/skills/quire</code>
+      <span class="snippet-label">Project-scoped</span>
+      <code class="snippet">git clone https://github.com/FoundDream/Quire.git \
+  &lt;project&gt;/.claude/skills/quire</code>
+      <p>Or skip agents entirely — open <code>assets/templates/playbook.html</code> and edit. Run <code>./scripts/build.sh</code> to print to PDF.</p>
+    </figure>
+  </div>
+</section>
+<hr class="section-divider">
 
 <!-- =============================================
      Formats
