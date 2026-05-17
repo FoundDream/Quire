@@ -1,4 +1,5 @@
 <div align="center">
+  <img src="assets/brand/icon-q.svg" alt="Quire" width="120" height="120">
   <h1>Quire</h1>
   <p><b>One sky-blue, five formats, no second color.</b></p>
   <p>A cold-toned, chromatically monochrome design system for editorial documents.</p>
